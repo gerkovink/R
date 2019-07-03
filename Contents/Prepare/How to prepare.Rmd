@@ -88,15 +88,30 @@ install.packages(c("ggplot2", "tidyverse", "magrittr", "micemd", "jomo", "pan",
                  dependencies = TRUE)
 ```
 
-If you are not sure which pane is the console window, use the figure below to identify the console:
-![The `R` console window in `RStudio`](install.png)
+
+If you are not sure where to execute code, use the following figure to identify the console:
+
+<center>
+  <img src="console.png" alt="HTML5 Icon" width = 70%>
+</center>
+
+Just copy and paste the installation command and press the return key. When asked 
+
+```{r eval = FALSE}
+Do you want to install from sources the package which needs compilation? (Yes/no/cancel)
+```
+
+type `Yes` in the console and press the return key. 
+
 ---
 
 # What if the above does not work for me?
-If all fails and you have insufficient rights to your machine, the following web-based service will offer a solution. Naturally, you will need internet access for those services to be accessed. Wireless internet access will be available at the course location. 
+If all fails and you have insufficient rights to your machine, the following web-based service will offer a solution. 
 
-1. You will receive an account to Utrecht University's [MyWorkPlace](https://myworkplace.uu.nl/). You would have access to `R` and `RStudio` there. You may need to install packages for new sessions. 
+1. You will receive an account to Utrecht University's [MyWorkPlace](https://myworkplace.uu.nl/). You would have access to `R` and `RStudio` there. You may need to install packages for new sessions during the course. 
 2. Open a free account on [rstudio.cloud](https://rstudio.cloud). You can run your own cloud-based `RStudio` environment there. 
+
+Naturally, you will need internet access for these services to be accessed. Wireless internet access will be available at the course location. 
 
 ---
 
