@@ -1,9 +1,43 @@
 ---
 title: "How to prepare"
-author: "Gerko Vink"
+author: ""
 date: "Statistical Programming with R"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+    number_sections: true
 ---
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 12px;
+  }
+td {  /* Table  */
+  font-size: 12px;
+}
+h1.title {
+  font-size: 18px;
+  color: DarkBlue;
+}
+h1 { /* Header 1 */
+  font-size: 18px;
+}
+h2 { /* Header 2 */
+    font-size: 18px;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+</style>
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -11,7 +45,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ---
 
-[Return Home](https://gerkovink.github.io/Statistical-Programming-with-R/)
+[Return Home](https://www.gerkovink.com/R/)
 
 ---
 
@@ -25,51 +59,44 @@ We look forward to see you all in Utrecht,
 
 ---
 
-#### Steps to prepare:
+# Steps to prepare
+
+Bring a laptop computer to the course and make sure that you have full write access and administrator rights to the machine. We will explore programming and compiling in this course. This means that you need full access to your machine. Some corporate laptops come with limited access for their users, we therefore advice you to bring a personal laptop computer, if you have one. 
 
 ---
 
-1. **Install `R`**
+## **Install `R`**
 `R` can be obtained [here](https://cran.r-project.org). We won't use `R` directly in the course, but rather call `R` through `RStudio`. Therefore it needs to be installed. 
 
 ---
 
-2. **Install `RStudio` Desktop**
+## **Install `RStudio` Desktop**
 
-Rstudio is an Integrated Development Environment (IDE). It can be obtained as stand-alone software [here](https://www.rstudio.com/products/RStudio/). 
-
----
-
-3. **Install package `mice`. **
-
-Go to `Tools` > `Install Packages` in `RStudio`. Make sure that you are connected to the internet and select  `Repository` under `Install From` and type `mice` under `Packages`. Leave the `Install to Library` at default and verify that `Install Dependencies` is selected. Click install. 
-
-Some packages depend on other packages, meaning that their functionality may be limited if their dependencies are not installed. Installing dependencies is therefore recommended. 
-
-If all is right, you will receive a message in the console that the package has been installed (with its dependencies). 
-
-Alternatively, if you know the name of the package you would like to install - in this case `mice` - you can also call `install.packages("mice")` in the console window.
+Rstudio is an Integrated Development Environment (IDE). It can be obtained as stand-alone software [here](https://www.rstudio.com/products/rstudio/download/#download). The free and open source `RStudio Desktop` version is sufficient.
 
 ---
 
-4. **Install also the following packages by executing the below code in the `R` console window:**
+## **Start RStudio and install the following packages. **
+
+Execute the following lines of code in the console window:
+
 ```{r eval=FALSE}
-install.packages("knitr")
-install.packages("rmarkdown")
-install.packages("plotly")
-install.packages("ggplot2")
-install.packages("shiny")
-install.packages("devtools")
-install.packages("tidyverse")
-install.packages("magrittr")
-install.packages("boot")
-install.packages("class")
-install.packages("car")
-install.packages("MASS")
-install.packages("ggplot2movies")
-install.packages("ISLR")
-install.packages("DAAG")
+install.packages(c("ggplot2", "tidyverse", "magrittr", "micemd", "jomo", "pan", 
+                 "lme4", "knitr", "rmarkdown", "plotly", "ggplot2", "shiny", 
+                 "devtools", "boot", "class", "car", "MASS", "ggplot2movies", 
+                 "ISLR", "DAAG", "mice", "mitml", "miceadds"), 
+                 dependencies = TRUE)
 ```
+
+If you are not sure which pane is the console window, use the figure below to identify the console:
+![The `R` console window in `RStudio`](install.png)
+---
+
+# What if the above does not work for me?
+If all fails and you have insufficient rights to your machine, the following web-based service will offer a solution. Naturally, you will need internet access for those services to be accessed. Wireless internet access will be available at the course location. 
+
+1. You will receive an account to Utrecht University's [MyWorkPlace](https://myworkplace.uu.nl/). You would have access to `R` and `RStudio` there. You may need to install packages for new sessions. 
+2. Open a free account on [rstudio.cloud](https://rstudio.cloud). You can run your own cloud-based `RStudio` environment there. 
 
 ---
 
