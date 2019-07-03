@@ -2,10 +2,41 @@
 title: "Statistical Programming with R 2019"
 author: 
 date: 
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+    number_sections: false
 ---
+<style type="text/css">
 
-<style>
+body{ /* Normal  */
+      font-size: 12px;
+  }
+td {  /* Table  */
+  font-size: 12px;
+}
+h1.title {
+  font-size: 18px;
+  color: DarkBlue;
+}
+h1 { /* Header 1 */
+  font-size: 18px;
+}
+h2 { /* Header 2 */
+    font-size: 18px;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+
 .column-left{
   float: left;
   width: 33%;
@@ -35,19 +66,19 @@ This is the course page for [**USS24: Statistical programming with R**](https://
 
 ---
 
-#### Preparing your machine for the course
+# Preparing your machine for the course
 We use `R`, `RStudio` and a variety of packages in this course. You can find a detailed guide to install the necessary software on your own laptop in [this guide](https://www.gerkovink.com/R/Contents/Prepare/How_to_prepare.html)
 
 ---
 
-#### Course Materials
+# Course Materials
 
 We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](https://www.gerkovink.com/R/Contents/Material/Archive/Archive2018.zip). 
 
 ---
 
 <div class="column-left">
-#### Day 1: Monday
+## Day 1: Monday
 - Part A: Introduction
     - [Lecture A](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part A - Introduction/Lecture_A.html)
     - [Lecture A Handout](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part A - Introduction/Lecture_A_handout.html)
@@ -67,7 +98,7 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
 </div>
 
 <div class="column-center">
-#### Day 2: Tuesday
+## Day 2: Tuesday
 
 - Part D: Generating Data
     - [Lecture D](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part D - Data generation/Lecture_D.html)
@@ -85,7 +116,7 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
 </div>
 
 <div class="column-right">
-#### Day 3: Wednesday
+## Day 3: Wednesday
 
 - Part G: Statistical models
     - [Lecture G](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part G - Statistical models/Lecture_G.html)
@@ -109,7 +140,7 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
 <div>
 
 <div class="column-left">
-#### Day 4: Thursday
+## Day 4: Thursday
 
 
 - Part J: Model estimation
@@ -127,7 +158,7 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
 </div>
 
 <div class="column-center">
-#### Day 5: Friday
+## Day 5: Friday
 - Part M: Classification & Clustering
     - [Lecture M](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part M - Unsupervised learning/Lecture_M.html)
     - [Practical M](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part M - Unsupervised learning/Practical_M_walkthrough.html)
