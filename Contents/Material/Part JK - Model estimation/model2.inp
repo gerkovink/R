@@ -1,0 +1,20 @@
+TITLE:  Regression boys’ bmi on weight, height and age 
+                 
+DATA:  
+    FILE = boys.dat;
+
+VARIABLE:  
+    NAMES ARE age bmi hgt wgt hc;
+    MISSING = . ;    
+    USEVAR = age bmi wgt hgt;
+
+DEFINE:
+
+MODEL:
+    bmi ON age wgt hgt;
+
+OUTPUT:  
+    TECH1 SAMPSTAT STANDARDIZED RESIDUAL cinterval;
+
+Plot:
+    TYPE = PLOT1;

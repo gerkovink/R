@@ -1,0 +1,105 @@
+---
+title: "Practical H"
+author: "Gerko Vink"
+date: "Statistical Programming in R"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+printAnswers <- TRUE
+```
+
+---
+
+#### Exercises
+
+---
+
+Again, just like last time it is wise to start with fixing the random seed.
+
+```{r}
+set.seed(123)
+```
+
+---
+
+1. **Generate two random samples of 10 numbers from a normal distribution with the below specifications. Test the null hypothesis that the population mean is 0.**
+
+- $\mu = 0$ and $\sigma = 2$
+- $\mu = 1.5$ and $\sigma = 2$
+
+---
+
+2. **Write a function that generates a random sample of `n` numbers from a normal distribution with a user defined mean (i.e. a mean that you can choose when running the function) and standard deviation 1, and returns the `p.value` for the test that the mean is 0.**
+
+---
+
+3. **Use the function of Exercise 3 to generate 50 $p$-values with $n=10,\mu=0$, and make a `qqplot` to compare distribution of the $p$-values with a uniform $[0,1]$ variable.**
+
+---
+
+In a study that examined the use of acupuncture to treat migraine headaches, consenting patients on a waiting list for treatment for migraine were randomly assigned in a 2:1:1 ratio to acupuncture treatment, a "sham" acupuncture treatment in which needles were inserted at non-acupuncture points, and waiting-list patients whose only treatment was self-administered (Linde et al., 2005). The "sham" acupuncture treatment was described to trial participants as an acupuncture treatment that did not follow the principles of Chinese medicine. 
+
+---
+
+4. **What is the conclusion when the outcome is classified according to numbers of patients who experienced a greater than 50% reduction in headaches over a four-week period, relative to a pre-randomization baseline?**
+
+Use the following data
+```{r}
+data <- matrix(c(74, 71, 43, 38, 11, 65), nrow = 2, ncol = 3)
+colnames(data) <- c("Acupuncture", "Sham", "Waiting list")
+rownames(data) <- c("> 50% reduction", "< 50% reduction")
+data
+```
+
+---
+
+5. **Patients who received the acupuncture and sham acupuncture treatments were asked to guess their treatment at the end of their trial. What would you conclude from this data?**
+
+```{r}
+data <- matrix(c(82, 17, 30, 30, 26, 16), nrow = 3, ncol = 2)
+colnames(data) <- c("Acupuncture", "Sham")
+rownames(data) <- c("Chinese", "Other", "Don't know")
+data
+```
+
+
+---
+
+In the following simulation experiment we investigate least-squares estimation of the mean.
+
+---
+
+6. **Start by drawing a 100 values from a normal distribution with $\mu = 3$ and $\sigma = 7$. Use seed value `32083`.**
+
+---
+
+7. **Next, confirm that the sample mean of the values in x is near 4.166.**
+
+---
+
+8. **Calculate the sample mean's sum of squared deviations from $\mu$. The sum of squared deviations from mu is defined as: **
+$$ \sum_{i=1}^{100} (x_i - \mu)^2,$$
+
+---
+
+9. **Now create a function that automates the calculation of the sum of squares for any given $\mu$. Call the function `lsfun` because we are going to identify the least squares estimate in exercise 8.**
+
+---
+
+10. **Plot the curve of your least square function such that you can identify the minimum of the curve (i.e. the location for $x$ where the sum of the squared deviations are the lowest).**
+
+---
+
+11. **Repeat the experiment from 10 with the following $X \sim \mathcal{N}(\mu, \sigma^2)$ normal samples of length $n=100$, but now use the sample mean $\bar{x}$ in your function `lsfun()`. Let the function plot the curve and print the location where the minimum of the sum of the squares is located each time. Fix the seed to `set.seed(123)`:**
+
+- $x \sim \mathcal{N}(3, 7)$
+- $x \sim \mathcal{N}(15, 12)$
+- $x \sim \mathcal{N}(0, 2)$
+- $\sqrt{x} \sim \mathcal{N}(0, 2)$, i.e. you need to square $x$
+
+Hint: use the sample mean $\bar{x}$ as the center of your graph and add/subtract e.g. `.5` from this value to plot a range.
+
+---
+
+End of practical. 

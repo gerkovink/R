@@ -1,0 +1,98 @@
+---
+title: "Practical G"
+author: "Gerko Vink"
+date: "Statistical Programming in R"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+printAnswers <- TRUE
+```
+
+---
+
+#### Exercises
+
+---
+
+In this exercise we will again be using random number generators. When using random numbers, it is wise to always fix the random seed (the starting point of the number generation). This ensures that in the future we can exactly reproduce the chain of executions that led to the randomly generated results. 
+
+Start by setting a random seed. If you follow my random seed and reproduce the code below in exactly the same order, you will get the same results. If you do not follow the exact ordering (i.e. if you skip or rerun a question, or have different code), your results may be different due to random sampling. This is not a bad thing! It is just a result of the method and should be that way.
+
+```{r}
+#set random seed, make things reproducible
+set.seed(123)
+```
+
+---
+
+1. **A group of experimenters have 4 experimental conditions they want to run. In each of these four conditions, there are seven manipulations that should be in a random order. Design the experiment such that for every condition, the seven manipulations are randomly ordered.**
+
+---
+
+2. **Generate a vector of 100 random standard normal numbers.**
+
+---
+
+3. **Compute the mean and standard deviation of the vector from question 2.**
+
+---
+
+4. **Generate a vector of 100 random standard normal numbers (like in Exercise 2) 25 times, and each time store means in object `av`. Compute the standard deviation of `av`.**
+
+---
+
+5. **Create a function that automatically returns a vector like `av`.**
+
+---
+
+6. **Add the option to this function to print a density plot. Set it to TRUE by default. **
+
+---
+
+7. **Generate a random sample of size 20 from a normal population with mean 100 and standard deviation 10. **
+
+```{r eval=printAnswers, echo=printAnswers}
+rnorm(20, 100, 10)
+```
+
+---
+
+8. **Use `mfrow` to set up the layout for a 3 by 4 array of plots. In the top 4 panels, show normal probability plots ('QQ-plots') for 4 separate "random" samples of size 10, all drawn from a normal distribution. In the middle 4 panels, display plots for samples of size 100. In the bottom 4 panels, display plots for samples of size 1000. Comment on how the appearance of the plots changes as the sample size changes.**
+
+---
+
+9. **Repeat exercise 8, but use `runif` instead of `rnorm`.**
+
+---
+
+10. **Use the function `rexp()` to simulate 100 exponential random numbers with rate 0.2. Do the following on the simulated random numbers **
+
+- Obtain a density plot for the observations. 
+- Find the sample mean of the observations. 
+- Compare with the population mean (the mean for an exponential population is 1/rate).
+
+---
+
+11. **Fit the following linear models on the anscombe data:**
+
+- `y1` predicted by `x1` - stored in object `fit1`
+- `y2` predicted by `x2` - stored in object `fit2`
+- `y3` predicted by `x3` - stored in object `fit3`
+- `y4` predicted by `x4` - stored in object `fit4`
+
+---
+
+12. **`Create a data frame from the coefficients of the 4 fitted objects from Exercise 11.**
+
+---
+
+13. **Plot the four fitted models from Exercise 11 in a single plotting window. Make the points in the plots `blue`, `gray`, `orange` and `purple`, respectively. **
+
+---
+
+14. **Now plot all four fitted models from Exercise 11 in a plotting window with 2 rows and 2 columns.**
+
+---
+
+End of practical. 

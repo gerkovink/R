@@ -1,0 +1,264 @@
+---
+title: "Monte Carlo Simulation"
+author: "Gerko Vink and Erik-Jan van Kesteren"
+date: "Statistical Programming with R"
+output:
+  ioslides_presentation:
+    logo: logo.png
+    smaller: yes
+    widescreen: no
+---
+
+## Packages and functions that we use
+```{r message=FALSE, warning=FALSE}
+library(dplyr)    # Data manipulation
+library(magrittr) # Pipes
+library(stringi)  # For counting substrings
+library(ggplot2)  # Plotting suite
+```
+
+```{r setup, include=FALSE}
+theme_update(plot.background = element_rect(fill = "transparent", colour = NA))
+knitr::opts_chunk$set(dev.args=list(bg="transparent"))
+```
+
+## What is it?
+
+With Monte Carlo methods we can estimate the value of any unknown quantity by using statistical theory (what we would expect based on chance)
+
+It builds upon the principles of inferential statistics and needs:
+
+- A large set of numbers (e.g. an infinite population) or a theoretical distribution
+- A random sample from that large set
+  
+It works by repetitively sampling from a population while varying the input, but keeping the method consistent.
+
+## Why do it?
+
+- evaluate how a statistical method performs in different situations
+- calculate the power of a particular test based on some (violation of) assumptions
+- estimate the probability of a complex event by simulating that event
+- learn about the sampling distribution and bootstrapping
+- "feel like a god at your own computer"
+
+# Some probability theory
+
+## An example
+
+- John travels to and from work by train every day: 
+    - In the past 10 years his train has been delayed 12 times
+    - $P(\text{delay}) = \frac{12}{2\times3650} \approx .0016$
+    - John feels very confident about trains and expects them to run on time
+
+- Bill travels to and from work by train every week: 
+    - In the past year his train has been delayed 50 times
+    - $P(\text{delay}) = \frac{50}{2\times52} \approx .481$
+    - Bill feels very confident about trains but realizes that they often do not run on time
+  
+- Claire travels by train very occasionally
+    - Out of the last 3 trips, two trips were delayed
+    - $P(\text{delay}) = \frac{2}{3}$
+    - Claire does not feel confident about trains and does not expect them to run on time
+  
+## Confidence
+
+- Is John's confidence misplaced?
+- Is Bill's expectation misplaced?
+- Is Claire's lack of confidence misplaced?
+
+## Law of large numbers
+
+### Bernouilli's law (1713):
+In repeated `independent` experiments 
+
+1. with the same `true` probability $p$ of a particular outcome in each experiment
+2. when repeated over a large number of times
+3. the average over the results for all these repetitions
+4. will converge to the `true` probability $p$
+
+So if we replicate the same procedure an infinite number of times, the difference between our estimate and the true value would be zero.
+
+The experiments **must be independent**, i.e., the probability of the event is the same for every trial.
+
+## Gambler's fallacy & independence
+The tendency to believe that previous throws alter the probability for a future event is referred to as **gambler's fallacy**: 
+
+for independent trials on a fair die, the probability is `one in six`: even if the previous 100 throws have been sixes.
+
+If a fair roulette game landed on black 50 times in a row, the probability of landing on red is not bigger for the next throw: it remains $\frac{18}{37}$.
+
+
+## Regression to the mean
+Following an extreme random event, the next random event is likely to be less extreme. In the long run the probability event will move to the mean.
+
+### RttM vs LLN vs gambler's fallacy 
+
+- `RTTM:` When one run of throwing a die 100 times yields 100 sixes (a rare event) --> the next run will likely return less than 100.
+- `LLN`: In the long term the 100 sixes event will average out and the probability of rolling a six will move to $P = \frac{1}{6}$.
+- `GF`: The coin is due to a run of 500 not-sixes to *even out* the 100 sixes
+
+## Law of large numbers
+```{r cache=TRUE}
+set.seed(123)
+x <- sample(1:6, 10, prob = rep(1/6, 6), replace = TRUE)
+prop.table(table(x))
+```
+
+```{r cache=TRUE}
+x <- sample(1:6, 100, prob = rep(1/6, 6), replace = TRUE)
+prop.table(table(x))
+```
+
+## More proof
+```{r cache=TRUE}
+x <- sample(1:6, 10000, prob = rep(1/6, 6), replace = TRUE)
+prop.table(table(x))
+```
+
+```{r cache=TRUE}
+x <- sample(1:6, 1000000, prob = rep(1/6, 6), replace = TRUE)
+prop.table(table(x))
+```
+
+## Estimating the probability of an event
+
+### What is the probability of getting 123 in a row?
+```{r}
+charx <- paste(x, collapse = "")
+
+occurrences <- stri_count_fixed(charx, "123") / 1e6
+trueprob <- (1/6)^3
+
+cat(occurrences,"\n", trueprob, sep = "")
+```
+
+# Monte Carlo simulation
+
+## Throwing 100000 dice 100 times
+
+```{r cache=TRUE}
+# Initialise results object
+result <- list() 
+
+# repeat K times
+for (i in 1:100) { 
+  
+  # generate a dataset of interest
+  dataset <- sample(1:6, 100000, prob = rep(1/6, 6), replace = TRUE)
+  
+  # optional: perform your method on this dataset
+  
+  # Save the values you are interested in 
+  result[[i]] <- dataset
+  
+} 
+
+# Aggregate your results
+probs <- sapply(result, function(x) prop.table(table(x)))
+
+# Display output
+rowMeans(probs)
+```
+
+## With fewer trials but more iterations
+```{r cache=TRUE}
+result <- list()
+for (i in 1:100000) { # repeat 100.000 times
+  result[[i]] <- sample(1:6, 100, prob = rep(1/6, 6), replace = TRUE)
+} # 'only' 100 dice
+probs <- sapply(result, function(x) prop.table(table(x)))
+rowMeans(probs)
+```
+
+## Unfair dice
+```{r cache=TRUE}
+result <- list()
+for (i in 1:1000) { 
+  result[[i]] <- sample(1:6, 
+                        size = 1000, 
+                        prob = c(.01, .04, .1, .15, .2, .5),
+                        replace = TRUE)
+} # 1000 trials
+probs <- sapply(result, function(x) prop.table(table(x)))
+rowMeans(probs)
+```
+
+# Power calculation
+
+## The goal
+
+Power: the probability of detecting an effect if there is in fact a true effect.
+
+- Larger effect size means larger power
+- Larger sample size means larger power (less uncertainty, smaller standard errors)
+- Some methods are more powerful than others
+
+### Research question
+What happens to the power of an independent-samples t-test if we measure on a 5-point scale instead of a continuous outcome?
+
+## Example situation
+
+```{r, fig.height=4, fig.align='center'}
+cuts <- c(-Inf, -1.2, -0.4, 0.4, 1.2, Inf)
+
+curve(dnorm, -3, 3)
+abline(v = cuts)
+```
+
+## Example situation
+```{r}
+set.seed(123)
+
+treatment <- rnorm(24, .7)
+control   <- rnorm(24)
+
+treatCut <- as.numeric(cut(treatment, cuts))
+contrCut <- as.numeric(cut(control,  cuts))
+
+t.test(treatment, control)$p.value
+t.test(treatCut, contrCut)$p.value
+```
+
+How confident are we in this result?
+
+## Monte carlo simulation
+
+```{r simsim, cache=TRUE}
+# Initialise results object
+result <- matrix(FALSE, nrow = 100000, ncol = 2) 
+
+for (i in 1:100000) { 
+  # generate a dataset of interest
+  treatment <- rnorm(24, .7)
+  control   <- rnorm(24)
+  treatCut <- as.numeric(cut(treatment, cuts))
+  contrCut <- as.numeric(cut(control,  cuts))
+  
+  # perform your method on this dataset
+  treatp <- t.test(treatment, control)$p.value
+  contrp <- t.test(treatCut, contrCut)$p.value
+  
+  # Save the values you are interested in 
+  result[i,1] <- treatp < 0.05
+  result[i,2] <- contrp < 0.05
+} 
+
+colMeans(result)
+```
+
+
+## Conclusions
+
+- Monte Carlo simulations can estimate difficult-to-calculate probabilities
+- iterations yield less bias (law of large numbers)
+- Monte Carlo simulations can be used to test the statistical properties of methodologies
+    - At what sample size does my method fail?
+    - How much of a violation of sphericity is allowed in an ANOVA?
+    - What is the power of a nonparametric vs. a parametric test?
+    - How biased is my estimation procedure?
+    - What is the effect on power if I do this sub-optimal thing?
+    
+    
+# Last practical!
+    
+

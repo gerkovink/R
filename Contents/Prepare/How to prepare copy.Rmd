@@ -1,0 +1,76 @@
+---
+title: "How to prepare"
+author: "Gerko Vink"
+date: "Statistical Programming with R"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+
+---
+
+Dear all, 
+
+This summer you will participate in the [**USS24: Statistical programming with R**](https://www.utrechtsummerschool.nl/courses/social-sciences/data-science-statistical-programming-with-r) course in Utrecht, the Netherlands. To realize a steeper learning curve, we will use some functionality that is not part of the base installation for `R`. The below steps guide you through installing both `R` as well as the necessary additions. 
+
+We look forward to see you all in Utrecht,  
+
+*The Statistical Programming with R Team*
+
+---
+
+#### Steps to prepare:
+
+---
+
+1. **Install `R`**
+`R` can be obtained [here](https://cran.r-project.org). We won't use `R` directly in the course, but rather call `R` through `RStudio`. Therefore it needs to be installed. 
+
+---
+
+2. **Install `RStudio` Desktop**
+
+Rstudio is an Integrated Development Environment (IDE). It can be obtained as stand-alone software [here](https://www.rstudio.com/products/RStudio/). 
+
+---
+
+3. **Install package `mice`. **
+
+Go to `Tools` > `Install Packages` in `RStudio`. Make sure that you are connected to the internet and select  `Repository` under `Install From` and type `mice` under `Packages`. Leave the `Install to Library` at default and verify that `Install Dependencies` is selected. Click install. 
+
+Some packages depend on other packages, meaning that their functionality may be limited if their dependencies are not installed. Installing dependencies is therefore recommended. 
+
+If all is right, you will receive a message in the console that the package has been installed (with its dependencies). 
+
+Alternatively, if you know the name of the package you would like to install - in this case `mice` - you can also call `install.packages("mice")` in the console window.
+
+---
+
+4. **Install also the following packages by executing the below code in the `R` console window:**
+```{r eval=FALSE}
+install.packages("knitr")
+install.packages("rmarkdown")
+install.packages("plotly")
+install.packages("ggplot2")
+install.packages("shiny")
+install.packages("devtools")
+install.packages("tidyverse")
+install.packages("magrittr")
+install.packages("boot")
+install.packages("class")
+install.packages("car")
+install.packages("MASS")
+install.packages("ggplot2movies")
+install.packages("ISLR")
+install.packages("DAAG")
+```
+
+---
+
+---
+
+

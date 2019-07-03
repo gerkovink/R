@@ -1,0 +1,145 @@
+---
+title: "Practical D - Data generation"
+author: "Gerko Vink"
+date: "Statistical Programming in R"
+output: html_document
+---
+
+
+```{r echo=FALSE}
+printAnswers <- TRUE
+
+```
+
+
+
+---
+
+#### Exercises 
+
+---
+
+It is always wise to fix the random seed. I (Gerko) often use a seed value of `123`:
+```{r}
+set.seed(123)
+```
+at the top of my document. This ensures that all calculations in my documents are exactly reproducible. This is because the random number generator in `R` will take its origin from the specified seed value. Every subsequent random process advance the random generation by one step. When we specify a seed value we can replicate the exact chain of random processes. This is an extremely useful tool.
+
+When an `R` instance is started, there is initially no seed. In that case, `R` will create one from the current time and process ID. Hence, different sessions will give different results when random numbers are involved. When you store a workspace and reopen it, you will continue from the seed specified within the workspace. 
+
+---
+
+1. **Fix the random seed to `123`**
+
+---
+
+#### Drawing random values
+
+---
+
+2. **Draw 10 values from a standard normal distribution and store the values in an object called `draw1`**.
+
+---
+
+3. **Verify that the means and variances for object `draw1` are indeed conform the default arguments of function `rnorm()`**
+
+---
+
+4. **Draw 1000 values from a standard normal distribution and store the values in an object called `draw2`**.
+
+---
+
+5. **Determine which object has less bias; `draw1` or `draw2`**
+
+---
+
+The lesson so far is: When you fix your random seed, do not forget that your results are dependent on this random seed. It may be the case that results you obtain are a mere fluke: extremely rare, but obtained because you use a random seed. It would be nice to automate any random number process with different seeds to obtain the sampling distribution of estimates. This we will do on Friday when we consider Monte Carlo simulation. 
+
+---
+
+It is clear that the larger sample size will, in general, yield less bias. However, the bias we obtain is directly dependent on the chosen random seed. For example, if we repeat the above process with `set.seed(125)`, we obtain completely different results:
+```{r}
+set.seed(125)
+draw1b <- rnorm(10)
+draw2b <- rnorm(1000)
+means <- c(0, mean(draw1b), mean(draw2b))
+sds <- c(1, sd(draw1b), sd(draw2b))
+result <- data.frame(n=c(Inf, 10, 1000), mean=means, sd=sds)
+row.names(result) <- c("population", "draw1 (seed=125)", "draw2 (seed=125)")
+round(result, 3)
+```
+Now `draw2` has a larger absolute bias from the mean, despite its larger sample size. Note that I renamed the objects to `draw1b` and `draw2b` because otherwise I would overwrite `draw1` and `draw2`. Overwriting these objects would be inefficient, because we will use these objects later on in this exercise.  If, by accident we would have overwritten these objects, we can simply obtain them again by re-fixing the random seed and parsing the exact same function calls. Also note that I do not recreate object `n` as it has not changed. I can simply re-use the object `n` that is already in our `Global Environment`. 
+
+
+In the previous exercise we have changed the random seed to `125`. 
+
+---
+
+6. **Re-fix the random seed to `123`**
+```{r}
+set.seed(123)
+```
+
+---
+
+7. **Draw objects `draw1` and `draw2` again, but name them `draw3` and `draw4`, respectively.**
+```{r}
+draw3 <- rnorm(10)
+draw4 <- rnorm(1000)
+```
+
+---
+
+8. **Draw object `draw5`: 22 values from a normal distribution with `mean = 8` and `variance = 144`.**
+
+---
+
+9. **Verify if object `draw1` is equal to `draw3` and if object `draw2` is equal to `draw4`.**
+
+---
+
+10. **Draw 1000 values from the following distributions and inspect them with `summary()`**
+
+- a normal distribution with `mean = 50` and `sd = 20`, 
+- a t-distribution with `df = 11` degrees of freedom,
+- a uniform distribution with minimum `min = 5` and maximum `max = 6`,
+- a binomial distribution with `size = 1` trials and `prob = .8` probablity if success on each trial,
+- an F-distribution with `df1 = 1` and `df2 = 2` degrees of freedom,
+- a poisson distribution with `lambda = 5` as the mean. 
+
+
+---
+
+11. **Plot histograms for the generated values from exercise 10 to inspect the shape of the respective distributions. Use `breaks = 25` for the number of breakpoints in the histogram **
+
+---
+
+We can use random number generation to simulate data. For example, we can use `sample()` to simulate rolling a single die 100 times:
+```{r}
+die.roll <- sample(1:6, size = 100, replace = TRUE)
+```
+We have to set `replace = TRUE` to sample with replacement because the sample size `size = 100` is larger than the set `1:6 = ``r 1:6`. 
+
+---
+
+12.  **Calculate the probability for obtaining each side of the die in `die.roll`. **
+
+---
+
+13. **Simulate two rolling dice and calculate the probability of obtaining two sixes over 1500 trials**
+
+---
+
+14. **Replicate the following empirical example by drawing from a *theoretical* distribution: 14563 students made an exam, but only 3589 successfully passed:**
+
+---
+
+So far, we have only considered univariate distributions. Let's generate some multivariate data
+
+---
+
+15. **Draw two variables (aka sets or features) of size `1000` from a multivariate normal distribution, both with mean `5` and variance `1` and make sure that they correlate $\rho = .8$.**
+
+---
+
+End of Practical 

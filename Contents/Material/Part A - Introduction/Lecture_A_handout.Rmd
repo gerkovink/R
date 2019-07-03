@@ -1,0 +1,110 @@
+---
+title: "Introduction"
+author: "Gerko Vink"
+date: "Statistical Programming in R"
+output: html_document
+---
+
+---
+
+##
+You can view my screen on your machine: 
+
+[join.me/statistics_uu](http://join.me/statistics_uu)
+
+# Overview of this course
+## Program
+<center>
+<img src="figures/schedule.png" alt="HTML5 Icon" width = 70%>
+</center>
+
+# Goal of this course
+## Learn to keep your *cool*
+<center>
+  <img src="figures/state_programming.png" alt="HTML5 Icon" width = 100%>
+</center>
+
+
+and build the foundation for a succesfull scripting career
+
+# What is R?
+
+## Software
+<center>
+<img src="figures/fig1.png" alt="HTML5 Icon" width = 90%>
+</center>
+
+## The origin of R
+- R is a language and environment for statistical computing and for graphics
+
+- GNU project (100% free software)
+
+- Managed by the R Foundation for Statistical Computing, Vienna, Austria.
+
+- Community-driven
+
+- Based on the object-oriented language S (1975)
+
+# What is RStudio?
+
+## Integrated Development Environment (IDE)
+<center>
+<img src="figures/fig2.png" alt="HTML5 Icon" width = 99%>
+</center>
+
+## RStudio
+- Aggregates all convenient information and procedures into one single place
+- Allows you to work in projects
+- Manages your code with highlighting
+- Gives extra functionality (Shiny, knitr, markdown, LaTeX)
+- Allows for integration with version control routines, such as Git.
+
+# How does R work
+
+## Objects and elements
+- R works with objects that consist of elements. The smallest elements are numbers and characters.
+
+    - These elements are assigned to objects. 
+    - A set of objects can be used to perform calculations
+    - Calculations can be presented as functions
+    - Functions are used to perform calculations and return new objects, containing calculated (or estimated) elements. 
+
+## The help
+- Everything that is published on the Comprehensive `R` Archive Network (CRAN) and is aimed at `R` users, must be accompanied by a help file. 
+- If you know the name of the function that performs an operation, e.g. `anova()`, then you just type `?anova` or `help(anova)` in the console. 
+- If you do not know the name of the function: type `??` followed by your search criterion. For example `??anova` returns a list of all help pages that contain the word 'anova'
+
+- Alternatively, the internet will tell you almost everything you'd like to know and sites such as http://www.stackoverflow.com and http://www.stackexchange.com, as well as `Google` can be of tremendous help. 
+    - If you google `R` related issues; use 'R:' as a prefix in your search term
+    
+## Assigning elements to objects
+- Assigning things in R is very straightforward: 
+
+    - you just use `<-`
+
+- For example, if you assign the value `100` (an element) to object `a`, you would type
+
+```{r}
+a <- 100
+```
+
+## Calling objects
+- Calling things in R is also very straightforward: 
+
+    - you just use type the name you have given to the object
+
+- For example, we assigned the value `100` to object `a`. To call object `a`, we would type
+
+```{r}
+a
+```
+
+## Writing code
+<center>
+<img src="figures/codelight.png" alt="HTML5 Icon" width = 99%>
+</center>
+
+This is why we use R-Studio.
+
+# Practical A
+

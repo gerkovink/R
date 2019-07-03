@@ -1,0 +1,280 @@
+---
+title: "Practical E"
+author: "Gerko Vink and Kees Mulder"
+date: "Statistical Programming in R"
+output: html_document
+---
+
+
+```{r echo=FALSE}
+printAnswers <- TRUE
+
+```
+
+
+
+---
+
+#### Exercises
+
+---
+
+1. **Create a `for`-loop that loops over all numbers between 0 and 10, but only prints numbers below 5. **
+
+```{r echo=printAnswers, eval=printAnswers}
+for (i in 0:10) {
+  if (i < 5) {
+    print(i)
+  }
+}
+```
+
+---
+
+2. **Modify the for loop to only print the numbers 3, 4, and 5.**
+
+```{r echo=printAnswers, eval=printAnswers}
+for (i in 0:10) {
+  if (i >= 3 & i <= 5) {
+    print(i)
+  }
+}
+```
+
+---
+
+3. **Try to do the same thing without a for-loop, by subsetting a vector from 0 to 10 directly.**
+
+```{r echo=printAnswers, eval=printAnswers}
+num <- 0:10
+num[num >= 3 & num <=5]
+``` 
+or, alternatively,
+```{r}
+subset(num, num >= 3 & num <=5)
+```
+
+---
+
+4. **Recreate the following matrix, where 1 to eight are multiplied by 1 on the first row, 2 on the second, etc. Tip: use `byrow = TRUE` to fill a matrix left-to-right instead of top-to-bottom.**
+```{r echo=FALSE, eval=TRUE}
+
+# Create a matrix with 1 to 8. 
+mat <- matrix(1:8, ncol=8, nrow=5, byrow = TRUE)
+
+# Loop over each row, and multiply it. 
+for (i in 1:5) {
+  mat[i, ] <- mat[i, ] * i
+}
+
+mat
+``` 
+
+```{r echo=printAnswers, eval=TRUE}
+
+# Create a matrix with 1 to 8. 
+mat <- matrix(1:8, ncol=8, nrow=5, byrow = TRUE)
+
+# Loop over each row, and multiply it. 
+for (i in 1:5) {
+  mat[i, ] <- mat[i, ] * i
+}
+
+mat
+``` 
+
+---
+
+5. **Create a 6 by 6 matrix of strings, where each cell contains "row + column = sum".  For example, the second row, third column would yield "2 + 3 = 6". Tip: Create an empty 6x6 matrix first and fill it with values later. **
+
+```{r echo=printAnswers, eval=printAnswers}
+string.mat <- matrix(NA, ncol = 6, nrow = 6)
+
+for (i in 1:6) {
+  for (j in 1:6) {
+    string.mat[i, j] <- paste(i, "+", j, "=", i+j, sep="")
+  }
+}
+
+string.mat
+```
+
+---
+
+6. **Modify your loop to put `"Sum > 8"` in the matrix in the cells where that is true.** 
+
+```{r echo=printAnswers, eval=printAnswers}
+string.mat <- matrix(NA, ncol = 6, nrow = 6)
+
+for (i in 1:6) {
+  for (j in 1:6) {
+    if (i+j <= 8) {
+      string.mat[i, j] <- paste(i, "+", j, "=", i+j, sep="")
+    } else {
+      string.mat[i, j] <- "Sum > 8"
+    }
+  }
+}
+
+string.mat
+```
+
+---
+
+The `anscombe` data set is a wonderful data set from 1973 by Francis J. Anscombe aimed to demonstrate that pairs of variables can have the same statistical properties, while having completely differnt graphical representations. We will be using this data set more this week. If you'd like to know more about `anscombe`, you can simply call `?anscombe` to enter the help.
+
+You can directly call `anscombe` from your console because the `datasets` package is a base package in `R`. This means that it is always included and loaded when you start an `R` instance. In general, when you would like to access functions or data sets from packages that are not automatically loaded, we don't have to explicitly load the package. We can also call `package::thing-we-need` to directly 'grab' the `thing-we-need` from the `package` namespace. For example,  
+```{r}
+test <- datasets::anscombe
+identical(test, anscombe) #test if identical
+```
+
+This is especially handy within functions, as we can call `package::function-name` to borrow functionality from installed packages, without loading the whole package. Calling only those functions that you need is more memory-efficient than loading it all. More memory efficient means faster computation. 
+
+---
+
+7. **Display summary statistics (for example, using `summary`) of each column of the `anscombe` dataset from the `datasets` package**
+
+```{r echo=printAnswers, eval=printAnswers, message=FALSE}
+# Using i as an indicator for the current column.
+for (i in 1:ncol(anscombe)) {
+  print(colnames(anscombe)[i])
+  print(summary(anscombe[, i]))
+}
+
+# Looping over the variables directly. 
+# Although the code is a bit more clear, this does mean that we can not access the names of the variables.
+# So the output is less clear. 
+for (i in anscombe) {
+  print(summary(i))
+}
+```
+
+---
+
+8. **Display summary statistics of each column of the `anscombe` dataset using `apply()`.**
+
+```{r echo=printAnswers, eval=printAnswers}
+apply(X = anscombe, MARGIN = 2, FUN = summary)
+```
+
+Remember that in `R`, the first indicator in square brackets always indicates the row, and the second indicator always indicates the column, such that `anscombe[2, 3]` would give us the value for the intersection of the second row and the third column. The same rationale translates to the margins we would like `apply()` to iterate over. The argument `MARGIN = 2` specifies the columns, while `MARGIN = 1` would indicate that a function should be applied over the rows: 
+
+```{r echo=printAnswers, eval=printAnswers}
+apply(anscombe, 1, summary)
+```
+We now see a returned matrix of `11` columns, that give us the `summary()` over the 11 rows in the `anscombe` data set.
+```{r}
+dim(anscombe)
+```
+
+
+---
+
+9. **Display summary statistics of each column of the `anscombe` dataset using `sapply()`. **
+
+```{r echo=printAnswers, eval=printAnswers}
+sapply(anscombe, summary)
+```
+We can see that `sapply()` returns a matrix. We don't have to specify any margins as the `anscombe` data set is of class `data.frame`: 
+```{r}
+class(anscombe)
+```
+Objects of class `data.frame` can be addressed as a list, where the columns are the listed elements (see Lecture B). The function `summary()` will automatically be applied over the listed elements. 
+
+---
+
+10. **Display summary statistics of each column of the `anscombe` dataset using `lapply()`. **
+
+```{r echo=printAnswers, eval=printAnswers}
+lapply(anscombe, summary)
+```
+
+Function `lapply()` behaves just like `sapply()` - in fact, `sapply()` is a more user-friendly version of `lapply()`, but returns a list rather than a matrix. I, personally, prefer the `sapply()` - or the equivalent `apply()` over the columns - solution for `anscombe` data set. However, if a data set has many dimensions, the return from `lapply()` may be much more flexible to work with.   
+
+---
+
+11. **Write a function that takes a vector of numbers as input, and returns a string containing "The mean is XXX", where XXX should be, of course, the mean.  **
+
+```{r echo=printAnswers, eval=printAnswers}
+giveMeanAsString <- function(x) {
+  paste("The mean is", mean(x))
+}
+```
+
+---
+
+12. **Apply this to each column of `anscombe`. **
+
+```{r echo=printAnswers, eval=printAnswers}
+sapply(anscombe, giveMeanAsString)
+```
+
+---
+
+13. **Now modify your function to `round()` off the means to have a single decimal, and `apply` it again to see the results.**
+
+```{r echo=printAnswers, eval=printAnswers}
+giveRoundedMeanAsString <- function(x) {
+  paste("The mean is", round(mean(x), 1))
+}
+sapply(anscombe, giveRoundedMeanAsString)
+```
+
+---
+
+The `mammalsleep` data set from the `mice` package shows data collected by Allison and Cicchetti (1976). It holds information for 62 mammal species on the interrelationship between sleep, ecological, and constitutional variables. The dataset contains missing values on five variables, which poses challenges when analyses include these variables. 
+
+We will use this datasets also more frequently this week, but we use it only once today. Therefore we could more efficiently call `mice::mammalsleep` to obtain only the `mammalsleep` data set without loading the whole `mice` package. 
+
+---
+
+14. **Write a function that takes a vector as input, and that returns a string that contains either (1) the mean and standard deviation (`sd()`) of the vector, if the vector is numeric, or (2) the `levels` of the vector, if it is categorical.**
+
+* **(a)** Apply this function over each row of the `mammalsleep` dataset from the `mice` package. 
+
+```{r echo=printAnswers, eval=printAnswers, message=FALSE}
+columnInfo <- function(x) {
+  if (is.numeric(x)) {
+    return(paste("The mean is", round(mean(x), 2), 
+                 "and the sd is",   round(sd(x), 2)))
+  } else {
+    return(paste(levels(x), collapse = ", "))
+  }
+}
+sapply(mice::mammalsleep, columnInfo)
+```
+
+* **(b)** Does this function work for all of the columns? If not, fix it. 
+
+```{r echo=printAnswers, eval=printAnswers}
+# We need to use the option na.rm=TRUE for mean and sd to make sure the missings are skipped. 
+columnInfo <- function(x) {
+  if (is.numeric(x)) {
+    return(paste("The mean is", round(mean(x, na.rm=TRUE), 2), 
+                 "and sd is",   round(sd(x, na.rm=TRUE), 2)))
+  } else {
+    return(paste(levels(x), collapse = ", "))
+  }
+}
+sapply(mice::mammalsleep, columnInfo)
+```
+
+
+---
+
+End of Practical
+
+---
+
+#### References
+
+Allison, T., Cicchetti, D.V. (1976). Sleep in Mammals: Ecological and Constitutional Correlates. Science, 194(4266), 732-734.
+
+Anscombe, Francis J. (1973) Graphs in statistical analysis. American Statistician, 27, 17–21.
+
+
+
+
+
+

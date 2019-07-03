@@ -1,0 +1,40 @@
+---
+title: "Practical_M"
+author: "Gerko Vink"
+date: "Statistical Programming in R"
+output: html_document
+---
+
+---
+
+1. **Reproduce the data from slide 18 twice, but now instead of $\pm 1.5$ use an adjustment of $\pm .5$ and $\pm 2.5$, respectively**
+
+---
+
+2. **Add a column to the data sets that indicates a `Train` (25%) and a `Test` (75%) part.**
+
+---
+
+3. **Fit the `K-NN` model to both data sets. Use `k = 3`.**
+
+---
+
+4. **What is the percentage of correct predictions for each model?**
+
+---
+
+5. **Plot the false and correct predictions for both models.**
+
+---
+
+6. **Write a function that determines the optimum `k` with respect to classification error. Have the function return the following:**
+
+---
+
+7. **Execute your function twice: once for the data set based on the `.5` adjustment and once for the data set based on the `2.5` adjustment. Does the previously used `k=3` yield the optimal classification prediction?**
+
+---
+
+End of Practical
+
+

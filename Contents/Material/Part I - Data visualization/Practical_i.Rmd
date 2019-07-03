@@ -1,0 +1,85 @@
+---
+title: "Practical I"
+author: "Gerko Vink & Erik-Jan van Kesteren"
+date: "Statistical Programming in R"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+
+```{r echo=FALSE}
+printAnswers <- TRUE
+```
+
+---
+
+#### Exercises 
+
+---
+
+The following packages are required for this practical:
+
+```{r, message=FALSE}
+library(dplyr)
+library(magrittr)
+library(mice)
+library(ggplot2)
+```
+
+and if you'd like the same results as I have obtained, you can fix the random seed
+
+```{r cache=TRUE}
+set.seed(123)
+```
+
+---
+
+1. **Create a scatterplot between `age` and `bmi` in the `mice::boys` data set**
+
+---
+
+2. **Now recreate the plot with the following specifications:**
+
+- If `bmi < 18.5` use `color = "light blue"`
+- If `bmi > 18.5 & bmi < 25` use `color = "light green"`
+- If `bmi > 25 & bmi < 30` use `color = "orange"`
+- If `bmi > 30` use `color = "red"`
+
+
+---
+
+3. **Create a histogram for `age` in the `boys` data set**
+
+---
+
+4. **Create a bar chart for `reg` in the boys data set**
+With a standard plotting device in `R`:
+
+---
+
+5. **Create a box plot for `hgt` with different boxes for `reg` in the `boys` data set**
+With a standard plotting device in `R`:
+
+---
+
+6. **Create a density plot for `age` with different curves for boys from the `city` and boys from rural areas (`!city`).**
+
+---
+
+7. **Create a diverging bar chart for `hgt` in the `boys` data set, that displays for every `age` year that year's mean height in deviations from the overall average `hgt`** 
+
+---
+
+End of Practical
+
+---
+
+#### Useful References
+
+[The `ggplot2` reference webpage](https://ggplot2.tidyverse.org/reference/index.html)
+
+
+---
+
+
