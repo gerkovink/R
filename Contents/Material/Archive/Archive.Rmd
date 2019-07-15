@@ -1,12 +1,12 @@
 ---
 title: "Archive Placeholder"
 author: ""
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output: html_document
 ---
 
 This document serves as an placeholder for the Course Material Archive.
-The archive is can be obtained from this link by Friday July 19 2018 @ 8pm
+The archive is can be obtained from this link by Friday July 19 2019 @ 8pm
 
 All the best, 
 
