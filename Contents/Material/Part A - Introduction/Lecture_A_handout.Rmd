@@ -2,15 +2,52 @@
 title: "Introduction"
 author: "Gerko Vink"
 date: "Statistical Programming in R"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+    number_sections: false
 ---
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 12px;
+  }
+td {  /* Table  */
+  font-size: 12px;
+}
+h1.title {
+  font-size: 18px;
+  color: DarkBlue;
+}
+h1 { /* Header 1 */
+  font-size: 18px;
+}
+h2 { /* Header 2 */
+    font-size: 18px;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+</style>
 
 ---
 
-##
+## Very useful
 You can view my screen on your machine: 
 
 [join.me/statistics_uu](http://join.me/statistics_uu)
+
+and access the course materials quickly from
+
+[www.gerkovink.com/R](https://www.gerkovink.com/R)
 
 # Overview of this course
 ## Program
@@ -23,7 +60,6 @@ You can view my screen on your machine:
 <center>
   <img src="figures/state_programming.png" alt="HTML5 Icon" width = 100%>
 </center>
-
 
 and build the foundation for a succesfull scripting career
 
@@ -47,9 +83,9 @@ and build the foundation for a succesfull scripting career
 
 # What is RStudio?
 
-## Integrated Development Environment (IDE)
+## Integrated Development Environment
 <center>
-<img src="figures/fig2.png" alt="HTML5 Icon" width = 99%>
+<img src="figures/fig2.png" alt="HTML5 Icon" width = 85%>
 </center>
 
 ## RStudio

@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 author: "Gerko Vink"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output:
   ioslides_presentation:
     logo: logo.png
@@ -9,7 +9,7 @@ output:
     widescreen: no
 ---
 
-##
+## Very useful
 You can view my screen on your machine: 
 
 [join.me/statistics_uu](http://join.me/statistics_uu)
@@ -29,7 +29,6 @@ and access the course materials quickly from
 <center>
   <img src="figures/state_programming.png" alt="HTML5 Icon" width = 100%>
 </center>
-
 
 and build the foundation for a succesfull scripting career
 
@@ -53,9 +52,9 @@ and build the foundation for a succesfull scripting career
 
 # What is RStudio?
 
-## Integrated Development Environment (IDE)
+## Integrated Development Environment
 <center>
-<img src="figures/fig2.png" alt="HTML5 Icon" width = 99%>
+<img src="figures/fig2.png" alt="HTML5 Icon" width = 85%>
 </center>
 
 ## RStudio

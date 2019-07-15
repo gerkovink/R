@@ -1,7 +1,7 @@
 ---
 title: "Working with R"
 author: "Gerko Vink"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output:
   ioslides_presentation:
     logo: logo.png
@@ -273,13 +273,6 @@ mean(na.omit(c(1, 2, NA, 4, 5)))
 ```
 
 ## Floating point example
-```{r}
-(round(1740 / 600, 0) - 1740 / 600)
-(round(1740 / 600, 0) - 1740 / 600) <= 0.1
-(round(1740 / 600, 0) - 1740 / 600) <= 0.11
-```
-
-## Floating point example #2
 ```{r}
 (3 - 2.9)
 (3 - 2.9) <= 0.1

@@ -1,7 +1,7 @@
 ---
 title: "Exercise in markdown"
 author: "Gerko Vink"
-date: "Statistical programming in `R`"
+date: "Statistical programming with `R`"
 output: html_document
 ---
 

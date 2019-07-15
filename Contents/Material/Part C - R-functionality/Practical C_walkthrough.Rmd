@@ -10,8 +10,6 @@ output: html_document
 #### Exercises
 Begin this practical by setting the maximum line length in `R-Studio` to 80 characters. Go to `RStudio`'s `Preferences` (or `Global Options` under `Tools`) --> `Code` --> `Display`, and tick the `show margin` box. Make sure that the `margin column` is set to `80`
 
-For those of you who are accustomed to running analysis models in Mplus, I have included two additional exercises (12 and 13) on how to call Mplus from within `R`. If you do not use Mplus, I suggest that you skip these two exercises.  
-
 ---
 
 1. **Install package `mice`. **
