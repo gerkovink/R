@@ -148,13 +148,14 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
     - [Lecture B](Contents/Material/Part B - How is R organized/Lecture_B.html)
     - [Lecture B Handout](Contents/Material/Part B - How is R organized/Lecture_B_handout.html)
     - [Practical B](Contents/Material/Part B - How is R organized/Practical_B_walkthrough.html)
+    - [Impractical B](Contents/Material/Part B - How is R organized/Practical_B.html)
     - [`boys.RData`](Contents/Material/Part B - How is R organized/boys.RData)
 - Part C: `R` Functionality
     - [Lecture C](Contents/Material/Part C - R-functionality/Lecture_C.html)
     - [Lecture C Handout](Contents/Material/Part C - R-functionality/Lecture_C_handout.html)
     - [Practical C](Contents/Material/Part C - R-functionality/Practical_C_walkthrough.html)
 
-All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. 
+All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions. 
 
 <!-- ### For fun -->
 <!-- <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My wife asked me what machine learning is and I said: remember when we ordered the hot plate for the boat and amazon suggested buying all the equipment needed to make a full meth lab?</p>&mdash; (((Kane Baccigalupi))) (@rubyghetto) <a href="https://twitter.com/rubyghetto/status/1058220004301127680?ref_src=twsrc%5Etfw">November 2, 2018</a></blockquote> -->
@@ -168,6 +169,8 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 <iframe src="https://player.vimeo.com/video/178485416?color=428bca&title=0&byline=0&portrait=0" width="500" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <p><a href="https://vimeo.com/178485416">What is R Markdown?</a> from <a href="https://vimeo.com/rstudioinc">RStudio, Inc.</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 </center>
+
+See also [this `rmarkdown` cheat sheet](Contents/Material/Part A - Introduction/rmarkdown-reference_sheet.pdf). 
 
 # Tuesday
 
@@ -262,4 +265,4 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 ## Column 1
 
 ### Download a course archive 
-We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](https://www.gerkovink.com/R/Contents/Material/Archive/Archive2019.zip). 
+We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](Contents/Material/Archive/Archive.html). 
