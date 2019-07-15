@@ -125,12 +125,12 @@ When an `R` instance is started, there is initially no seed. In that case, `R` w
 
 ## Random seeds
 <center>
-<img src="fig/random_seed.pdf" alt="HTML5 Icon" width = 60%>
+<img src="fig/random_seed.png" alt="HTML5 Icon" width = 60%>
 </center>
 
 ## Random processes
 <center>
-<img src="fig/random_process.pdf" alt="HTML5 Icon" width = 80%>
+<img src="fig/random_process.png" alt="HTML5 Icon" width = 80%>
 </center>
 
 ## Drawing data
