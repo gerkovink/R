@@ -1,195 +1,265 @@
 ---
 title: "Statistical Programming with R 2019"
-author: 
-date: 
 output: 
-  html_document:
-    toc: true
-    toc_depth: 5
-    toc_float: true
-    number_sections: false
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: scroll
 ---
-<style type="text/css">
 
-body{ /* Normal  */
-      font-size: 12px;
-  }
-td {  /* Table  */
-  font-size: 12px;
-}
-h1.title {
-  font-size: 18px;
-  color: DarkBlue;
-}
-h1 { /* Header 1 */
-  font-size: 18px;
-}
-h2 { /* Header 2 */
-    font-size: 18px;
-}
-h3 { /* Header 3 */
-  font-size: 18px;
-}
-code.r{ /* Code block */
-    font-size: 12px;
-}
-pre { /* Code block - determines code spacing between lines */
-    font-size: 14px;
-}
+# Intro {.sidebar}
 
-.column-left{
-  float: left;
-  width: 33%;
-  text-align: left;
-}
-.column-center{
-  display: inline-block;
-  width: 33%;
-  text-align: left;
-}
-.column-right{
-  float: right;
-  width: 33%;
-  text-align: left;
-}
-.span-wide{
-  float: right;
-  width: 100%;
-  text-align: left;
-}
-</style>
-
+This dashboard covers the course materials for the course [**USS24: Statistical programming with R**](https://www.utrechtsummerschool.nl/courses/social-sciences/data-science-statistical-programming-with-r). 
 
 ---
 
-This is the course page for [**USS24: Statistical programming with R**](https://www.utrechtsummerschool.nl/courses/social-sciences/data-science-statistical-programming-with-r). All course materials can be obtained from this site. 
+Course leader: [Gerko Vink](https://www.gerkovink.com) <br>
+Instructors: 
+
+ - [Erik-Jan van Kesteren](https://erikjanvankesteren.nl)
+ - [Duco Veen](https://www.ducoveen.com)
+ - [Ayoub Bagheri](https://github.com/bagheria)
+
+Study load: 1.5 ECTS <br>
+Location: [Koningsberger building - Cosmos hall](https://www.uu.nl/en/victor-j-koningsberger-building)
 
 ---
+# Quick Overview
 
-# Preparing your machine for the course
-We use `R`, `RStudio` and a variety of packages in this course. You can find a detailed guide to install the necessary software on your own laptop in [this guide](https://www.gerkovink.com/R/Contents/Prepare/How_to_prepare.html)
+## Column 1
 
----
+### Outline
+R is rapidly becoming the standard platform for data manipulation, visualization and analysis and has a number of advantages over other statistical software packages. A wide community of users contribute to R, resulting in an enormous coverage of statistical procedures, including many that are not available in any other statistical program. Furthermore, it is highly flexible for programming and scripting purposes, for example when manipulating data or creating professional plots. However, R lacks standard GUI menus, as in SPSS for example, from which to choose what statistical test to perform or which graph to create. As a consequence, R is more challenging to master. Therefore, this course offers an elaborate introduction into statistical programming in R. Students learn to operate R, make plots, fit, assess and interpret a variety of basic statistical models and do advanced statistical programming and data manipulation. The topics in this course include regression models for linear, dichotomous, ordinal and multivariate data, statistical inference, statistical learning, bootstrapping and Monte Carlo simulation techniques. 
 
-# Course Materials
+The course deals with the following topics:
 
-We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](https://www.gerkovink.com/R/Contents/Material/Archive/Archive2018.zip). 
+1.	An introduction to the R environment.
+2.	Basic to advanced programming skills: data generation, manipulation, pipelines, summaries and plotting.
+3.	Fitting statistical models: estimation, prediction and testing.
+4.	Drawing statistical inference from data. 
+5.	Basic statistical learning techniques.
+6.	Bootstrapping and Monte Carlo simulation.
 
----
 
-<div class="column-left">
-## Day 1: Monday
+The course starts at a very basic level and builds up gradually. At the end of the week, participants will master advanced programming skills with R. No previous experience with R is required.
+
+Prerequisites:
+Participants are requested to bring their own laptop for lab meetings.
+
+### Certificate
+Participants will receive a certificate at the end of the course. 
+
+## Column 2
+
+### Daily schedule 
+
+| When?  |      | What?      |
+|:--------|:-------|:-------------|
+| 09.00 | 09.30  | Lecture |
+| 09:30 | 10.15  | Practical |
+| 10.15 | 10.45  | Discussion |
+|       | **break** |            |
+| 11.00 | 11.45  | Lecture |
+| 11:45 | 12.30  | Practical |
+|       | [Lunch](https://www.uu.nl/en/educatorium) |            |
+| 14:00 | 14.30  | Discussion |
+| 14:30 | 15:30 | Lecture |
+|       | **break** |            |
+| 15:45 | 16.30  | Practical |
+| 16:30 | 17:00  | Discussion |
+
+# How to prepare
+
+## Column 1
+
+### Preparing your machine for the course
+Dear all, 
+
+This summer you will participate in the [**USS24: Statistical programming with R**](https://www.utrechtsummerschool.nl/courses/social-sciences/data-science-statistical-programming-with-r) course in Utrecht, the Netherlands. To realize a steeper learning curve, we will use some functionality that is not part of the base installation for `R`. The below steps guide you through installing both `R` as well as the necessary additions. 
+
+We look forward to see you all in Utrecht,  
+
+*The Statistical Programming with R Team*
+
+### **System requirements**
+
+Bring a laptop computer to the course and make sure that you have full write access and administrator rights to the machine. We will explore programming and compiling in this course. This means that you need full access to your machine. Some corporate laptops come with limited access for their users, we therefore advice you to bring a personal laptop computer, if you have one. 
+
+### **1. Install `R`**
+`R` can be obtained [here](https://cran.r-project.org). We won't use `R` directly in the course, but rather call `R` through `RStudio`. Therefore it needs to be installed. 
+
+### **2. Install `RStudio` Desktop**
+
+Rstudio is an Integrated Development Environment (IDE). It can be obtained as stand-alone software [here](https://www.rstudio.com/products/rstudio/download/#download). The free and open source `RStudio Desktop` version is sufficient.
+
+### **3. Start RStudio and install the following packages. **
+
+Execute the following lines of code in the console window:
+
+```{r eval=FALSE, echo = TRUE}
+install.packages(c("ggplot2", "tidyverse", "magrittr", "micemd", "jomo", "pan", 
+                 "lme4", "knitr", "rmarkdown", "plotly", "ggplot2", "shiny", 
+                 "devtools", "boot", "class", "car", "MASS", "ggplot2movies", 
+                 "ISLR", "DAAG", "mice", "mitml", "miceadds"), 
+                 dependencies = TRUE)
+```
+
+
+If you are not sure where to execute code, use the following figure to identify the console:
+
+<center>
+  <img src="console.png" alt="HTML5 Icon" width = 70%>
+</center>
+
+Just copy and paste the installation command and press the return key. When asked 
+
+```{r eval = FALSE, echo = TRUE}
+Do you want to install from sources the package which needs 
+compilation? (Yes/no/cancel)
+```
+
+type `Yes` in the console and press the return key. 
+
+## Column 2
+
+### **What if the steps to the left do not work for me?**
+If all fails and you have insufficient rights to your machine, the following web-based service will offer a solution. 
+
+1. You will receive an account to Utrecht University's [MyWorkPlace](https://myworkplace.uu.nl/). You would have access to `R` and `RStudio` there. You may need to install packages for new sessions during the course. 
+2. Open a free account on [rstudio.cloud](https://rstudio.cloud). You can run your own cloud-based `RStudio` environment there. 
+
+Naturally, you will need internet access for these services to be accessed. Wireless internet access will be available at the course location. 
+
+
+# Monday
+
+## Column 1
+
+### Monday's materials
+We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online.
+
 - Part A: Introduction
-    - [Lecture A](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part A - Introduction/Lecture_A.html)
-    - [Lecture A Handout](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part A - Introduction/Lecture_A_handout.html)
-    - [Practical A](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part A - Introduction/Practical_A_walkthrough.html)
-    - [`notebook.R`](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part A - Introduction/notebook.R)
-    - [`markdown.Rmd`](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part A - Introduction/markdown.Rmd)
+    - [Lecture A](Contents/Material/Part A - Introduction/Lecture_A.html)
+    - [Lecture A Handout](Contents/Material/Part A - Introduction/Lecture_A_handout.html)
+    - [Practical A](Contents/Material/Part A - Introduction/Practical_A_walkthrough.html)
+    - [`notebook.R`](Contents/Material/Part A - Introduction/notebook.R)
+    - [`markdown.Rmd`](Contents/Material/Part A - Introduction/markdown.Rmd)
     - [Install R on UU laptop](https://gist.github.com/vankesteren/f2e198aa5ab4f6262b21a3d13bbea0b5)
 - Part B: How is `R` organized?
-    - [Lecture B](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part B - How is R organized/Lecture_B.html)
-    - [Lecture B Handout](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part B - How is R organized/Lecture_B_handout.html)
-    - [Practical B](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part B - How is R organized/Practical_B_walkthrough.html)
-    - [`boys.RData`](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part B - How is R organized/boys.RData)
+    - [Lecture B](Contents/Material/Part B - How is R organized/Lecture_B.html)
+    - [Lecture B Handout](Contents/Material/Part B - How is R organized/Lecture_B_handout.html)
+    - [Practical B](Contents/Material/Part B - How is R organized/Practical_B_walkthrough.html)
+    - [`boys.RData`](Contents/Material/Part B - How is R organized/boys.RData)
 - Part C: `R` Functionality
-    - [Lecture C](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part C - R-functionality/Lecture_C.html)
-    - [Lecture C Handout](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part C - R-functionality/Lecture_C_handout.html)
-    - [Practical C](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part C - R-functionality/Practical_C_walkthrough.html)
-</div>
+    - [Lecture C](Contents/Material/Part C - R-functionality/Lecture_C.html)
+    - [Lecture C Handout](Contents/Material/Part C - R-functionality/Lecture_C_handout.html)
+    - [Practical C](Contents/Material/Part C - R-functionality/Practical_C_walkthrough.html)
 
-<div class="column-center">
-## Day 2: Tuesday
+All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. 
+
+### For fun
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My wife asked me what machine learning is and I said: remember when we ordered the hot plate for the boat and amazon suggested buying all the equipment needed to make a full meth lab?</p>&mdash; (((Kane Baccigalupi))) (@rubyghetto) <a href="https://twitter.com/rubyghetto/status/1058220004301127680?ref_src=twsrc%5Etfw">November 2, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+## Column 2
+
+### About `rmarkdown`
+<center>
+<iframe src="https://player.vimeo.com/video/178485416?color=428bca&title=0&byline=0&portrait=0" width="500" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/178485416">What is R Markdown?</a> from <a href="https://vimeo.com/rstudioinc">RStudio, Inc.</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+</center>
+
+# Tuesday
+
+## Column 1
+
+### Tuesday's materials
+We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online.
 
 - Part D: Generating Data
-    - [Lecture D](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part D - Data generation/Lecture_D.html)
-    - [Practical D](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part D - Data generation/Practical_D_walkthrough.html)
-    - [Impractical D](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part D - Data generation/Practical_D.html)
+    - [Lecture D](Contents/Material/Part D - Data generation/Lecture_D.html)
+    - [Practical D](Contents/Material/Part D - Data generation/Practical_D_walkthrough.html)
+    - [Impractical D](Contents/Material/Part D - Data generation/Practical_D.html)
 - Part E: Custom functions
-    - [Lecture E](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part E - Functions apply and looping/Lecture_E.html)
-    - [Practical E](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part E - Functions apply and looping/Practical_E_walkthrough.html)
-    - [Impractical E](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part F - Pipes/Practical_E.html)
+    - [Lecture E](Contents/Material/Part E - Functions apply and looping/Lecture_E.html)
+    - [Practical E](Contents/Material/Part E - Functions apply and looping/Practical_E_walkthrough.html)
+    - [Impractical E](Contents/Material/Part F - Pipes/Practical_E.html)
 - Part F: Pipes
-    - [Lecture F](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part F - Pipes/Lecture_F.html)
-    - [Practical F](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part F - Pipes/Practical_F_walkthrough.html)
-    - [Impractical F](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part F - Pipes/Practical_F.html) 
-    
-</div>
+    - [Lecture F](Contents/Material/Part F - Pipes/Lecture_F.html)
+    - [Practical F](Contents/Material/Part F - Pipes/Practical_F_walkthrough.html)
+    - [Impractical F](Contents/Material/Part F - Pipes/Practical_F.html) 
 
-<div class="column-right">
-## Day 3: Wednesday
+All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions. 
+
+# Wednesday
+
+## Column 1
+
+### Wednesday's materials
+We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online.
 
 - Part G: Statistical models
-    - [Lecture G](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part G - Statistical models/Lecture_G.html)
-    - [Practical G](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part G - Statistical models/PracticalG_walkthrough.html)
-    - [Impractical G](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part G - Statistical models/PracticalG.html)
+    - [Lecture G](Contents/Material/Part G - Statistical models/Lecture_G.html)
+    - [Practical G](Contents/Material/Part G - Statistical models/PracticalG_walkthrough.html)
+    - [Impractical G](Contents/Material/Part G - Statistical models/PracticalG.html)
 - Part H: Statistical Inference
-    - [Lecture H](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part H - Statistical inference/Lecture_H.html)
-    - [Practical H](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part H - Statistical inference/PracticalH_walkthrough.html)
-    - [Impractical H](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part H - Statistical inference/PracticalH.html)
+    - [Lecture H](Contents/Material/Part H - Statistical inference/Lecture_H.html)
+    - [Practical H](Contents/Material/Part H - Statistical inference/PracticalH_walkthrough.html)
+    - [Impractical H](Contents/Material/Part H - Statistical inference/PracticalH.html)
 - Part I: Data visualization
-    - [Lecture I](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part I - Data visualization/Lecture_i.html)
-    - [Practical I](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part I - Data visualization/Practical_i_walkthrough.html)
-    - [Impractical I](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part I - Data visualization/Practical_i.html)
+    - [Lecture I](Contents/Material/Part I - Data visualization/Lecture_i.html)
+    - [Practical I](Contents/Material/Part I - Data visualization/Practical_i_walkthrough.html)
+    - [Impractical I](Contents/Material/Part I - Data visualization/Practical_i.html).
 
-</div>
+All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions. 
 
-<div class="span-wide">
+# Thursday
 
----
+## Column 1
 
-<div>
-
-<div class="column-left">
-## Day 4: Thursday
-
+### Thursday's materials
+We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online.
 
 - Part J: Model estimation
-    - [Lecture JK](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part JK - Model estimation/Lecture_J.html)
-    - [Practical JK](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part JK - Model estimation/Practical_J_walkthrough.html)
-    - [Impractical JK](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part JK - Model estimation/Practical_J.html)
+    - [Lecture JK](Contents/Material/Part JK - Model estimation/Lecture_J.html)
+    - [Practical JK](Contents/Material/Part JK - Model estimation/Practical_J_walkthrough.html)
+    - [Impractical JK](Contents/Material/Part JK - Model estimation/Practical_J.html)
 - Part K: Model estimation
-    - [Lecture JK](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part JK - Model estimation/Lecture_J.html)
-    - [Practical JK](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part JK - Model estimation/Practical_J_walkthrough.html)
-    - [Impractical JK](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part JK - Model estimation/Practical_J.html)
+    - [Lecture JK](Contents/Material/Part JK - Model estimation/Lecture_J.html)
+    - [Practical JK](Contents/Material/Part JK - Model estimation/Practical_J_walkthrough.html)
+    - [Impractical JK](Contents/Material/Part JK - Model estimation/Practical_J.html)
 - Part L: GLM's
-    - [Lecture L](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part L - GLMs/Lecture_L.html)
-    - [Practical L](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part L - GLMs/Practical_L_walkthrough.html)
-    - [Impractical L](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part L - GLMs/Practical_L.html)
-</div>
+    - [Lecture L](Contents/Material/Part L - GLMs/Lecture_L.html)
+    - [Practical L](Contents/Material/Part L - GLMs/Practical_L_walkthrough.html)
+    - [Impractical L](Contents/Material/Part L - GLMs/Practical_L.html)
 
-<div class="column-center">
-## Day 5: Friday
+All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions. 
+
+# Friday
+
+## Column 1
+
+### Friday's materials
+We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online.
+
 - Part M: Classification & Clustering
-    - [Lecture M](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part M - Unsupervised learning/Lecture_M.html)
-    - [Practical M](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part M - Unsupervised learning/Practical_M_walkthrough.html)
-    - [Impractical M](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part M - Unsupervised learning/Practical_M.html)
+    - [Lecture M](Contents/Material/Part M - Unsupervised learning/Lecture_M.html)
+    - [Practical M](Contents/Material/Part M - Unsupervised learning/Practical_M_walkthrough.html)
+    - [Impractical M](Contents/Material/Part M - Unsupervised learning/Practical_M.html)
 - Part N: Bootstrapping
-    - [Lecture N](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part N - Bootstrapping/Lecture_N.html)
-    - [Practical N](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part N - Bootstrapping/Practical_N_walkthrough.html)
-    - [Impractical N](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part N - Bootstrapping/Practical_N.html)
+    - [Lecture N](Contents/Material/Part N - Bootstrapping/Lecture_N.html)
+    - [Practical N](Contents/Material/Part N - Bootstrapping/Practical_N_walkthrough.html)
+    - [Impractical N](Contents/Material/Part N - Bootstrapping/Practical_N.html)
 - Part O: Monte Carlo simulation
-    - [Lecture O](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part O - Monte carlo simulation/Lecture_O.html)
-    - [Practical O](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part O - Monte carlo simulation/Practical_O_walkthrough.html)
-    - [Impractical O](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part O - Monte carlo simulation/Practical_O.html)
-</div>
+    - [Lecture O](Contents/Material/Part O - Monte carlo simulation/Lecture_O.html)
+    - [Practical O](Contents/Material/Part O - Monte carlo simulation/Practical_O_walkthrough.html)
+    - [Impractical O](Contents/Material/Part O - Monte carlo simulation/Practical_O.html)
 
+All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions. 
 
-<!-- <div class="column-right"> -->
-<!-- #### Group pictures: -->
+# Course archive
 
-<!-- - [Such nice people](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part L - GLMs/pic_1.jpg) -->
-<!-- - [Crazy about StatsWithR](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part L - GLMs/pic_2.jpg) -->
+## Column 1
 
-<!-- --- -->
-
-<!-- #### Archive of course materials -->
-
-<!-- - [All Course Materials](https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Archive/Archive2018.zip) -->
-<!-- </div> -->
-
-<div class="span-wide">
-
----
-
-</div>
-
+### Download a course archive 
+We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](https://www.gerkovink.com/R/Contents/Material/Archive/Archive2019.zip). 

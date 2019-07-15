@@ -16,7 +16,7 @@ You can view my screen on your machine:
 
 and access the course materials quickly from
 
-[http://bit.ly/statsR](http://bit.ly/statsR)
+[www.gerkovink.com/R](https://www.gerkovink.com/R)
 
 # Overview of this course
 ## Program
