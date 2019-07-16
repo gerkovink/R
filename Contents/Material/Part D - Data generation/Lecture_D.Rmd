@@ -22,7 +22,7 @@ library(mvtnorm)  # Multivariate Normal tools
 - `hist()`: Draw a histogram
 - `mvtnorm::rmvnorm()`: Drawing values from a multivariate normal distribution
 - `sample()`: Probabilistic sampling with or without replacement
-- `rchisq()`: Probabilistic sampling from a $X2$ distribution
+- `rchisq()`: Probabilistic sampling from a $\chi^2$ distribution
 - `rpois()`: Probabilistic sampling from a poisson distribution
 - `set.seed(123)`: Fixing the Random Number Generator seed
 
