@@ -137,10 +137,19 @@ What do we conclude?
 
 ## Correlation
 
-Makes sense, remember?
-
-```{r fig.height=4.5, fig.width=4.5, dev.args = list(bg = 'transparent'), fig.align='center'}
+```{r fig.height=5, fig.width=5, dev.args = list(bg = 'transparent'), fig.align='center'}
 plot(cats$Bwt, cats$Hwt)
+```
+
+## T-test
+Test the null hypothesis that the difference in mean heart weight between male and female cats is 0
+```{r}
+t.test(formula = Hwt ~ Sex, data = cats)
+```
+
+## T-test
+```{r fig.height=5, fig.width=5, dev.args = list(bg = 'transparent'), fig.align='center'}
+plot(formula = Hwt ~ Sex, data = cats)
 ```
 
 # Pipes
@@ -200,6 +209,23 @@ boys %>% cor(use = "pairwise.complete.obs")
 boys %>% subset(select = wgt) %>% na.omit() %>% max()
 ```
 
+## Useful: outlier filtering
+```{r}
+nrow(cats)
+
+cats.outl <- 
+  cats %>% 
+  filter(Hwt < mean(Hwt) + 3 * sd(Hwt), 
+         Hwt > mean(Hwt) - 3 * sd(Hwt))
+
+nrow(cats.outl)
+
+cats %>%  
+  filter(Hwt > mean(Hwt) + 3 * sd(Hwt))
+```
+
+# More pipe stuff
+
 ## The standard `%>%` pipe
 <center>
 <img src="flow_pipe.png" alt="HTML5 Icon" width = 75%>
@@ -216,24 +242,29 @@ boys %>% subset(select = wgt) %>% na.omit() %>% max()
 </center>
 
 ## The role of `.` in a pipe
+In `a %>% b(arg1, arg2, arg3)`, `a` will become `arg1`. With `.` we can change this.
 ```{r error=TRUE}
 set.seed(123)
 1:5 %>%
   mean() %>%
-  rnorm(10) %>%
-  mean()
+  rnorm(10)
 ```
 VS
 ```{r}
 set.seed(123)
 1:5 %>% 
   mean() %>%
-  rnorm(n = 10, mean = ., ) %>%
-  mean()
+  rnorm(n = 10, mean = .)
 ```
 The `.` can be used as a placeholder in the pipe. 
 
 ## Placeholder example
+Remember: `sample()` takes a random sample from a vector
+```{r}
+sample(x = c(1, 1, 2, 3, 5, 8), size = 2)
+```
+
+Sample 3 positions from the alphabet and show the position and the letter
 ```{r}
 set.seed(123)
 1:26 %>%
@@ -241,11 +272,24 @@ set.seed(123)
   paste(., LETTERS[.])
 ```
 
+## Debugging pipelines
+If you don't know what's going on, run each statement separately!
+```{r}
+set.seed(123)
+1:26
+
+set.seed(123)
+1:26 %>% 
+  sample(3)
+
+set.seed(123)
+1:26 %>%
+  sample(3) %>%
+  paste(., LETTERS[.])
+```
 
 ## Performing a t-test in a pipe
 ```{r message=FALSE}
-library(MASS) # for cats data
-
 cats %$%
   t.test(Bwt ~ Sex)
 ```
@@ -262,35 +306,4 @@ cats.test <-
 
 cats.test
 ```
-
-## Overwriting an object with a pipe
-```{r}
-set.seed(123)
-x <- rnorm(5)
-x
-
-x %<>%
-  abs()
-x
-```
-or
-```{r}
-x <- x %>%
-  abs()
-x
-```
-
-## Useful: outlier filtering
-```{r}
-cats %$% mean(Hwt)
-
-cats.outl <- 
-  cats %>% 
-  filter(Hwt < mean(Hwt) + 3 * sd(Hwt), 
-         Hwt > mean(Hwt) - 3 * sd(Hwt))
-
-cats %>%  
-  filter(Hwt > mean(Hwt) + 3 * sd(Hwt))
-```
-
 # Practical 
