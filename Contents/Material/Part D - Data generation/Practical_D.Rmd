@@ -1,17 +1,9 @@
 ---
 title: "Practical D - Data generation"
 author: "Gerko Vink"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output: html_document
 ---
-
-
-```{r echo=FALSE}
-printAnswers <- TRUE
-
-```
-
-
 
 ---
 

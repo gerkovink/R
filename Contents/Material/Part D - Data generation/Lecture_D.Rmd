@@ -137,7 +137,7 @@ When an `R` instance is started, there is initially no seed. In that case, `R` w
 
 We can draw data from a standard normal distribution
 ```{r}
-hist(rnorm(1000, mean = 5, sd = 1))
+hist(rnorm(1000, mean = 0, sd = 1))
 ```
 
 ## Drawing data
