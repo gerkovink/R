@@ -8,7 +8,6 @@ output: html_document
 
 ```{r echo=FALSE}
 printAnswers <- TRUE
-
 ```
 
 

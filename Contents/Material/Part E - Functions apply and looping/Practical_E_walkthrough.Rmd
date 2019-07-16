@@ -248,8 +248,8 @@ sapply(mice::mammalsleep, columnInfo)
 # We need to use the option na.rm=TRUE for mean and sd to make sure the missings are skipped. 
 columnInfo <- function(x) {
   if (is.numeric(x)) {
-    return(paste("The mean is", round(mean(x, na.rm=TRUE), 2), 
-                 "and sd is",   round(sd(x, na.rm=TRUE), 2)))
+    return(paste("The mean is", round(mean(x, na.rm = TRUE), 2), 
+                 "and sd is",   round(sd(x, na.rm = TRUE), 2)))
   } else {
     return(paste(levels(x), collapse = ", "))
   }
@@ -266,9 +266,9 @@ End of Practical
 
 #### References
 
-Allison, T., Cicchetti, D.V. (1976). Sleep in Mammals: Ecological and Constitutional Correlates. Science, 194(4266), 732-734.
+Allison, T., Cicchetti, D.V. (1976). [Sleep in Mammals: Ecological and Constitutional Correlates](https://pdfs.semanticscholar.org/8d4f/202354bf0fd1bd445792340e16acc042ec6d.pdf). Science, 194(4266), 732-734.
 
-Anscombe, Francis J. (1973) Graphs in statistical analysis. American Statistician, 27, 17–21.
+Anscombe, Francis J. (1973) [Graphs in statistical analysis](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf). American Statistician, 27, 17–21.
 
 
 

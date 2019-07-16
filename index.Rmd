@@ -164,6 +164,13 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 
 ## Column 2
 
+### Useful references
+
+- [The tidyverse style guide](https://style.tidyverse.org)
+- [The Google R style guide](https://google.github.io/styleguide/Rguide.xml)
+
+The above links are useful references that connect to today's materials. 
+
 ### About `rmarkdown`
 <center>
 <iframe src="https://player.vimeo.com/video/178485416?color=428bca&title=0&byline=0&portrait=0" width="500" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -193,6 +200,15 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
     - [Impractical F](Contents/Material/Part F - Pipes/Practical_F.html) 
 
 All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions. 
+
+## Column 2
+
+### Useful References
+
+- [`magrittr`](https://magrittr.tidyverse.org)
+- [`R` for Data Science](http://r4ds.had.co.nz) - [Chapter 18 on pipes](http://r4ds.had.co.nz/pipes.html)
+
+The above links are useful references that connect to today's materials. 
 
 # Wednesday
 
