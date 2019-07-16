@@ -153,13 +153,13 @@ hist(rnorm(100000, mean = 50, sd = 15))
 ```
 
 ## Drawing data: other distribution
-$X^2$-distribution with $df = 1$ degrees of freedom
+$\chi^2$-distribution with $df = 1$ degrees of freedom
 ```{r}
 hist(rchisq(500, df = 1))
 ```
 
 ## Drawing data: other distribution
-$X^2$-distribution with $df = 100$ degrees of freedom
+$\chi^2$-distribution with $df = 100$ degrees of freedom
 ```{r}
 hist(rchisq(500, df = 100))
 ```

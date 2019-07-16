@@ -293,11 +293,11 @@ cor(var1, var2) #correlations
 ```
 We see that the means are indeed approximately `5`, the variances approximate `1` and the correlation is approximately `.8`. In the case where the variance equals `1`, the correlation is equal to the covariance. For example, if the variance were exactly `1`, the correlation would be:
 
-\[\rho_{X,Y} = \frac{\text{COV(X,Y)}}{\sigma_X\sigma_Y} = \frac{.7873003}{1\times1} = .7873003.\]
+\[\rho_{X,Y} = \frac{\text{COV(X,Y)}}{\sigma_X\sigma_Y} = \frac{.7925752}{1\times1} = .7925752.\]
 
 In our case, the correlation equals:
 
-\[\rho_{X,Y} =  \frac{.7873003}{\sqrt{.9983921}\times\sqrt{.9816118}} = .7952798 \approx .80.\]
+\[\rho_{X,Y} =  \frac{.7925752}{\sqrt{0.9847586}\times\sqrt{.9830075}} = .8055587 \approx .80.\]
 
 ---
 
