@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Gerko Vink and Kees Mulder" />
@@ -343,18 +344,6 @@ summary {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -453,7 +442,7 @@ $(document).ready(function () {
 <li><strong>Write a function that takes a vector as input, and that returns a string that contains either (1) the mean and standard deviation (<code>sd()</code>) of the vector, if the vector is numeric, or (2) the <code>levels</code> of the vector, if it is categorical.</strong></li>
 </ol>
 <ul>
-<li><p><strong>(a)</strong> Apply this function over each row of the <code>mammalsleep</code> dataset from the <code>mice</code> package.</p></li>
+<li><p><strong>(a)</strong> Apply this function over each column of the <code>mammalsleep</code> dataset from the <code>mice</code> package.</p></li>
 <li><p><strong>(b)</strong> Does this function work for all of the columns? If not, fix it.</p></li>
 </ul>
 <hr />
@@ -483,6 +472,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

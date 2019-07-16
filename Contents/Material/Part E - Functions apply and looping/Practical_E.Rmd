@@ -230,7 +230,7 @@ We will use this datasets also more frequently this week, but we use it only onc
 
 14. **Write a function that takes a vector as input, and that returns a string that contains either (1) the mean and standard deviation (`sd()`) of the vector, if the vector is numeric, or (2) the `levels` of the vector, if it is categorical.**
 
-* **(a)** Apply this function over each row of the `mammalsleep` dataset from the `mice` package. 
+* **(a)** Apply this function over each column of the `mammalsleep` dataset from the `mice` package. 
 
 ```{r   , message=FALSE}
 columnInfo <- function(x) {
