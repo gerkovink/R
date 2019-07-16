@@ -255,9 +255,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -276,25 +274,98 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -304,8 +375,8 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Practical E</h1>
-<h4 class="author"><em>Gerko Vink and Kees Mulder</em></h4>
-<h4 class="date"><em>Statistical Programming in R</em></h4>
+<h4 class="author">Gerko Vink and Kees Mulder</h4>
+<h4 class="date">Statistical Programming in R</h4>
 
 </div>
 
@@ -566,7 +637,7 @@ for (i in anscombe) {
 <p>Function <code>lapply()</code> behaves just like <code>sapply()</code> - in fact, <code>sapply()</code> is a more user-friendly version of <code>lapply()</code>, but returns a list rather than a matrix. I, personally, prefer the <code>sapply()</code> - or the equivalent <code>apply()</code> over the columns - solution for <code>anscombe</code> data set. However, if a data set has many dimensions, the return from <code>lapply()</code> may be much more flexible to work with.</p>
 <hr />
 <ol start="11" style="list-style-type: decimal">
-<li><strong>Write a function that takes a vector of numbers as input, and returns a string containing “The mean is XXX”, where XXX should be, of course, the mean. </strong></li>
+<li><strong>Write a function that takes a vector of numbers as input, and returns a string containing “The mean is XXX”, where XXX should be, of course, the mean of the input vector. </strong></li>
 </ol>
 <pre class="r"><code>giveMeanAsString &lt;- function(x) {
   paste(&quot;The mean is&quot;, mean(x))

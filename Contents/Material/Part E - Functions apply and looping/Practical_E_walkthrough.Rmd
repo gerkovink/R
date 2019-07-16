@@ -8,10 +8,7 @@ output: html_document
 
 ```{r echo=FALSE}
 printAnswers <- TRUE
-
 ```
-
-
 
 ---
 
@@ -194,7 +191,7 @@ Function `lapply()` behaves just like `sapply()` - in fact, `sapply()` is a more
 
 ---
 
-11. **Write a function that takes a vector of numbers as input, and returns a string containing "The mean is XXX", where XXX should be, of course, the mean.  **
+11. **Write a function that takes a vector of numbers as input, and returns a string containing "The mean is XXX", where XXX should be, of course, the mean of the input vector.  **
 
 ```{r echo=printAnswers, eval=printAnswers}
 giveMeanAsString <- function(x) {

@@ -1,7 +1,7 @@
 ---
 title: "Practical E"
 author: "Gerko Vink and Kees Mulder"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output: html_document
 ---
 
@@ -193,7 +193,7 @@ lapply(anscombe, summary)
 
 ---
 
-11. **Write a function that takes a vector of numbers as input, and returns a string containing "The mean is XXX", where XXX should be, of course, the mean.  **
+11. **Write a function that takes a vector of numbers as input, and returns a string containing "The mean is XXX", where XXX should be, of course, the mean of the input vector.  **
 
 ```{r   }
 giveMeanAsString <- function(x) {

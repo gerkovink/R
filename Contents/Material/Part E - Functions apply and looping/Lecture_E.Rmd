@@ -1,7 +1,7 @@
 ---
 title: "Loops and functions"
 author: "Gerko Vink and Kees Mulder"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output:
   ioslides_presentation:
     logo: logo.png
@@ -10,10 +10,9 @@ output:
   beamer_presentation: default
 ---
 
-```{r echo=FALSE, warning=FALSE, message=FALSE}
-require(ggplot2)
-require(dplyr)
-require(MASS)
+## Packages we use
+```{r echo=TRUE, warning=FALSE, message=FALSE}
+library(MASS) #for the cats data
 ```
 
 ## This lecture
@@ -44,13 +43,13 @@ require(MASS)
 # Conditionals and loops
 ## If-statements
 
-Often, we want to run some code *only if* something *condition* is true.
+Often, we want to run some code ***only if*** some ***condition*** is true.
 
 For example:
 
 ```{r}
 a <- 2
-if (a > 5) {
+if (a > 5){
   print("a is larger than 5.")
 }
 ```
@@ -58,7 +57,7 @@ if (a > 5) {
 
 ```{r}
 a <- 8
-if (a > 5) {
+if (a > 5){
   print("a is larger than 5.")
 }
 ```
@@ -70,7 +69,7 @@ We can also specify something to be run if the *condition* is **not** true.
 
 ```{r}
 a <- 2
-if (a > 5) {
+if (a > 5){
   print("a is larger than 5.")
 } else {
   print("a is smaller than 5.")
@@ -81,7 +80,7 @@ if (a > 5) {
 
 ```{r}
 a <- 8
-if (a > 5) {
+if (a > 5){
   print("a is larger than 5.")
 } else {
   print("a is smaller than 5.")
@@ -90,9 +89,9 @@ if (a > 5) {
 
 ## For-loops
 
-Very often, we want to do something multiple times. 
+For loops are used when we want to perform some repetitive calculations. 
 
-It is tedious, and often impossible, to write this out completely. 
+It is often tedious, or even impossible, to write this repetition out completely. 
 
 ## For-loops {.small}
 ```{r}
@@ -114,7 +113,7 @@ print(6)
 For-loops allow us to automate this!
 
 ```{r}
-for (i in 1:6) {
+for (i in 1:6){
   print(i)
 }
 ```
@@ -122,7 +121,7 @@ for (i in 1:6) {
 ## For-loops
 
 ```{r}
-for (some.var.name in 1:6) {
+for (some.var.name in 1:6){
   print(some.var.name)
 }
 ```
@@ -130,7 +129,7 @@ for (some.var.name in 1:6) {
 ## For-loops
 
 ```{r}
-for (i in 1:6) {
+for (i in 1:6){
   print(i < 5)
 }
 ```
@@ -138,8 +137,8 @@ for (i in 1:6) {
 ## For-loops
 
 ```{r}
-for (i in 1:nrow(cats)) {
-  if (cats$Bwt[i] > 2.5) {
+for (i in 1:nrow(cats)){
+  if (cats$Bwt[i] > 2.5){
     cat(i, "is over 2.5. It is:", cats$Bwt[i], "\n")
   }
 }
@@ -149,7 +148,7 @@ for (i in 1:nrow(cats)) {
 ## For-loops {.build}
 
 ```{r}
-for (i in 1:ncol(cats)) {
+for (i in 1:ncol(cats)){
   print(class(cats[, i]))
 }
 ```
@@ -159,7 +158,7 @@ for (i in 1:ncol(cats)) {
 ```{r}
 empty.cats <- matrix(NA, nrow = nrow(cats), ncol = ncol(cats))
 
-for (i in 1:ncol(cats)) {
+for (i in 1:ncol(cats)){
   empty.cats[, i] <- rep(i, nrow(cats))
 }
 
@@ -168,8 +167,8 @@ head(empty.cats)
 
 ## For-loops in for-loops {.smaller}
 ```{r}
-for (i in 1:3) {
-  for (j in 1:3) {
+for (i in 1:3){
+  for (j in 1:3){
     print(paste(i, "x", j, "=", i*j))
   }
 }
@@ -179,7 +178,7 @@ for (i in 1:3) {
 ```{r}
 my.list <- list(A = c(4, 2, 1:3), B = "Hello.", C = TRUE)
 
-for (list.item in my.list) {
+for (list.item in my.list){
   cat("One element is", list.item, "\n")
 }
 ```
@@ -189,7 +188,7 @@ But if we want to change the item, we have to be able to access it, so we are be
 ```{r}
 my.list <- list(A = c(4, 2, 1:3), B = "Hello.", C = c(TRUE, TRUE, FALSE))
 
-for (iter in 1:length(my.list)) {
+for (iter in 1:length(my.list)){
   my.list[[iter]] <- rev(my.list[[iter]])
 }
 my.list
@@ -269,7 +268,7 @@ sapply(my.list, range)
 
 It returns a vector or a matrix, depending on the output of the function.
 
-Why is each element a string?
+Why is each element a character string?
 
 ## `sapply()`
 
@@ -316,7 +315,7 @@ mean(1:6)
 We can make our own functions as follows:
 
 ```{r}
-squared <- function (x) {
+squared <- function (x){
   x.square <- x * x
   return(x.square)
 }
@@ -331,7 +330,7 @@ squared(4)
 If there is no `return()`, the last line is automatically returned, so we can also just write:
 
 ```{r}
-squared <- function (x) {
+squared <- function(x){
   x * x
 }
 
@@ -350,8 +349,8 @@ apply(rand.mat, 2, squared)
 
 ## Our own function
 ```{r}
-areDivisible <- function (x, y) {
-  if (x > y) {
+areDivisible <- function(x, y){
+  if (x > y){
     larger  <- x
     smaller <- y
   } else {
@@ -376,11 +375,10 @@ areDivisible(9, 3)
 * They allow us to provide an additional option, but if no choice is provided, we can choose for the user of the function. 
 
 ```{r}
-areDivisible <- function (x, y, printInput = TRUE) {
-  if (printInput) {
+areDivisible <- function(x, y, printInput = TRUE){
+  if (printInput){
     cat("Testing if", x, "and", y, "are divisible: \n")
   }
-
   ((x %% y) == 0) | ((y %% x) == 0)
 }
 ```
@@ -403,7 +401,7 @@ areDivisible(9, 3, printInput = FALSE)
 rand.vec <- rnorm(10)
 
 # Add ten to each element.
-for (i in 1:rand.vec) {
+for (i in 1:rand.vec){
   i <- i + 10
 }
 
@@ -413,7 +411,7 @@ rand.vec
 ## Troubleshooting
 ```{r eval=FALSE}
 # Add ten to each element.
-for (i in 1:rand.vec) {
+for (i in 1:rand.vec){
     i <- i + 10
 }
 ```
@@ -428,7 +426,7 @@ Let's try again:
 
 ```{r eval=FALSE}
 # Add ten to each element.
-for (i in 1:length(rand.vec)) {
+for (i in 1:length(rand.vec)){
   i <- i + 10
 }
 ```
@@ -443,7 +441,7 @@ Still, no luck.
 
 ```{r eval=FALSE}
 # Add ten to each element.
-for (i in 1:length(rand.vec)) {
+for (i in 1:length(rand.vec)){
   i <- i + 10
 }
 ```
@@ -456,7 +454,7 @@ i
 ## Troubleshooting
 ```{r eval=FALSE}
 # Add ten to each element.
-for (i in 1:length(rand.vec)) {
+for (i in 1:length(rand.vec)){
   i <- i + 10
 }
 ```
@@ -472,7 +470,7 @@ i
 ## Troubleshooting
 ```{r}
 # Add ten to each element.
-for (i in 1:length(rand.vec)) {
+for (i in 1:length(rand.vec)){
   rand.vec[i] <- rand.vec[i] + 10
 }
 
