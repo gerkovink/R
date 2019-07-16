@@ -37,6 +37,15 @@ for (i in 0:10) {
   }
 }
 ```
+Or, even more efficiently:
+```{r}
+for (i in 0:10) {
+  if (i %in% 3:5) {
+    print(i)
+  }
+}
+```
+
 
 ---
 

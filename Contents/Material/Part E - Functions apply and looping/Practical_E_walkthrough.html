@@ -410,6 +410,15 @@ $(document).ready(function () {
 <pre><code>## [1] 3
 ## [1] 4
 ## [1] 5</code></pre>
+<p>Or, even more efficiently:</p>
+<pre class="r"><code>for (i in 0:10) {
+  if (i %in% 3:5) {
+    print(i)
+  }
+}</code></pre>
+<pre><code>## [1] 3
+## [1] 4
+## [1] 5</code></pre>
 <hr />
 <ol start="3" style="list-style-type: decimal">
 <li><strong>Try to do the same thing without a for-loop, by subsetting a vector from 0 to 10 directly.</strong></li>
