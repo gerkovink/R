@@ -157,11 +157,6 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
 
 All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions. 
 
-<!-- ### For fun -->
-<!-- <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My wife asked me what machine learning is and I said: remember when we ordered the hot plate for the boat and amazon suggested buying all the equipment needed to make a full meth lab?</p>&mdash; (((Kane Baccigalupi))) (@rubyghetto) <a href="https://twitter.com/rubyghetto/status/1058220004301127680?ref_src=twsrc%5Etfw">November 2, 2018</a></blockquote> -->
-<!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
-
-
 ## Column 2
 
 ### Useful references
@@ -282,3 +277,7 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 
 ### Download a course archive 
 We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](Contents/Material/Archive/Archive.html). 
+
+<!-- ### For fun -->
+<!-- <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My wife asked me what machine learning is and I said: remember when we ordered the hot plate for the boat and amazon suggested buying all the equipment needed to make a full meth lab?</p>&mdash; (((Kane Baccigalupi))) (@rubyghetto) <a href="https://twitter.com/rubyghetto/status/1058220004301127680?ref_src=twsrc%5Etfw">November 2, 2018</a></blockquote> -->
+<!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
