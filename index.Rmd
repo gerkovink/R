@@ -186,7 +186,7 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
 - Part E: Custom functions
     - [Lecture E](Contents/Material/Part E - Functions apply and looping/Lecture_E.html)
     - [Practical E](Contents/Material/Part E - Functions apply and looping/Practical_E_walkthrough.html)
-    - [Impractical E](Contents/Material/Part F - Pipes/Practical_E.html)
+    - [Impractical E](Contents/Material/Part E - Functions apply and looping/Practical_E.html)
 - Part F: Pipes
     - [Lecture F](Contents/Material/Part F - Pipes/Lecture_F.html)
     - [Practical F](Contents/Material/Part F - Pipes/Practical_F_walkthrough.html)
