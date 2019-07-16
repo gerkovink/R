@@ -287,11 +287,11 @@ cats %$% mean(Hwt)
 
 cats.outl <- 
   cats %>% 
-  filter(Hwt < mean(Hwt) + 3*sd(Hwt), 
-         Hwt > mean(Hwt) - 3*sd(Hwt))
+  filter(Hwt < mean(Hwt) + 3 * sd(Hwt), 
+         Hwt > mean(Hwt) - 3 * sd(Hwt))
 
-cats %>% 
-  filter(Hwt > mean(Hwt) + 3*sd(Hwt))
+cats %>%  
+  filter(Hwt > mean(Hwt) + 3 * sd(Hwt))
 ```
 
 # Practical 
