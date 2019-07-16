@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = FALSE, eval = FALSE, include = FALSE)
 
 ---
 
-1. **Create a `for`-loop that loops over all numbers between 0 and 10, but only prints numbers below 5. **
+1. **Create a `for`-loop that loops over all numbers between 0 and 10, but only prints numbers below 5**.
 
 ```{r   }
 for (i in 0:10) {
@@ -271,6 +271,7 @@ End of Practical
 Allison, T., Cicchetti, D.V. (1976). [Sleep in Mammals: Ecological and Constitutional Correlates](https://pdfs.semanticscholar.org/8d4f/202354bf0fd1bd445792340e16acc042ec6d.pdf). Science, 194(4266), 732-734.
 
 Anscombe, Francis J. (1973) [Graphs in statistical analysis](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf). American Statistician, 27, 17–21.
+
 
 
 

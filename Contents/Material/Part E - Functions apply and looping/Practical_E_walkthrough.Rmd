@@ -1,7 +1,7 @@
 ---
 title: "Practical E"
 author: "Gerko Vink and Kees Mulder"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output: html_document
 ---
 
@@ -269,6 +269,7 @@ End of Practical
 Allison, T., Cicchetti, D.V. (1976). [Sleep in Mammals: Ecological and Constitutional Correlates](https://pdfs.semanticscholar.org/8d4f/202354bf0fd1bd445792340e16acc042ec6d.pdf). Science, 194(4266), 732-734.
 
 Anscombe, Francis J. (1973) [Graphs in statistical analysis](http://www.sjsu.edu/faculty/gerstman/StatPrimer/anscombe1973.pdf). American Statistician, 27, 17–21.
+
 
 
 
