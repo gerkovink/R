@@ -16,9 +16,7 @@ output:
 
 - Data manipulation
 
-- Basic analysis
-
-- Combination
+- Basic analysis (correlation & t-test)
 
 - Pipes
 
@@ -291,7 +289,7 @@ set.seed(123)
 ## Performing a t-test in a pipe
 ```{r message=FALSE}
 cats %$%
-  t.test(Bwt ~ Sex)
+  t.test(Hwt ~ Sex)
 ```
 is the same as 
 ```{r eval=FALSE}
