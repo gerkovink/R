@@ -92,7 +92,7 @@ To obtain a linear model with just main effects for `wgt` and `hgt`, we formulat
 ```{r}
 require(mice)
 fit <- boys %$%
-  lm(age ~ wgt)
+  lm(age ~ wgt + hgt)
 fit
 ```
 

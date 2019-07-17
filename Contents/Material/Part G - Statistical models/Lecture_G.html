@@ -3249,16 +3249,16 @@ fit</pre>
 
 <pre class = 'prettyprint lang-r'>require(mice)
 fit &lt;- boys %$%
-  lm(age ~ wgt)
+  lm(age ~ wgt + hgt)
 fit</pre>
 
 <pre >## 
 ## Call:
-## lm(formula = age ~ wgt)
+## lm(formula = age ~ wgt + hgt)
 ## 
 ## Coefficients:
-## (Intercept)          wgt  
-##     -0.1924       0.2517</pre>
+## (Intercept)          wgt          hgt  
+##    -7.45952      0.07138      0.10660</pre>
 
 </article></slide><slide class=""><hgroup><h2>Continuous predictors: more detail</h2></hgroup><article  class="smaller" id="continuous-predictors-more-detail-1">
 
@@ -3266,23 +3266,24 @@ fit</pre>
 
 <pre >## 
 ## Call:
-## lm(formula = age ~ wgt)
+## lm(formula = age ~ wgt + hgt)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -12.0907  -1.1686  -0.5342   1.4286   5.5143 
+##     Min      1Q  Median      3Q     Max 
+## -5.1627 -0.8836 -0.1656  0.8765  4.4365 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -0.192377   0.136878  -1.405     0.16    
-## wgt          0.251673   0.003018  83.395   &lt;2e-16 ***
+## (Intercept) -7.459525   0.246782  -30.23   &lt;2e-16 ***
+## wgt          0.071376   0.005949   12.00   &lt;2e-16 ***
+## hgt          0.106602   0.003336   31.96   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 2.142 on 742 degrees of freedom
-##   (4 observations deleted due to missingness)
-## Multiple R-squared:  0.9036, Adjusted R-squared:  0.9035 
-## F-statistic:  6955 on 1 and 742 DF,  p-value: &lt; 2.2e-16</pre>
+## Residual standard error: 1.391 on 724 degrees of freedom
+##   (21 observations deleted due to missingness)
+## Multiple R-squared:  0.9592, Adjusted R-squared:  0.9591 
+## F-statistic:  8510 on 2 and 724 DF,  p-value: &lt; 2.2e-16</pre>
 
 </article></slide><slide class=""><hgroup><h2>Continuous predictors: interaction effects</h2></hgroup><article  id="continuous-predictors-interaction-effects">
 
