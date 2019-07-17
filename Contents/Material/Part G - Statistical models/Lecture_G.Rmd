@@ -10,9 +10,15 @@ output:
 ---
 
 ## I use the following package in this lecture
-```{r}
-library(MASS)
+```{r message=FALSE}
+library(magrittr) #for pipes
+library(MASS)     #for the cats and bacteria data
+library(mice)     #for the boys data
 ```
+
+### New functions
+
+- `lm()` to run linear models
 
 
 ```{r echo=FALSE}
@@ -69,53 +75,54 @@ If we want to know what these arguments do we can ask R:
 This will open a help page on the `lm()` function.
 
 ## Continuous predictors {.smaller}
-To obtain a linear model with a main effects for `wgt`, we formulate $age\sim wgt$ 
+To obtain a linear model with a main effect for `wgt`, we formulate $age\sim wgt$ 
 ```{r warning=FALSE, message = FALSE}
-library(mice)
-fit <- with(boys, lm(age ~ wgt))
+fit <- boys %$%
+  lm(age ~ wgt)
 fit
 ```
 
 ## Continuous predictors: more detail {.smaller}
 ```{r}
-summary(fit)
+fit %>% summary
 ```
 
 ## Continuous predictors
 To obtain a linear model with just main effects for `wgt` and `hgt`, we formulate $age\sim wgt + hgt$ 
 ```{r}
 require(mice)
-fit <- with(boys, lm(age ~ wgt + hgt))
+fit <- boys %$%
+  lm(age ~ wgt)
 fit
 ```
 
 ## Continuous predictors: more detail {.smaller}
 ```{r}
-summary(fit)
+fit %>% summary
 ```
 
 ## Continuous predictors: interaction effects
 To predict $age$ from $wgt$, $hgt$ and the interaction $wgt*hgt$ we formulate $age\sim wgt * hgt$
 ```{r}
-fit <- with(boys, lm(age ~ wgt * hgt))
+fit <- boys %$% lm(age ~ wgt * hgt)
 fit
 ```
 
 ##  and with more detail {.smaller}
 ```{r}
-summary(fit)
+fit %>% summary
 ```
 
 ## Categorical predictors in the linear model
 If a categorical variable is entered into function `lm()`, it is automatically converted to a dummy set in `R`. The first level is always taken as the reference category. If we want another reference category we can use the function `relevel()` to change this.
 
 ```{r}
-fit <- with(boys, lm(age ~ reg))
+fit <- boys %$% lm(age ~ reg)
 ```
 
 ##  and again with more detail {.smaller}
 ```{r}
-summary(fit)
+fit %>% summary
 ```
 
 ## Components of the linear model {.smaller}
@@ -184,27 +191,45 @@ The probability of $y$ events within a time period (e.g. number of earthquakes i
 P(y|\lambda)=\frac{e^{-\lambda}\lambda^y}{y!}, \text{where } lambda=\text{rate parameter}
 \]
 ```{r echo=FALSE, fig.height=4}
-par(mfrow = c(1, 2), bg = NA)
+par(mfrow = c(1, 3), bg = NA)
 y <- factor(0:5)
 x <- 0:5
 barplot(dpois(x, .5), ylim = c(0, .6), names.arg = y, 
         ylab = "P(Y=y)", xlab = "y")
 text(5, .5, expression(paste(lambda, " = 0.5")))
+barplot(dpois(x, 1), 
+        ylim = c(0, .6), 
+        names.arg = y, 
+        ylab = "P(Y=y)", 
+        xlab = "y")
+text(5, .5, expression(paste(lambda, " = 1")))
 barplot(dpois(x, 2), ylim = c(0, .6), names.arg = y, 
         ylab = "P(Y = y)",xlab="y")
 text(5,.5,expression(paste(lambda," = 2")))
 ```
 
-## Code that generates plot of previous slide
+## Code that generates plot of previous slide{.smaller}
 ```{r eval=FALSE, fig.height=4}
-par(mfrow = c(1, 2), bg = NA)
+par(mfrow = c(1, 3), bg = NA)
 y <- factor(0:5)
 x <- 0:5
-barplot(dpois(x, .5), ylim = c(0, .6), names.arg = y, 
-        ylab = "P(Y=y)", xlab = "y")
+barplot(dpois(x, .5), 
+        ylim = c(0, .6), 
+        names.arg = y, 
+        ylab = "P(Y=y)", 
+        xlab = "y")
 text(5, .5, expression(paste(lambda, " = 0.5")))
-barplot(dpois(x, 2), ylim = c(0, .6), names.arg = y, 
-        ylab = "P(Y = y)",xlab="y")
+barplot(dpois(x, 1), 
+        ylim = c(0, .6), 
+        names.arg = y, 
+        ylab = "P(Y=y)", 
+        xlab = "y")
+text(5, .5, expression(paste(lambda, " = 1")))
+barplot(dpois(x, 2), 
+        ylim = c(0, .6), 
+        names.arg = y, 
+        ylab = "P(Y = y)",
+        xlab="y")
 text(5,.5,expression(paste(lambda," = 2")))
 ```
 
@@ -240,13 +265,13 @@ text(2.3,0.5,expression(paste(lambda," = 0.5")),col="blue")
 
 ## Performing a t-test
 ```{r}
-t.test(Hwt ~ Sex, data = cats)
+cats %$% t.test(Hwt ~ Sex)
 ```
 
 ## Performing a chi-square test {.smaller}
 
 ```{r}
-head(bacteria, n=8)
+bacteria %>% head(n=8)
 ```
 
 Column `y`: 
@@ -262,7 +287,7 @@ Column `ap`:
 
 ## Performing a chi-square test
 ```{r}
-table(bacteria$ap, bacteria$y)
+bacteria %$% table(ap, y)
 ```
 ```{r}
 x2.table <- table(bacteria$ap, bacteria$y)
@@ -282,7 +307,7 @@ rbind(x2.table, colSums(x2.table))
 - Expected:
 
 ```{r echo = FALSE}
-chisq.test(bacteria$ap, bacteria$y)$expected
+bacteria %$% chisq.test(ap, y)$expected
 ```
 
 ## Performing a chi-square test
@@ -298,23 +323,23 @@ Should we assume this means the medicine works?
 
 ## Performing a chi-square test
 ```{r}
-chisq.test(bacteria$y, bacteria$ap)
+bacteria %$% chisq.test(ap, y)
 ```
 or the other way around
 ```{r}
-chisq.test(bacteria$ap, bacteria$y)
+bacteria %$% chisq.test(y, ap)
 ```
 
 ## Or, equivalently:
 ```{r}
-chisq.test(table(bacteria$y, bacteria$ap))
+bacteria %$% table(ap, y) %>% chisq.test
 ```
 
 
 ## Visualizing this
 
 ```{r, dev.args = list(bg = 'transparent')}
-plot(table(bacteria$y, bacteria$ap))
+bacteria %$% table(y, ap) %>% plot
 ```
 
 ## Visualizing this {.smaller}
@@ -327,28 +352,31 @@ barplot(table(bacteria$y, bacteria$ap),
         args.legend = list(x=4.5, y=80))
 ```
 
-## Fisher's exact test
+## Fisher's exact test {.smaller}
 
-With small cell sizes (roughly if any is below 5), we should use Fishers exact test.
+With small expected cell frequencies (roughly if any are below 5), we should use Fishers exact test.
 
-```{r warning=TRUE}
-short.bac <- bacteria[bacteria$week <= 2, ]
-short.tab <- table(short.bac$y, short.bac$ap)
-short.tab 
+```{r}
+short <- bacteria %>%
+  subset(week <= 2) %$%
+  table(y, ap)
+short
 ```
 
 
 ## Fisher's exact test
 
 ```{r}
-chisq.test(short.tab)
+short %>% chisq.test
 ```
 
 
 ## Fisher's exact test
 
 ```{r warning=TRUE}
-fisher.test(table(short.bac$y, short.bac$ap))
+#fisher.test(table(short$y, short$ap))
+short %>%
+  fisher.test
 ```
 
 What do we conclude?
@@ -356,13 +384,13 @@ What do we conclude?
 ## Visualizing this
 
 ```{r, dev.args = list(bg = 'transparent')}
-plot(table(short.bac$y, short.bac$ap))
+plot(short)
 ```
 
 ## Visualizing this
 
 ```{r fig.height=4, dev.args = list(bg = 'transparent')}
-barplot(table(short.bac$y, short.bac$ap), 
+barplot(short, 
         beside = TRUE, 
         legend = c("No infection", "Infection"), 
         col = c("blue", "orange"),
