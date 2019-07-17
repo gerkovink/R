@@ -1,7 +1,7 @@
 ---
 title: "Practical H"
 author: "Gerko Vink"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output: html_document
 ---
 
@@ -180,6 +180,7 @@ There is a slow way
 mu = 3
 summed <- x-mu
 sum.sq <- sum(summed^2)
+sum.sq
 ```
 
 And a fast way
