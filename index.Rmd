@@ -17,7 +17,7 @@ Instructors:
 
  - [Erik-Jan van Kesteren](https://erikjanvankesteren.nl)
  - [Duco Veen](https://www.ducoveen.com)
- - [Ayoub Bagheri](https://github.com/bagheria)
+ - [Ayoub Bagheri](https://bagheria.github.io)
 
 Study load: 1.5 ECTS <br>
 Location: [Koningsberger building - Cosmos hall](https://www.uu.nl/en/victor-j-koningsberger-building)
