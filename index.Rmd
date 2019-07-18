@@ -252,6 +252,7 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
     - [Impractical JK](Contents/Material/Part JK - Model estimation/Practical_J.html)
 - Part L: GLM's
     - [Lecture L](Contents/Material/Part L - GLMs/Lecture_L.html)
+    - [The other, much longer, Lecture L](Contents/Material/Part L - GLMs/Lecture_L .html)
     - [Practical L](Contents/Material/Part L - GLMs/Practical_L_walkthrough.html)
     - [Impractical L](Contents/Material/Part L - GLMs/Practical_L.html)
 
