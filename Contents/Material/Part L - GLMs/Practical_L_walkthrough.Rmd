@@ -224,7 +224,7 @@ CVbinary(glm(sex ~ lpo, family=binomial(link='logit'), data = brandsma.subset))
 
 ---
 
-The lesson here is that a significant paramater has no meaning if the substantive interpretation of the effect is ignored. There is almost no relation, whatsoever, there is just sufficient data to deem the influence of `lpo` on `sex` worthy of significance. 
+The lesson here is that a significant parameter has no meaning if the substantive interpretation of the effect is ignored. There is almost no relation, whatsoever, there is just sufficient data to deem the influence of `lpo` on `sex` worthy of significance. 
 
 ---
 
