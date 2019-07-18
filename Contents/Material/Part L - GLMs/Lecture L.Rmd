@@ -1,13 +1,26 @@
 ---
 title: "Generalized linear models"
 author: "Gerko Vink"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output:
   ioslides_presentation:
     smaller: yes
     widescreen: no
     logo: logo.png
 ---
+
+## Packages and functions used
+```{r message=FALSE}
+library(magrittr) # pipes
+library(DAAG) # data sets and functions
+```
+
+- `glm()` Generalized linear models
+- `predict()` Obtain predictions based on a model
+- `confint()` Obtain confidence intervals for model parameters
+- `coef()` Obtain a model's coefficients
+- `DAAG::CVbinary()` Cross-validation for regression with a binary response
+
 
 # Generalized linear models
 ## GLM's
@@ -78,8 +91,8 @@ plot(0:1000, logodds, xlab = "x", ylab = "log(odds)", type = "l")
 ## logit$^{-1}$ explained
 ```{r cache=TRUE,  dev.args = list(bg = 'transparent')}
 invlogit <- exp(logodds) / (1 + exp(logodds))
-head(invlogit)
-tail(invlogit)
+invlogit %>% head()
+invlogit %>% head()
 ```
 
 ## logit$^{-1}$ explained
@@ -101,30 +114,32 @@ In normally distributed data: $\text{SS}=\text{D}$.
 
 ## Logistic regression
 ```{r, message = FALSE}
-require(DAAG) 
-anesthetic
+anesthetic %>% head(n = 18)
 ```
 
 ## Logistic regression
 ```{r,  dev.args = list(bg = 'transparent')}
-fit <- glm(nomove ~ conc, family = binomial(link="logit"), data = anesthetic)
-summary(fit)
+anesthetic %$% glm(nomove ~ conc, family = binomial(link="logit")) %>% summary()
 ```
 
-## Logistic regression
+## A different approach
 ```{r,  dev.args = list(bg = 'transparent')}
 anestot <- aggregate(anesthetic[, c("move","nomove")],  
                      by = list(conc = anesthetic$conc), FUN = sum) 
-anestot$conc <- as.numeric(as.character(anestot$conc)) 
+anestot
+```
+
+## A different approach
+```{r,  dev.args = list(bg = 'transparent')}
 anestot$total <- apply(anestot[, c("move","nomove")], 1 , sum) 
 anestot$prop <- anestot$nomove / anestot$total 
 anestot
 ```
 
-## Logistic regression
+## A different approach
 ```{r,  dev.args = list(bg = 'transparent')}
-fit <- glm(prop ~ conc, family = binomial(link="logit"), weights = total, data = anestot)
-summary(fit)
+anestot %$% glm(prop ~ conc, family = binomial(link="logit"), weights = total) %>% 
+  summary()
 ```
 
 ## Logistic multiple regression
@@ -136,27 +151,17 @@ Do not forget that you use transformations to "make" things more linear
 
 ## Logistic multiple regression
 ```{r,  dev.args = list(bg = 'transparent'), echo=FALSE}
-with(frogs, pairs(cbind(log(distance), log(NoOfPools), NoOfSites, avrain, altitude, 
-                        meanmax+meanmin, meanmax-meanmin), 
-                  col = "gray", panel = panel.smooth, 
-                  labels = c("log(Distance)", "log(NoOfPools)", 
-                             "NoOfSites", "AvRainfall", "Altitude", 
-                             "meanmax + meanmin", "meanmax - meanmin"))) 
-```
-
-## Logistic multiple regression
-```{r,  dev.args = list(bg = 'transparent'), echo=FALSE}
-with(frogs, pairs(cbind(log(distance), log(NoOfPools), NoOfSites, avrain, altitude, 
-                        meanmax+meanmin, meanmax-meanmin), 
-                  col = "gray", panel = panel.smooth, 
-                  labels = c("log(Distance)", "log(NoOfPools)", 
-                             "NoOfSites", "AvRainfall", "Altitude", 
-                             "meanmax + meanmin", "meanmax - meanmin"))) 
-```
-
-## Logistic multiple regression
-```{r,  dev.args = list(bg = 'transparent'), echo=FALSE}
 with(frogs, pairs(cbind(distance, NoOfPools, NoOfSites, avrain, altitude, 
+                        meanmax+meanmin, meanmax-meanmin), 
+                  col = "gray", panel = panel.smooth, 
+                  labels = c("Distance", "NoOfPools", 
+                             "NoOfSites", "AvRainfall", "Altitude", 
+                             "meanmax + meanmin", "meanmax - meanmin"))) 
+```
+
+## Logistic multiple regression
+```{r,  dev.args = list(bg = 'transparent'), echo=FALSE}
+with(frogs, pairs(cbind(log(distance), log(NoOfPools), NoOfSites, avrain, altitude, 
                         meanmax+meanmin, meanmax-meanmin), 
                   col = "gray", panel = panel.smooth, 
                   labels = c("log(Distance)", "log(NoOfPools)", 
@@ -173,38 +178,60 @@ summary(frogs.glm0 <- glm(formula = pres.abs ~ log(distance) + log(NoOfPools)
 
 ## Logistic multiple regression
 ```{r echo=FALSE,  dev.args = list(bg = 'transparent')}
-frogs.glm <- glm(pres.abs ~ log(distance) + log(NoOfPools) + I(meanmax + meanmin) 
-                 + I(meanmax - meanmin),  family = binomial, data = frogs) 
-summary(frogs.glm) 
+frogs.glm <- frogs %$% glm(pres.abs ~ log(distance) + log(NoOfPools) 
+                           + I(meanmax + meanmin) + I(meanmax - meanmin),  
+                           family = binomial)
+frogs.glm %>% summary()
 ```
 
 ## Fitted values
 ```{r,  dev.args = list(bg = 'transparent')}
-head(fitted(frogs.glm))
-head(predict(frogs.glm, type = "response"))
-head(predict(frogs.glm, type = "link"))  # Scale of linear predictor 
+frogs.glm <- frogs %$% glm(pres.abs ~ log(distance) + log(NoOfPools) 
+                           + I(meanmax + meanmin) + I(meanmax - meanmin),  
+                           family = binomial)
+frogs.glm %>% fitted() %>% head()
+frogs.glm %>% predict(type = "response") %>% head()
+frogs.glm %>% predict(type = "link") %>% head() # Scale of linear predictor 
 ```
 
 ## Fitted values with approximate SE's
 ```{r,  dev.args = list(bg = 'transparent')}
-pred <- predict(frogs.glm, type = "link", se.fit = TRUE)
-head(data.frame(fit = pred$fit, se = pred$se.fit))
+pred <- frogs.glm %>% 
+  predict(type = "link", se.fit = TRUE)
+data.frame(fit = pred$fit, se = pred$se.fit) %>% head()
 ```
 
 ## Confidence intervals for the $\beta$
 ```{r}
-confint(frogs.glm)
-coef(frogs.glm)
+frogs.glm %>% confint()
+frogs.glm %>% coef()
 ```
 
 ## Cross validating predictive power
 ```{r,  dev.args = list(bg = 'transparent')}
+set.seed(123)
 frogs.glm <- glm(pres.abs ~ log(distance) + log(NoOfPools), 
                  family = binomial, data = frogs)
 cv <- CVbinary(frogs.glm)
 ```
 
 The cross-validation measure is the proportion of predictions over the folds that are correct. 
+
+## Cross validating predictive power
+```{r,  dev.args = list(bg = 'transparent')}
+frogs.glm2 <- glm(pres.abs ~ log(distance) + log(NoOfPools) 
+                 + I(meanmax + meanmin) + I(meanmax - meanmin),
+                 family = binomial, data = frogs)
+cv <- CVbinary(frogs.glm2)
+```
+
+## Cross validating predictive power
+```{r,  dev.args = list(bg = 'transparent')}
+frogs.glm2 <- glm(pres.abs ~ log(distance) + log(NoOfPools) 
+                 + I(meanmax + meanmin) + I(meanmax - meanmin),
+                 family = binomial, data = frogs)
+cv <- CVbinary(frogs.glm2, nfolds = 5)
+```
 
 
 

@@ -1,1 +1,5 @@
 base
+dplyr
+magrittr
+lattice
+DAAG
