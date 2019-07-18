@@ -40,19 +40,20 @@ not contain the population value.**
 
 ---
 
-#### SOLUTION:
+#### SOLUTION
 
-We start by fixing the random seed. Otherwise this whole exercise is redundant.
+NB: this is just one of many possible solutions!
+
+We start by fixing the random seed. Otherwise your results will likely vary
 ```{r}
 set.seed(1234)
 ```
 
 Then, we draw 100 samples from a standard normal distribution, i.e. a distribution with $\mu=0$ and $\sigma^2=1$, such that for any drawn sample $X$ we could write $X \sim \mathcal{N}(0, 1)$. No specification about the size of the samples is explicitly requested, so for computational reasons a mere 5000 cases would suffice to obtain a detailed approximation.
 ```{r}
-require(plyr)
-samples <- rlply(100, rnorm(5000, mean = 0, sd = 1))
+samples <- lapply(1:100, function(x) rnorm(5000, mean = 0, sd = 1))
 ```
-We use the `plyr::rlply()` function to draw the 100 samples and return the resulting output as a list. Further, we extract the following sources of information for each sample:
+We use the `lapply()` function to draw the 100 samples and return the resulting output as a list. You could also use a for-loop. Further, we extract the following sources of information for each sample:
 
 - the sample mean $\bar{x}$.
 - the absolute bias: i.e. $|\bar{x} - \mu|$, which would be $\bar{x}$ in this case. 
@@ -65,20 +66,20 @@ info <- function(x){
   DF <- length(x) - 1
   SE <- 1 / sqrt(length(x))
   INT <- qt(.975, DF) * SE
-  return(c(M, M - 0, SE, M - INT, M + INT))
+  return(c("Mean"    = M, 
+           "Bias"    = M - 0, 
+           "Std.Err" = SE, 
+           "Lower"   = M - INT, 
+           "Upper"   = M + INT))
 }
-format <- c("Mean" = 0, "Bias" = 0, "Std.Err" = 0, "Lower" = 0, "Upper" = 0)
 ```
 
-We can then proceed by creating a piped process. The following code is written with the pipe functionality from package [`magrittr`](http://magrittr.tidyverse.org) - FYI: [`dplyr`](http://dplyr.tidyverse.org) adopted `magrittr`, so `dplyr` would also work here. 
+Then we can compute the info on each of the samples
 ```{r warning=FALSE, message=FALSE}
-require("magrittr")
-results <- samples %>%
-  vapply(., info, format) %>%
-  t()
+results <- samples %>% sapply(info) %>% t()
 ```
 
-Because object `samples` is a list, we can execute funtion `vapply()` to obtain a numerical object with the results of function `info()`. `vapply()` allows you to return output to a pre-defined format. Function $t()$ is here used to obtain the transpose of `vapply()`'s return - the resulting object has all information in the columns. 
+Because object `samples` is a list, we can execute funtion `sapply()` to obtain a numerical object with the results of function `info()`. Function $t()$ is here used to obtain the transpose of `sapply()`'s return - the resulting object has all information in the columns. 
 
 To create an indicator for the inclusion of the population value $\mu=0$ in the confidence interval, we can add the following coverage column `cov` to the data:
 ```{r}
@@ -95,46 +96,33 @@ We can see that 95 out of the 100 samples cover the population value.
 
 To identify the samples for which the population value is not covered, we can use column `cov` as it is already a logical evaluation. 
 ```{r}
-table <- results[!results$Covered, ]
+noncovered <- results[!results$Covered, ]
 ```
 
-To present this info as a nicer table, package `kableExtra` is a wonderful extension to use with `rmarkdown` (remember that I generate these documents with `rmarkdown` from within `RStudio`:
-```{r, warning=FALSE, message=FALSE}
-require(knitr)
-require(kableExtra)
-kable(table)
-```
-
-or even nicer:
-```{r}
-kable(table, "html") %>%
-  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),
-                full_width = F)
-```
 
 To create a graph that would serve the purpose of the exercise, one could think about the following graph:
 
 ```{r warning=FALSE, message=FALSE}
-require(ggplot2)
-limits <- aes(ymax = results$Upper, ymin = results$Lower)
+library(ggplot2)
 
-ggplot(results, aes(y=Mean, x=1:100, colour = Covered)) + 
-  geom_hline(aes(yintercept = 0), color = "dark grey", size = 2) + 
-  geom_pointrange(limits) + 
+ggplot(results, aes(y = Mean, x = 1:100, ymax = Upper, ymin = Lower, 
+                    colour = Covered)) + 
+  geom_hline(yintercept = 0, color = "dark grey", size = 2) + 
+  geom_pointrange() + 
   xlab("Simulations 1-100") +
-  ylab("Means and 95% Confidence Intervals")
+  ylab("Means and 95% Confidence Intervals") + 
+  theme_minimal()
 ```
 
 To just plot the 5 cases that do not overlap with the population parameter:
 ```{r}
-require(ggplot2)
-limits <- aes(ymax = table$Upper, ymin = table$Lower)
 
-ggplot(table, aes(y=Mean, x=1:5)) + 
+ggplot(noncovered, aes(y = Mean, x = 1:5, ymax = Upper, ymin = Lower)) + 
   geom_hline(aes(yintercept = 0), color = "dark grey", size = 2) + 
-  geom_pointrange(limits, col = "red") + 
+  geom_pointrange(col = "red") + 
   xlab("Simulations 1-100") +
-  ylab("Means and 95% Confidence Intervals")
+  ylab("Means and 95% Confidence Intervals") + 
+  theme_minimal()
 ```
 
 ---
