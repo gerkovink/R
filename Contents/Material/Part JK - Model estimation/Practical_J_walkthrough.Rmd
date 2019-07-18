@@ -1,7 +1,7 @@
 ---
 title: "Practical J&K"
 author: "Gerko Vink"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output: html_document
 ---
 
@@ -457,6 +457,7 @@ The analysis we ran is in fact equivalent to running a fixed effects model on cl
 ---
 
 16. **Can you find a model that improves the $R^2$ in modeling `brw`?**
+
 Since we're considering linear models so far, I limit myself to linear models only. The basis of the linear model is the variance covariance matrix and how it translates to data relations. This is most easily linearly summarized in the correlation matrix:
 ```{r}
 mammalsleep %>%
@@ -501,7 +502,7 @@ and we have obtained a very high $R^2$. If prediction was our goal, we are doing
 
 ---
 
-17. **Inspect the diagnostic plots for the model obtained under ***11***. What issues can you detect?**
+17. **Inspect the diagnostic plots for the model obtained in `exercise 16`. What issues can you detect?**
 ```{r}
 fit %>%
   plot(which = 1:6)
