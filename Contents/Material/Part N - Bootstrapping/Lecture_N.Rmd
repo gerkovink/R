@@ -419,13 +419,18 @@ mystat <- function(dat, index) {
 
 bootstat <- sdat100 %>% boot(mystat, R = 1000)
 
+# the first 10 replicates
+bootstat$t[1:10]
+
 # SE
 sd(bootstat$t)
-
-# 95% CI
-bootstat$t %>% quantile(c(0.025, 0.975))
 ```
+## The `boot` package
 
+```{r}
+# 95% CI
+boot.ci(bootstat)
+```
 ## The `boot` package
 ```{r, fig.height=3}
 # Distribution
