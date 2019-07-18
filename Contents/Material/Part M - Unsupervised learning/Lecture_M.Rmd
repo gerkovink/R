@@ -236,7 +236,7 @@ sim.data %>%
 3. We estimate the probability for $x_0$ being part of class $j$ as the fraction of points in $\mathcal{N}_0$ for whom the response equals $j$:
 $$P(Y = j | X = x_0) = \frac{1}{K}\sum_{i\in\mathcal{N}_0}I(y_i=j)$$
 
-4. The observation $x_0$ is classified to the class with the largest probability (after Bayes rule is applied of course)
+4. The observation $x_0$ is classified to the class with the largest probability
 
 ### In short
 An observation gets that class assigned to which most of its $K$ neighbours belong
@@ -260,8 +260,10 @@ However, we do not get parameters as with LDA and regression.
 First we need to determine a training set
 ```{r}
 set.seed(123)
-sim.data %<>% 
-  mutate(set = sample(c("Train", "Test"), size=100, prob = c(.25, .75), replace=TRUE))
+sim.data <-
+  sim.data %>% 
+  mutate(set = sample(c("Train", "Test"), size = 100, 
+                      prob = c(.25, .75), replace = TRUE))
 sim.data
 ```
 
@@ -276,9 +278,10 @@ obs.class <-  subset(sim.data, set == "Train", select = class)
 Now we can fit the K-NN model
 ```{r}
 fit.knn <- knn(train = train.data,
-               test = test.data, 
-               cl = as.matrix(obs.class),
-               k = 3)
+               test  = test.data, 
+               cl    = as.matrix(obs.class),
+               k     = 3)
+fit.knn
 ```
 
 ## Predictions
@@ -301,9 +304,9 @@ cbind(test.data, correct) %>%
 ## Fewer neighbours
 ```{r}
 fit.knn <- knn(train = train.data,
-               test = test.data, 
-               cl = as.matrix(obs.class),
-               k = 2)
+               test  = test.data, 
+               cl    = as.matrix(obs.class),
+               k     = 2)
 correct <- fit.knn == class.test
 mean(correct)
 table(fit.knn, class.test)
@@ -312,9 +315,9 @@ table(fit.knn, class.test)
 ## More neighbours
 ```{r}
 fit.knn <- knn(train = train.data,
-               test = test.data, 
-               cl = as.matrix(obs.class),
-               k = 4)
+               test  = test.data, 
+               cl    = as.matrix(obs.class),
+               k     = 4)
 correct <- fit.knn == class.test
 mean(correct)
 table(fit.knn, class.test)
