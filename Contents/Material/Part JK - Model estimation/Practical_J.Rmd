@@ -166,7 +166,7 @@ The mammalsleep dataset is part of `mice`. It contains the Allison and Cicchetti
 
 ---
 
-17. **Inspect the diagnostic plots for the model obtained under ***11***. What issues can you detect?**
+17. **Inspect the diagnostic plots for the model obtained in `exercise 16`. What issues can you detect?**
 
 ---
 
