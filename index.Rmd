@@ -287,6 +287,20 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 ### Download a course archive 
 We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](Contents/Material/Archive/Archive.html). 
 
-<!-- ### For fun -->
-<!-- <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My wife asked me what machine learning is and I said: remember when we ordered the hot plate for the boat and amazon suggested buying all the equipment needed to make a full meth lab?</p>&mdash; (((Kane Baccigalupi))) (@rubyghetto) <a href="https://twitter.com/rubyghetto/status/1058220004301127680?ref_src=twsrc%5Etfw">November 2, 2018</a></blockquote> -->
-<!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+# To continue
+
+## Column 1
+
+### What to do after the course
+
+- [R for Data Science](https://r4ds.had.co.nz): a wonderful book that details a usefull toolset for current and aspiring data scientists. 
+- [Introduction to Statistical Learning](http://faculty.marshall.usc.edu/gareth-james/ISL/): an introductory book on statistical learning, with applications in R.
+- [Data Analysis and Graphics Using R](http://www.pindex.com/uploads/post_docs/Maindonald%20Data%20Analysis%20and%20Graphics(PINDEX-DOC-6953).pdf): a detailed book that covers a lot about categorical data analysis and fitting `glm`s in `R`.
+
+The above references are (currently) available for free in these links. I deem them very useful and I would highly recommend them. 
+
+## Column 2
+
+### For fun
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My wife asked me what machine learning is and I said: remember when we ordered the hot plate for the boat and amazon suggested buying all the equipment needed to make a full meth lab?</p>&mdash; (((Kane Baccigalupi))) (@rubyghetto) <a href="https://twitter.com/rubyghetto/status/1058220004301127680?ref_src=twsrc%5Etfw">November 2, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
