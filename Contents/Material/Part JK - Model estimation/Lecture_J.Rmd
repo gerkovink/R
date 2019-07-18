@@ -63,11 +63,11 @@ anscombe %>%
 ```
 
 ##  Fitting a line {.smaller}
-The linear model:
+The linear model would take the following form:
 ```{r eval=FALSE}
 fit <- 
-  data %>%
-  lm(y ~ x)
+  yourdata %>%
+  lm(youroutcome ~ yourpredictors)
 
 summary(fit)
 ```

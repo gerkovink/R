@@ -3199,11 +3199,11 @@ y_i=\alpha+\beta{x}_i+\varepsilon_i
 
 </article></slide><slide class=""><hgroup><h2>Fitting a line</h2></hgroup><article  id="fitting-a-line-2" class="smaller smaller">
 
-<p>The linear model:</p>
+<p>The linear model would take the following form:</p>
 
 <pre class = 'prettyprint lang-r'>fit &lt;- 
-  data %&gt;%
-  lm(y ~ x)
+  yourdata %&gt;%
+  lm(youroutcome ~ yourpredictors)
 
 summary(fit)</pre>
 
