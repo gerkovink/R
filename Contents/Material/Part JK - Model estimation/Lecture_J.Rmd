@@ -33,7 +33,18 @@ Assumptions:
   -  $y_i$ conditionally normal with mean $\mu_i=\alpha+\beta{x}_i$
   -  $\varepsilon_i$ are $i.i.d.$ with mean 0 and (constant) variance $\sigma^2$
 
-##  Fitting a line {.smaller}
+## The `anscombe` data
+```{r}
+head(anscombe)
+```
+
+Or, alternatively, 
+```{r}
+anscombe %>%
+  head
+```
+
+## Fitting a line {.smaller}
 
 ```{r eval = FALSE, message = FALSE}
 anscombe %>%
@@ -69,7 +80,7 @@ Output:
     -  Multiple R-squared (proportion variance explained)
     -  F-statistic and $p$-value (significance test model)
 
-##  `boys` example {.smaller}
+##  `anscombe` example {.smaller}
 ```{r message=FALSE, warning = FALSE}
 fit <- anscombe %$%
   lm(y1 ~ x1)
@@ -236,6 +247,12 @@ boys.fit <-
   lm(age ~ reg)
 ```
 
+```{r}
+boys %>% 
+  head
+```
+
+
 ## Model {.smaller}
 ```{r cache = TRUE}
 boys.fit %>%
@@ -396,7 +413,8 @@ boys.fit3 %>%
 DfBeta calculates the change in coefficients depicted as deviation in SE's.
 ```{r cache = TRUE}
 boys.fit3 %>%
-  dfbeta()
+  dfbeta() %>%
+  head(n = 7)
 ```
 
 # Prediction
