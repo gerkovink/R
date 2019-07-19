@@ -195,6 +195,7 @@ reshape2::melt(est) %>%
 ---
 
 9. **Calculate the confidence intervals for **
+
 We can use function `boot.ci()` to automatically obtain the confidence intervals from our estimates.
 ```{r}
 boot.ci(bootstr.lm)

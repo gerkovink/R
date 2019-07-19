@@ -287,6 +287,11 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 ### Download a course archive 
 We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](Contents/Material/Archive/Archive.html). 
 
+### Such a wonderful group
+
+- [Such nice people](Contents/img/pic1.jpg)
+- [Crazy about StatsWithR](Contents/img/pic2.jpg)
+
 # To continue
 
 ## Column 1
