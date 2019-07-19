@@ -285,7 +285,7 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 ## Column 1
 
 ### Download a course archive 
-We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](Contents/Material/Archive/Archive.html). 
+We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](Contents/Material/Archive/S24_summerschool2019.zip). 
 
 ### Such a wonderful group
 
