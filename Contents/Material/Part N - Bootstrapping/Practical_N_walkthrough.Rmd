@@ -57,7 +57,7 @@ head(bootstr.cor$data)
 
 The most interesting listed dimensions are the following:
 
-- The `$t0` contains the overall bootstrapped estimate for the correlations
+- The `$t0` contains the original estimate for the data 
 ```{r}
 bootstr.cor$t0
 ```
@@ -66,6 +66,12 @@ bootstr.cor$t0
 ```{r}
 head(bootstr.cor$t)
 ```
+
+The average bootstrapped estimate would then be
+```{r}
+bootstr.cor$t %>% mean
+```
+
 
 - The `$data` has the original data set that has been served to function `boot()`:
 ```{r}
