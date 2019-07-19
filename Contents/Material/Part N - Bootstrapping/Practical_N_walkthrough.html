@@ -559,13 +559,13 @@ bootstr.lm</code></pre>
 ## t2*  0.710865240  8.265404e-04 0.2334275999
 ## t3* -0.498229914 -2.482243e-03 0.0366745633
 ## t4*  0.003722907  9.426072e-06 0.0002206243</code></pre>
-<p>Again, the average (bootstrapped) regression estimate is:</p>
+<p>Again, the observed data regression estimate is:</p>
 <pre class="r"><code>bootstr.lm$t0</code></pre>
 <pre><code>##  (Intercept)          age          hgt     I(hgt^2) 
 ## 23.853118370  0.710865240 -0.498229914  0.003722907</code></pre>
 <hr />
 <ol start="8" style="list-style-type: decimal">
-<li>** Create a histogram of the individual bootstrapped estimates **</li>
+<li><strong>Create a histogram of the individual bootstrapped estimates </strong></li>
 </ol>
 <pre class="r"><code>est &lt;- bootstr.lm$t
 colnames(est) &lt;- (c(&quot;Intercept&quot;, &quot;wgt&quot;, &quot;hgt&quot;, &quot;hgt^2&quot;))
@@ -603,6 +603,10 @@ reshape2::melt(est) %&gt;%
 <pre><code>##       Intercept       wgt        hgt       hgt^2
 ## 2.5%   20.19144 0.2511471 -0.5692692 0.003302579
 ## 97.5%  27.62233 1.1622391 -0.4285475 0.004166733</code></pre>
+<p>The <code>quantile()</code> function yields a slightly different result from the percentile bootstrap estimates, because the quantile function uses a quantile algorithm - number 7 out of 9 types of algorithm. Read all about these algorithms in the help.</p>
+<p>To calculate the percentile bootstrap CI by hand:</p>
+<pre class="r"><code>sort(est[, &quot;Intercept&quot;])[c(25, 976)]</code></pre>
+<pre><code>## [1] 20.16351 27.65708</code></pre>
 <hr />
 <p>End of Practical</p>
 

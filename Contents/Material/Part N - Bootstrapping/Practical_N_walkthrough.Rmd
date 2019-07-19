@@ -174,14 +174,14 @@ bootstr.lm <-
 bootstr.lm
 ```
 
-Again, the average (bootstrapped) regression estimate is:
+Again, the observed data regression estimate is:
 ```{r}
 bootstr.lm$t0
 ```
 
 ---
 
-8. ** Create a histogram of the individual bootstrapped estimates **
+8. **Create a histogram of the individual bootstrapped estimates **
 ```{r}
 est <- bootstr.lm$t
 colnames(est) <- (c("Intercept", "wgt", "hgt", "hgt^2"))
@@ -206,6 +206,13 @@ quantile(est[, "Intercept"], c(0.025,0.975))
 or, for all estimates when using `apply()`:
 ```{r}
 apply(est, 2, function(x) quantile(x, c(0.025,0.975)))
+```
+
+The `quantile()` function yields a slightly different result from the percentile bootstrap estimates, because the quantile function uses a quantile algorithm - number 7 out of 9 types of algorithm. Read all about these algorithms in the help. 
+
+To calculate the percentile bootstrap CI by hand:
+```{r}
+sort(est[, "Intercept"])[c(25, 976)]
 ```
 
 ---
