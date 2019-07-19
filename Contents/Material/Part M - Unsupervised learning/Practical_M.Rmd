@@ -29,6 +29,11 @@ output: html_document
 
 6. **Write a function that determines the optimum `k` with respect to classification error. Have the function return the following:**
 
+- The optimum `k` (i.e. the lowest `k` with the most correct predictions)
+- The proportion correctly predicted for optimum `k`
+- A data frame with the proportion correct for every `k`
+
+
 ---
 
 7. **Execute your function twice: once for the data set based on the `.5` adjustment and once for the data set based on the `2.5` adjustment. Does the previously used `k=3` yield the optimal classification prediction?**
