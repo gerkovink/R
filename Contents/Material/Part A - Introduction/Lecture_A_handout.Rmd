@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 author: "Gerko Vink"
-date: "Statistical Programming in R"
+date: "Statistical Programming with R"
 output: 
   html_document:
     toc: true
