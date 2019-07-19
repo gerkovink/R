@@ -17,6 +17,7 @@ knitr::opts_chunk$set(dev        = "png",
                       fig.align  = "center",
                       message    = FALSE, 
                       warning    = FALSE)
+RNGkind(sample.kind = "Rounding")
 ```
 
 ## We use the following packages
