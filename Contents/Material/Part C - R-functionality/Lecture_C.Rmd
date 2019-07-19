@@ -23,7 +23,7 @@ There are several 'layers' in `R`. Some layers you are allowed to fiddle around 
 ## Environments
 The global environment can be seen as a olympic-size swimming pool. Everything you do has its place there. 
 
-If you'd like, you may create another, seperate environment to work in. 
+If you'd like, you may create another, separate environment to work in. 
 
 - A user environment would by default not have access to other environments
 
@@ -39,7 +39,7 @@ If you'd like, you may create another, seperate environment to work in.
 - Packages have their own space. 
 
     - Everything needed to run the functions in a package is needly contained within its own space
-    - See packages as seperate (mini) pools that are connected to the main pool (the global environment)
+    - See packages as separate (mini) pools that are connected to the main pool (the global environment)
 
 ## Loading packages
 

@@ -414,7 +414,7 @@ library(mice)</code></pre>
 <pre class="r"><code>&quot;x&quot; %&gt;% assign(1:5)
 x</code></pre>
 <pre><code>## Error in eval(expr, envir, enclos): object 'x' not found</code></pre>
-<p>The pipe creates a seperate, temporary environment where all things <code>%&gt;%</code> take place (environments were discussed in Lecture C). This environment is different from the Global Environment and disappears once the pipe is finished. In other words, we assign <code>1:5</code> to object <code>x</code>, but once we are done assigning, object <code>x</code> is deleted.</p>
+<p>The pipe creates a separate, temporary environment where all things <code>%&gt;%</code> take place (environments were discussed in Lecture C). This environment is different from the Global Environment and disappears once the pipe is finished. In other words, we assign <code>1:5</code> to object <code>x</code>, but once we are done assigning, object <code>x</code> is deleted.</p>
 <p>Function <code>assign()</code> is part of a class of functions that uses the current environment (the one that it is called from) to do its business. For such functions, we need to be explicit about the environment we would like the funtion to use:</p>
 <pre class="r"><code>env &lt;- environment()
 &quot;x&quot; %&gt;% assign(1:5, envir = env)
