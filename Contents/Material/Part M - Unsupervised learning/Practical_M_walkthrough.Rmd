@@ -119,7 +119,7 @@ correct.twohalf <- fit.knn.twohalf == class.test.twohalf
 mean(correct.twohalf)
 ```
 
-The model based on the 2.5 adjustment data performs much better. But in this model the classes are also more seperated. 
+The model based on the 2.5 adjustment data performs much better. But in this model the classes are also more separated. 
 
 ---
 
@@ -143,7 +143,7 @@ cbind(test.twohalf, correct.twohalf) %>%
   scale_colour_manual(values = c("red", "black")) + 
   ggtitle("K-NN classification \n Adjustment = 2.5")
 ```
-The clusters are visisbly seperated. It is quite difficult to misclassify values based on their three closest neighbors - except for the values that are somewhat in between two (or more) clusters. Now we only make 1 misclassification given that we have `set.seed(123)` - different seeds may yield different data and, hence, different results. The misclassified value is indeed one of those values: in between two clusters.
+The clusters are visisbly separated. It is quite difficult to misclassify values based on their three closest neighbors - except for the values that are somewhat in between two (or more) clusters. Now we only make 1 misclassification given that we have `set.seed(123)` - different seeds may yield different data and, hence, different results. The misclassified value is indeed one of those values: in between two clusters.
 
 ---
 

@@ -39,7 +39,7 @@ In the top left you will find ![alt text](figuresPractical/fig2.png). Click it a
 A new pane opens, and we can start typing our code. It is preferable to work from an `R`-script instead of directly working in the console for at least the following reasons (there are many more). 
 
 a. You will not lose code, since `RStudio` caches files even if they are not saved. 
-b. You log your own work. Code does not disappear over time, as you save the code in a seperate file. 
+b. You log your own work. Code does not disappear over time, as you save the code in a separate file. 
 c. With access to your `R`-script and data, others are able to exactly reproduce your work. Reproducibility is becoming increasingly more important, and this is where `RStudio` excells. 
 d. You become more organized in coding, as you focus on creating readable code. In the long run, this will result in you becoming a more efficient programmer. Remember: efficient code runs faster. 
 
@@ -73,7 +73,7 @@ This is how you enter and run code in `R` by using `RStudio`.
 
 You can use the standard Ctrl-s (Windows/Linux) or Cmd-s (Mac) or click on the icon ![alt text](figuresPractical/fig4.png) in the code pane. 
 
-Your document is now saved. We saved it in a seperate folder so that we are able to create a project out of our practicals. 
+Your document is now saved. We saved it in a separate folder so that we are able to create a project out of our practicals. 
 
 ---
 

@@ -86,7 +86,7 @@ One thing that may have caught your attention is the relation between `ts`, `ps`
 
 ---
 
-7. **Save the current workspace. Name the workspace `Practical_C.RData`. Also, save the sleepdata file as a seperate workspace called `Sleepdata.RData`. **
+7. **Save the current workspace. Name the workspace `Practical_C.RData`. Also, save the sleepdata file as a separate workspace called `Sleepdata.RData`. **
 
 Now that we have imported our data, it may be wise to save the current workspace, i.e. the current state of affairs. Saving the workspace will leave everything as is, so that we can continue from this exact state at a later time, by simply opening the workspace file. To save everything in the current workspace, type
 ```{r}
