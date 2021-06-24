@@ -79,7 +79,9 @@ Dear all,
 
 This summer you will participate in the [**USS24: Statistical programming with R**](https://www.utrechtsummerschool.nl/courses/social-sciences/data-science-statistical-programming-with-r) course in Utrecht, the Netherlands. To realize a steeper learning curve, we will use some functionality that is not part of the base installation for `R`. The below steps guide you through installing both `R` as well as the necessary additions. 
 
-We look forward to see you all in Utrecht,  
+**If you follow this course online; please have a look at [this instructional page on MS Teams](https://www.uu.nl/en/education/quality-and-innovation/remote-teaching/microsoft-teams)**
+
+We look forward to see you all in Utrecht and online,  
 
 *The Statistical Programming with R Team*
 
