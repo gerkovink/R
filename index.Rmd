@@ -87,10 +87,10 @@ We look forward to see you all in Utrecht,
 
 Bring a laptop computer to the course and make sure that you have full write access and administrator rights to the machine. We will explore programming and compiling in this course. This means that you need full access to your machine. Some corporate laptops come with limited access for their users, we therefore advice you to bring a personal laptop computer, if you have one. 
 
-### **1. Install `R`**
+### **1. Install the latest version of `R`**
 `R` can be obtained [here](https://cran.r-project.org). We won't use `R` directly in the course, but rather call `R` through `RStudio`. Therefore it needs to be installed. 
 
-### **2. Install `RStudio` Desktop**
+### **2. Install the latest `RStudio` Desktop**
 
 Rstudio is an Integrated Development Environment (IDE). It can be obtained as stand-alone software [here](https://www.rstudio.com/products/rstudio/download/#download). The free and open source `RStudio Desktop` version is sufficient.
 
@@ -99,15 +99,14 @@ Rstudio is an Integrated Development Environment (IDE). It can be obtained as st
 Execute the following lines of code in the console window:
 
 ```{r eval=FALSE, echo = TRUE}
-install.packages(c("ggplot2", "tidyverse", "magrittr", "micemd", "jomo", "pan", 
-                 "lme4", "knitr", "rmarkdown", "plotly", "ggplot2", "shiny", 
-                 "devtools", "boot", "class", "car", "MASS", "ggplot2movies", 
-                 "ISLR", "DAAG", "mice", "mitml", "miceadds"), 
-                 dependencies = TRUE)
+install.packages(c("ggplot2", "tidyverse", "magrittr", "knitr", "rmarkdown", 
+                   "plotly", "ggplot2", "shiny", "devtools", "boot", "class", 
+                   "car", "MASS", "ggplot2movies", "ISLR", "DAAG", "mice", 
+                   "purrr", "furrr", "future"), dependencies = TRUE)
 ```
 
 
-If you are not sure where to execute code, use the following figure to identify the console:
+If you are not sure where to execute code, use the following figure to identify the console - ignore the outdated version in the example:
 
 <center>
   <img src="console.png" alt="HTML5 Icon" width = 70%>
