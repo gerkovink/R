@@ -1,5 +1,5 @@
 ---
-title: "Statistical Programming with R 2019"
+title: "Statistical Programming with R 2021"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -9,6 +9,8 @@ output:
 # Intro {.sidebar}
 
 This dashboard covers the course materials for the course [**USS24: Statistical programming with R**](https://www.utrechtsummerschool.nl/courses/social-sciences/data-science-statistical-programming-with-r). 
+<br> <br>
+We usually adapt the course as we go, so we suggest to access the materials online when we consider them. 
 
 ---
 
@@ -16,11 +18,12 @@ Course leader: [Gerko Vink](https://www.gerkovink.com) <br>
 Instructors: 
 
  - [Erik-Jan van Kesteren](https://erikjanvankesteren.nl)
- - [Duco Veen](https://www.ducoveen.com)
+ - [Maarten Cruyff](https://www.uu.nl/medewerkers/mcruyff)
  - [Ayoub Bagheri](https://bagheria.github.io)
+ - [Thom Volker](https://thomvolker.github.io)
 
 Study load: 1.5 ECTS <br>
-Location: [Koningsberger building - Cosmos hall](https://www.uu.nl/en/victor-j-koningsberger-building)
+Location of Start: [Koningsberger building - Pangea hall](https://www.uu.nl/en/victor-j-koningsberger-building)
 
 ---
 # Quick Overview
@@ -280,23 +283,6 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
     - [Impractical O](Contents/Material/Part O - Monte carlo simulation/Practical_O.html)
 
 All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions. 
-
-# Course archive
-
-## Column 1
-
-### Download a course archive 
-We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. At the end of the course, you can download all course materials [here](Contents/Material/Archive/S24_summerschool2019.zip). 
-
-### Such a wonderful group
-
-- [Such nice people](Contents/img/pic1.jpg)
-- [Crazy about StatsWithR](Contents/img/pic2.jpg)
-
-Above you can find the group pictures. We really enjoyed having you in our course. 
-
-Ayoub, Duco, Erik-Jan and Gerko
-
 
 
 # To continue
