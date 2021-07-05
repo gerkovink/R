@@ -171,7 +171,7 @@ See also [this `rmarkdown` cheat sheet](https://rstudio.com/wp-content/uploads/2
 
 11. **Open the file `markdown.Rmd`. **
 
-You can find a zip containing the [`markdown.Rmd` here](markdown.Rmd.zip).
+You can find the [`markdown.Rmd` here](markdown.Rmd).
 
 Have a look at the code in the `markdown.Rmd` file and make sure that you understand what is going on. If you do not understand what you are looking at, please ask me (Gerko) during the lecture or [via e-mail](mailto:G.Vink@uu.nl), or ask the workgroup instructor. 
 
