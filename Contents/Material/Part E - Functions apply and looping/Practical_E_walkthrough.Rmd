@@ -242,8 +242,7 @@ We will use this datasets also more frequently this week, but we use it only onc
 ```{r echo=printAnswers, eval=printAnswers, message=FALSE}
 columnInfo <- function(x) {
   if (is.numeric(x)) {
-    return(paste("The mean is", round(mean(x), 2), 
-                 "and the sd is",   round(sd(x), 2)))
+    return(paste("The mean is", round(mean(x), 2), "and the sd is", round(sd(x), 2)))
   } else {
     return(paste(levels(x), collapse = ", "))
   }

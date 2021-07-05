@@ -9,7 +9,7 @@ output: html_document
 
 1. **Create an object a with element (value) `1`**
 ```{r}
-a <- 1
+#a <- 1
 ```
 
 We can see that value `1` is assigned to a, but we cannot verify that it is 

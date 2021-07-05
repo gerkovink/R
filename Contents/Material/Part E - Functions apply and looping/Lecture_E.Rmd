@@ -59,7 +59,7 @@ if (a > 5){
 a <- 8
 if (a > 5){
   print("a is larger than 5.")
-}
+} 
 ```
 
 ## If-else-statements
