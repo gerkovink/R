@@ -316,11 +316,11 @@ slide:not(.current) .plotly.html-widget{
 
 <p>To model objects based on other objects, we use <code>~</code> (tilde)</p>
 
-<pre >- For example, to model body mass index (BMI) on weight, we would type</pre>
+<p>For example, to model body mass index (BMI) on weight, we would type</p>
 
 <pre class = 'prettyprint lang-r'>BMI ~ weight</pre>
 
-<p>Tilde is used to separate the left- and right-hand sides in a model formula.</p>
+<p>The <code>~</code> is used to separate the left- and right-hand sides in a model formula.</p>
 
 <p>For functions (or models), within models we use <code>I()</code> - For example, to model body mass index (BMI) on its deterministic function of weight and height, we would type</p>
 
@@ -353,6 +353,28 @@ slide:not(.current) .plotly.html-widget{
 ## Coefficients:
 ##        (Intercept)  I(wgt/(hgt/100)^2)  
 ##          -0.005553            1.000034</pre>
+
+</article></slide><slide class=""><hgroup><h2>Why we really need <code>I()</code></h2></hgroup><article  id="why-we-really-need-i" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>lm(bmi ~ wgt + wgt^2, data = boys)</pre>
+
+<pre >## 
+## Call:
+## lm(formula = bmi ~ wgt + wgt^2, data = boys)
+## 
+## Coefficients:
+## (Intercept)          wgt  
+##     14.5401       0.0935</pre>
+
+<pre class = 'prettyprint lang-r'>lm(bmi ~ wgt + I(wgt^2), data = boys)</pre>
+
+<pre >## 
+## Call:
+## lm(formula = bmi ~ wgt + I(wgt^2), data = boys)
+## 
+## Coefficients:
+## (Intercept)          wgt     I(wgt^2)  
+##   16.271466    -0.041715     0.001604</pre>
 
 </article></slide><slide class=""><hgroup><h2>More efficient</h2></hgroup><article  id="more-efficient" class="smaller ">
 

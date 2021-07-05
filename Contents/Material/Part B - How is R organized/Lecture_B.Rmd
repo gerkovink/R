@@ -218,6 +218,31 @@ g[[2]][[1]]
 g[[2]]$vector
 ```
 
+
+## Functional programming
+```{r}
+library(purrr)
+map(g, "vector")
+map(map(g, "data frame"), "V2")
+```
+
+## Grabbing elements with `map()`
+and making them into new objects
+```{r}
+do.call("cbind", map(map(g, "data frame"), "V2"))
+```
+
+## Now with a pipe
+```{r message=FALSE}
+library(dplyr)
+g %>% 
+  map("data frame") %>% 
+  map("V2") %>% 
+  do.call("cbind", .)
+```
+
+Tomorrow we focus much more on pipes
+
 ## Logical operators
 - Logical operators are signs that evaluate a statement, such as `==`, `<`, `>`, `<=`, `>=`, and `|` (OR) as well as `&` (AND). Typing `!` before a logical operator takes the complement of that action. There are more operations, but these are the most useful. 
 

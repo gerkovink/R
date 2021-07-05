@@ -553,6 +553,48 @@ f</code></pre>
 <pre class="r"><code>g[[2]]$vector</code></pre>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 </div>
+<div id="functional-programming" class="section level2">
+<h2>Functional programming</h2>
+<pre class="r"><code>library(purrr)
+map(g, &quot;vector&quot;)</code></pre>
+<pre><code>## [[1]]
+## [1] 1 2 3 4 5
+## 
+## [[2]]
+## [1] 1 2 3 4 5</code></pre>
+<pre class="r"><code>map(map(g, &quot;data frame&quot;), &quot;V2&quot;)</code></pre>
+<pre><code>## [[1]]
+## [1] 8.430130 5.921832 2.469878 3.626294 4.108676
+## 
+## [[2]]
+## [1] 8.430130 5.921832 2.469878 3.626294 4.108676</code></pre>
+</div>
+<div id="grabbing-elements-with-map" class="section level2">
+<h2>Grabbing elements with <code>map()</code></h2>
+<p>and making them into new objects</p>
+<pre class="r"><code>do.call(&quot;cbind&quot;, map(map(g, &quot;data frame&quot;), &quot;V2&quot;))</code></pre>
+<pre><code>##          [,1]     [,2]
+## [1,] 8.430130 8.430130
+## [2,] 5.921832 5.921832
+## [3,] 2.469878 2.469878
+## [4,] 3.626294 3.626294
+## [5,] 4.108676 4.108676</code></pre>
+</div>
+<div id="now-with-a-pipe" class="section level2">
+<h2>Now with a pipe</h2>
+<pre class="r"><code>library(dplyr)
+g %&gt;% 
+  map(&quot;data frame&quot;) %&gt;% 
+  map(&quot;V2&quot;) %&gt;% 
+  do.call(&quot;cbind&quot;, .)</code></pre>
+<pre><code>##          [,1]     [,2]
+## [1,] 8.430130 8.430130
+## [2,] 5.921832 5.921832
+## [3,] 2.469878 2.469878
+## [4,] 3.626294 3.626294
+## [5,] 4.108676 4.108676</code></pre>
+<p>Tomorrow we focus much more on pipes</p>
+</div>
 <div id="logical-operators" class="section level2">
 <h2>Logical operators</h2>
 <ul>

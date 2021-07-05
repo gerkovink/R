@@ -54,7 +54,7 @@ There are several 'layers' in `R`. Some layers you are allowed to fiddle around 
 ## Environments
 The global environment can be seen as an olympic-size swimming pool. Everything you do has its place there. 
 
-If you'd like, you may create another, seperate environment to work in. 
+If you'd like, you may create another, separate environment to work in. 
 
 - A user environment would by default not have access to other environments
 
@@ -70,7 +70,7 @@ If you'd like, you may create another, seperate environment to work in.
 - Packages have their own space. 
 
     - Everything needed to run the functions in a package is needly contained within its own space
-    - See packages as seperate (mini) pools that are connected to the main pool (the global environment)
+    - See packages as separate (mini) pools that are connected to the main pool (the global environment)
 
 ## Loading packages
 
@@ -136,18 +136,17 @@ Most often it may be useful to look back at the code history for various reasons
 ## Modeling in `R`
 To model objects based on other objects, we use `~` (tilde)
 
-    - For example, to model body mass index (BMI) on weight, we would type
+For example, to model body mass index (BMI) on weight, we would type
 ```{r eval=FALSE}
 BMI ~ weight
 ```
-Tilde is used to separate the left- and right-hand sides in a model formula.
+The `~` is used to separate the left- and right-hand sides in a model formula.
 
 For functions (or models), within models we use `I()`
     - For example, to model body mass index (BMI) on its deterministic function of weight and height, we would type
 ```{r eval=FALSE}
 BMI ~ I(weight / height^2)
 ```
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 require(mice)
 ```
@@ -162,6 +161,12 @@ lm(bmi ~ wgt, data = boys)
 Remember the `boys` data from package `mice`:
 ```{r}
 lm(bmi ~ I(wgt / (hgt / 100)^2), data = boys)
+```
+
+## Why we really need `I()`
+```{r}
+lm(bmi ~ wgt + wgt^2, data = boys)
+lm(bmi ~ wgt + I(wgt^2), data = boys)
 ```
 
 ## More efficient

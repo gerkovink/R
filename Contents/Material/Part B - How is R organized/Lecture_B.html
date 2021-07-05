@@ -192,9 +192,9 @@ slide:not(.current) .plotly.html-widget{
           </hgroup>
   </slide>
 
-<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Recap</h2></hgroup><article  id="recap" class="smaller ">
+<slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Recap</h2></hgroup><article  class="smaller " id="recap">
 
-</article></slide><slide class=""><hgroup><h2>So far</h2></hgroup><article  id="so-far" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>So far</h2></hgroup><article  class="smaller " id="so-far">
 
 <p>This morning we have learned the basics of programming in <code>R</code>:</p>
 
@@ -206,9 +206,9 @@ slide:not(.current) .plotly.html-widget{
 <li>How to create notebooks or markdown HTML files</li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Objects that contain more than one element</h2></hgroup><article  id="objects-that-contain-more-than-one-element" class="smaller ">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Objects that contain more than one element</h2></hgroup><article  class="smaller " id="objects-that-contain-more-than-one-element">
 
-</article></slide><slide class=""><hgroup><h2>More than one element</h2></hgroup><article  id="more-than-one-element" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>More than one element</h2></hgroup><article  class="smaller " id="more-than-one-element">
 
 <ul>
 <li>We can assign more than one element to a vector (in this case a 1-dimensional congatenation of numbers 1 through 5)</li>
@@ -224,7 +224,7 @@ b</pre>
 
 <pre >## [1] 1 2 3 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>More than one element, with characters</h2></hgroup><article  id="more-than-one-element-with-characters" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>More than one element, with characters</h2></hgroup><article  class="smaller " id="more-than-one-element-with-characters">
 
 <p>Characters (or character strings) in <code>R</code> are indicated by the double quote identifier.</p>
 
@@ -239,14 +239,14 @@ a.new</pre>
 
 <pre >## [1] 1 2 3 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Quickly identifying elements in vectors</h2></hgroup><article  id="quickly-identifying-elements-in-vectors" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Quickly identifying elements in vectors</h2></hgroup><article  class="smaller " id="quickly-identifying-elements-in-vectors">
 
 <pre class = 'prettyprint lang-r'>rep(a, 15)</pre>
 
 <pre >##  [1] 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3
 ## [39] 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5 1 2 3 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Calling elements in vectors</h2></hgroup><article  id="calling-elements-in-vectors" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Calling elements in vectors</h2></hgroup><article  class="smaller " id="calling-elements-in-vectors">
 
 <p>If we would want just the third element, we would type</p>
 
@@ -254,7 +254,7 @@ a.new</pre>
 
 <pre >## [1] 3</pre>
 
-</article></slide><slide class=""><hgroup><h2>Multiple vectors in one object</h2></hgroup><article  id="multiple-vectors-in-one-object" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Multiple vectors in one object</h2></hgroup><article  class="smaller " id="multiple-vectors-in-one-object">
 
 <p>This we would refer to as a matrix</p>
 
@@ -268,7 +268,7 @@ c</pre>
 ## [4,]    4    4
 ## [5,]    5    5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Calling elements in matrices #1</h2></hgroup><article  id="calling-elements-in-matrices-1" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Calling elements in matrices #1</h2></hgroup><article  class="smaller " id="calling-elements-in-matrices-1">
 
 <ul>
 <li>The first row is called by</li>
@@ -286,7 +286,7 @@ c</pre>
 
 <pre >## [1] 1 2 3 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Calling elements in matrices #2</h2></hgroup><article  id="calling-elements-in-matrices-2" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Calling elements in matrices #2</h2></hgroup><article  class="smaller " id="calling-elements-in-matrices-2">
 
 <ul>
 <li>The intersection of the first row and second column is called by</li>
@@ -298,7 +298,7 @@ c</pre>
 
 <p>In short; square brackets [] are used to call elements, rows, columns (and much more beyond the scope of this course)</p>
 
-</article></slide><slide class=""><hgroup><h2>Matrices with mixed numeric / character data</h2></hgroup><article  id="matrices-with-mixed-numeric-character-data" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Matrices with mixed numeric / character data</h2></hgroup><article  class="smaller " id="matrices-with-mixed-numeric-character-data">
 
 <p>If we add a character column to matrix <code>c</code>; everything becomes a character:</p>
 
@@ -311,7 +311,7 @@ c</pre>
 ## [4,] &quot;4&quot;  &quot;4&quot;  &quot;d&quot; 
 ## [5,] &quot;5&quot;  &quot;5&quot;  &quot;e&quot;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Matrices with mixed numeric / character data</h2></hgroup><article  id="matrices-with-mixed-numeric-character-data-1" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Matrices with mixed numeric / character data</h2></hgroup><article  class="smaller " id="matrices-with-mixed-numeric-character-data-1">
 
 <p>Alternatively,</p>
 
@@ -326,7 +326,7 @@ c</pre>
 
 <p>Remember, matrices and vectors are numerical OR character objects. They can never contain both and still be used for numerical calculations.</p>
 
-</article></slide><slide class=""><hgroup><h2>Data frames</h2></hgroup><article  id="data-frames" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Data frames</h2></hgroup><article  class="smaller " id="data-frames">
 
 <pre class = 'prettyprint lang-r'>d &lt;- data.frame(&quot;V1&quot; = rnorm(5),
                 &quot;V2&quot; = rnorm(5, mean = 5, sd = 2), 
@@ -342,7 +342,7 @@ d</pre>
 
 <p>We &lsquo;filled&rsquo; a dataframe with two randomly generated sets from the normal distribution - where \(V1\) is standard normal and \(V2 \sim N(5,2)\) - and a character set.</p>
 
-</article></slide><slide class=""><hgroup><h2>Data frames (continued)</h2></hgroup><article  id="data-frames-continued" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Data frames (continued)</h2></hgroup><article  class="smaller " id="data-frames-continued">
 
 <p>Data frames can contain both numerical and character elements at the same time, although never in the same column.</p>
 
@@ -358,7 +358,7 @@ d</pre>
 ## row 4  0.07050839 3.626294  d
 ## row 5  0.12928774 4.108676  e</pre>
 
-</article></slide><slide class=""><hgroup><h2>Calling row elements in data frames</h2></hgroup><article  id="calling-row-elements-in-data-frames" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Calling row elements in data frames</h2></hgroup><article  class="smaller " id="calling-row-elements-in-data-frames">
 
 <p>There are two ways to obtain row <code>3</code> from data frame <code>d</code>:</p>
 
@@ -380,7 +380,7 @@ d</pre>
 
 <pre >## [1] &quot;b&quot;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Calling columns elements in data frames</h2></hgroup><article  id="calling-columns-elements-in-data-frames" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Calling columns elements in data frames</h2></hgroup><article  class="smaller " id="calling-columns-elements-in-data-frames">
 
 <p>Both</p>
 
@@ -398,7 +398,7 @@ d</pre>
 
 <pre >## [1] 8.430130 5.921832 2.469878 3.626294 4.108676</pre>
 
-</article></slide><slide class=""><hgroup><h2>Beyond two dimensions</h2></hgroup><article  id="beyond-two-dimensions" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Beyond two dimensions</h2></hgroup><article  class="smaller " id="beyond-two-dimensions">
 
 <p>If you wish to use numerical objects that have more than two dimension, an array would be a suitable object. The following code yields a 3-dimensional array (2 rows, 4 columns and 3 matrices):</p>
 
@@ -423,7 +423,7 @@ e</pre>
 ## [1,]   17   19   21   23
 ## [2,]   18   20   22   24</pre>
 
-</article></slide><slide class=""><hgroup><h2>Indexing an array</h2></hgroup><article  id="indexing-an-array" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Indexing an array</h2></hgroup><article  class="smaller " id="indexing-an-array">
 
 <p>The square bracket identification works similarly to the identification of matrices and dataframes, but with the added dimension(s). For example,</p>
 
@@ -435,7 +435,7 @@ e</pre>
 
 <p>In other words, characters and numerical elements may not be mixed.</p>
 
-</article></slide><slide class=""><hgroup><h2>Potential problem with array</h2></hgroup><article  id="potential-problem-with-array" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Potential problem with array</h2></hgroup><article  class="smaller " id="potential-problem-with-array">
 
 <p>If we replace the third matrix in the array by a character version of that matrix, we obtain</p>
 
@@ -460,7 +460,7 @@ e</pre>
 ## [1,] &quot;17&quot; &quot;19&quot; &quot;21&quot; &quot;23&quot;
 ## [2,] &quot;18&quot; &quot;20&quot; &quot;22&quot; &quot;24&quot;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Solution: a list</h2></hgroup><article  id="solution-a-list" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Solution: a list</h2></hgroup><article  class="smaller " id="solution-a-list">
 
 <p>List are just what it says they are: lists. You can have a list of everything mixed with everything. For example, an simple list can be created by</p>
 
@@ -476,7 +476,7 @@ f</pre>
 
 <pre >## [1] 1 2 3 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Lists (continued)</h2></hgroup><article  id="lists-continued" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Lists (continued)</h2></hgroup><article  class="smaller " id="lists-continued">
 
 <p>We can simply add an object or element to an existing list</p>
 
@@ -496,7 +496,7 @@ f</pre>
 
 <p>to obtain a list with a vector and a data frame.</p>
 
-</article></slide><slide class=""><hgroup><h2>Lists (continued)</h2></hgroup><article  id="lists-continued-1" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Lists (continued)</h2></hgroup><article  class="smaller " id="lists-continued-1">
 
 <p>We can add names to the list as follows</p>
 
@@ -514,7 +514,7 @@ f</pre>
 ## row 4  0.07050839 3.626294  d
 ## row 5  0.12928774 4.108676  e</pre>
 
-</article></slide><slide class=""><hgroup><h2>Calling elements in lists</h2></hgroup><article  id="calling-elements-in-lists" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Calling elements in lists</h2></hgroup><article  class="smaller " id="calling-elements-in-lists">
 
 <p>Calling the vector (a) from the list can be done as follows</p>
 
@@ -530,7 +530,7 @@ f</pre>
 
 <pre >## [1] 1 2 3 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Lists in lists</h2></hgroup><article  id="lists-in-lists" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Lists in lists</h2></hgroup><article  class="smaller " id="lists-in-lists">
 
 <p>Take the following example</p>
 
@@ -546,7 +546,56 @@ f</pre>
 
 <pre >## [1] 1 2 3 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Logical operators</h2></hgroup><article  id="logical-operators" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Functional programming</h2></hgroup><article  class="smaller " id="functional-programming">
+
+<pre class = 'prettyprint lang-r'>library(purrr)
+map(g, &quot;vector&quot;)</pre>
+
+<pre >## [[1]]
+## [1] 1 2 3 4 5
+## 
+## [[2]]
+## [1] 1 2 3 4 5</pre>
+
+<pre class = 'prettyprint lang-r'>map(map(g, &quot;data frame&quot;), &quot;V2&quot;)</pre>
+
+<pre >## [[1]]
+## [1] 8.430130 5.921832 2.469878 3.626294 4.108676
+## 
+## [[2]]
+## [1] 8.430130 5.921832 2.469878 3.626294 4.108676</pre>
+
+</article></slide><slide class=""><hgroup><h2>Grabbing elements with <code>map()</code></h2></hgroup><article  class="smaller " id="grabbing-elements-with-map">
+
+<p>and making them into new objects</p>
+
+<pre class = 'prettyprint lang-r'>do.call(&quot;cbind&quot;, map(map(g, &quot;data frame&quot;), &quot;V2&quot;))</pre>
+
+<pre >##          [,1]     [,2]
+## [1,] 8.430130 8.430130
+## [2,] 5.921832 5.921832
+## [3,] 2.469878 2.469878
+## [4,] 3.626294 3.626294
+## [5,] 4.108676 4.108676</pre>
+
+</article></slide><slide class=""><hgroup><h2>Now with a pipe</h2></hgroup><article  class="smaller " id="now-with-a-pipe">
+
+<pre class = 'prettyprint lang-r'>library(dplyr)
+g %&gt;% 
+  map(&quot;data frame&quot;) %&gt;% 
+  map(&quot;V2&quot;) %&gt;% 
+  do.call(&quot;cbind&quot;, .)</pre>
+
+<pre >##          [,1]     [,2]
+## [1,] 8.430130 8.430130
+## [2,] 5.921832 5.921832
+## [3,] 2.469878 2.469878
+## [4,] 3.626294 3.626294
+## [5,] 4.108676 4.108676</pre>
+
+<p>Tomorrow we focus much more on pipes</p>
+
+</article></slide><slide class=""><hgroup><h2>Logical operators</h2></hgroup><article  class="smaller " id="logical-operators">
 
 <ul>
 <li><p>Logical operators are signs that evaluate a statement, such as <code>==</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, and <code>|</code> (OR) as well as <code>&amp;</code> (AND). Typing <code>!</code> before a logical operator takes the complement of that action. There are more operations, but these are the most useful.</p></li>
@@ -557,7 +606,7 @@ f</pre>
 
 <pre >## [1] 4 5 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Why does a logical statement on a matrix return a vector?</h2></hgroup><article  id="why-does-a-logical-statement-on-a-matrix-return-a-vector" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Why does a logical statement on a matrix return a vector?</h2></hgroup><article  class="smaller " id="why-does-a-logical-statement-on-a-matrix-return-a-vector">
 
 <pre class = 'prettyprint lang-r'>c &gt; 3</pre>
 
@@ -570,7 +619,7 @@ f</pre>
 
 <p>The column values for <code>TRUE</code> may be of different length. A vector as a return is therefore more appropriate.</p>
 
-</article></slide><slide class=""><hgroup><h2>Logical operators (cont’d)</h2></hgroup><article  id="logical-operators-contd" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Logical operators (cont’d)</h2></hgroup><article  class="smaller " id="logical-operators-contd">
 
 <ul>
 <li>If we would like the elements that are smaller than 3 OR larger than 3, we could type</li>
@@ -586,7 +635,7 @@ f</pre>
 
 <pre >## [1] 1 2 4 5 1 2 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Logical operators (cont’d)</h2></hgroup><article  id="logical-operators-contd-1" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Logical operators (cont’d)</h2></hgroup><article  class="smaller " id="logical-operators-contd-1">
 
 <ul>
 <li>In fact, <code>c != 3</code> returns a matrix</li>
@@ -610,7 +659,7 @@ f</pre>
 ## [4,]    4    4
 ## [5,]    5    5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Things that cannot be done</h2></hgroup><article  id="things-that-cannot-be-done" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Things that cannot be done</h2></hgroup><article  class="smaller " id="things-that-cannot-be-done">
 
 <ul>
 <li>Things that have no representation in real number space (at least not without tremendous effort)
@@ -632,7 +681,7 @@ f</pre>
 
 <pre >## [1] NA</pre>
 
-</article></slide><slide class=""><hgroup><h2>Standard solves for missing values</h2></hgroup><article  id="standard-solves-for-missing-values" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Standard solves for missing values</h2></hgroup><article  class="smaller " id="standard-solves-for-missing-values">
 
 <p>There are two easy ways to perform &ldquo;listwise deletion&rdquo;:</p>
 
@@ -644,7 +693,7 @@ f</pre>
 
 <pre >## [1] 3</pre>
 
-</article></slide><slide class=""><hgroup><h2>Floating point example</h2></hgroup><article  id="floating-point-example" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Floating point example</h2></hgroup><article  class="smaller " id="floating-point-example">
 
 <pre class = 'prettyprint lang-r'>(3 - 2.9)</pre>
 
@@ -658,7 +707,7 @@ f</pre>
 
 <pre >## [1] 8.326673e-17</pre>
 
-</article></slide><slide class=""><hgroup><h2>Some programming tips:</h2></hgroup><article  id="some-programming-tips" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>Some programming tips:</h2></hgroup><article  class="smaller " id="some-programming-tips">
 
 <ul>
 <li>keep your code tidy</li>
@@ -677,9 +726,9 @@ f</pre>
 <li>if allowed, place your project folders in some cloud-based environment</li>
 </ul>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Practical</h2></hgroup><article  id="practical" class="smaller ">
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Practical</h2></hgroup><article  class="smaller " id="practical">
 
-</article></slide><slide class=""><hgroup><h2>How to approach the next practical</h2></hgroup><article  id="how-to-approach-the-next-practical" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>How to approach the next practical</h2></hgroup><article  class="smaller " id="how-to-approach-the-next-practical">
 
 <p>Aim to make the exercises without looking at the answers.</p>
 

@@ -292,7 +292,7 @@ pre { /* Code block - determines code spacing between lines */
 <div id="environments" class="section level2">
 <h2>Environments</h2>
 <p>The global environment can be seen as an olympic-size swimming pool. Everything you do has its place there.</p>
-<p>If you’d like, you may create another, seperate environment to work in.</p>
+<p>If you’d like, you may create another, separate environment to work in.</p>
 <ul>
 <li>A user environment would by default not have access to other environments</li>
 </ul>
@@ -311,7 +311,7 @@ pre { /* Code block - determines code spacing between lines */
 <li><p>Packages have their own space.</p>
 <ul>
 <li>Everything needed to run the functions in a package is needly contained within its own space</li>
-<li>See packages as seperate (mini) pools that are connected to the main pool (the global environment)</li>
+<li>See packages as separate (mini) pools that are connected to the main pool (the global environment)</li>
 </ul></li>
 </ul>
 </div>
@@ -382,9 +382,9 @@ pre { /* Code block - determines code spacing between lines */
 <div id="modeling-in-r" class="section level2">
 <h2>Modeling in <code>R</code></h2>
 <p>To model objects based on other objects, we use <code>~</code> (tilde)</p>
-<pre><code>- For example, to model body mass index (BMI) on weight, we would type</code></pre>
+<p>For example, to model body mass index (BMI) on weight, we would type</p>
 <pre class="r"><code>BMI ~ weight</code></pre>
-<p>Tilde is used to separate the left- and right-hand sides in a model formula.</p>
+<p>The <code>~</code> is used to separate the left- and right-hand sides in a model formula.</p>
 <p>For functions (or models), within models we use <code>I()</code> - For example, to model body mass index (BMI) on its deterministic function of weight and height, we would type</p>
 <pre class="r"><code>BMI ~ I(weight / height^2)</code></pre>
 </div>
@@ -411,6 +411,25 @@ pre { /* Code block - determines code spacing between lines */
 ## Coefficients:
 ##        (Intercept)  I(wgt/(hgt/100)^2)  
 ##          -0.005553            1.000034</code></pre>
+</div>
+<div id="why-we-really-need-i" class="section level2">
+<h2>Why we really need <code>I()</code></h2>
+<pre class="r"><code>lm(bmi ~ wgt + wgt^2, data = boys)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = bmi ~ wgt + wgt^2, data = boys)
+## 
+## Coefficients:
+## (Intercept)          wgt  
+##     14.5401       0.0935</code></pre>
+<pre class="r"><code>lm(bmi ~ wgt + I(wgt^2), data = boys)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = bmi ~ wgt + I(wgt^2), data = boys)
+## 
+## Coefficients:
+## (Intercept)          wgt     I(wgt^2)  
+##   16.271466    -0.041715     0.001604</code></pre>
 </div>
 <div id="more-efficient" class="section level2">
 <h2>More efficient</h2>
