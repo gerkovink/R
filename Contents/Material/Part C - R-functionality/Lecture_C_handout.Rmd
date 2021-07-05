@@ -52,7 +52,7 @@ There are several 'layers' in `R`. Some layers you are allowed to fiddle around 
 - Namespaces
 
 ## Environments
-The global environment can be seen as a olympic-size swimming pool. Everything you do has its place there. 
+The global environment can be seen as an olympic-size swimming pool. Everything you do has its place there. 
 
 If you'd like, you may create another, seperate environment to work in. 
 

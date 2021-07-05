@@ -1,0 +1,226 @@
+---
+title: "Practical C"
+author: "Gerko Vink"
+date: "Statistical Programming with R"
+output: 
+   html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+    number_sections: false
+---
+
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 12px;
+  }
+td {  /* Table  */
+  font-size: 12px;
+}
+h1.title {
+  font-size: 18px;
+  color: DarkBlue;
+}
+h1 { /* Header 1 */
+  font-size: 18px;
+}
+h2 { /* Header 2 */
+    font-size: 18px;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+</style>
+
+
+
+---
+
+# Exercises
+Begin this practical exercise by setting the maximum line length in `R-Studio` to 80 characters. Go to `RStudio`'s `Preferences` (or `Global Options` under `Tools`) --> `Code` --> `Display`, and tick the `show margin` box. Make sure that the `margin column` is set to `80`
+
+---
+
+## Exercise 1-5
+
+---
+
+1. **Install package `mice`. **
+
+Go to `Tools` > `Install Packages` in `RStudio`. If you are connected to the internet, select  `Repository` under `Install From` and type `mice` under `Packages`. Leave the `Install to Library` at default and make sure that `Install Dependencies` is selected. Click install. If you are not connected to the internet, select `Package Archive File` under "Install from" and navigate to the respective file on your drive. 
+
+Some packages depend on other packages, meaning that their functionality may be limited if their dependencies are not installed. Installing dependencies is therefor recommended, but internet connectivity is required. 
+
+If all is right, you will receive a message in the console that the package has been installed (as well as its dependencies. 
+
+ALternatively, if you know the name of the package you would like to install - in this case `mice` - you can also call `install.packages("mice")` in the console window.
+
+---
+
+2. **Load package `mice`. **
+Loading packages can be done through functions `library()` and `require()`.
+```{r}
+library(mice)
+```
+
+If you use `require()` within a function, and the required package is not available, `require()` will yield a warning and the remainder of the function is still executed, whereas `library()` will yield an error and terminate all executions. The use of `library()` when not doing too complicated things is preferred - `require()` would result in more computational overhead because it calls `library()` itself. 
+
+---
+
+3. **Most packages have datasets included. Open the `mammalsleep` dataset from package `mice` by typing `mammalsleep` in the console, and subsequently by using the function `View()`. **
+
+Using `View()` is preferred for inspecting datasets that are large. `View()` opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you `View()` your own datasets, you can even edit the datasets' contents. 
+
+---
+
+4. **Write the mammalsleep dataset from package `mice` to the work directory as a tab-delimited text file with `.` as a decimal seperator. Name the file `mammalsleep.txt`**
+
+```{r, warning=FALSE, message=FALSE}
+library(mice)
+write.table(mammalsleep, "mammalsleep.txt", sep = "\t", dec = ".", row.names = FALSE)
+```
+The command `sep = "\t"` indicates that the file is tabulated and the command `dec = "."` indicates that a point is used as the decimal seperator (instead of a comma). `row.names = FALSE` tells `R` that row names are not to be included in exported file. 
+
+---
+
+5. **Import the `mammalsleep.txt` file. **
+```{r}
+sleepdata <- read.table("mammalsleep.txt", sep = "\t", dec = ".", header = TRUE, stringsAsFactors = TRUE)
+```
+
+The command `sep = "\t"` indicates that the file is tabulated and the command `dec = "."` indicates that a point is used as the decimal seperator (instead of a comma). `header = TRUE` tells `R` that variable names are included in the header.
+
+All files that are presented in the work directory of the current `R` project, can essentially be imported into the workspace (the space that contains all environments) directly. All other locations require you to specify the specific path from the root of your machine. To find out what the current work directory is, you can type `getwd()` and to change the work directory you can use `setwd()`. The beauty of using projects in RStudio is that you would never have to change the work directory, as the work directory is automatically set, relative to your projects' `R`-scripts. 
+
+There are many packages that facilitate importing datasets from other statistical software packages, such as SPSS (e.g. function `read_spss` from package `haven`), Mplus (package `MplusAutomation`), Stata (`read.dta()` in `foreign`), SAS (`sasxport.get()` from package `Hmisc`) and from spreadsheet software, such as MS Excel (function `read.xlsx()` from package `xlsx`). For a short guideline to import multiple formats into `R`, see e.g. http://www.statmethods.net/input/importingdata.html. 
+
+---
+
+## Exercise 6-10
+
+---
+
+6. **The dataset we've just imported contains the sleepdata by Allison & Cicchetti (1976). Inspect the sleepdata and make yourself familiar with it. **
+
+If you would like to know more about this dataset, you can open the help for the `mammalsleep` dataset in package `mice` through `?mammalsleep`. Don't forget to load package `mice` first. 
+
+Inspecting the sleepdata could be done by 
+```{r}
+str(sleepdata) #the data structure
+summary(sleepdata) #distributional summaries
+round(cor(sleepdata[, -1], use = "pairwise.complete.obs"), 2) #bivariate correlations, variable 1 excluded. 
+head(mammalsleep) #first six rows
+tail(mammalsleep) #last six rows
+?mammalsleep # the help
+```
+Note that the sleepdata dataset is automatically recognized as a dataframe. After all, there is one factor (categorical variable) containing the animal names. 
+
+The functions `head()` and `tail()` are very useful functions. As is function `str` as it gives you a quick overview of the measurement levels in `mammalsleep`. 
+
+Since `mammalsleep` is an `R`-dataset, there should be a help file. Taking a look at `?mammalsleep` may yield valuable insight about the measurements and origin of the variables. 
+
+One thing that may have caught your attention is the relation between `ts`, `ps` and `sws`. This is a deterministic relation where total sleep (`ts`) is the sum of paradoxical sleep (`ps`) and short-wave sleep (`sws`). In the event that you would model the data, you need to take such relations into account. 
+
+---
+
+7. **Save the current workspace. Name the workspace `Practical_C.RData`. Also, save the sleepdata file as a separate workspace called `Sleepdata.RData`. **
+
+Now that we have imported our data, it may be wise to save the current workspace, i.e. the current state of affairs. Saving the workspace will leave everything as is, so that we can continue from this exact state at a later time, by simply opening the workspace file. To save everything in the current workspace, type
+```{r}
+save.image("Practical_C.RData")
+```
+
+To save just the dataset `sleepdata`, and nothing else, type
+```{r}
+save(sleepdata, file = "Sleepdata.RData")
+```
+
+With the save functions, any object in the workspace can be saved. 
+
+---
+
+8. **Some animals were not used in the calculations by Allison and Cicchetti. Exclude the following animals from the sleepdata dataset: Echidna, Lesser short-tailed shrew and Musk shrew. Save the dataset as sleepdata2.** Tip: use the square brackets to indicate [rows, columns].
+
+There are three ways to exclude the three animals from the dataset. The first approach uses the names:
+```{r}
+exclude <- c("Echidna", "Lesser short-tailed shrew", "Musk shrew")
+which <- sleepdata$species %in% exclude #Indicate the species that match the names in exclude
+which
+sleepdata2 <- sleepdata[!which, ]
+```
+
+the second approach uses function `filter()` from package `dplyr`:
+```{r}
+library(dplyr) # Data Manipulation
+filter(sleepdata, !sleepdata$species %in% exclude) # ! makes all TRUES into FALSE
+```
+
+and the third approach uses the row numbers directly (you would need to inquire about, or calculate the rownumbers)
+```{r}
+sleepdata2 <- sleepdata[-c(16, 32, 38), ]
+```
+
+Note that the numbered option requires less code, but the named option has a much lower probability for error. As the dataset might change, or might get sorted differently, the second option may not be valid anymore. 
+
+---
+
+9. **Plot brain weight as a function of species. **
+```{r}
+plot(brw ~ species, data = sleepdata2)
+```
+
+---
+
+10. **Some animals have much heavier brains than other animals. Find out the names of the animals that have a brain weight larger than 1 standard deviation above the mean brain weight. Replicate the plot from Question 9 with only these animals and do not plot any information about the other animals. **
+
+To find out which animals have a brain weight larger than 1 standard deviation above the mean brain weight:
+```{r}
+sd.brw <- sd(sleepdata2$brw) #standard deviation  
+mean.brw <- mean(sleepdata2$brw) #mean
+which <- sleepdata2$brw > (mean.brw + (1 * sd.brw)) #which are larger?
+as.character(sleepdata2$species[which]) #names of the animals with brw > 1000
+```
+To plot these animals:
+```{r}
+plot(brw ~ species, data = sleepdata2[which, ])
+```
+
+The downside is that it still prints all the animals on the x-axis. This is due to the factor labels for `species` being copied to the smaller subset of the data. Plot automatically takes over the labels. For example, 
+```{r}
+sleepdata2$species[which]
+```
+
+returns only 3 mammals, but still has 62 factor levels. To get rid of the unused factor levels, we can use function `factor()`:
+```{r}
+sleepdata3 <- sleepdata2[which, ]
+sleepdata3$species <- factor(sleepdata3$species)
+sleepdata3$species
+```
+To plot the graph that we wanted:
+```{r}
+plot(brw ~ species, data = sleepdata3)
+```
+
+---
+
+If your current software-analysis platform is different from `R`, chances are that you prepare your data in the software of your choice. In `R` there are fantastic facilities for importing and exporting data and I would specifically like to pinpoint you to package [`haven`](https://haven.tidyverse.org/index.html) by [Hadley Wickham](http://hadley.nz). It provides wonderful functions to import and export many data types from software such as Stata, SAS and SPSS. For integrating Mplus into `R`, package `MplusAutomation` is essential.
+
+---
+
+# Useful links 
+
+- [`Package haven`](https://haven.tidyverse.org/index.html) for importing/exporting `SPSS`, `SAS` and `STATA` data.
+
+---
+
+End of exercise 
+
+---
+

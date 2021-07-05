@@ -41,11 +41,7 @@ pre { /* Code block - determines code spacing between lines */
 ---
 
 ## Very useful
-You can view my screen on your machine: 
-
-[join.me/statistics_uu](http://join.me/statistics_uu)
-
-and access the course materials quickly from
+You can access the course materials quickly from
 
 [www.gerkovink.com/R](https://www.gerkovink.com/R)
 

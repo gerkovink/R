@@ -2,13 +2,53 @@
 title: "Practical B"
 author: "Gerko Vink"
 date: "Statistical Programming with R"
-output: html_document
+output: 
+   html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+    number_sections: false
 ---
+
+<style type="text/css">
+
+body{ /* Normal  */
+      font-size: 12px;
+  }
+td {  /* Table  */
+  font-size: 12px;
+}
+h1.title {
+  font-size: 18px;
+  color: DarkBlue;
+}
+h1 { /* Header 1 */
+  font-size: 18px;
+}
+h2 { /* Header 2 */
+    font-size: 18px;
+}
+h3 { /* Header 3 */
+  font-size: 18px;
+}
+code.r{ /* Code block */
+    font-size: 12px;
+}
+pre { /* Code block - determines code spacing between lines */
+    font-size: 14px;
+}
+</style>
+
+
 
 ---
 
-#### Exercises
-In this practical we are going to play around with the different types of elements in R. 
+# Exercises
+In this practical exercise we are going to play around with the different types of elements in R. 
+
+---
+
+## Exercise 1-5
 
 ---
 
@@ -75,11 +115,15 @@ dat3
 
 ---
 
+## Exercise 6-10
+
+---
+
 6. **Again, make a dataframe called `dat3b` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `as.data.frame()` on the matrix obtained from `Question 4`. **
 
 This is a tricky situation. At face value, everything may seem to be in order. But, be aware that the code
 ```{r}
-dat3b <- as.data.frame(mat3)
+dat3b <- as.data.frame(mat3, stringsAsFactors = TRUE)
 dat3b
 ```
 does not work properly (at least not as intended) as the matrix nature of `mat3` turned everything into a character value and you have lost the numerical nature of `vec1`. It may appear to be working, but if we check if column 1 is numerical, it turns out not to be the case. 
@@ -100,7 +144,7 @@ Rather tricky; the function `as.data.frame()` has converted the first variable t
 ```{r}
 is.factor(dat3b[, 1])
 ```
-This is due to us not specifying the variable correctly in the matrix we used to create the dataframe. Factors are categorical variables that are depicted by numbers. Character vectors are converted to factors in data frames. 
+This is due to us not specifying the variable correctly in the matrix we used to create the dataframe. Factors are categorical variables that are depicted by numbers. Character vectors are not converted to factors in data frames by default, but the argument `stringsAsFactors = TRUE` has resulted in this conversion. I forced this to prove a point: You now know that there is a distinction between characters and factors and you know hot to force this conversion to factors in a data frame. 
 
 ---
 
@@ -134,24 +178,29 @@ dat3
 
 ---
 
-10. **Open the workspace `boys.RData`. You need to download this file and put it in the project folder.**
+10. **Open the workspace `boys.RData`.** 
 
-Either run the below code
+There are two ways to go about opening workspaces that are available on the internet. You either need to download the `boys.RData` file from the course page and put it in the project folder. Then run the below code
 ```{r}
 load("boys.RData")
 ```
 or double-click the `boys.RData` file on your machine (right-click and `open with RStudio` if it does not open by default in `RStudio`, but in `R`). 
 
-You can also import it directly from the internet by running and loading the below code connection
-```{r}
-con <- url("https://gerkovink.github.io/Statistical-Programming-with-R/Contents/Material/Part%20B%20-%20How%20is%20R%20organized/boys.RData")
+Alternatively, you can import workspaces directly from the internet by running and loading the connection
+```{r eval = FALSE}
+con <- url("https://www.gerkovink.com/fundamentals/data/boys.RData")
 load(con)
 ```
+In the above code we store the connection in object `con` and then load the connection with `load(con)`.
 
 The `boys` object will be added to your Global Environment. You can now use the `boys` data by running
 ```{r eval=FALSE}
 boys
 ```
+
+---
+
+## Exercise 11-15
 
 ---
 
@@ -224,6 +273,10 @@ or, alternatively,
 boys2.1 <- subset(boys, age >= 20)
 nrow(boys2.1)
 ```
+
+---
+
+## Exercise 16-17
 
 ---
 

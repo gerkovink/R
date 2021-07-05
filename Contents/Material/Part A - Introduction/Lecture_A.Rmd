@@ -10,13 +10,18 @@ output:
 ---
 
 ## Very useful
-You can view my screen on your machine: 
-
-[join.me/statistics_uu](http://join.me/statistics_uu)
-
-and access the course materials quickly from
+You can access the course materials quickly from
 
 [www.gerkovink.com/R](https://www.gerkovink.com/R)
+
+
+Some guidelines
+
+1. Please keep your microphone off
+2. If you have a question, raise your hand or type your question in the chat
+3. You may always interrupt me 
+4. We will introduce frequent question breaks
+
 
 # Overview of this course
 ## Program
@@ -111,5 +116,16 @@ a
 
 This is why we use R-Studio.
 
-# Practical A
+## Practical A
+
+In a few moments, 
+
+1. you will be automatically added to a practical session 
+2. There will be a practical instructor present
+3. At the end of the practical, you will be automatically returned to the main meeting
+
+
+
+
+
 
