@@ -46,7 +46,7 @@ The help tells you all about a functions arguments (the input you can specify), 
 example(plot)
 ```
 
-There are many more functions that can plot specific types of plots. For example, function `hist()` plots histograms, but falls back on the basic `plot()` function. Packages `lattice` and `ggplot2` are excellent packages to use for complex plots. Pretty much any type of plot can be made in R. A good reference for packages `lattice` that provides all `R`-code can be found at [http://lmdvr.r-forge.r-project.org/figures/figures.html](http://lmdvr.r-forge.r-project.org/figures/figures.html). Alternatively, all ggplot2 documentation can be found at [http://docs.ggplot2.org/current/](http://docs.ggplot2.org/current/)
+There are many more functions that can plot specific types of plots. For example, function `hist()` plots histograms, but falls back on the basic `plot()` function. Package `ggplot2` is an excellent package to use for more complex plots. Pretty much any type of plot can be made in R. All ggplot2 documentation can be found at [ggplot2.tidyverse.org](https://ggplot2.tidyverse.org/)
 
 ---
 
@@ -275,7 +275,8 @@ Let's not make things too complicated and just focus on `ggplot2`:
 boys %>%
   mutate(Hgt = hgt - mean(hgt, na.rm = TRUE),
          Age = cut(age, 0:22, labels = 0:21)) %>%
-  aggregate(Hgt ~ Age, data = ., mean) %>% #specify data = . to allow formula
+  group_by(Age) %>%
+  summarize(Hgt = mean(Hgt, na.rm = TRUE)) %>% 
   mutate(Diff = cut(Hgt, c(-Inf, 0, Inf),
                     labels = c("Below Average", "Above Average"))) %>%
   ggplot(aes(x = Age, y = Hgt, fill = Diff)) + 
@@ -283,39 +284,19 @@ boys %>%
   coord_flip()
 ```
 
-We can clearly see that the average height in the group is reached just before age 7. The `aggregate()` function is used to return the `mean()` of deviation `Hgt` for every group in `Age`. 
+We can clearly see that the average height in the group is reached just before age 7. 
 
-For example, if we would like the mean height `hgt` for every region `reg` in the `boys` data, we could call:
+The `group_by()` and `summarize()` function are advanced `dplyr` functions used to return the `mean()` of deviation `Hgt` for every group in `Age`. For example, if we would like the mean and sd of height `hgt` for every region `reg` in the `boys` data, we could call:
 
 ```{r}
 boys %>%
-  aggregate(hgt ~ reg, data = ., FUN = mean)
+  group_by(reg) %>% 
+  summarize(mean_hgt = mean(hgt, na.rm = TRUE), 
+            sd_hgt   = sd(hgt, na.rm = TRUE))
 ```
 
-We have to specify `data = .` in order to allow for the formula-style call to `aggregate()` - where the method is of class `formula`. However, the data set `boys` is parsed down the pipe as an object of class `data.frame`. The default evaluation of argument would therefore be
-```{r eval=FALSE}
-aggregate(x, by, FUN)
-```
+The `na.rm` argument ensures that the mean and sd of only the observed values in each category are used.
 
-and in the pipe this is by default evaluated as 
-
-```{r eval=FALSE}
-aggregate(., hgt ~ reg, mean)
-```
-
-where `.` is the object parsed down the pipe. This `.` is automatically evaluated as the first argument, unless otherwise specified by the user. In most cases this works because the data is usually the first argument that is evaluated in a function. However, the result is not a valid call to `aggregate()` because the object we're parsing down the pipe has class `data.frame`. `aggregate()` would therefor try to run `aggregate.data.frame()`, but our code dictates an evaluation of the formula call. By assigning the `.` to `data = .`, we specifically call for a `formula` evaluation of `aggregate()`. This solves the mismatch and forces `aggregate()` to conform to class `formula`:
-```{r eval=FALSE}
-aggregate(formula, data, FUN)
-```
-
-which is evaluated as 
-
-```{r eval=FALSE}
-aggregate(hgt ~ reg, data = ., mean)
-```
-in the pipe. Problem solved!
-
-The specifics about calling functions and evaluating their arguments can always be found in the help. Try `?aggregate` to see all forms this function's call may take. 
 
 ---
 
