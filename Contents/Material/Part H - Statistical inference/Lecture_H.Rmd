@@ -32,8 +32,8 @@ The sampling distribution is the distribution of a sample statistic
 
 ### Central Limit Theorem
 
-- ***Given a distribution with mean $\mu$ and standard deviation $\sigma$, the sampling 
-distribution of the mean approaches a normal distribution with mean $\mu$ and standard deviation $\frac{\sigma}{\sqrt{n}}$ as $n\to\infty$ ***
+- **Given a distribution with mean $\mu$ and standard deviation $\sigma$, the sampling 
+distribution of the mean approaches a normal distribution with mean $\mu$ and standard deviation $\frac{\sigma}{\sqrt{n}}$ as $n\to\infty$ **
 
 Conditions for the CLT to hold
 

@@ -234,6 +234,7 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
     - [Lecture H](Contents/Material/Part H - Statistical inference/Lecture_H.html)
     - [Practical H](Contents/Material/Part H - Statistical inference/PracticalH_walkthrough.html)
     - [Impractical H](Contents/Material/Part H - Statistical inference/PracticalH.html)
+    - [A plot that demonstrates the (mis)use of Confidence Intervals](https://www.gerkovink.com/markup/Archive/2019/Wk4/Solution_to_Ex5.html)
 - Part I: Data visualization
     - [Lecture I](Contents/Material/Part I - Data visualization/Lecture_i.html)
     - [Practical I](Contents/Material/Part I - Data visualization/Practical_i_walkthrough.html)
@@ -247,8 +248,12 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 
 - [The `ggplot2` reference page](https://ggplot2.tidyverse.org/reference/)
 - [A great reference on contrasts with linear modeling](https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html)
+- These papers are a nice reference for editors:
 
-The above link details pretty much all you can do with package `ggplot2`.
+  - [A comment in Nature from 800+ signatories](https://www.nature.com/articles/d41586-019-00857-9)
+  - [Naomi Altman and Martin Krzywinski in Nature Methods](https://www.nature.com/articles/nmeth.4120)
+  - [Statement by the Americal Statistical Association](https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108)
+
 
 # Thursday
 
