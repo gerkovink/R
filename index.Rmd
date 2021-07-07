@@ -254,6 +254,16 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
   - [Naomi Altman and Martin Krzywinski in Nature Methods](https://www.nature.com/articles/nmeth.4120)
   - [Statement by the Americal Statistical Association](https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108)
 
+### Releveling
+```{r echo = TRUE, message=FALSE}
+library(mice)
+library(magrittr)
+boys %$% lm(age ~ reg) %>% coef()
+
+boys$reg <- relevel(boys$reg, ref = "south")
+boys %$% lm(age ~ reg) %>% coef()
+```
+
 
 # Thursday
 
