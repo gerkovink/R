@@ -54,102 +54,142 @@ As a result
 
 and residuals do not need to be normal (heck, $y$ probably isn't, so why should $\epsilon$ be?)
 
+## Binary dependent variables
+
+Success vs Failure, e.g.
+
+- pass or fail the exam
+
+- smoker or non-smoker
+
+- illness or not
+
+$~$
+
+Estimate probability of a "success" given set of predictors.
+
+## Logistic regression model
+
+Let $p=P(Y=success)$
+
+$$p=\frac{e^{\alpha+\beta x}}{1+e^{\alpha+\beta x}}$$
+
+or
+
+$$\mbox{logit}(p)=\alpha+\beta x$$
+
+
+
 ## Logit
-\[\text{logit}(p) = \log(\frac{p}{1-p}) = \log(p) - \log(1-p)\]
-```{r echo=FALSE,  dev.args = list(bg = 'transparent')}
+
+The logit is the log of the odds of a success
+
+\[\text{logit}(p) = \log\left(\frac{p}{1-p}\right)\]
+
+```{r include=FALSE,  dev.args = list(bg = 'transparent')}
 p <- (1:999)/1000 
 gitp <- log(p/(1 - p)) 
 par(pty="s")
 plot(gitp, p, xlab = "logit(p)", ylab = "p", type = "l", pch = 1)
 ```
 
-## Logit continued
-Logit models work on the $\log(\text{odds})$ scale
+But why so complicated?
 
-\[\log(\text{odds}) = \log(\frac{p}{1-p}) = \log(p) - \log(1-p) = \text{logit}(p)\]
+## Logistic vs linear regression
 
-The logit of the probability is the log of the odds. 
+To avoid negative probabiliy estimates!
 
-Logistic regression allows us to model the $\log(\text{odds})$ as a function of other, linear predictors. 
-
-## $\log(\text{odds})$ explained
-```{r cache=TRUE,  dev.args = list(bg = 'transparent')}
-logodds <- rep(NA, 1001)
-for(i in 0:1000){
-  p <- i / 1000 
-  logodds[i + 1] <- log(p / (1 - p))
-}
-head(logodds)
-tail(logodds)
+```{r echo=F, out.width="100%", fig.align='center'}
+knitr::include_graphics("Lin_vs_LogReg.png")
 ```
 
-## $\log(\text{odds})$ explained
-```{r,  dev.args = list(bg = 'transparent')}
-plot(0:1000, logodds, xlab = "x", ylab = "log(odds)", type = "l")
-```
 
-## logit$^{-1}$ explained
-```{r cache=TRUE,  dev.args = list(bg = 'transparent')}
-invlogit <- exp(logodds) / (1 + exp(logodds))
-invlogit %>% head()
-invlogit %>% head()
-```
+## Goodness-of-fit
 
-## logit$^{-1}$ explained
-```{r,  dev.args = list(bg = 'transparent')}
-plot(0:1000, invlogit, xlab = "x", ylab = "log(odds)", type = "l")
-```
+`Deviance` is the logistic counterpart of the `Sum of Squares`. 
 
-# Logistic regression
-## Logistic regression
-With linear regression we had the `Sum of Squares (SS)`. Its logistic counterpart is the `Deviance (D)`. 
-
- -  Deviance is the fit of the observed values to the expected values. 
+- Deviance is the (mis)fit of the observed values to the expected values. 
  
-With logistic regression we aim to maximize the `likelihood`, which is equivalent to minimizing the deviance. 
+- The lower the deviance, the better the fit (Dev = 0 is perfect fit)
 
-The likelihood is the (joint) probability of the observed values, given the current model parameters.
 
-In normally distributed data: $\text{SS}=\text{D}$.
+$~$
 
-## Logistic regression
+`AIC` is for model selection of nested models
+
+- `AIC` value has no absolute interpretation 
+
+- model with lowest `AIC` is the best
+
+# Example
+ 
+## Model
+
+Predict probability not moving after anesthetic from concentration
+
 ```{r, message = FALSE}
-anesthetic %>% head(n = 18)
+anesthetic %>% dplyr::select(-move, -logconc) %>% head(n = 10)
 ```
 
-## Logistic regression
+## Interpretation in terms of the logit
+
+
+With each unit increase in concentration: 
+
+- the logit of `nomove` increases with 5.567
+
+- the odds  of `nomove` increase with a factor `log(5.567) = 1.72`
+
 ```{r,  dev.args = list(bg = 'transparent')}
-anesthetic %$% glm(nomove ~ conc, family = binomial(link="logit")) %>% summary()
+anesthetic %$% glm(nomove ~ conc, family = binomial(link="logit")) 
 ```
 
-## A different approach
+
+## Predicted probabilities
+
+For `conc = 1`, the probability of `nomove` is 
+
+$$p = \frac{e^{-6.469 + 5.567}}{1+e^{-6.469 + 5.567}}=0.29$$
+
+```{r}
+data.frame(conc = anesthetic$conc, pred = glm(nomove ~ conc, 
+                                              family = binomial(link="logit"), 
+                                              anesthetic)$fitted)[1:10, ] %>% 
+  round(2)
+
+```
+
+
+## Significance of parameter estimates
+
 ```{r,  dev.args = list(bg = 'transparent')}
-anestot <- aggregate(anesthetic[, c("move","nomove")],  
-                     by = list(conc = anesthetic$conc), FUN = sum) 
-anestot
+anesthetic %$% 
+  glm(nomove ~ conc, family = binomial(link="logit")) %>% 
+  summary() %>% 
+  coef() %>% 
+  round(3)
 ```
 
-## A different approach
-```{r,  dev.args = list(bg = 'transparent')}
-anestot$total <- apply(anestot[, c("move","nomove")], 1 , sum) 
-anestot$prop <- anestot$nomove / anestot$total 
-anestot
+# Logistic multiple regression
+
+## Explore your data
+
+
+```{r}
+head(frogs)
 ```
 
-## A different approach
-```{r,  dev.args = list(bg = 'transparent')}
-anestot %$% glm(prop ~ conc, family = binomial(link="logit"), weights = total) %>% 
-  summary()
-```
 
-## Logistic multiple regression
-Always try to make the relation as linear as possible 
+Make the relation as linear as possible and avoid skew
 
-- after all you are assessing a linear model. 
+- after all you are assessing a (generalized) linear model
+ 
+Use transformations to "make" things more linear / less skewed
 
-Do not forget that you use transformations to "make" things more linear
 
-## Logistic multiple regression
+
+
+## Checking the data
 ```{r,  dev.args = list(bg = 'transparent'), echo=FALSE}
 with(frogs, pairs(cbind(distance, NoOfPools, NoOfSites, avrain, altitude, 
                         meanmax+meanmin, meanmax-meanmin), 
@@ -159,7 +199,7 @@ with(frogs, pairs(cbind(distance, NoOfPools, NoOfSites, avrain, altitude,
                              "meanmax + meanmin", "meanmax - meanmin"))) 
 ```
 
-## Logistic multiple regression
+## Resolving issues
 ```{r,  dev.args = list(bg = 'transparent'), echo=FALSE}
 with(frogs, pairs(cbind(log(distance), log(NoOfPools), NoOfSites, avrain, altitude, 
                         meanmax+meanmin, meanmax-meanmin), 
@@ -169,14 +209,14 @@ with(frogs, pairs(cbind(log(distance), log(NoOfPools), NoOfSites, avrain, altitu
                              "meanmax + meanmin", "meanmax - meanmin"))) 
 ```
 
-## Logistic multiple regression
+## All predictors
 ```{r echo=FALSE,  dev.args = list(bg = 'transparent')}
 summary(frogs.glm0 <- glm(formula = pres.abs ~ log(distance) + log(NoOfPools) 
                           + NoOfSites + avrain +  I(meanmax + meanmin) 
                           + I(meanmax - meanmin), family = binomial, data = frogs)) 
 ```
 
-## Logistic multiple regression
+## Subset of predictors
 ```{r echo=FALSE,  dev.args = list(bg = 'transparent')}
 frogs.glm <- frogs %$% glm(pres.abs ~ log(distance) + log(NoOfPools) 
                            + I(meanmax + meanmin) + I(meanmax - meanmin),  
