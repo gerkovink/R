@@ -41,11 +41,7 @@ student cleaned <- 3
 student_cleaned <- 3 #studentCleaned
 ```
 
-
-<figure>
-<img src="figures/naming_convention.png"  width = 70%>
-<figcaption>Source: [stackoverflow](https://https://stackoverflow.com/questions/1944910/what-is-your-preferred-style-for-naming-variables-in-r)</figcaption>
-</figure>
+![http://journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf](figures/naming_convention.png){width=70%}
 
 
 # Data Types (Elements)

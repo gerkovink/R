@@ -39,10 +39,8 @@ output:
 
 ## R for data science 
 
-<figure>
-<img src="figures/data-science-explore.png" alt="Data Science exploration" width = 85% caption="test">
-<figcaption>Source: [R for Data Science](https://r4ds.had.co.nz/explore-intro.html)</figcaption>
-</figure>
+![Source: R for Data Science](figures/data-science-explore.png)
+
 
 
 # What is R / RStudio?
@@ -102,38 +100,34 @@ Run commands on your terminal (this is not R, you won't need to use this)
 
 ---
 
-<center>
-<img src="figures/rstudio1.png" alt="HTML5 Icon" width = 95%>
-</center>
+![RStudio](figures/rstudio1.png){width=90%}
 
 ---
 
 #### Basic units of RStudio
-<center>
-<img src="figures/rstudio2.png" alt="HTML5 Icon" width = 95%>
-</center>
+
+![Basic units](figures/rstudio2.png){width=90%}
+
 
 ---
 
 #### Run pieces of code
-<center>
-<img src="figures/rstudio3.png" alt="HTML5 Icon" width = 95%>
-</center>
+
+![Run code](figures/rstudio3.png){width=90%}
+
 
 ---
 
 #### View your data/objects
-<center>
-<img src="figures/rstudio4.png" alt="HTML5 Icon" width = 95%>
-</center>
+
+![View data](figures/rstudio4.png){width=90%}
+
 
 ---
 
 #### Create a new file: RScript and RNotebook
-<center>
-<img src="figures/rstudio5.png" alt="HTML5 Icon" width = 95%>
-</center>
 
+![Create new files](figures/rstudio5.png){width=90%}
 
 
 # Paths & working directory 
