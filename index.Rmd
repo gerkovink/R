@@ -1,29 +1,39 @@
 ---
-title: "Statistical Programming with R 2021"
+title: "basic`R`: Introduction to `R` and `RStudio"
 output: 
   flexdashboard::flex_dashboard:
+    theme: 
+      version: 4
     orientation: columns
     vertical_layout: scroll
 ---
 
 # Intro {.sidebar}
 
-This dashboard covers the course materials for the course [**USS24: Statistical programming with R**](https://www.utrechtsummerschool.nl/courses/social-sciences/data-science-statistical-programming-with-r). 
-<br> <br>
-We usually adapt the course as we go, so we suggest to access the materials online when we consider them. 
+This dashboard covers a gentle introduction to `R` and `RStudio`. Materials covered:
+
+Day 1:
+- Installing R/Rstudio (done at home)
+- Getting comfortable with notebooks/projects/scripts
+- Understanding/installing packages
+- Getting help
+- Variables in R: basic data types (character, numeric, integer, logical, date) and data structures (vectors, matrices, lists, data.frames)
+- Type conversion (as.integer/as.numeric/as.factor)
+- Reading a CSV and calculating descriptive statistics
+
+Day 2:
+- Control flow (if-else statements)
+- For loops (for): a conceptual understanding of loops
+- Functions: creating your own functions
+- Principles of tidy data and short comparison of base R and the tidyverse
+- Reading and writing files in several formats
+- Inferential statistics: A 5-min primer of linear regression
+- Best practises in R
 
 ---
 
-Course leader: [Gerko Vink](https://www.gerkovink.com) <br>
-Instructors: 
+Instructor: [Javier García-Bernardo](https://javier.science) <br>
 
- - [Erik-Jan van Kesteren](https://erikjanvankesteren.nl)
- - [Maarten Cruyff](https://www.uu.nl/medewerkers/mcruyff)
- - [Ayoub Bagheri](https://bagheria.github.io)
- - [Thom Volker](https://thomvolker.github.io)
-
-Study load: 1.5 ECTS <br>
-Location of Start: [Koningsberger building - Pangea hall](https://www.uu.nl/en/victor-j-koningsberger-building)
 
 ---
 # Quick Overview

@@ -1,44 +1,16 @@
 ---
 title: "Practical B"
-author: "Gerko Vink"
+author: "Javier Garcia-Bernardo (adapted from Gerko Vink)"
 date: "Statistical Programming with R"
 output: 
    html_document:
     toc: true
     toc_depth: 5
-    toc_float: true
+    toc_float: 
+      collapsed: false
+      smooth_scroll: false
     number_sections: false
 ---
-
-<style type="text/css">
-
-body{ /* Normal  */
-      font-size: 12px;
-  }
-td {  /* Table  */
-  font-size: 12px;
-}
-h1.title {
-  font-size: 18px;
-  color: DarkBlue;
-}
-h1 { /* Header 1 */
-  font-size: 18px;
-}
-h2 { /* Header 2 */
-    font-size: 18px;
-}
-h3 { /* Header 3 */
-  font-size: 18px;
-}
-code.r{ /* Code block */
-    font-size: 12px;
-}
-pre { /* Code block - determines code spacing between lines */
-    font-size: 14px;
-}
-</style>
-
 
 
 ---
@@ -47,6 +19,10 @@ pre { /* Code block - determines code spacing between lines */
 In this practical exercise we are going to play around with the different types of elements in R. 
 
 ---
+
+## Preparation
+- Create a new notebook for this homework (File -> New File -> R Notebook)
+
 
 ## Exercise 1-5
 
@@ -86,13 +62,8 @@ mat2
 
 ---
 
- 4. **Make a matrix from both `vec1` and `vec2` with 6 rows and 2 columns. Inspect this matrix.**
+ 4. **Make a matrix from both `vec1` and `vec2` using cbind. Inspect this matrix using is.matrix().**
 
-```{r}
-mat3 <- matrix(c(vec1, vec2), 6, 2)
-mat3
-```
-or
 ```{r}
 mat3b <- cbind(vec1, vec2)
 is.matrix(mat3b)
@@ -112,43 +83,9 @@ To solve the problem of charactered numbers we can create a dataframe. A datafra
 dat3 <- data.frame(V1 = vec1, V2 = vec2)
 dat3
 ```
+## Exercise 6-7
 
----
-
-## Exercise 6-10
-
----
-
-6. **Again, make a dataframe called `dat3b` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `as.data.frame()` on the matrix obtained from `Question 4`. **
-
-This is a tricky situation. At face value, everything may seem to be in order. But, be aware that the code
-```{r}
-dat3b <- as.data.frame(mat3, stringsAsFactors = TRUE)
-dat3b
-```
-does not work properly (at least not as intended) as the matrix nature of `mat3` turned everything into a character value and you have lost the numerical nature of `vec1`. It may appear to be working, but if we check if column 1 is numerical, it turns out not to be the case. 
-
----
-
-7. **Check if the first column in the data frames from Question 4 and Question 5 are indeed numeric. If not, determine what they are. **
-
-```{r}
-is.numeric(dat3[, 1])
-is.numeric(dat3b[, 1])
-```
-The first column in matrix `dat3b` obtained from Question 5 is indeed not numeric. As a matter of fact, it is also not a character variable.
-```{r}
-is.character(dat3b[, 1])
-```
-Rather tricky; the function `as.data.frame()` has converted the first variable to a factor. 
-```{r}
-is.factor(dat3b[, 1])
-```
-This is due to us not specifying the variable correctly in the matrix we used to create the dataframe. Factors are categorical variables that are depicted by numbers. Character vectors are not converted to factors in data frames by default, but the argument `stringsAsFactors = TRUE` has resulted in this conversion. I forced this to prove a point: You now know that there is a distinction between characters and factors and you know hot to force this conversion to factors in a data frame. 
-
----
-
-8. **Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe `dat3` that you have created in Question 4. **
+6. **Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe `dat3` that you have created in Question 4. **
 ```{r}
 dat3[3, ] #3rd row
 dat3[, 2] #2nd column
@@ -170,49 +107,50 @@ Inspecting the structure of your data is vital, as you probably have imported yo
 
 ---
 
-9. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht, New York, London, Singapore, Rome and Cape Town.** 
+7. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht (1), New York (2), London (3), Singapore (4), Rome (5) and Cape Town (6).** 
 ```{r}
 dat3$V1 <- factor(dat3$V1, labels = c("Utrecht", "New York", "London", "Singapore", "Rome", "Capetown"))
 dat3
 ```
 
+## Exercise 8-11 
+
 ---
 
-10. **Open the workspace `boys.RData`.** 
+8. **Read the file `dataset_boys.csv`.** 
 
-There are two ways to go about opening workspaces that are available on the internet. You either need to download the `boys.RData` file from the course page and put it in the project folder. Then run the below code
+First create a folder "data" in your project. Then download it from HERE (TODO) and add it to that folder.
+
+Then run the below code
 ```{r}
-load("boys.RData")
+#boys <- readr::read_delim("data/dataset_boys.csv", delim = ",")
+library(readr)
+boys <- read_delim("../common_datasets/dataset_boys.csv",delim=",")
+head(boys)
 ```
 or double-click the `boys.RData` file on your machine (right-click and `open with RStudio` if it does not open by default in `RStudio`, but in `R`). 
 
 Alternatively, you can import workspaces directly from the internet by running and loading the connection
-```{r eval = FALSE}
-con <- url("https://www.gerkovink.com/fundamentals/data/boys.RData")
-load(con)
+```{m eval = FALSE}
+#To update
+#con <- url("dataset_boys.csv")
 ```
 In the above code we store the connection in object `con` and then load the connection with `load(con)`.
 
 The `boys` object will be added to your Global Environment. You can now use the `boys` data by running
-```{r eval=FALSE}
-boys
+```{rm eval=FALSE}
+boys <- readr::read_delim(con, delim = ",")
 ```
 
----
 
-## Exercise 11-15
 
----
-
-11. **Most packages have datasets included. Since we have not learned to load packages yet, you are presented with such a data set in a workspace. Open the `boys` dataset (it is from package `mice`, by the way) by typing `boys` in the console, and subsequently by using the function `View()`. **
-
-The output is not displayed here as it is simply too large. 
+9. **You can explore boys in several ways. In notebooks just write "boys" and run the chunk. You can also use the "Environment" menu to find the data "boys" and double click it. Alternatively write View(boys).**
 
 Using `View()` is preferred for inspecting datasets that are large. `View()` opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you `View()` your own datasets, you can not edit the datasets' contents. 
 
 ---
 
-12. **Find out the dimensions of the `boys` data set and inspect the first and final 6 cases in the data set. **
+10. **Find out the dimensions of the `boys` data set (use the function dim) and inspect the first and final 6 cases in the data set. **
 
 To do it numerically, find out what the dimensions of the boys dataset are. 
 ```{r}
@@ -232,22 +170,7 @@ The functions `head()` and `tail()` are very useful functions. For example, from
 
 ---
 
-13. **It seems that the `boys` data are sorted based on `age`. Verify this.** 
-
-To verify if the data are indeed sorted, we can run the following command to test the complement of that statement. Remember that we can always search the help for functions: e.g. we could have searched here for `?sort` and we would quickly have ended up at function `is.unsorted()` as it tests whether an object is **not sorted**. 
-
-```{r}
-is.unsorted(boys$age)
-```
-which returns `FALSE`, indicating that boys' age is indeed sorted (we asked if it was unsorted!). To directly test if it is sorted, we could have used
-```{r}
-!is.unsorted(boys$age)
-```
-which tests if data data are not unsorted. In other words the values `TRUE` and `FALSE` under `is.unsorted()` turn into `FALSE` and `TRUE` under `!is.unsorted()`, respectively. 
-
----
-
-14. **Inspect the `boys` dataset with `str()`. Use one or more functions to find distributional summary information (at least information about the minimum, the maximum, the mean and the median) for all of the variables. Give the standard deviation for `age` and `bmi`. ** Tip: make use of the help (?) and help search (??) functionality in `R`. 
+11. **Inspect the `boys` dataset with `str()`. Use one or more functions to find distributional summary information (at least information about the minimum, the maximum, the mean and the median) for all of the variables. Give the standard deviation for `age` and `bmi`. ** Tip: make use of the help (?) and help search (??) functionality in `R`. 
 
 ```{r}
 str(boys)
@@ -260,11 +183,13 @@ Note that `bmi` contains 21 missing values, e.g. by looking at the summary infor
 
 ---
 
-15. **Select all boys that are 20 years or older. How many are there?**
+## Exercise 12-14
+
+12. **Select all boys that are 20 years or older. How many are there?**
 
 The logical operators (TRUE vs FALSE) are a very powerful tool in `R`. For example, we can just select the rows (respondents) in the data that are older than 20 by putting the logical operater within the row index of the dataset:
 ```{r}
-boys2 <- boys[boys$age >= 20, ]
+boys2 <- boys[(boys$age >= 20), ]
 nrow(boys2)
 ```
 
@@ -274,15 +199,12 @@ boys2.1 <- subset(boys, age >= 20)
 nrow(boys2.1)
 ```
 
----
-
-## Exercise 16-17
 
 ---
 
-16. **Select all boys that are older than 19, but younger than 19.5. How many are there?**
+13. **Select all boys that are older than 19, but younger than 19.5. How many are there?**
 ```{r}
-boys3 <- boys[boys$age > 19 & boys$age < 19.5, ]
+boys3 <- boys[(boys$age > 19) & (boys$age < 19.5), ]
 nrow(boys3)
 ```
 
@@ -294,22 +216,60 @@ nrow(boys3.2)
 
 ---
 
-17. **What is the mean age of boys younger than 15 years of age that do not live in region `north`?**
+14. **What is the mean age of boys younger than 15 years of age that do not live in region `north`?**
 
 ```{r}
-mean(boys$age[boys$age < 15 & boys$reg != "north" ], na.rm = TRUE)
+age_subset <- boys[(boys$age < 15) & (boys$reg != "north"), "age"]
+mean(age_subset, na.rm = TRUE)
 ```
 
 or, alternatively, 
 ```{r}
-mean(subset(boys, age < 15 & reg != "north")$age, na.rm=TRUE)
+age_subset <- subset(boys, (age < 15) & (reg != "north"))$age
+mean(age_subset, na.rm=TRUE)
 ```
 
 The mean age is `r mean(boys$age[boys$age < 15 & boys$reg != "north" ], na.rm = TRUE)` years
 
+
+# Exercises 15--18
+Download a excel dataset from here (TODO) and add it to the data folder.
+
+Open the file in your text editor to see how it looks. What is the first line?
+
+## Exercises 15
+Load the required library to read the CSV (readr). You may need to install it first.
+
+```{r}
+#install.packages(c("readr"),repos = "http://cran.us.r-project.org")
+library(readr)
+```
+
+## Exercises 16
+Read the file and save it with the name "df_events". You'll need to use the argument "skip" in the read_delim or read_csv function to skip the first line. Make sure it looks fine by printing the head.
+
+```{r}
+df_events <- readr::read_delim("../common_datasets/example_csv.csv", skip = 1)
+head(df_events)
+```
+
+## Exercises 17
+Print summary statistics of the dataset
+```{r}
+summary(df_events)
+```
+
+
+## Exercises 18
+Plot the time vs the events using the function `plot` (you'll learn a better way to plot with Gerko)
+```{r}
+plot(df_events$Time, df_events$Number)
+```
+
+
 --- 
 
-Today we have learned to use `R` at its basics. This offers tremendous flexibility, but may also be inefficient when our aim is some complex analysis, data operation of data manipulation. Doing advanced operations in basic `R` may require lots and lots of code. Tomorrow we will start using packages that allow us to do complicated operations with just a few lines of code. 
+Today we have learned to use `R` at its basics. This offers tremendous flexibility, but may also be inefficient when our aim is some complex analysis, data operation of data manipulation. Doing advanced operations in basic `R` may require lots and lots of code. Next you will learn how to use R efficiently. 
 
 As you start using `R` in your own research, you will find yourself in need of packages that are not part of the default `R` installation. The beauty of `R` is that its functionality is community-driven. People can add packages to `CRAN` that other people can use and improve. Chances are that a function and/or package has been already developed for the analysis or operation you plan to carry out. If not, you are of course welcome to fill the gap by submitting your own package. 
 
