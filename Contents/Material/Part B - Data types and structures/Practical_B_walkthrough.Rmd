@@ -19,15 +19,13 @@ output:
 # Exercises
 In this practical exercise we are going to play around with the different types of elements in R. 
 
-Click on the `show` buttons to see the solutions. Please really try before looking at the solution, and ask the instructor if something is not 100% clear.
-
----
-
-## Preparation
-- Create a new notebook for this homework (File -> New File -> R Notebook)
+Click on the `Code` buttons to see the solutions. Please really try before looking at the solution, and ask the instructor if something is not 100% clear.
 
 
-## Exercise 1-5
+First, create a new notebook for this homework (File -> New File -> R Notebook)
+
+
+## Exercise 1-4: Vectors and matrixes
 
 ---
 
@@ -80,13 +78,15 @@ To solve the problem of charactered numbers we can create a dataframe. A datafra
 
 ---
 
+## Exercise 5-7: Data frames
+
 5. **Make a dataframe called `dat3` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `data.frame()`.**
 
 ```{r}
 dat3 <- data.frame(V1 = vec1, V2 = vec2)
 dat3
 ```
-## Exercise 6-7
+
 
 6. **Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe `dat3` that you have created in Question 4. **
 ```{r}
@@ -110,41 +110,56 @@ Inspecting the structure of your data is vital, as you probably have imported yo
 
 ---
 
-7. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht (1), New York (2), London (3), Singapore (4), Rome (5) and Cape Town (6).** 
+7. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht (corresponding to value 1), New York (value 2), London (3), Singapore (4), Rome (5) and Cape Town (6).** 
 ```{r}
 dat3$V1 <- factor(dat3$V1, labels = c("Utrecht", "New York", "London", "Singapore", "Rome", "Capetown"))
 dat3
 ```
 
-## Exercise 8-11 
+## Exercise 8-11: Read/explore CSV 
 
 ---
 
 8. **Read the file `dataset_boys.csv`.** 
 
-First create a folder "data" in your project. Then download it from HERE (TODO) and add it to that folder.
+First create a folder "data" in your project. Then download it from [here](https://javier.science/R/#day-1-nov-12th) and add it to that folder (use Ctrl+S in the browser to download it).
 
-Then run the below code
+First you need to load the required library to read the CSV (`readr`). You may need to install it first.
+
 ```{r}
-#boys <- readr::read_delim("data/dataset_boys.csv", delim = ",")
+#install.packages(c("readr"),repos = "http://cran.us.r-project.org")
 library(readr)
-boys <- read_delim("../common_datasets/dataset_boys.csv",delim=",")
+```
+
+Then you can read the file using the function `read_delim()` from the `readr` library
+
+```{r, echo=FALSE}
+#Reading the file in the background
+boys <- readr::read_delim("../common_datasets/dataset_boys.csv",delim=",")
+```
+
+
+```{r, eval=FALSE}
+boys <- readr::read_delim("data/dataset_boys.csv",delim=",")
+```
+
+```{r}
 head(boys)
 ```
-or double-click the `boys.RData` file on your machine (right-click and `open with RStudio` if it does not open by default in `RStudio`, but in `R`). 
+
 
 Alternatively, you can import workspaces directly from the internet by running and loading the connection
-```{m eval = FALSE}
+```{r eval = TRUE}
 #To update
-#con <- url("dataset_boys.csv")
+con <- url("https://javier.science/R/Contents/Material/common_datasets/dataset_boys.csv")
 ```
 In the above code we store the connection in object `con` and then load the connection with `load(con)`.
 
 The `boys` object will be added to your Global Environment. You can now use the `boys` data by running
-```{rm eval=FALSE}
+
+```{r eval=TRUE}
 boys <- readr::read_delim(con, delim = ",")
 ```
-
 
 
 9. **You can explore boys in several ways. In notebooks just write "boys" and run the chunk. You can also use the "Environment" menu to find the data "boys" and double click it. Alternatively write View(boys).**
@@ -155,7 +170,7 @@ Using `View()` is preferred for inspecting datasets that are large. `View()` ope
 
 10. **Find out the dimensions of the `boys` data set (use the function dim) and inspect the first and final 6 cases in the data set. **
 
-To do it numerically, find out what the dimensions of the boys dataset are. 
+To do it numerically, find out what the dimensions of the boys dataset are. Use the function `dim()`
 ```{r}
 dim(boys)
 ```
@@ -186,7 +201,7 @@ Note that `bmi` contains 21 missing values, e.g. by looking at the summary infor
 
 ---
 
-## Exercise 12-14
+## Exercise 12-14: Filtering the CSV
 
 12. **Select all boys that are 20 years or older. How many are there?**
 
@@ -196,12 +211,13 @@ boys2 <- boys[(boys$age >= 20), ]
 nrow(boys2)
 ```
 
-or, alternatively, 
+
+or, alternatively (the tidy way), 
 ```{r}
-boys2.1 <- subset(boys, age >= 20)
+library(dplyr) #Library to filter
+boys2.1 <- dplyr::filter(boys, age >= 20)
 nrow(boys2.1)
 ```
-
 
 ---
 
@@ -213,7 +229,7 @@ nrow(boys3)
 
 or, alternatively, 
 ```{r}
-boys3.2 <- subset(boys, age > 19 & age < 19.5)
+boys3.2 <- dplyr::filter(boys, age > 19, age < 19.5)
 nrow(boys3.2)
 ```
 
@@ -228,43 +244,41 @@ mean(age_subset, na.rm = TRUE)
 
 or, alternatively, 
 ```{r}
-age_subset <- subset(boys, (age < 15) & (reg != "north"))$age
+age_subset <- dplyr::filter(boys, (age < 15), (reg != "north"))$age
 mean(age_subset, na.rm=TRUE)
 ```
 
 The mean age is `r mean(boys$age[boys$age < 15 & boys$reg != "north" ], na.rm = TRUE)` years
 
 
-# Exercises 15--18
-Download a excel dataset from here (TODO) and add it to the data folder.
+## Exercises 15-17:  Visualization
+Download the file `example_csv.csv` from [here](http://javier.science/R/#day-1-nov-12th) and add it to your data folder.
 
 Open the file in your text editor to see how it looks. What is the first line?
 
-## Exercises 15
-Load the required library to read the CSV (readr). You may need to install it first.
+15. **Read the file and save it with the name "df_events".** You'll need to use the argument "skip" in the `read_delim()` function to skip the first line. Make sure it looks fine by printing the head.
 
-```{r}
-#install.packages(c("readr"),repos = "http://cran.us.r-project.org")
-library(readr)
+```{r, echo=FALSE}
+#Reading data in background
+df_events <- readr::read_delim("../common_datasets/example_csv.csv", skip = 1)
 ```
 
-## Exercises 16
-Read the file and save it with the name "df_events". You'll need to use the argument "skip" in the read_delim or read_csv function to skip the first line. Make sure it looks fine by printing the head.
-
-```{r}
-df_events <- readr::read_delim("../common_datasets/example_csv.csv", skip = 1)
+```{r, eval=FALSE}
+df_events <- readr::read_delim("data/example_csv.csv", skip = 1)
 head(df_events)
 ```
 
-## Exercises 17
-Print summary statistics of the dataset
+```{r}
+head(df_events)
+```
+
+16. **Print summary statistics of the dataset**
 ```{r}
 summary(df_events)
 ```
 
 
-## Exercises 18
-Plot the time vs the events using the function `plot` (you'll learn a better way to plot with Gerko)
+17. **Plot the time vs the events using the function `plot` (you'll learn a better way to plot with Gerko)**
 ```{r}
 plot(df_events$Time, df_events$Number)
 ```

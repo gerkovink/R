@@ -138,7 +138,7 @@ We adapt the course as we go. To ensure that you work with the latest iteration 
     - [Lecture B (pdf)](Contents/Material/Part B - Data types and structures/Lecture_B.pdf)
     - [Practical B](Contents/Material/Part B - Data types and structures/Practical_B_walkthrough.html)
     - [`dataset_boys.csv`](Contents/Material/common_datasets/dataset_boys.csv)
-
+    - [`example_csv.csv`](Contents/Material/common_datasets/example_csv.csv)
 
 All lectures are in `html` format. Practicals are files that guide you through the exercises. Use the files without solutions unless you get stuck. Please ask questions to the instructors if something is not 100% clear.
 
