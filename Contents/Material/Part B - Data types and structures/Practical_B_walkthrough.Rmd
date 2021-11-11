@@ -1,0 +1,281 @@
+---
+title: "Practical B"
+author: "Javier Garcia-Bernardo (adapted from Gerko Vink)"
+date: "Statistical Programming with R"
+output: 
+   html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: 
+      collapsed: false
+      smooth_scroll: false
+    number_sections: false
+    code_folding: hide
+---
+
+
+---
+
+# Exercises
+In this practical exercise we are going to play around with the different types of elements in R. 
+
+Click on the `show` buttons to see the solutions. Please really try before looking at the solution, and ask the instructor if something is not 100% clear.
+
+---
+
+## Preparation
+- Create a new notebook for this homework (File -> New File -> R Notebook)
+
+
+## Exercise 1-5
+
+---
+
+ 1. **Make two vectors: one named `vec1` with values 1 through 6 and one named `vec2` with letters A through F. **
+```{r}
+vec1 <- c(1, 2, 3, 4, 5, 6)
+vec2 <- c("A", "B", "C", "D", "E", "F")
+```
+
+To create a vector we used `c()`, which stands for 'concatenation'. It is just a series of numbers or letters. 
+
+---
+
+ 2. **Create two matrices, one from `vec1` and one from `vec2`. The dimensions for both matrices are 3 rows by 2 columns. **
+
+```{r}
+mat1 <- matrix(vec1, nrow = 3, ncol = 2)
+mat2 <- matrix(vec2, nrow = 3, ncol = 2)
+```
+
+To create a matrix we used `matrix()`. For a matrix we need to specify the dimensions (in this case 3 rows and 2 columns) and the input (in this case `vec1` or `vec2`) needs to match these dimensions. 
+
+---
+
+3. **Inspect your vectors and matrices. Are all numerical?**
+
+```{r}
+vec1
+vec2
+mat1
+mat2
+```
+
+`vec1` and `mat1` contain numbers and `vec2` and `mat2` contain characters. 
+
+---
+
+ 4. **Make a matrix from both `vec1` and `vec2` using cbind. Inspect this matrix using is.matrix().**
+
+```{r}
+mat3b <- cbind(vec1, vec2)
+is.matrix(mat3b)
+mat3b
+```
+
+
+If one or more elements in the matrix represent characters, all other elements are also converted to characters. A matrix is just for either numeric or character elements. Notice that the second approach (the column bind approach from `mat3b`) returns a matrix where the column names are already set to the name of the bound objects. 
+
+To solve the problem of charactered numbers we can create a dataframe. A dataframe is essentially a matrix that allows for character elements. The use of a dataframe is often preferred over the use of a matrix in `R`, except for purposes where pure numerical calculations are done, such as in matrix algebra. However, most datasets do contain character information and a dataframe would normally be your preferred choice when working with your own collected datasets in R. 
+
+---
+
+5. **Make a dataframe called `dat3` where `vec1` and `vec2` are both columns. Name the columns `V1` and `V2`, respectively. Use function `data.frame()`.**
+
+```{r}
+dat3 <- data.frame(V1 = vec1, V2 = vec2)
+dat3
+```
+## Exercise 6-7
+
+6. **Select 1) the third row, 2) the second column and 3) the intersection of these two in the dataframe `dat3` that you have created in Question 4. **
+```{r}
+dat3[3, ] #3rd row
+dat3[, 2] #2nd column
+dat3$V2   #also 2nd column
+dat3[3,2] #intersection
+```
+
+The `[3,2]` index is very useful in 'R'. The first number (before the comma) represents the row and the second number (after the comma) represents the column. For a vector there are no two dimensions and only one dimension can be called. For example, `vec1[3]` would yield `3`. Try it. 
+
+Columns can also be called by the `$` sign, but only if a name has been assigned. With dataframes assigning names happens automatically. 
+
+Note that `R` automatically reports the values the character column can take. This means that the column is indeed a factor (a categorical variable - as it is supposed to be). A useful function to inspect the structure of a dataframe is `str()`. Try running it. 
+
+```{r}
+str(dat3)
+```
+
+Inspecting the structure of your data is vital, as you probably have imported your data from some other source. If we, at a later stage, start analyzing our data without the correct measurement level, we may run into problems. One problem that often occurs is that categorical variables (factors in `R`) are not coded as such. 
+
+---
+
+7. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht (1), New York (2), London (3), Singapore (4), Rome (5) and Cape Town (6).** 
+```{r}
+dat3$V1 <- factor(dat3$V1, labels = c("Utrecht", "New York", "London", "Singapore", "Rome", "Capetown"))
+dat3
+```
+
+## Exercise 8-11 
+
+---
+
+8. **Read the file `dataset_boys.csv`.** 
+
+First create a folder "data" in your project. Then download it from HERE (TODO) and add it to that folder.
+
+Then run the below code
+```{r}
+#boys <- readr::read_delim("data/dataset_boys.csv", delim = ",")
+library(readr)
+boys <- read_delim("../common_datasets/dataset_boys.csv",delim=",")
+head(boys)
+```
+or double-click the `boys.RData` file on your machine (right-click and `open with RStudio` if it does not open by default in `RStudio`, but in `R`). 
+
+Alternatively, you can import workspaces directly from the internet by running and loading the connection
+```{m eval = FALSE}
+#To update
+#con <- url("dataset_boys.csv")
+```
+In the above code we store the connection in object `con` and then load the connection with `load(con)`.
+
+The `boys` object will be added to your Global Environment. You can now use the `boys` data by running
+```{rm eval=FALSE}
+boys <- readr::read_delim(con, delim = ",")
+```
+
+
+
+9. **You can explore boys in several ways. In notebooks just write "boys" and run the chunk. You can also use the "Environment" menu to find the data "boys" and double click it. Alternatively write View(boys).**
+
+Using `View()` is preferred for inspecting datasets that are large. `View()` opens the dataset in a spreadsheet-like window (conform MS Excel, or SPSS). If you `View()` your own datasets, you can not edit the datasets' contents. 
+
+---
+
+10. **Find out the dimensions of the `boys` data set (use the function dim) and inspect the first and final 6 cases in the data set. **
+
+To do it numerically, find out what the dimensions of the boys dataset are. 
+```{r}
+dim(boys)
+```
+There are 748 cases on 9 variables. To select the first and last six cases, use
+```{r}
+boys[1:6, ]
+boys[743:748, ]
+```
+or, more efficiently:
+```{r}
+head(boys)
+tail(boys)
+```
+The functions `head()` and `tail()` are very useful functions. For example, from looking at both functions we can observe that the data are very likely sorted based on `age`.
+
+---
+
+11. **Inspect the `boys` dataset with `str()`. Use one or more functions to find distributional summary information (at least information about the minimum, the maximum, the mean and the median) for all of the variables. Give the standard deviation for `age` and `bmi`. ** Tip: make use of the help (?) and help search (??) functionality in `R`. 
+
+```{r}
+str(boys)
+summary(boys) #summary info
+sd(boys$age) #standard deviation for age
+sd(boys$bmi, na.rm = TRUE) #standard deviation for bmi
+```
+
+Note that `bmi` contains 21 missing values, e.g. by looking at the summary information. Therefor we need to use `na.rm = T` to calculate the standard deviation on the observed cases only.
+
+---
+
+## Exercise 12-14
+
+12. **Select all boys that are 20 years or older. How many are there?**
+
+The logical operators (TRUE vs FALSE) are a very powerful tool in `R`. For example, we can just select the rows (respondents) in the data that are older than 20 by putting the logical operater within the row index of the dataset:
+```{r}
+boys2 <- boys[(boys$age >= 20), ]
+nrow(boys2)
+```
+
+or, alternatively, 
+```{r}
+boys2.1 <- subset(boys, age >= 20)
+nrow(boys2.1)
+```
+
+
+---
+
+13. **Select all boys that are older than 19, but younger than 19.5. How many are there?**
+```{r}
+boys3 <- boys[(boys$age > 19) & (boys$age < 19.5), ]
+nrow(boys3)
+```
+
+or, alternatively, 
+```{r}
+boys3.2 <- subset(boys, age > 19 & age < 19.5)
+nrow(boys3.2)
+```
+
+---
+
+14. **What is the mean age of boys younger than 15 years of age that do not live in region `north`?**
+
+```{r}
+age_subset <- boys[(boys$age < 15) & (boys$reg != "north"), "age"]
+mean(age_subset, na.rm = TRUE)
+```
+
+or, alternatively, 
+```{r}
+age_subset <- subset(boys, (age < 15) & (reg != "north"))$age
+mean(age_subset, na.rm=TRUE)
+```
+
+The mean age is `r mean(boys$age[boys$age < 15 & boys$reg != "north" ], na.rm = TRUE)` years
+
+
+# Exercises 15--18
+Download a excel dataset from here (TODO) and add it to the data folder.
+
+Open the file in your text editor to see how it looks. What is the first line?
+
+## Exercises 15
+Load the required library to read the CSV (readr). You may need to install it first.
+
+```{r}
+#install.packages(c("readr"),repos = "http://cran.us.r-project.org")
+library(readr)
+```
+
+## Exercises 16
+Read the file and save it with the name "df_events". You'll need to use the argument "skip" in the read_delim or read_csv function to skip the first line. Make sure it looks fine by printing the head.
+
+```{r}
+df_events <- readr::read_delim("../common_datasets/example_csv.csv", skip = 1)
+head(df_events)
+```
+
+## Exercises 17
+Print summary statistics of the dataset
+```{r}
+summary(df_events)
+```
+
+
+## Exercises 18
+Plot the time vs the events using the function `plot` (you'll learn a better way to plot with Gerko)
+```{r}
+plot(df_events$Time, df_events$Number)
+```
+
+
+--- 
+
+Today we have learned to use `R` at its basics. This offers tremendous flexibility, but may also be inefficient when our aim is some complex analysis, data operation of data manipulation. Doing advanced operations in basic `R` may require lots and lots of code. Next you will learn how to use R efficiently. 
+
+As you start using `R` in your own research, you will find yourself in need of packages that are not part of the default `R` installation. The beauty of `R` is that its functionality is community-driven. People can add packages to `CRAN` that other people can use and improve. Chances are that a function and/or package has been already developed for the analysis or operation you plan to carry out. If not, you are of course welcome to fill the gap by submitting your own package. 
+
+---
+
+End of practical

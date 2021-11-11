@@ -2,15 +2,19 @@
 title: "Introduction"
 author: "Javier García-Bernardo (based on material by Gerko Vink)"
 date: "Introduction to R and RStudio"
+knit: (function(inputFile, encoding){
+  rmarkdown::render(inputFile, output_format = "all") })
 output: 
   ioslides_presentation:
     logo: logo.png
     smaller: true
     widescreen: true
     transition: 0
+  pdf_document: default
+
 ---
 
-# This course
+
 
 ## Goal of this course
 - Gentle introduction to:
@@ -20,21 +24,21 @@ output:
 
 
 ## Why do we care about R?
-- Why programming languages?
-  - Faster
-  - Easier
-  - Beautiful
-  - Flexibly (new methods)
-  - Reproducibility! (open an old Excel file and try to understand what you did) 
+##### Why programming languages?
+- Faster
+- Easier
+- Communication: Beautiful plots/interactive
+- Flexibly (new methods)
+- Reproducibility! (open an old Excel file and try to understand what you did) 
   
-- Why R:
-  - Designed for statistics/data science
-  - Huge community of users
-  
+##### Why R:
+- Designed for statistics/data science
+- Huge community of users
 - From a personal perspective: You know R = you are employed
 
 
 ## R for data science 
+
 <figure>
 <img src="figures/data-science-explore.png" alt="Data Science exploration" width = 85% caption="test">
 <figcaption>Source: [R for Data Science](https://r4ds.had.co.nz/explore-intro.html)</figcaption>
@@ -49,7 +53,7 @@ output:
 - Programming <b>language</b>, allows you to communicate with the computer
 
 ### RStudio: Integrated Development Environment ~ Word
-- Using R as effective and efficient as possible:
+- Makes using R as effective and efficient as possible:
   - Code editor
   - Nice extras: Syntax highlighting; Code completion; File explorer; Help
 
@@ -130,16 +134,11 @@ Run commands on your terminal (this is not R, you won't need to use this)
 <img src="figures/rstudio5.png" alt="HTML5 Icon" width = 95%>
 </center>
 
-```{r}
-getwd()
-```
 
 
----
+# Paths & working directory 
 
-# Paths and working directory (folder)
-
-## Paths and working directory (folder) I
+## Paths and working directory (folder) 
 
 - Your computer finds files by their path:
   - "/Users/javiergb/Desktop/somefile.csv" (Mac/Linux)
@@ -153,16 +152,17 @@ getwd()
   - Absolute (as the ones above). They are defined from the root directory, the top-most directory.
   - Relative. They are defined from the working directory
     - e.g. "data/somefile.csv" --> in our working directory, find the folder "data", and inside, the file "somefile.csv"
+    - It makes possible to use the code in different computers.
+    
+## Paths and working directory (cont)
 
-## Paths and working directory (folder) II
-
-- Important shortcuts for relative paths:
+##### Important shortcuts for relative paths:
   - "`../`somefile.csv": find "somefile.csv" one level down
   - "`../../`somefile.csv": find "somefile.csv" two levels down
   - "`./`somefile.csv": find "somefile.csv" in the current level (not so useful, it is identical to "somefile.csv")
   - "`~/`somefile.csv": find "somefile.csv" in your home directory
 
-- Changing the working directory with RStudio:
+##### Changing the working directory with RStudio:
   - "Session (top menu) -> Set Working directories"
   - "Files (RStudio unit) -> More --> Set as working directory"
 
@@ -178,20 +178,18 @@ getwd()
 - Working directory:
   - If associated to a project: your home directory (e.g. "/Users/javiergb") 
   - If not associated to a project: the project directory 
-- Output in the console and the plots
+- Output in the console/plots menus
 
 ### Rstudio-projects (.Rproj)
-- Contains a .Rproj file within the directory, with project options
-- Working directory of scripts within the project: the project directory where the .Rproj file resides.
-- More info; https://bookdown.org/yih_huynh/Guide-to-R-Book/rstudio-set-up.html
+- Contains a .Rproj file within the directory, with project options.
+- Working directory: the project directory where the .Rproj file resides.
+- [More info on setting up projects](https://bookdown.org/yih_huynh/Guide-to-R-Book/rstudio-set-up.html)
 
 ### R-notebooks (.Rmd)
-- R-markdown files (like this one!)
+- R-markdown files (like this one!) -- combines chunks of texts and code
 - Working directory: the directory where the notebook is located
-- Most useful for data science
-- Chunks of code and chunks of text
 - Outputs directly in the editor. Can be knitted to HTML/PDF/Word
-
+- Most useful for data science
 
 
 # How does R (and Python) work
@@ -201,9 +199,9 @@ getwd()
 - Tell the computer to save an `object` (a number, a string, a spreadsheet) with a name.
 
 - Creating variables in R is very straightforward: 
-    - you just use `<-`
+    - you just use `<-` (assignment operator)
 
-- For example, if you assign the value `100` (an element) to object `a`, you would type
+- For example, if you assign the value `100` (an element) to variable `a`, you would type
 
 ```{r}
 a <- 100
@@ -217,22 +215,21 @@ print(a)
 
 
 ## Objects in R: 
-- Everything is an object in R
-- The objects can be assigned to a variable name
+- Everything is an object in R, and can be assigned to a variable name
 
 ### Basic data types (elements)
 - `character`: "some text"
-- Number:
-  - `numeric`: e.g., 2.1
-  - `integer`: e.g., 2L
+- `numeric`: e.g., 2.1
+- `integer`: e.g., 2L
 - `logical`: TRUE/FALSE
 - `factor`: e.g., factor("amsterdam")
 
-### Basic data structures (consist of data types and functions to transform them)
-- `vector`: c(2, 4, 2) 
-- `list`: list(first_col = 1, second = "a", third = TRUE)
-- `matrix`: matrix(c(4, 4, 4, 4),nrow = 2,ncol = 2)
-- `data.frame`: The most important
+### Basic data structures 
+- Consist of data types and functions to transform them
+  - `vector`: c(2, 4, 2) 
+  - `list`: list(first_col = 1, second = "a", third = TRUE)
+  - `matrix`: matrix(c(4, 4, 4, 4), nrow = 2, ncol = 2)
+  - `data.frame`: The most important ~ spreadsheet
 
 
 
@@ -249,14 +246,20 @@ print(a)
 ## Calling objects
 - You just use type the name you have given to the object
 
-- For example, we assigned the value `100` to object `a`. To call object `a`, we would type
+- For example, we assigned the value `100` to object `a`. 
+
+```{r}
+a <- 100
+```
+
+To call object `a`, we would type
 
 ```{r}
 a
 ```
 
 ## Writing code
-### Using functions
+### 1. Using functions
 ```{r}
 # This is a comment, it won't be read by R
 student_number <- 4
@@ -267,7 +270,7 @@ paste("The number of students is: ", student_number, sep = " ")
 
 ---
 
-### Using packages
+### 2. Using packages
 ```{r, eval = TRUE, echo = FALSE}
 # install.packages("tidyverse") #installing packages
 library(readr) #loading the library to read csv, usually on top of the file
@@ -279,25 +282,30 @@ summary(data)
 ```
 
 ---
-### Some other important considerations
-- The computer cannot read your mind
+### 3. Some other important considerations
+The computer cannot read your mind
 ```{r, error= TRUE}
 a <- 100
 print()
 ```
 
-- The computer reads from the top to the bottom
-```{r, error= TRUE}
+The computer reads from the top to the bottom
+```{r, eval= FALSE}
 a <- 100
 print(b)
 b <- 10
+```
+
+```{r, error= TRUE, echo=FALSE}
+print(b)
 ```
 
 
 
 ## Practical A
 
-Goal: Get used to RStudio using R as a calculator
+Goal: Get used to RStudio using R as a calculator, and install one library
+
 1. Create an R script
 2. Create an R project
 3. Create an R notebook

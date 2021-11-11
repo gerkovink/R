@@ -21,11 +21,11 @@ If you have any questions or if you feel that some code should be elaborated, fe
 ---
 
 # Exercises
-We start with the very basics and will move towards more advanced operations in `R`. First we will get acquainted with the language (which is called `S` - to keep it simple) and the environment we work in. 
+We start with the very basics and will move towards more advanced operations in `R`. First we will get acquainted with the language and the environment we work in. 
 
 ---
 
-## Exercise 1-5
+## Exercise 1-5: R-scripts
 
 ---
 
@@ -85,7 +85,7 @@ Your document is now saved. We saved it in a separate folder so that we are able
 
 ---
 
-## Exercise 6-10
+## Exercise 6-10: R-projects
 
 ---
 
@@ -107,7 +107,7 @@ You can find [`notebook.R` here](exercise_examples/notebook.R).
 
 ---
 
-8. **Have a look at the code in the script and make sure that you understand what is going on. If you do not understand what you are looking at, please ask me (Gerko) during the lecture or [via e-mail](mailto:G.Vink@uu.nl), or ask the workgroup instructor.** 
+8. **Have a look at the code in the script and make sure that you understand what is going on. If you do not understand what you are looking at, please ask the instructor.** 
 
 ---
  
@@ -124,6 +124,10 @@ to a readable file where code and output are visible. There is, however, an even
 
 ---
 
+## Exercise 11-13: R-markdown
+
+---
+
 ## About `rmarkdown`
 <center>
 <iframe src="https://player.vimeo.com/video/178485416?color=428bca&title=0&byline=0&portrait=0" width="500" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -132,9 +136,6 @@ to a readable file where code and output are visible. There is, however, an even
 
 See also [this `rmarkdown` cheat sheet](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). 
 
----
-
-## Exercise 11-13
 
 ---
 
