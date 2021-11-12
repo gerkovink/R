@@ -39,7 +39,7 @@ output:
 
 ## R for data science 
 
-![Source: R for Data Science](figures/data-science-explore.png)
+![Source: R for Data Science](figures/data-science-explore.png){width=80%}
 
 
 
