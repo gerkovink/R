@@ -255,14 +255,19 @@ d[3, ]
 CAREFUL! You always need the comma (,) when filtering by rows
 
 ## Retrieving columns elements in data frames
-Both
-```{r}
+All
+```{r,collapse=TRUE}
 d[, "V2_new"] # and
 d[, 2]
 d$V2_new
 
 ```
+Using it without the comma returns a dataframe
+```{r,collapse=TRUE}
+d["V2_new"] # and d[2]
 
+
+```
 
 ## Retrieving both
 
