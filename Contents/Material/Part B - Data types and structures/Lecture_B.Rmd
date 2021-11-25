@@ -245,10 +245,6 @@ d
 There are two ways to obtain row `3` from data frame `d`:
 ```{r}
 d["row 3", ]
-```
-
-and
-```{r}
 d[3, ]
 ```
 
@@ -257,15 +253,14 @@ CAREFUL! You always need the comma (,) when filtering by rows
 ## Retrieving columns elements in data frames
 All
 ```{r,collapse=TRUE}
-d[, "V2_new"] # and
-d[, 2]
 d$V2_new
-
+d[["V2_new"]]
+d[, "V2_new"] # Careful! In tibbles this returns a one-col tibble
+d[, 2] # Careful! In tibbles this returns a one-col tibble
 ```
 Using it without the comma returns a dataframe
 ```{r,collapse=TRUE}
 d["V2_new"] # and d[2]
-
 
 ```
 
@@ -286,7 +281,7 @@ d[3:4, 1:2]
 - A data type used to encode categorical variables
 - It'll be useful for data modeling and data isualization
 ```{r,collapse=TRUE}
-d$V3_factor = factor(d$V3, labels = c("Amsterdam","Utrecht"))
+d$V3_factor <- factor(d$V3, labels = c("Amsterdam","Utrecht"))
 d
 ```
 Class
@@ -303,12 +298,12 @@ str(d$V3_factor)
 ## Use of as.xxx functions
 You can convert between data types (as long as the conversion is valid)
 ```{r}
-d$V2_int = as.integer(d$V2_new)
+d$V2_int <- as.integer(d$V2_new)
 d
 ```
 
 ```{r}
-d$V2_char = as.character(d$V2_int)
+d$V2_char <- as.character(d$V2_int)
 d
 ```
 
@@ -378,7 +373,7 @@ g[[2]][[1]] #Also g[[2]]$vector
 
 - For example, if we would like elements out of example vector below that are larger than 3, we would type:
 ```{r, collapse=TRUE}
-example_vector = c(1,2,3,4,5,6,7,8,9)
+example_vector <- c(1,2,3,4,5,6,7,8,9)
 example_vector[example_vector>3]
 
 ```

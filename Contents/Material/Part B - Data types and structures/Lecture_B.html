@@ -446,12 +446,12 @@ c
                 &quot;V3&quot; = c(&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;b&quot;))
 d</pre>
 
-<pre >##            V1        V2 V3
-## 1 -1.00852714 3.1498321  a
-## 2 -0.97814843 6.9123025  a
-## 3  1.01502772 0.4641633  b
-## 4 -0.02614153 8.8894785  b
-## 5 -0.09870507 4.2323261  b</pre>
+<pre >##            V1       V2 V3
+## 1  0.78121699 1.187876  a
+## 2  0.11522980 4.908420  a
+## 3 -0.08303563 4.075036  b
+## 4 -0.28488865 1.828363  b
+## 5  0.15859374 6.139502  b</pre>
 
 <p>We &lsquo;filled&rsquo; a dataframe with two randomly generated sets from the normal distribution - where \(V1\) is standard normal and \(V2 \sim N(5,2)\) - and a character set.</p>
 
@@ -462,22 +462,22 @@ d</pre>
 <pre class = 'prettyprint lang-r'>#Rows
 row.names(d) &lt;- c(&quot;row 1&quot;, &quot;row 2&quot;, &quot;row 3&quot;, &quot;row 4&quot;, &quot;row 5&quot;)
 d
-##                V1        V2 V3
-## row 1 -1.00852714 3.1498321  a
-## row 2 -0.97814843 6.9123025  a
-## row 3  1.01502772 0.4641633  b
-## row 4 -0.02614153 8.8894785  b
-## row 5 -0.09870507 4.2323261  b</pre>
+##                V1       V2 V3
+## row 1  0.78121699 1.187876  a
+## row 2  0.11522980 4.908420  a
+## row 3 -0.08303563 4.075036  b
+## row 4 -0.28488865 1.828363  b
+## row 5  0.15859374 6.139502  b</pre>
 
 <pre class = 'prettyprint lang-r'>#Columns
 names(d) &lt;- c(&quot;V1&quot;, &quot;V2_new&quot;, &quot;V3&quot;)
 d
-##                V1    V2_new V3
-## row 1 -1.00852714 3.1498321  a
-## row 2 -0.97814843 6.9123025  a
-## row 3  1.01502772 0.4641633  b
-## row 4 -0.02614153 8.8894785  b
-## row 5 -0.09870507 4.2323261  b</pre>
+##                V1   V2_new V3
+## row 1  0.78121699 1.187876  a
+## row 2  0.11522980 4.908420  a
+## row 3 -0.08303563 4.075036  b
+## row 4 -0.28488865 1.828363  b
+## row 5  0.15859374 6.139502  b</pre>
 
 </article></slide><slide class=""><hgroup><h2>Retrieving row elements in data frames</h2></hgroup><article  id="retrieving-row-elements-in-data-frames" class="smaller ">
 
@@ -485,15 +485,13 @@ d
 
 <pre class = 'prettyprint lang-r'>d[&quot;row 3&quot;, ]</pre>
 
-<pre >##             V1    V2_new V3
-## row 3 1.015028 0.4641633  b</pre>
-
-<p>and</p>
+<pre >##                V1   V2_new V3
+## row 3 -0.08303563 4.075036  b</pre>
 
 <pre class = 'prettyprint lang-r'>d[3, ]</pre>
 
-<pre >##             V1    V2_new V3
-## row 3 1.015028 0.4641633  b</pre>
+<pre >##                V1   V2_new V3
+## row 3 -0.08303563 4.075036  b</pre>
 
 <p>CAREFUL! You always need the comma (,) when filtering by rows</p>
 
@@ -501,22 +499,24 @@ d
 
 <p>All</p>
 
-<pre class = 'prettyprint lang-r'>d[, &quot;V2_new&quot;] # and
-## [1] 3.1498321 6.9123025 0.4641633 8.8894785 4.2323261
-d[, 2]
-## [1] 3.1498321 6.9123025 0.4641633 8.8894785 4.2323261
-d$V2_new
-## [1] 3.1498321 6.9123025 0.4641633 8.8894785 4.2323261</pre>
+<pre class = 'prettyprint lang-r'>d$V2_new
+## [1] 1.187876 4.908420 4.075036 1.828363 6.139502
+d[[&quot;V2_new&quot;]]
+## [1] 1.187876 4.908420 4.075036 1.828363 6.139502
+d[, &quot;V2_new&quot;] # Careful! In tibbles this returns a one-col tibble
+## [1] 1.187876 4.908420 4.075036 1.828363 6.139502
+d[, 2] # Careful! In tibbles this returns a one-col tibble
+## [1] 1.187876 4.908420 4.075036 1.828363 6.139502</pre>
 
 <p>Using it without the comma returns a dataframe</p>
 
 <pre class = 'prettyprint lang-r'>d[&quot;V2_new&quot;] # and d[2]
-##          V2_new
-## row 1 3.1498321
-## row 2 6.9123025
-## row 3 0.4641633
-## row 4 8.8894785
-## row 5 4.2323261</pre>
+##         V2_new
+## row 1 1.187876
+## row 2 4.908420
+## row 3 4.075036
+## row 4 1.828363
+## row 5 6.139502</pre>
 
 </article></slide><slide class=""><hgroup><h2>Retrieving both</h2></hgroup><article  id="retrieving-both" class="smaller ">
 
@@ -530,9 +530,9 @@ d$V2_new
 
 <pre class = 'prettyprint lang-r'>d[3:4, 1:2]</pre>
 
-<pre >##                V1    V2_new
-## row 3  1.01502772 0.4641633
-## row 4 -0.02614153 8.8894785</pre>
+<pre >##                V1   V2_new
+## row 3 -0.08303563 4.075036
+## row 4 -0.28488865 1.828363</pre>
 
 </article></slide><slide class=""><hgroup><h2>4. Factor</h2></hgroup><article  id="factor" class="smaller ">
 
@@ -541,14 +541,14 @@ d$V2_new
 <li>It’ll be useful for data modeling and data isualization</li>
 </ul>
 
-<pre class = 'prettyprint lang-r'>d$V3_factor = factor(d$V3, labels = c(&quot;Amsterdam&quot;,&quot;Utrecht&quot;))
+<pre class = 'prettyprint lang-r'>d$V3_factor &lt;- factor(d$V3, labels = c(&quot;Amsterdam&quot;,&quot;Utrecht&quot;))
 d
-##                V1    V2_new V3 V3_factor
-## row 1 -1.00852714 3.1498321  a Amsterdam
-## row 2 -0.97814843 6.9123025  a Amsterdam
-## row 3  1.01502772 0.4641633  b   Utrecht
-## row 4 -0.02614153 8.8894785  b   Utrecht
-## row 5 -0.09870507 4.2323261  b   Utrecht</pre>
+##                V1   V2_new V3 V3_factor
+## row 1  0.78121699 1.187876  a Amsterdam
+## row 2  0.11522980 4.908420  a Amsterdam
+## row 3 -0.08303563 4.075036  b   Utrecht
+## row 4 -0.28488865 1.828363  b   Utrecht
+## row 5  0.15859374 6.139502  b   Utrecht</pre>
 
 <p>Class</p>
 
@@ -564,25 +564,25 @@ d
 
 <p>You can convert between data types (as long as the conversion is valid)</p>
 
-<pre class = 'prettyprint lang-r'>d$V2_int = as.integer(d$V2_new)
+<pre class = 'prettyprint lang-r'>d$V2_int &lt;- as.integer(d$V2_new)
 d</pre>
 
-<pre >##                V1    V2_new V3 V3_factor V2_int
-## row 1 -1.00852714 3.1498321  a Amsterdam      3
-## row 2 -0.97814843 6.9123025  a Amsterdam      6
-## row 3  1.01502772 0.4641633  b   Utrecht      0
-## row 4 -0.02614153 8.8894785  b   Utrecht      8
-## row 5 -0.09870507 4.2323261  b   Utrecht      4</pre>
+<pre >##                V1   V2_new V3 V3_factor V2_int
+## row 1  0.78121699 1.187876  a Amsterdam      1
+## row 2  0.11522980 4.908420  a Amsterdam      4
+## row 3 -0.08303563 4.075036  b   Utrecht      4
+## row 4 -0.28488865 1.828363  b   Utrecht      1
+## row 5  0.15859374 6.139502  b   Utrecht      6</pre>
 
-<pre class = 'prettyprint lang-r'>d$V2_char = as.character(d$V2_int)
+<pre class = 'prettyprint lang-r'>d$V2_char &lt;- as.character(d$V2_int)
 d</pre>
 
-<pre >##                V1    V2_new V3 V3_factor V2_int V2_char
-## row 1 -1.00852714 3.1498321  a Amsterdam      3       3
-## row 2 -0.97814843 6.9123025  a Amsterdam      6       6
-## row 3  1.01502772 0.4641633  b   Utrecht      0       0
-## row 4 -0.02614153 8.8894785  b   Utrecht      8       8
-## row 5 -0.09870507 4.2323261  b   Utrecht      4       4</pre>
+<pre >##                V1   V2_new V3 V3_factor V2_int V2_char
+## row 1  0.78121699 1.187876  a Amsterdam      1       1
+## row 2  0.11522980 4.908420  a Amsterdam      4       4
+## row 3 -0.08303563 4.075036  b   Utrecht      4       4
+## row 4 -0.28488865 1.828363  b   Utrecht      1       1
+## row 5  0.15859374 6.139502  b   Utrecht      6       6</pre>
 
 </article></slide><slide class=""><hgroup><h2>5. List: Mixed type</h2></hgroup><article  id="list-mixed-type" class="smaller ">
 
@@ -612,12 +612,12 @@ f</pre>
 ## [1] 1 2 3 4 5
 ## 
 ## [[2]]
-##                V1    V2_new V3 V3_factor V2_int V2_char
-## row 1 -1.00852714 3.1498321  a Amsterdam      3       3
-## row 2 -0.97814843 6.9123025  a Amsterdam      6       6
-## row 3  1.01502772 0.4641633  b   Utrecht      0       0
-## row 4 -0.02614153 8.8894785  b   Utrecht      8       8
-## row 5 -0.09870507 4.2323261  b   Utrecht      4       4</pre>
+##                V1   V2_new V3 V3_factor V2_int V2_char
+## row 1  0.78121699 1.187876  a Amsterdam      1       1
+## row 2  0.11522980 4.908420  a Amsterdam      4       4
+## row 3 -0.08303563 4.075036  b   Utrecht      4       4
+## row 4 -0.28488865 1.828363  b   Utrecht      1       1
+## row 5  0.15859374 6.139502  b   Utrecht      6       6</pre>
 
 <p>to obtain a list with a vector and a data frame.</p>
 
@@ -632,12 +632,12 @@ f</pre>
 ## [1] 1 2 3 4 5
 ## 
 ## $`data frame`
-##                V1    V2_new V3 V3_factor V2_int V2_char
-## row 1 -1.00852714 3.1498321  a Amsterdam      3       3
-## row 2 -0.97814843 6.9123025  a Amsterdam      6       6
-## row 3  1.01502772 0.4641633  b   Utrecht      0       0
-## row 4 -0.02614153 8.8894785  b   Utrecht      8       8
-## row 5 -0.09870507 4.2323261  b   Utrecht      4       4</pre>
+##                V1   V2_new V3 V3_factor V2_int V2_char
+## row 1  0.78121699 1.187876  a Amsterdam      1       1
+## row 2  0.11522980 4.908420  a Amsterdam      4       4
+## row 3 -0.08303563 4.075036  b   Utrecht      4       4
+## row 4 -0.28488865 1.828363  b   Utrecht      1       1
+## row 5  0.15859374 6.139502  b   Utrecht      6       6</pre>
 
 </article></slide><slide class=""><hgroup><h2>Lists (continued)</h2></hgroup><article  id="lists-continued-2" class="smaller ">
 
@@ -655,12 +655,12 @@ f</pre>
 ## [1] 1 2 3 4 5
 ## 
 ## $`data frame`$`data frame`
-##                V1    V2_new V3 V3_factor V2_int V2_char
-## row 1 -1.00852714 3.1498321  a Amsterdam      3       3
-## row 2 -0.97814843 6.9123025  a Amsterdam      6       6
-## row 3  1.01502772 0.4641633  b   Utrecht      0       0
-## row 4 -0.02614153 8.8894785  b   Utrecht      8       8
-## row 5 -0.09870507 4.2323261  b   Utrecht      4       4</pre>
+##                V1   V2_new V3 V3_factor V2_int V2_char
+## row 1  0.78121699 1.187876  a Amsterdam      1       1
+## row 2  0.11522980 4.908420  a Amsterdam      4       4
+## row 3 -0.08303563 4.075036  b   Utrecht      4       4
+## row 4 -0.28488865 1.828363  b   Utrecht      1       1
+## row 5  0.15859374 6.139502  b   Utrecht      6       6</pre>
 
 </article></slide><slide class=""><hgroup><h2>Retrieving elements in lists</h2></hgroup><article  id="retrieving-elements-in-lists" class="smaller ">
 
@@ -711,7 +711,7 @@ g</pre>
 <li><p>For example, if we would like elements out of example vector below that are larger than 3, we would type:</p></li>
 </ul>
 
-<pre class = 'prettyprint lang-r'>example_vector = c(1,2,3,4,5,6,7,8,9)
+<pre class = 'prettyprint lang-r'>example_vector &lt;- c(1,2,3,4,5,6,7,8,9)
 example_vector[example_vector&gt;3]
 ## [1] 4 5 6 7 8 9</pre>
 
@@ -759,21 +759,23 @@ example_vector[example_vector&gt;3]
 <p>They are extremely useful in dataframes</p>
 
 <pre class = 'prettyprint lang-r'>d
-##                V1    V2_new V3 V3_factor V2_int V2_char
-## row 1 -1.00852714 3.1498321  a Amsterdam      3       3
-## row 2 -0.97814843 6.9123025  a Amsterdam      6       6
-## row 3  1.01502772 0.4641633  b   Utrecht      0       0
-## row 4 -0.02614153 8.8894785  b   Utrecht      8       8
-## row 5 -0.09870507 4.2323261  b   Utrecht      4       4</pre>
+##                V1   V2_new V3 V3_factor V2_int V2_char
+## row 1  0.78121699 1.187876  a Amsterdam      1       1
+## row 2  0.11522980 4.908420  a Amsterdam      4       4
+## row 3 -0.08303563 4.075036  b   Utrecht      4       4
+## row 4 -0.28488865 1.828363  b   Utrecht      1       1
+## row 5  0.15859374 6.139502  b   Utrecht      6       6</pre>
 
 <pre class = 'prettyprint lang-r'>d$V1 &gt; 0</pre>
 
-<pre >## [1] FALSE FALSE  TRUE FALSE FALSE</pre>
+<pre >## [1]  TRUE  TRUE FALSE FALSE  TRUE</pre>
 
 <pre class = 'prettyprint lang-r'>d[d$V1 &gt; 0, ]</pre>
 
-<pre >##             V1    V2_new V3 V3_factor V2_int V2_char
-## row 3 1.015028 0.4641633  b   Utrecht      0       0</pre>
+<pre >##              V1   V2_new V3 V3_factor V2_int V2_char
+## row 1 0.7812170 1.187876  a Amsterdam      1       1
+## row 2 0.1152298 4.908420  a Amsterdam      4       4
+## row 5 0.1585937 6.139502  b   Utrecht      6       6</pre>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Functions</h2></hgroup><article  id="functions" class="smaller ">
 

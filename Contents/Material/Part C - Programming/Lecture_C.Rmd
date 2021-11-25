@@ -1,0 +1,560 @@
+---
+title: "Programming"
+author: "Javier Garcia-Bernardo (based on material by Gerko Vink)"
+date: "Introduction to R and RStudio"
+knit: (function(inputFile, encoding){
+  rmarkdown::render(inputFile, output_format = "all") })
+output: 
+  ioslides_presentation:
+    logo: logo.png
+    smaller: true
+    widescreen: true
+    transition: 0
+  pdf_document: default
+
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+```
+
+# Recap
+
+## Last week
+- How to use `R`, `RStudio`, `R`-scripts and `R`-notebooks
+- Data types (elements)
+  - character, numeric, integer, logical, factor
+- Data structures: composed of data types
+  - vector, matrix, list, **data.frame**
+- Subsetting data structures
+- Reading files in different formats
+
+## This week
+How to organize and automate your code:
+
+#### First half
+- Control-flow: 
+  - Choice: if-else statements
+  - Loops: For loops
+- Functions
+- Environments
+
+#### Second half
+- Reading and writing files in serveral formats
+- Principles of tidy data and short comparison of base R and the tidyverse
+- Inferential statistics: A primer of linear regression
+- Best practices in R
+
+# Control-flow
+
+
+## New controls and functions 
+
+
+- Choice: 
+  - We often want to run some code ***only if*** some ***condition*** is true.
+  - `if(cond)` `{cons.expr}`  `else`  `{alt.expr}`
+- Loops: 
+  - We often want to repeat the execution of a piece of code many times.
+  - `for(var in seq)` `{expr}`
+
+Loops in R often happen under the hood, using apply functions:
+
+- `apply()`: apply a function to margins of a matrix
+- `sapply()`: apply a function to elements of a list, `vector` or `matrix` return
+- `lapply()`: apply a function to elements of a list, `list` return
+
+
+
+
+# Control-flow (I): Choice
+
+## If statement
+
+:::: {style="display: flex;"}
+
+::: {.column width="50%"}
+
+
+Operation of an __if__ statement:
+
+![Source: datamentor.io](img/r-if-statement.jpg){width=50%}
+
+:::
+
+::: {.column width="45%"}
+Code of an if statement:
+```{r}
+value <- 3
+if (value > 3) { #text expression
+  print("Value greater than 3") #body of if
+}  
+
+```
+
+:::
+
+::::
+
+
+
+## If-else statements
+
+:::: {style="display: flex;"}
+
+::: {.column width="50%"}
+
+
+Operation of an if-else statement:
+![Source: datamentor.io](img/r-if-else-statement.jpg){width=60%}
+:::
+
+::: {.column width="45%"}
+Code of an if-else statment:
+```{r}
+value <- 3
+if (value > 3) { #test expression
+  print("Value greater than three") #body of if
+} else {
+    print("Value <= 3") #body of else
+}
+```
+
+:::
+
+::::
+
+
+## If-else statements
+
+:::: {style="display: flex;"}
+
+::: {.column width="50%"}
+
+
+Operation of an if-else if statement:
+![Source: CS161 oregonstate.edu](img/4_09.png){width=70%}
+
+:::
+
+::: {.column width="45%"}
+Code of an if-else if statment:
+```{r}
+value <- 3
+if (value > 3) { #condition 1
+  print("Value greater than 3") #condition 1 statements
+} else if (value > 1) { #condition 2
+ print("Value greater than 1")  #condition 2 statements
+} else if (value > 0) { #condition 3
+ print("Value greater than 0")  #condition 3 statements
+}
+```
+
+You can also add an else at the end.
+
+:::
+
+::::
+
+## Subsetting consists of if-else statements
+
+Remember our example from last time
+
+
+```{r}
+example_vector = c(1,2,3,4,5,6,7,8,9)
+example_vector>3
+example_vector[example_vector>3]
+```
+
+The computer keeps the value of the elements of example_vector **if** the corresponding elements in the condition (`example_vector>3`) are TRUE.
+
+# Control-flow (II): Loops
+
+## For loops
+For loops are used when we want to perform some repetitive calculations. 
+
+```{r, collapse=TRUE}
+# Let's print the numbers 1 to 6 one by one. 
+print(1)
+print(2)
+print(3)
+print(4)
+print(5)
+print(6)
+```
+
+
+## For-loops
+
+For-loops allow us to automate this!
+
+For each element of `1:6`, print the element:
+```{r}
+for (i in 1:6){
+  print(i)
+}
+```
+
+## For-loops 
+You can use any variable name, `i` is a convention for counting/index.
+```{r}
+for (some_var_name in 1:6){
+  print(some_var_name)
+}
+```
+
+
+## For-loops (visually)
+![Source: datacamp.com](img/content_flowchart1.png)
+
+
+
+## Subsetting consists of for-loops and if-else statements
+
+```{r}
+example_vector = c(1,2,3,4,5,6,7,8,9)
+example_vector>3
+example_vector[example_vector>3]
+```
+
+***For*** each element in example_vector, keep the value ***if*** the corresponding element of the condition (`example_vector>3`) is TRUE
+
+
+## For-loops
+Often you don't want to iterate over a range, but over an object
+
+```{r}
+for (element in c("Amsterdam","Rotterdam","Eindhoven")){
+  print(element)
+}
+```
+
+```{r}
+for (element in c("Amsterdam","Rotterdam","Eindhoven")){
+  print(element)
+  if (element == "Amsterdam"){
+    print("Terrible football team.")
+  } else {
+    print("Not the prettiest city, but at least their football team is okay.")
+  }
+}
+```
+
+
+## For-loops 
+
+Something a bit more useful
+
+```{r}
+df <- data.frame("V1" = rnorm(5),
+                "V2" = rnorm(5, mean = 5, sd = 2), 
+                "V3" = rnorm(5, mean = 6, sd = 1))
+
+head(df)
+
+
+```
+
+## For-loops 
+
+Doing an operation on each column
+```{r}
+for (col in names(df)) {
+  print(col)
+}
+
+for (col in names(df)) {
+  print(col)
+  print(mean(df[, col]))
+}
+
+```
+
+## For-loops 
+
+Doing an operation on each row
+
+```{r}
+for (row in 1:nrow(df)) {
+  row_values = df[row, ]
+  print(row_values)
+  print(sum(row_values>5))
+}
+
+```
+
+## While loops 
+Do something forever until a condition is (not) met 
+```{r}
+i  = 0
+while (i < 10) {
+  i =  i + 1
+  print(i)
+}
+```
+
+
+More info on loops: https://www.datamentor.io/r-programming/break-next/
+
+
+
+# The `apply()` family
+## `apply()`
+
+The `apply` family is a group of very useful functions that allow you to easily execute a function of your choice over a list of objects, such as a `list`, a `data.frame`, or `matrix`.
+
+We will look at three examples:
+
+- `apply`
+
+- `sapply`
+
+- `lapply`
+
+## `apply()` {.build}
+`apply` is used for matrices/dataframes. It applies a function to each *row* or *column*. It returns a vector or a matrix.
+
+```{r, collapse=TRUE}
+head(df, 1)
+```
+
+Apply it by row (MARGIN = 1):
+```{r, collapse=TRUE}
+apply(df, MARGIN = 1, mean)
+```
+
+
+Apply it by column (MARGIN = 2):
+```{r, collapse=TRUE}
+apply(df, MARGIN = 2, mean) #Identical to colMeans(df)
+```
+
+
+
+## `sapply()` {.build}
+`sapply()` is used on `list`-objects. It returns a vector or a matrix.
+
+```{r}
+my.list <- list(A = c(4, 2, 1), B = "Hello.", C = TRUE)
+sapply(my.list, class)
+```
+
+
+```{r}
+my.list <- list(A = c(4, 2, 1), B = c("hello","Hello","Aa","aa"), C = c(FALSE,TRUE))
+sapply(my.list, range)
+```
+
+
+Why is each element a character string?
+
+## `sapply()`
+
+Any `data.frame` is also a `list`, where each column is one `list`-element.
+
+This means we can use `sapply` on data frames as well, which is often useful.
+
+```{r}
+sapply(df, mean)
+```
+
+## `lapply()`
+
+`lapply()` is *exactly* the same as `sapply()`, but it returns a list instead of a vector.
+```{r}
+lapply(df, class)
+```
+
+
+
+# Writing your own functions
+
+## What are functions?
+
+Functions are reusable pieces of code that 
+
+1. take some standard input (e.g. a vector of numbers)
+2. do some computation  (e.g. calculate the mean)
+3. return some standard output (e.g. one number with the mean)
+
+We have been using a lot of functions: code of the form `something()` is usually a function. 
+
+```{r}
+mean(1:6)
+```
+
+## Our own function
+
+We can make our own functions as follows:
+
+```{r}
+squared <- function (x){
+  x.square <- x * x
+  return(x.square) 
+}
+
+squared(4)
+```
+
+`x`, the input, is called the (formal) *argument* of the function. `x.square` is called the *return value*.
+
+## Our own function
+
+If there is no `return()`, the last line is automatically returned, so we can also just write:
+
+
+```{r}
+squared <- function(x){
+  x * x
+}
+
+squared(-2)
+```
+
+I do not recommend this, please always specify what you return unless you have a one-line function.
+
+
+## Our own function {.smaller}
+
+We can also combine this with `apply()`
+
+```{r}
+df
+sapply(df, squared)
+```
+
+
+
+## Default options in functions {.build}
+* Default options for some arguments are provided in many functions. 
+* They allow us to provide an additional option, but if no choice is provided, we can choose for the user of the function. 
+
+```{r}
+is_contained <- function(str_1, str_2, print_input = TRUE){
+  if (print_input){
+    cat("Testing if", str_1, "contained in", str_2, "\n")
+  }
+  return(str_1 %in% str_2)
+}
+```
+
+
+```{r, collapse=TRUE,eval=FALSE}
+is_contained("R", "rstudio")
+```
+```{r, collapse=TRUE}
+is_contained("R", "rstudio")
+is_contained("R", "rstudio", print_input = TRUE)
+is_contained("R", "rstudio", print_input = FALSE)
+```
+
+
+## Troubleshooting
+* Your first self-written for-loop, or function, will probably not work.
+
+* Don't panic! Just go line-by-line, keeping track of what is currently inside each variable. 
+* Stackoverflow is your friend.
+
+
+# Scoping rules in `R` 
+
+## Global environemnt (workspace)
+
+When you write the name of a variable, R needs to find the value.
+
+In the interactive computation (outside of functions, e.g., your console), this happens in the following order:
+
+- First, search the global environment (i.e., your workspace) 
+- If it cannot be found, search each of the loaded packages
+
+
+```{r}
+search()
+```
+The order of packages is important.
+
+
+
+## Scoping rules in `R`: Functions
+
+Inside a function, this happens in the following order:
+
+- First, search within the function.
+- If it cannot be found, search in the global environment (i.e., your workspace) 
+- If it cannot be found, search each of the loaded packages
+
+
+```{r, collapse=TRUE}
+y <- 3
+test_t <- function() {
+  print(y)
+}
+test_t()
+```
+```{r, collapse=TRUE}
+y <- 3
+test_t <- function() {
+  y <- 2
+  print(y)
+}
+test_t()
+```
+
+## Scoping rules in `R`: Functions
+
+What happens inside a function, stays within a function (unless you specify it differently)
+
+
+```{r}
+y <- 3
+test_t <- function() {
+  y <- 2
+  print(y)
+}
+test_t()
+y
+```
+
+## Scoping rules in `R`: Packages
+
+Packages are neatly contained/isolated, so they are not affected by your code.They do so through namespaces: 
+
+- Namespaces allow the package developer to hide functions and data.
+- Objects in the global environment that match objects in the function's namespace are ignored when running functions from packages (prevent clashes)
+- Functions are executed within the namespace of the package and have access to the global environment
+- They provide a way to refer to an object, with the double colon `::`
+
+```{r}
+dplyr::n_distinct(c(1,2,3,4,2))
+```
+
+## Scoping rules in `R`: Packages (good practices)
+- Pass to the function (using arguments) ***everything*** that the function needs to use (i.e. don't define something outside the function that is being used for the function)
+
+BAD
+```{r}
+
+shifted_mean <- function(numbers) {
+   return(mean(numbers) + shift_by)
+}
+
+shift_by <- 3
+shifted_mean(c(1,2,3))
+```
+
+GOOD
+```{r}
+numbers <- 
+
+shifted_mean <- function(numbers, shift_by) {
+   return(mean(numbers) + shift_by)
+}
+
+shift_by <- 3
+shifted_mean(c(1,2,3), shift_by)
+```
+
+# Practical
+
+

@@ -41,8 +41,7 @@ Materials covered:
 - Reading a CSV and calculating descriptive statistics
 
 ##### Day 2:
-- Control flow (if-else statements)
-- For loops (for): a conceptual understanding of loops
+- Control flow (if-else statements and for loops)
 - Functions: creating your own functions
 - Principles of tidy data and short comparison of base R and the tidyverse
 - Reading and writing files in several formats
@@ -124,8 +123,8 @@ Naturally, you will need internet access for these services to be accessed.
 
 ## Column 1
 
-### Monday's materials
-We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online.
+### Materials
+To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online.
 
 - Part A: Introduction
     - [Lecture A (slides)](Contents/Material/Part A - Introduction/Lecture_A.html)
@@ -162,143 +161,41 @@ The above links are useful references that connect to today's materials.
 
 See also [this `rmarkdown` cheat sheet](Contents/Material/Part A - Introduction/rmarkdown-reference_sheet.pdf). 
 
-<!-- # Tuesday -->
 
-<!-- ## Column 1 -->
+# Day 2 (Nov. 26th)
 
-<!-- ### Tuesday's materials -->
-<!-- We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. -->
+## Column 1
 
-<!-- - Part D: Generating Data -->
-<!--     - [Lecture D](Contents/Material/Part D - Data generation/Lecture_D.html) -->
-<!--     - [Practical D](Contents/Material/Part D - Data generation/Practical_D_walkthrough.html) -->
-<!--     - [Impractical D](Contents/Material/Part D - Data generation/Practical_D.html) -->
-<!-- - Part E: Custom functions -->
-<!--     - [Lecture E](Contents/Material/Part E - Functions apply and looping/Lecture_E.html) -->
-<!--     - [Practical E](Contents/Material/Part E - Functions apply and looping/Practical_E_walkthrough.html) -->
-<!--     - [Impractical E](Contents/Material/Part E - Functions apply and looping/Practical_E.html) -->
-<!-- - Part F: Pipes -->
-<!--     - [Lecture F](Contents/Material/Part F - Pipes/Lecture_F.html) -->
-<!--     - [Practical F](Contents/Material/Part F - Pipes/Practical_F_walkthrough.html) -->
-<!--     - [Impractical F](Contents/Material/Part F - Pipes/Practical_F.html)  -->
+### Materials
+To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online.
 
-<!-- All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions.  -->
+- Part C: Programming
+    - [Lecture C (slides)](Contents/Material/Part C - Programming/Lecture_C.html)
+    - [Lecture C (pdf)](Contents/Material/Part C - Programmin/Lecture_C.pdf)
+    - [Practical C](Contents/Material/Part C - Programmin/Practical_C_walkthrough.html)
+    
 
-<!-- ## Column 2 -->
+- Part B: Working with `R`: Data types and structures
+    - [Lecture B (slides)](Contents/Material/Part D - Tidy/Lecture_D.html)
+    - [Lecture B (pdf)](Contents/Material/Part D - Tidy/Lecture_D.pdf)
+    - [Practical B](Contents/Material/Part D - Tidy/Practical_D_walkthrough.html)
+    - [`dataset_boys.csv`](Contents/Material/common_datasets/dataset_boys.csv)
+  
 
-<!-- ### Useful References -->
+All lectures are in `html` format. Practicals are files that guide you through the exercises. Use the files without solutions unless you get stuck. Please ask questions to the instructors if something is not 100% clear.
 
-<!-- - [`magrittr`](https://magrittr.tidyverse.org) -->
-<!-- - [`R` for Data Science](http://r4ds.had.co.nz) - [Chapter 18 on pipes](http://r4ds.had.co.nz/pipes.html) -->
+## Column 2
 
-<!-- The above links are useful references that connect to today's materials.  -->
+### Useful references
 
-<!-- # Wednesday -->
-
-<!-- ## Column 1 -->
-
-<!-- ### Wednesday's materials -->
-<!-- We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. -->
-
-<!-- - Part G: Statistical models -->
-<!--     - [Lecture G](Contents/Material/Part G - Statistical models/Lecture_G.html) -->
-<!--     - [Practical G](Contents/Material/Part G - Statistical models/PracticalG_walkthrough.html) -->
-<!--     - [Impractical G](Contents/Material/Part G - Statistical models/PracticalG.html) -->
-<!-- - Part H: Statistical Inference -->
-<!--     - [Lecture H](Contents/Material/Part H - Statistical inference/Lecture_H.html) -->
-<!--     - [Practical H](Contents/Material/Part H - Statistical inference/PracticalH_walkthrough.html) -->
-<!--     - [Impractical H](Contents/Material/Part H - Statistical inference/PracticalH.html) -->
-<!--     - [A plot that demonstrates the (mis)use of Confidence Intervals](https://www.gerkovink.com/markup/Archive/2019/Wk4/Solution_to_Ex5.html) -->
-<!-- - Part I: Data visualization -->
-<!--     - [Lecture I](Contents/Material/Part I - Data visualization/Lecture_i.html) -->
-<!--     - [Practical I](Contents/Material/Part I - Data visualization/Practical_i_walkthrough.html) -->
-<!--     - [Impractical I](Contents/Material/Part I - Data visualization/Practical_i.html). -->
-
-<!-- All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions.  -->
-
-<!-- ## Column 2 -->
-
-<!-- ### Useful links -->
-
-<!-- - [The `ggplot2` reference page](https://ggplot2.tidyverse.org/reference/) -->
-<!-- - [A great reference on contrasts with linear modeling](https://rstudio-pubs-static.s3.amazonaws.com/65059_586f394d8eb84f84b1baaf56ffb6b47f.html) -->
-<!-- - These papers are a nice reference for editors: -->
-
-<!--   - [A comment in Nature from 800+ signatories](https://www.nature.com/articles/d41586-019-00857-9) -->
-<!--   - [Naomi Altman and Martin Krzywinski in Nature Methods](https://www.nature.com/articles/nmeth.4120) -->
-<!--   - [Statement by the Americal Statistical Association](https://www.tandfonline.com/doi/full/10.1080/00031305.2016.1154108) -->
-
-<!-- ### Releveling -->
-<!-- ```{r echo = TRUE, message=FALSE} -->
-<!-- library(mice) -->
-<!-- library(magrittr) -->
-<!-- boys %$% lm(age ~ reg) %>% coef() -->
-
-<!-- boys$reg <- relevel(boys$reg, ref = "south") -->
-<!-- boys %$% lm(age ~ reg) %>% coef() -->
-<!-- ``` -->
+- [The dplyr cheatsheet (mutate, select, etc)](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-transformation.pdf)
+- [The tidyr cheatsheet (pivot_longer/wider)](https://raw.githubusercontent.com/rstudio/cheatsheets/main/tidyr.pdf)
+- [The purrr cheatsheet (map)](https://raw.githubusercontent.com/rstudio/cheatsheets/main/purrr.pdf)
+- [Data importint and exporting](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-import.pdf)
+- [The base R cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/base-r.pdf)
+- [The tidyverse style guide](https://style.tidyverse.org)
+- [The Google R style guide](https://google.github.io/styleguide/Rguide.xml)
 
 
-<!-- # Thursday -->
 
-<!-- ## Column 1 -->
-
-<!-- ### Thursday's materials -->
-<!-- We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. -->
-
-<!-- - Part J: Model estimation -->
-<!--     - [Lecture JK](Contents/Material/Part JK - Model estimation/Lecture_J.html) -->
-<!--     - [Practical JK](Contents/Material/Part JK - Model estimation/Practical_J_walkthrough.html) -->
-<!--     - [Impractical JK](Contents/Material/Part JK - Model estimation/Practical_J.html) -->
-<!-- - Part K: Model estimation -->
-<!--     - [Lecture JK](Contents/Material/Part JK - Model estimation/Lecture_J.html) -->
-<!--     - [Practical JK](Contents/Material/Part JK - Model estimation/Practical_J_walkthrough.html) -->
-<!--     - [Impractical JK](Contents/Material/Part JK - Model estimation/Practical_J.html) -->
-<!-- - Part L: GLM's -->
-<!--     - [Lecture L](Contents/Material/Part L - GLMs/Lecture_L.html) -->
-<!--     - [The other, much longer, Lecture L](Contents/Material/Part L - GLMs/ch8_ioslides.html) -->
-<!--     - [Practical L](Contents/Material/Part L - GLMs/Practical_L_walkthrough.html) -->
-<!--     - [Impractical L](Contents/Material/Part L - GLMs/Practical_L.html) -->
-
-<!-- All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions.  -->
-
-<!-- # Friday -->
-
-<!-- ## Column 1 -->
-
-<!-- ### Friday's materials -->
-<!-- We adapt the course as we go. To ensure that you work with the latest iteration of the course materials, we advice all course participants to access the materials online. -->
-
-<!-- - Part M: Classification & Clustering -->
-<!--     - [Lecture M](Contents/Material/Part M - Unsupervised learning/Lecture_M.html) -->
-<!--     - [Practical M](Contents/Material/Part M - Unsupervised learning/Practical_M_walkthrough.html) -->
-<!--     - [Impractical M](Contents/Material/Part M - Unsupervised learning/Practical_M.html) -->
-<!-- - Part N: Bootstrapping -->
-<!--     - [Lecture N](Contents/Material/Part N - Bootstrapping/Lecture_N.html) -->
-<!--     - [Practical N](Contents/Material/Part N - Bootstrapping/Practical_N_walkthrough.html) -->
-<!--     - [Impractical N](Contents/Material/Part N - Bootstrapping/Practical_N.html) -->
-<!-- - Part O: Monte Carlo simulation -->
-<!--     - [Lecture O](Contents/Material/Part O - Monte carlo simulation/Lecture_O.html) -->
-<!--     - [Practical O](Contents/Material/Part O - Monte carlo simulation/Practical_O_walkthrough.html) -->
-<!--     - [Impractical O](Contents/Material/Part O - Monte carlo simulation/Practical_O.html) -->
-
-<!-- All lectures are in `html` format. Practicals are walkthrough files that guide you through the exercises. `Impractical` files contain the exercises, without walkthrough, explanations and solutions.  -->
-
-
-<!-- # To continue -->
-
-<!-- ## Column 1 -->
-
-<!-- ### What to do after the course -->
-
-<!-- - [R for Data Science](https://r4ds.had.co.nz): a wonderful book that details a usefull toolset for current and aspiring data scientists.  -->
-<!-- - [Introduction to Statistical Learning](https://www.statlearning.com): an introductory book on statistical learning, with applications in R. -->
-<!-- - [Data Analysis and Graphics Using R](https://maths-people.anu.edu.au/~johnm/r-book/daagur3.html): a detailed book that covers a lot about categorical data analysis and fitting `glm`s in `R`. -->
-
-<!-- The above references are (currently) available for free in these links. I deem them very useful and I would highly recommend them.  -->
-
-<!-- ## Column 2 -->
-
-<!-- ### For fun -->
-<!-- <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My wife asked me what machine learning is and I said: remember when we ordered the hot plate for the boat and amazon suggested buying all the equipment needed to make a full meth lab?</p>&mdash; (((Kane Baccigalupi))) (@rubyghetto) <a href="https://twitter.com/rubyghetto/status/1058220004301127680?ref_src=twsrc%5Etfw">November 2, 2018</a></blockquote> -->
-<!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+The above links are useful references that connect to today's materials. 
