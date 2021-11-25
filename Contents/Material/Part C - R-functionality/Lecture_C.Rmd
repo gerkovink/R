@@ -1,377 +1,520 @@
 ---
-title: "R-functionality"
-author: "Gerko Vink"
-date: "Statistical Programming with R"
-output:
+title: "Programming"
+author: "Javier Garcia-Bernardo (based on material by Gerko Vink)"
+date: "Introduction to R and RStudio"
+knit: (function(inputFile, encoding){
+  rmarkdown::render(inputFile, output_format = "all") })
+output: 
   ioslides_presentation:
     logo: logo.png
-    smaller: yes
-    widescreen: no
+    smaller: true
+    widescreen: true
+    transition: 0
+  #pdf_document: default
+
 ---
 
-# The blueprint of `R` 
+```{r, include=FALSE}
+library(tidyverse)
+```
 
-## Layers in `R`
-There are several 'layers' in `R`. Some layers you are allowed to fiddle around in, some are forbidden. In general there is the following distinction:
+# Recap
 
-- The global environment. 
-- User environments
+## Last week
+- How to use `R`, `RStudio`, `R`-scripts and `R`-notebooks
+- Data types (elements)
+  - character, numeric, integer, logical, factor
+- Data structures: composed of data types
+  - vector, matrix, list, **data.frame**
+- Subsetting data structures
+- Reading files in different formats
+
+## This week
+How to organize and automate your code:
+
+#### First half
+- Control-flow: 
+  - Choice: if-else statements
+  - Loops: For loops
 - Functions
-- Packages
-- Namespaces
+- Environments
 
-## Environments
-The global environment can be seen as an olympic-size swimming pool. Everything you do has its place there. 
+#### Second half
+- Principles of tidy data and short comparison of base R and the tidyverse
+- Inferential statistics: A primer of linear regression
+- Best practices in R
 
-If you'd like, you may create another, separate environment to work in. 
+# Control-flow
 
-- A user environment would by default not have access to other environments
 
-## Functions
+## New controls and functions 
 
-- If you create a function, it is positioned in the global environment. 
+### New control flow constructs
+- Choice: 
+  - We often want to run some code ***only if*** some ***condition*** is true.
+  - `if(cond)` `{cons.expr}`  `else`  `{alt.expr}`
+- Loops: 
+  - We often want to repeat the execution of a piece of code many times.
+  - `for(var in seq)` `{expr}`
 
-- Everything that happens in a function, stays in a function. Unless you specifically tell the function to share the information with the global environment. 
+Loops in R happen often under the hood. New functions:
 
-- See functions as a shampoo bottle in a swimming pool to which you add some water. If you'd like to see the color of the mixture, you'd have to squeeze the bottle for it to come out. 
+- `apply()`: apply a function to margins of a matrix
+- `sapply()`: apply a function to elements of a list, `vector` or `matrix` return
+- `lapply()`: apply a function to elements of a list, `list` return
 
-## Packages
-- Packages have their own space. 
 
-    - Everything needed to run the functions in a package is needly contained within its own space
-    - See packages as separate (mini) pools that are connected to the main pool (the global environment)
 
-## Loading packages
+# Control-flow (I): Choice
 
-There are two ways to load a package in `R`
+## If statement
+
+:::: {style="display: flex;"}
+
+::: {.column width="50%"}
+
+
+Operation of a if statement:
+![Source: tutorialspoint.com](https://www.tutorialspoint.com/scala/images/scala_decision_making.jpg){width=50%}
+:::
+
+::: {.column width="45%"}
+Code of an if statment:
 ```{r}
-library(stats)
-``` 
-and
-```{r}
-require(stats)
+value <- 3
+if (value > 3) { #condition
+  print("Value greater than 3") #conditional code
+}  
+
 ```
 
-`require()` will produce a warning when a package is not found. In other words, it will not stop as function `library()` does. 
+:::
 
-## Installing packages
-The easiest way to install e.g. package `mice` is to use
-```{r eval=FALSE}
-install.packages("mice")
+::::
+
+
+
+## If-else statements
+
+:::: {style="display: flex;"}
+
+::: {.column width="50%"}
+
+
+Operation of a if-else statement:
+![Source: guru99.com](https://www.guru99.com/images/r_programming/032818_1241_IFELSEELIF1.png){width=70%}
+:::
+
+::: {.column width="45%"}
+Code of an if-else statment:
+```{r}
+value <- 3
+if (value > 3) { #condition true?
+  print("Value greater than 3") #code in if block
+} else {
+    print("Value lower or equal to one") #code in else block
+}
 ```
 
-Alternatively, you can also do it in `RStudio` through 
+:::
 
-`Tools --> Install Packages`
+::::
 
-## Namespaces
-- Namespaces. These are the deeper layers that feed new water to the surface of the mini pools.    
-    - Packages can have namespaces. 
-    - Functions within packages are executed within the package or namespace and have access to the global environment. 
-    - Objects in the global environment that match objects in the function's namespace are ignored when running functions from packages!
 
-# `R` in depth
+## If-else statements
 
-## Workspaces and why you should sometimes save them
-A workspace contains all changes you made to environments, functions and namespaces. 
+:::: {style="display: flex;"}
 
-A saved workspace contains everything at the time of the state wherein it was saved. 
+::: {.column width="50%"}
 
-You do not need to run all the previous code again if you would like to continue working at a later time. 
 
-- You can save the workspace and continue exactly where you left. 
+Operation of a if-else statement:
+![Source: CS161 oregonstate.edu](https://eecs.oregonstate.edu/ecampus-video/CS161/template/chapter_4/chapter4_images/4_09.png){width=70%}
 
-Workspaces are compressed and require relatively little memory when stored. The compression is very efficient and beats reloading large datasets from raw text. 
+:::
 
-## History and why it is useful
-`R` by default saves (part of) the code history and `RStudio` expands this functionality greatly. 
+::: {.column width="45%"}
+Code of an if-else statment:
+```{r}
+value <- 3
+if (value > 3) { #condition 1
+  print("Value greater than 3") #condition 1 statements
+} else if (value > 1) { #condition 2
+ print("Value greater than 1")  #condition 2 statements
+} else if (value > 0) { #condition 3
+ print("Value greater than 0")  #condition 3 statements
+}
+```
 
-Most often it may be useful to look back at the code history for various reasons.
+:::
 
-- There are multiple ways to access the code history.
+::::
+
+## Subsetting consists of if-else statements
+
+Remember our example from last time
+
+The computer keeps the value of the element *i* of example_vector ***if*** the element *i* of the condition (`example_vector>3`) is true.
+```{r}
+example_vector = c(1,2,3,4,5,6,7,8,9)
+example_vector>3
+example_vector[example_vector>3]
+```
+
+
+# Control-flow (II): Loops
+
+## For loops
+For loops are used when we want to perform some repetitive calculations. 
+
+![Source: datacamp.com](http://community.datacamp.com.s3.amazonaws.com/community/production/ckeditor_assets/pictures/132/content_flowchart1.png)
+
+## For-loops {.small}
+```{r, collapse=TRUE}
+# Let's print the numbers 1 to 6 one by one. 
+print(1)
+print(2)
+print(3)
+print(4)
+print(5)
+print(6)
+```
+
+
+## For-loops
+
+For-loops allow us to automate this!
+
+For each element of `1:6`, print the element:
+```{r}
+for (i in 1:6){
+  print(i)
+}
+```
+
+## For-loops 
+You can use any variable name, `i` is a convention for counting/index.
+```{r}
+for (some_var_name in 1:6){
+  print(some_var_name)
+}
+```
+
+## Subsetting consists of for-loops and if-else statements
+***For*** each element *i*, keep the value of the element *i* of example_vector ***if*** the element *i* of the condition (`example_vector>3`) is true.
+
+```{r}
+example_vector = c(1,2,3,4,5,6,7,8,9)
+example_vector>3
+example_vector[example_vector>3]
+```
+
+## For-loops
+Often you don't want to iterate over a range, but over an object
+
+```{r}
+for (element in c("Amsterdam","Rotterdam","Eindhoven")){
+  if (element == "Amsterdam"){
+    print(paste(element,"Terrible football team.", sep=": "))
+  } else {
+    print(paste(element,"Not the prettiest city, but at least their football team is okay.", sep=": "))
+  }
+}
+```
+
+
+## For-loops 
+
+Something a bit more useful
+
+```{r}
+df <- data.frame("V1" = rnorm(5),
+                "V2" = rnorm(5, mean = 5, sd = 2), 
+                "V3" = rnorm(5, mean = 6, sd = 1))
+
+head(df)
+
+for (col in names(df)) {
+  print(col)
+}
+
+```
+
+## For-loops 
+
+Doing an operation on each column
+```{r}
+df <- data.frame("V1" = rnorm(5),
+                "V2" = rnorm(5, mean = 5, sd = 2), 
+                "V3" = rnorm(5, mean = 6, sd = 1))
+
+for (col in names(df)) {
+  print(paste("Mean of ", col, ": ", mean(df[, col]), sep=""))
+}
+
+```
+
+## For-loops 
+
+Doing an operation on each row
+
+```{r}
+for (row in 1:nrow(df)) {
+  row_values = df[row, ]
   
-    1. Use arrow up in the console. This allows you to go back in time, one codeline by one. Extremely useful to go back to previous lines for minor alterations to the code.
-    2. Use the history tab in the environment pane. The complete project history can be found here and the history can be searched. This is particularly convenient when you know what code you are looking for. 
-    
-## Working in projects in `RStudio`
-- Every project has its own history
-- Every research project has its own project
-- Every project can have its own folder, which also serves as a research archive
-- Every project can have its own version control system
-- R-studio projects can relate to Git (or other online) repositories
+  print(paste("Row ", row, ": ", sum(row_values>5), " values over 2", sep=""))
+}
 
-# Modeling
-
-## Modeling in `R`
-To model objects based on other objects, we use `~` (tilde)
-
-For example, to model body mass index (BMI) on weight, we would type
-```{r eval=FALSE}
-BMI ~ weight
-```
-The `~` is used to separate the left- and right-hand sides in a model formula.
-
-For functions (or models), within models we use `I()`
-    - For example, to model body mass index (BMI) on its deterministic function of weight and height, we would type
-```{r eval=FALSE}
-BMI ~ I(weight / height^2)
-```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-require(mice)
 ```
 
-## Example
-Remember the `boys` data from package `mice`:
+## While loops 
+Do something forever until a condition is (not) met 
 ```{r}
-lm(bmi ~ wgt, data = boys)
+i  = 0
+while (i < 10) {
+  i =  i + 1
+  print(i)
+}
 ```
 
-## Example continued
-Remember the `boys` data from package `mice`:
-```{r}
-lm(bmi ~ I(wgt / (hgt / 100)^2), data = boys)
+
+More info on loops: https://www.datamentor.io/r-programming/break-next/
+
+
+
+# The `apply()` family
+## `apply()`
+
+The `apply` family is a group of very useful functions that allow you to easily execute a function of your choice over a list of objects, such as a `list`, a `data.frame`, or `matrix`.
+
+We will look at three examples:
+
+- `apply`
+
+- `sapply`
+
+- `lapply`
+
+## `apply()` {.build}
+`apply` is used for matrices/dataframes. It applies a function to each *row* or *column*. It returns a vector or a matrix.
+
+```{r, collapse=TRUE}
+head(df, 1)
 ```
 
-## Why we really need `I()`
-```{r}
-lm(bmi ~ wgt + wgt^2, data = boys)
-lm(bmi ~ wgt + I(wgt^2), data = boys)
+Apply it by row (MARGIN = 1):
+```{r, collapse=TRUE}
+apply(df, MARGIN = 1, mean)
 ```
 
-## More efficient
-It is 'nicer' to store the output from the function in an object. The convention for regression models is an object called `fit`. 
-```{r}
-fit <- lm(bmi ~ I(wgt / (hgt / 100)^2), data = boys)
-```
-The object `fit` contains a lot more than just the regression weights. To inspect what is inside you can use
-```{r}
-ls(fit)
+
+Apply it by column (MARGIN = 2):
+```{r, collapse=TRUE}
+apply(df, MARGIN = 2, mean) #Identical to colMeans(df)
 ```
 
-## Inspecting what is inside `fit`
-Another approach to inspecting the contents of `fit` is the function `attributes()`
-```{r}
-attributes(fit)
-```
-
-The benefit of using `attributes()` is that it directly tells you the class of the object. 
-
-## Classes in R {.smaller}
-```{r}
-class(fit)
-```
-
-Classes are used for an object-oriented style of programming. This means that you can write a specific function that
-- has fixed requirements with respect to the input. 
-- presents output or graphs in a predefined manner. 
-
-When a generic function fun is applied to an object with class attribute `c("first", "second")`, the system searches for a function called `fun.first` and, if it finds it, applies it to the object. 
-
-If no such function is found, a function called `fun.second` is tried. If no class name produces a suitable function, the function fun.default is used (if it exists). If there is no class attribute, the implicit class is tried, then the default method.
-
-## Classes example: plotting without class
-```{r, dev.args = list(bg = 'transparent')}
-plot(bmi ~ wgt, data = boys)
-```
-
-## Classes example: plotting with class
-```{r, dev.args = list(bg = 'transparent')}
-plot(lm(bmi ~ wgt, data = boys), which = 1)
-```
-
-## Classes example: plotting with class
-```{r, dev.args = list(bg = 'transparent')}
-plot(lm(bmi ~ wgt, data = boys), which = 2)
-```
-
-## Classes example: plotting with class
-```{r, dev.args = list(bg = 'transparent')}
-plot(lm(bmi ~ wgt, data = boys), which = 3)
-```
-
-## Classes example: plotting with class
-```{r, dev.args = list(bg = 'transparent')}
-plot(lm(bmi ~ wgt, data = boys), which = 4)
-```
-
-## Classes example: plotting with class
-```{r, dev.args = list(bg = 'transparent')}
-plot(lm(bmi ~ wgt, data = boys), which = 5)
-```
-
-## Classes example: plotting with class
-```{r, dev.args = list(bg = 'transparent')}
-plot(lm(bmi ~ wgt, data = boys), which = 6)
-```
-
-## Why is plot different for class `"lm"`?
-The function `plot()` is called, but not used. Instead, because the linear model has class `"lm"`, `R` searches for the function `plot.lm()`. 
-
-If function `plot.lm()` would not exist, `R` tries to apply function `plot()` (which would have failed in this case because plot requires `x` and `y` as input)
-
-`plot.lm()` is created by John Maindonald and Martin Maechler. They thought it would be useful to have a standard plotting environment for objects with class `"lm"`. 
-
-Since the elements that class `"lm"` returns are known, creating a generic function class is straightforward.  
 
 
-# `R`-coding <br> <br> The Google style guide
-
-# Naming conventions
-
-## File Names
-File names should end in `.R` and, of course, be meaningful. 
-
-GOOD:
-```{r eval=FALSE}
-predict_ad_revenue.R
-```
-
-<font color="red">BAD: </font>
-```{r eval=FALSE}
-foo.R
-```
-
-## Identifiers
-
-Don't use underscores ( _ ) or hyphens ( - ) in identifiers. Identifiers should be named according to the following conventions. 
-
-1. The preferred form for variable names is all lower case letters and words separated with dots (variable.name), but variableName is also accepted; 
-2. function names have initial capital letters and no dots (FunctionName); 
-3. constants are named like functions but with an initial k.
-
-## Identifiers (continued)
-- variable.name is preferred, variableName is accepted \
-  GOOD: `avg.clicks` \
-  OK: `avgClicks` \
-  <font color="red">BAD: `avg_Clicks`</font>
-
-- FunctionName \
-  GOOD: `CalculateAvgClicks` \
-  <font color="red">BAD: `calculate_avg_clicks` , `calculateAvgClicks` </font> \
-- `kConstantName`
-
-# Syntax
-
-## Line Length
-
-The maximum line length is 80 characters.
+## `sapply()` {.build}
+`sapply()` is used on `list`-objects. It returns a vector or a matrix.
 
 ```{r}
-# This is to demonstrate that at about eighty characters you would move off of the page
-
-# Also, if you have a very wide function
-fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg + bmi * hgt + wgt * hgt + wgt * hgt * bmi, data = boys)
-
-# it would be nice to pose it as
-fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg + bmi * hgt 
-          + bmi * wgt + wgt * hgt + wgt * hgt * bmi, data = boys)
-#or
-fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg 
-          + bmi * hgt 
-          + bmi * wgt
-          + wgt * hgt 
-          + wgt * hgt * bmi, 
-          data = boys)
+my.list <- list(A = c(4, 2, 1:3), B = "Hello.", C = TRUE)
+sapply(my.list, class)
 ```
 
 
-## Indentation
-
-When indenting your code, use two spaces. `RStudio` does this for you!
-
-Never use tabs or mix tabs and spaces. 
-
-Exception: When a line break occurs inside parentheses, align the wrapped line with the first character inside the parenthesis.
-
-## Spacing
-Place spaces around all binary operators (=, +, -, <-, etc.). 
-
-Exception: Spaces around ='s are optional when passing parameters in a function call.
-```{r eval=FALSE}
-lm(age ~ bmi, data=boys)
-```
-or
-```{r eval=FALSE}
-lm(age ~ bmi, data = boys)
-```
-
-## Spacing (continued)
-Do not place a space before a comma, but always place one after a comma. 
-
-GOOD:
-```{r eval=FALSE}
-tab.prior <- table(df[df$days.from.opt < 0, "campaign.id"])
-total <- sum(x[, 1])
-total <- sum(x[1, ])
+```{r}
+my.list <- list(A = c(4, 2, 1:3), B = c("hello","Hello.","Aa","aa"), C = c(FALSE,TRUE))
+sapply(my.list, range)
 ```
 
 
-## Spacing (continued)
-<font color="red">BAD:
-```{r eval=FALSE}
-# Needs spaces around '<'
-tab.prior <- table(df[df$days.from.opt<0, "campaign.id"])  
-# Needs a space after the comma
-tab.prior <- table(df[df$days.from.opt < 0,"campaign.id"])  
-# Needs a space before <-
-tab.prior<- table(df[df$days.from.opt < 0, "campaign.id"]) 
-# Needs spaces around <-
-tab.prior<-table(df[df$days.from.opt < 0, "campaign.id"])  
-# Needs a space after the comma
-total <- sum(x[,1])  
-# Needs a space after the comma, not before 
-total <- sum(x[ ,1])  
-```
-</font>
+Why is each element a character string?
 
-## Spacing (continued)
-Place a space before left parenthesis, except in a function call.
+## `sapply()`
 
-GOOD: 
-```{r eval=FALSE}
-if (debug)
+Any `data.frame` is also a `list`, where each column is one `list`-element.
+
+This means we can use `sapply` on data frames as well, which is often useful.
+
+```{r}
+sapply(df, mean)
 ```
 
-<font color="red">BAD:</font>
-```{r eval=FALSE}
-if(debug)
+## `lapply()`
+
+`lapply()` is *exactly* the same as `sapply()`, but it returns a list instead of a vector.
+```{r}
+lapply(df, class)
 ```
 
-## Extra spacing
-Extra spacing (i.e., more than one space in a row) is okay if it improves alignment of equals signs or arrows (<-).
-```{r eval = FALSE}
-plot(x    = x.coord,
-     y    = data.mat[, MakeColName(metric, ptiles[1], "roiOpt")],
-     ylim = ylim,
-     xlab = "dates",
-     ylab = metric,
-     main = (paste(metric, " for 3 samples ", sep = "")))
 
+
+# Writing your own functions
+
+## What are functions?
+
+Functions are reusable pieces of code that 
+
+1. take some standard input (e.g. a vector of numbers)
+2. do some computation  (e.g. calculate the mean)
+3. return some standard output (e.g. one number with the mean)
+
+We have been using a lot of functions: code of the form `something()` is usually a function. 
+
+```{r}
+mean(1:6)
 ```
 
-Do not place spaces around code in parentheses or square brackets.
+## Our own function
 
-Exception: Always place a space after a comma.
+We can make our own functions as follows:
 
-## Extra spacing
-GOOD:
-```{r eval=FALSE}
-if (debug)
-x[1, ]
+```{r}
+squared <- function (x){
+  x.square <- x * x
+  return(x.square) 
+}
+
+squared(4)
 ```
 
-<font color="red">BAD:</font>
-```{r eval=FALSE}
-if ( debug )  # No spaces around debug
-x[1,]  # Needs a space after the comma 
+`x`, the input, is called the (formal) *argument* of the function. `x.square` is called the *return value*.
+
+## Our own function
+
+If there is no `return()`, the last line is automatically returned, so we can also just write:
+
+I do not recommend this.
+
+```{r}
+squared <- function(x){
+  x * x
+}
+
+squared(-2)
 ```
 
-## In general...
-- Use common sense and BE CONSISTENT.
+## Our own function {.smaller}
 
-- The point of having style guidelines is to have a common vocabulary of coding 
-    - so people can concentrate on what you are saying, rather than on how you are saying it. 
+We can also combine this with `apply()`
 
-- If code you add to a file looks drastically different from the existing code around it, the discontinuity will throw readers out of their rhythm when they go to read it. Try to avoid this.
+```{r}
+df
+apply(df, 2, squared)
+```
+
+
+
+## Default options in functions {.build}
+* Default options for some arguments are provided in many functions. 
+
+* They allow us to provide an additional option, but if no choice is provided, we can choose for the user of the function. 
+
+```{r}
+is_contained <- function(str_1, str_2, print_input = TRUE){
+  if (print_input){
+    cat("Testing if", str_1, "contained in", str_2, "\n")
+  }
+  return(str_1 %in% str_2)
+}
+```
+
+
+```{r, collapse=TRUE,eval=FALSE}
+is_contained("R", "rstudio")
+```
+```{r, collapse=TRUE}
+is_contained("R", "rstudio")
+is_contained("R", "rstudio", print_input = TRUE)
+is_contained("R", "rstudio", print_input = FALSE)
+```
+
+
+## Troubleshooting
+* Your first self-written for-loop, or function, will probably not work.
+
+* Don't panic! Just go line-by-line, keeping track of what is currently inside each variable. 
+* Stackoverflow is your friend.
+
+
+# Scoping rules in `R` 
+
+## Scoping rules in `R`: Global environemnt (workspace)
+When you write the name of a variable, R needs to find the value.
+
+In the interactive computation (outside of functions, e.g., your console), this happens in the following order:
+- First, search the global environment (i.e., your workspace) 
+- If it cannot be found, search each of the loaded packages
+
+
+```{r}
+search()
+```
+The order of packages is important.
+
+
+## Scoping rules in `R`: Functions
+
+Inside a function, this happens in the following order:
+- First, search within the function.
+- If it cannot be found, search in the global environment (i.e., your workspace) 
+- If it cannot be found, search each of the loaded packages
+
+
+```{r}
+y <- 3
+
+test_t <- function() {
+  print(y)
+}
+
+test_t()
+```
+```{r}
+y <- 3
+
+test_t <- function() {
+  y <- 3
+  print(y)
+}
+
+test_t()
+```
+
+## Scoping rules in `R`: Functions
+
+What happens inside a function, stays within a function (unless you specify differently)
+
+
+```{r}
+y <- 3
+
+test_t <- function() {
+  y <- 2
+  print(y)
+}
+
+test_t()
+y
+```
+
+## Scoping rules in `R`: Packages
+
+Packages are neatly contained/isolated, so they are not affected by your code.
+
+They do so through namespaces.
+- Allow the package developer to hide functions and data.
+- Objects in the global environment that match objects in the function's namespace are ignored when running functions from packages (prevent clashes)
+- Functions are executed within the namespace of the package and have access to the global environment
+- They provide a way to refer to an object, with the double colon `::`
+
+```{r}
+dplyr::n_distinct(c(1,2,3,4,2))
+```
+
+
+# Practical
 
 
