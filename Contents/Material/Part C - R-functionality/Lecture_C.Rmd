@@ -10,7 +10,7 @@ output:
     smaller: true
     widescreen: true
     transition: 0
-  #pdf_document: default
+  pdf_document: default
 
 ---
 
@@ -75,7 +75,9 @@ Loops in R happen often under the hood. New functions:
 
 
 Operation of a if statement:
-![Source: tutorialspoint.com](https://www.tutorialspoint.com/scala/images/scala_decision_making.jpg){width=50%}
+
+![Source: datamentor.io](img/r-if-statement.jpg){width=50%}
+
 :::
 
 ::: {.column width="45%"}
@@ -102,7 +104,7 @@ if (value > 3) { #condition
 
 
 Operation of a if-else statement:
-![Source: guru99.com](https://www.guru99.com/images/r_programming/032818_1241_IFELSEELIF1.png){width=70%}
+![Source: datamentor.io](img/r-if-else-statement.jpg){width=60%}
 :::
 
 ::: {.column width="45%"}
@@ -129,7 +131,7 @@ if (value > 3) { #condition true?
 
 
 Operation of a if-else statement:
-![Source: CS161 oregonstate.edu](https://eecs.oregonstate.edu/ecampus-video/CS161/template/chapter_4/chapter4_images/4_09.png){width=70%}
+![Source: CS161 oregonstate.edu](img/4_09.png){width=70%}
 
 :::
 
@@ -167,7 +169,7 @@ example_vector[example_vector>3]
 ## For loops
 For loops are used when we want to perform some repetitive calculations. 
 
-![Source: datacamp.com](http://community.datacamp.com.s3.amazonaws.com/community/production/ckeditor_assets/pictures/132/content_flowchart1.png)
+![Source: datacamp.com](img/content_flowchart1.png)
 
 ## For-loops {.small}
 ```{r, collapse=TRUE}
