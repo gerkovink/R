@@ -171,14 +171,14 @@ To ensure that you work with the latest iteration of the course materials, we ad
 
 - Part C: Programming
     - [Lecture C (slides)](Contents/Material/Part C - Programming/Lecture_C.html)
-    - [Lecture C (pdf)](Contents/Material/Part C - Programmin/Lecture_C.pdf)
-    - [Practical C](Contents/Material/Part C - Programmin/Practical_C_walkthrough.html)
+    - [Lecture C (pdf)](Contents/Material/Part C - Programming/Lecture_C.pdf)
+    - [Practical C](Contents/Material/Part C - Programming/Practical_C_walkthrough.html)
     
 
-- Part B: Working with `R`: Data types and structures
-    - [Lecture B (slides)](Contents/Material/Part D - Tidy/Lecture_D.html)
-    - [Lecture B (pdf)](Contents/Material/Part D - Tidy/Lecture_D.pdf)
-    - [Practical B](Contents/Material/Part D - Tidy/Practical_D_walkthrough.html)
+- Part D: Tidy R
+    - [Lecture D (slides)](Contents/Material/Part D - Tidy/Lecture_D.html)
+    - [Lecture D (pdf)](Contents/Material/Part D - Tidy/Lecture_D.pdf)
+    - [Practical D](Contents/Material/Part D - Tidy/Practical_D_walkthrough.html)
     - [`dataset_boys.csv`](Contents/Material/common_datasets/dataset_boys.csv)
   
 
