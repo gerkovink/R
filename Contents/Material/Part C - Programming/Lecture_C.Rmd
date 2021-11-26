@@ -169,6 +169,18 @@ example_vector[example_vector>3]
 
 The computer keeps the value of the elements of example_vector **if** the corresponding elements in the condition (`example_vector>3`) are TRUE.
 
+
+## Vectorized version of if-else statements
+
+Operations in R are much faster when applied at once to a vector
+
+
+```{r}
+example_vector = c(1,2,3,4,5,6,7,8,9)
+ifelse(example_vector > 5.5, "Pass","Fail")
+```
+
+
 # Control-flow (II): Loops
 
 ## For loops
@@ -307,10 +319,12 @@ The `apply` family is a group of very useful functions that allow you to easily 
 We will look at three examples:
 
 - `apply`
-
 - `sapply`
-
 - `lapply`
+
+There are more:
+- `vapply`
+- `mapply`
 
 ## `apply()` {.build}
 `apply` is used for matrices/dataframes. It applies a function to each *row* or *column*. It returns a vector or a matrix.
@@ -327,10 +341,14 @@ apply(df, MARGIN = 1, mean)
 
 Apply it by column (MARGIN = 2):
 ```{r, collapse=TRUE}
-apply(df, MARGIN = 2, mean) #Identical to colMeans(df)
+apply(df, MARGIN = 2, mean) #Identical to colMeans(df), which is much faster
 ```
 
 
+It doesn't need to aggregate:
+```{r, collapse=TRUE}
+apply(df, MARGIN = 2, sqrt)
+```
 
 ## `sapply()` {.build}
 `sapply()` is used on `list`-objects. It returns a vector or a matrix.
@@ -354,6 +372,11 @@ Why is each element a character string?
 Any `data.frame` is also a `list`, where each column is one `list`-element.
 
 This means we can use `sapply` on data frames as well, which is often useful.
+
+```{r}
+boys[boys[["reg"]] == reg, "age"]
+```
+
 
 ```{r}
 sapply(df, mean)

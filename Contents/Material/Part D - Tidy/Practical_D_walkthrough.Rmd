@@ -69,12 +69,21 @@ dplyr::mutate(boys,
 4. **group_by + summarize: Group by region, and calculate the average bmi, wgt and hgt. Use a pipe if you dare**
 
 ```{r}
+# Without a pipe
+gr_boys <- dplyr::group_by(boys, reg)  
+dplyr::summarize(gr_boys, mean_bmi = mean(bmi, na.rm=TRUE),
+                   mean_wgt = mean(wgt, na.rm=TRUE),
+                   mean_hgt = mean(hgt, na.rm=TRUE))
+
+# With a pipe
 # The arguments are evaluated sequentially in tidyverse, by the time we get to bmi_2 the computer has already created hgt_square
 boys %>% 
   dplyr::group_by(reg) %>% 
   dplyr::summarize(mean_bmi = mean(bmi, na.rm=TRUE),
                    mean_wgt = mean(wgt, na.rm=TRUE),
                    mean_hgt = mean(hgt, na.rm=TRUE))
+
+
 ```
 
 4. **arrange: Sort the dataset by bmi, what can you say about the boys with low bmi?**
@@ -94,6 +103,7 @@ tidyr::table2
 6. **Transform the data to make it tidy, and calculate the cases of TB per 1 million people? Which country had the highest cases per capita?** Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?
 
 ```{r}
+# With a pipe (but you could do it with intermediate steps as well)
 table2 %>%  
   tidyr::pivot_wider(id_cols = c("country","year"),
                     names_from = "type",
@@ -119,28 +129,29 @@ head(table4b_tidy)
 8. **Join table4a_tidy and table4b_tidy, and calculate the cases of TB per 1 million people? Which country had the highest cases per capita?** Could you have done this with table4a and table4b?
 
 ```{r}
+#With a pipe
 dplyr::inner_join(table4a_tidy, table4b_tidy, on = c("country", "year")) %>% 
     dplyr::mutate(cases_per_capita = 1E6*TB/Pop) %>% 
     dplyr::arrange(desc(cases_per_capita))
   
 ```
 
-## Exercises 9--10: Linear regression
+## Exercises 9--11: Linear regression
 
-8. **Using the boys dataset, fit a model where the weight depends on the age and the region.** 
+9. **Using the boys dataset, fit a model where the weight depends on the age and the region.** 
 
 ```{r}
 fit <- stats::lm(wgt ~ age + reg, data=boys)
 fit
 ```
 
-8. **Print the regression table using the function summary. Does the region have a significant effect?** 
+10. **Print the regression table using the function summary. Does the region have a significant effect?** 
 
 ```{r}
 summary(fit)
 ```
 
-8. **Check the assumptions of linear regression using plot(). Are the assumptions met? What are the biggest outliers? (find them in the data)** Homoscedasticity and independence of residuals (which = 1). Normality of residuals (which = 2 and which = 5). 
+11. **Check the assumptions of linear regression using plot(). Are the assumptions met? What are the biggest outliers? (find them in the data)** Homoscedasticity and independence of residuals (which = 1). Normality of residuals (which = 2 and which = 5). 
 
 ```{r}
 plot(fit, which = 1)
@@ -149,7 +160,19 @@ plot(fit, which = 6)
 boys[c(733,610,574),]
 ```
 
-## Exercise 9--10. Some visualization
+
+## Exercise 12. Saving data
+
+12. **Save the data `boys` as an RDS file, and as an Excel file**. Remember to save your data to the data folder!
+
+```{r}
+readr::write_rds(boys, "data/boys.rds")
+writexl::write_xlsx(boys, "data/boys.xlsx")
+```
+
+
+
+## Exercise 13--14. Some visualizations
 
 
 Tidyverse is great because it connects very well with ggplot. You'll learn more next time, but let's demonstrate using the datasaurus dataset. There are 12 datasets composed of a `x` variable and a `y` variable, created in a way that mean(x), mean(y), sd(x), sd(y).
@@ -163,19 +186,19 @@ library(datasauRus)
 ```
 
 
-9. Group datasauRus::datasaurus_dozen by the variable `dataset` and calculate the mean and standard deviation of both x and y, and the correlation (function `cor()`) between x and y.
+13. Group datasauRus::datasaurus_dozen by the variable `dataset` and calculate the mean and standard deviation of both x and y, and the correlation (function `cor()`) between x and y.
 
 ```{r}
 datasauRus::datasaurus_dozen %>% 
       dplyr::group_by(dataset) %>% 
-      dplyr::(mean_x = mean(x),
+      dplyr::summarize(mean_x = mean(x),
                 mean_y = mean(y),
                 sd_x = sd(x),
                 sd_y = sd(y),
                 cor(x,y))
 ```
 
-10. **Use the following code to visualize the data.**
+14. **Use the following code to visualize the data.**
 
 ```{r, class.source = 'fold-show'}
 ggplot(datasaurus_dozen, aes(x=x, y=y, colour=dataset))+

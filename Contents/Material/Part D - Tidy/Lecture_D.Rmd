@@ -376,6 +376,8 @@ nans <- rowSums(is.na(data[, c("bmi","reg")]))
 data[!nans,]
 
 ```
+
+
 :::
 
 ::: {.column width="50%"}
@@ -446,7 +448,7 @@ new_data
 ::::
 
 
-## Applying a function by columns
+## Applying a function by columns (map is more consistent)
 
 :::: {style="display: flex;"}
 
@@ -872,7 +874,7 @@ Exception: Always place a space after a comma.
 5. You shouldn't need to write a command more than two times. 
    - If you are doing something similar several times --> Use __functions__ (e.g. you made an amazing plot and you want to use it in two subsets of the data)
       - Reusable in other projects
-   - If you find yourself writing the same thing several times --> use __for loops__ (potentially with `purrr::map` for performance)
+   - If you find yourself writing the same thing several times --> use __for loops__ (potentially with `purrr::map` for convenience)
    - Both functions and loops allow you:
       - Have a clear code
       - Easier to maintain / less errors

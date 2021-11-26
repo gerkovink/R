@@ -266,9 +266,11 @@ div.tocify {
 
 
 <p>In the practical I will be explicitly specifying the package of each library (e.g. readr::read_delim). Specifying the package is not required and can be cumbersome for the most commonly used functions. It is however a good idea to understand the source of the functions you are using.</p>
+<p>In the following exercises we will use the same dataset as last time, boys.</p>
+<p>(if you haven’t done the previous practical) You need to download You need to download <code>dataset_boys.csv</code> from <a href="https://javier.science/R/#day-2-nov-26th">here</a> and add it to a folder “data” in the same folder as your markdown file.</p>
+<p>Then, read the file dataset_boys.csv using the code in the next cell.</p>
 <div id="reading-data" class="section level2">
 <h2>Reading data</h2>
-<p>Then you can read the file using the function <code>read_delim()</code> from the <code>readr</code> library</p>
 </div>
 <div id="exercise-1-4-tidyverse-operations" class="section level2">
 <h2>Exercise 1-4: Tidyverse operations</h2>
@@ -290,19 +292,25 @@ div.tocify {
 <li><p><strong>Join table4a_tidy and table4b_tidy, and calculate the cases of TB per 1 million people? Which country had the highest cases per capita?</strong> Could you have done this with table4a and table4b?</p></li>
 </ol>
 </div>
-<div id="exercises-910-linear-regression" class="section level2">
-<h2>Exercises 9–10: Linear regression</h2>
-<ol start="8" style="list-style-type: decimal">
+<div id="exercises-911-linear-regression" class="section level2">
+<h2>Exercises 9–11: Linear regression</h2>
+<ol start="9" style="list-style-type: decimal">
 <li><p><strong>Using the boys dataset, fit a model where the weight depends on the age and the region.</strong></p></li>
 <li><p><strong>Print the regression table using the function summary. Does the region have a significant effect?</strong></p></li>
 <li><p><strong>Check the assumptions of linear regression using plot(). Are the assumptions met? What are the biggest outliers? (find them in the data)</strong> Homoscedasticity and independence of residuals (which = 1). Normality of residuals (which = 2 and which = 5).</p></li>
 </ol>
 </div>
-<div id="exercise-910.-some-visualization" class="section level2">
-<h2>Exercise 9–10. Some visualization</h2>
+<div id="exercise-12.-saving-data" class="section level2">
+<h2>Exercise 12. Saving data</h2>
+<ol start="12" style="list-style-type: decimal">
+<li><strong>Save the data <code>boys</code> as an RDS file, and as an Excel file</strong>. Remember to save your data to the data folder!</li>
+</ol>
+</div>
+<div id="exercise-1314.-some-visualizations" class="section level2">
+<h2>Exercise 13–14. Some visualizations</h2>
 <p>Tidyverse is great because it connects very well with ggplot. You’ll learn more next time, but let’s demonstrate using the datasaurus dataset. There are 12 datasets composed of a <code>x</code> variable and a <code>y</code> variable, created in a way that mean(x), mean(y), sd(x), sd(y).</p>
 <p>First, install the library datasauRus and load it</p>
-<ol start="9" style="list-style-type: decimal">
+<ol start="13" style="list-style-type: decimal">
 <li><p>Group datasauRus::datasaurus_dozen by the variable <code>dataset</code> and calculate the mean and standard deviation of both x and y, and the correlation (function <code>cor()</code>) between x and y.</p></li>
 <li><p><strong>Use the following code to visualize the data.</strong></p></li>
 </ol>
