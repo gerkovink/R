@@ -1,5 +1,5 @@
 ---
-title: "Practical B"
+title: "Practical D"
 author: "Javier Garcia-Bernardo"
 date: "Statistical Programming with R"
 output: 
@@ -15,12 +15,12 @@ output:
 
 
 
-
-```{r echo=FALSE}
-knitr::opts_chunk$set(echo = FALSE, eval = FALSE, include = FALSE)
-```
-
 In the practical I will be explicitly specifying the package of each library (e.g. readr::read_delim). Specifying the package is not required and can be cumbersome for the most commonly used functions. It is however a good idea to understand the source of the functions you are using.
+
+First, load the required library (tidyverse). Look at the output, which packages does it load?
+```{r  class.source = 'fold-show'}
+library(tidyverse)
+```
 
 In the following exercises we will use the same dataset as last time, boys.
 
@@ -30,43 +30,39 @@ Then, read the file dataset_boys.csv using the code in the next cell.
 
 ## Reading data
 
-```{r}
-#install.packages(c("readr"),repos = "http://cran.us.r-project.org")
-library(readr)
+```{r class.source = 'fold-show'}
 #Reading the file
 boys <- readr::read_delim("data/dataset_boys.csv",delim=",")
 is_tibble(boys)
 ```
 
+---
 
 ## Exercise 1-4: Tidyverse operations
 
-
----
-
-1. Filter: **Create a new tibble What is the mean age of boys younger than 15 years of age that do not live in region `north`?**
+1. Filter: **Create a new tibble with the boys younger than 15 that do not live in the "north" region, and calculate their average age.**
 
 ```{r}
 age_subset <- dplyr::filter(boys, (age < 15), (reg != "north"))
 mean(age_subset$age, na.rm=TRUE)
 ```
 
-2. Select: **Select variables bmi and wgt of the tibble you just created**
+2. Select: **Select the variables bmi and wgt of the tibble you just created**
 
 ```{r}
 dplyr::select(age_subset, bmi, wgt)
 ```
 
-3. Mutate: **Create two new variables, one call hgt_square (htg^2), and another called bmi_2 (10000  wgt/hgt_square)**. Use one command only
+3. Mutate: **Create two new variables, one call hgt_square (hgt^2), and another called bmi_2 (10000  wgt/hgt_square)**. 
 
 ```{r}
 # The arguments are evaluated sequentially in tidyverse, by the time we get to bmi_2 the computer has already created hgt_square
 dplyr::mutate(boys, 
-              hgt_square = htg^2,
+              hgt_square = hgt^2,
               bmi_2 = 10000 * wgt / hgt_square)
 ```
 
-4. **group_by + summarize: Group by region, and calculate the average bmi, wgt and hgt. Use a pipe if you dare**
+4. **group_by + summarize: Group by region, and calculate the average bmi, wgt and hgt. You could use a pipe to make it more compact.**
 
 ```{r}
 # Without a pipe
@@ -89,7 +85,7 @@ boys %>%
 4. **arrange: Sort the dataset by bmi, what can you say about the boys with low bmi?**
 
 ```{r}
-#The boys are small babies
+#They are small babies
 dplyr::arrange(boys, bmi)
 ```
 
@@ -100,10 +96,21 @@ dplyr::arrange(boys, bmi)
 tidyr::table2
 ```
 
-6. **Transform the data to make it tidy, and calculate the cases of TB per 1 million people? Which country had the highest cases per capita?** Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?
+6. **Transform the data to make it tidy** *Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?* **Then, calculate the cases of TB per 1 million people. Which country had the highest cases per capita?**
 
 ```{r}
-# With a pipe (but you could do it with intermediate steps as well)
+# Without a pipe
+table2_tidy <- tidyr::pivot_wider(table2,
+                                  id_cols = c("country","year"),
+                                  names_from = "type",
+                                  values_from = "count")
+
+table2_tidy <-dplyr::mutate(table2_tidy, cases_per_capita = 1E6*cases/population) 
+dplyr::arrange(table2_tidy, desc(cases_per_capita))
+```
+
+```{r}
+#Or with a pipe
 table2 %>%  
   tidyr::pivot_wider(id_cols = c("country","year"),
                     names_from = "type",
@@ -112,8 +119,9 @@ table2 %>%
   dplyr::arrange(desc(cases_per_capita))
 ```
 
-7. **Tidy the datasets tidyr::table4a (cases of TB) and tidyr::table4b (population). Save the output table with names table4a_tidy and table4ab_tidy** Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?
 
+7. **Print the datasets tidyr::table4a (cases of TB) and tidyr::table4b (population). Tidy them and save the output tables with names table4a_tidy and table4ab_tidy** 
+*Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?*
 ```{r}
 table4a_tidy <- tidyr::pivot_longer(table4a, cols = c("1999","2000"),
                                 names_to = "year",
@@ -151,13 +159,19 @@ fit
 summary(fit)
 ```
 
-11. **Check the assumptions of linear regression using plot(). Are the assumptions met? What are the biggest outliers? (find them in the data)** Homoscedasticity and independence of residuals (which = 1). Normality of residuals (which = 2 and which = 5). 
+11. **Check the assumptions of linear regression using plot(). Are the assumptions met? What are the biggest outliers? (find them in the data)** Homoscedasticity and independence of residuals (which = 1). Normality of residuals (which = 2) and presence of outliers (which = 6). 
 
 ```{r}
+# There shouldn't be strange patterns
 plot(fit, which = 1)
+# The points should lie on the line
 plot(fit, which = 2)
+# Cook's distance measures the effect of deleting a given observation. 
+# Leverage is a measure of how far away the independent variable values of an observation are from those of the other observations.
 plot(fit, which = 6)
-boys[c(733,610,574),]
+
+# Checking outliers
+slice(boys, c(733,610,574))
 ```
 
 
@@ -198,7 +212,7 @@ datasauRus::datasaurus_dozen %>%
                 cor(x,y))
 ```
 
-14. **Use the following code to visualize the data.**
+14. **Use the following code to visualize the data.** *The descriptive statistics were identical, but do the datasets look similar?**
 
 ```{r, class.source = 'fold-show'}
 ggplot(datasaurus_dozen, aes(x=x, y=y, colour=dataset))+

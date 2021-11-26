@@ -1,5 +1,5 @@
 ---
-title: "Practical B"
+title: "Practical C"
 author: "Javier Garcia-Bernardo"
 date: "Statistical Programming with R"
 output: 
@@ -36,6 +36,7 @@ boys <- boys[, c("age","wgt","bmi")]
 boys <- na.omit(boys)
 ```
 
+---
 
 ## Exercise 1-3: Control-flow 
 
@@ -50,7 +51,7 @@ for (i in 0:10) {
 }
 ```
 
----
+
 
 2. **Modify the for loop to only print the numbers 3, 4, and 5.**
 
@@ -78,7 +79,7 @@ num <- 0:10
 num[num >= 3 & num <=5]
 ``` 
 
-
+---
 
 ## Exercise 4--6: Functions
 
