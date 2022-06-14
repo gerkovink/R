@@ -56,9 +56,9 @@ Participants will receive a certificate at the end of the course.
 
 | When?  |      | What?      |
 |:--------|:-------|:-------------|
-| 09.15 | 09.45  | Lecture |
-| 09:45 | 10.30  | Practical |
-| 10.30 | 10.45  | Discussion |
+| 09.00 | 09.30  | Lecture |
+| 09:30 | 10.15  | Practical |
+| 10.15 | 10.45  | Discussion |
 |       | **break** |            |
 | 11.00 | 11.45  | Lecture |
 | 11:45 | 12.30  | Practical |
