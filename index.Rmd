@@ -1,5 +1,5 @@
 ---
-title: "Statistical Programming with R 2021"
+title: "Statistical Programming with R 2022"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -14,16 +14,15 @@ We usually adapt the course as we go, so we suggest to access the materials onli
 
 ---
 
-Course leader: [Gerko Vink](https://www.gerkovink.com) <br>
+Course leader: [Laurence Frank](https://www.) <br>
 Instructors: 
 
- - [Erik-Jan van Kesteren](https://erikjanvankesteren.nl)
- - [Maarten Cruyff](https://www.uu.nl/medewerkers/mcruyff)
- - [Ayoub Bagheri](https://bagheria.github.io)
- - [Thom Volker](https://thomvolker.github.io)
+ - [Duco Veen](https://www.ducoveen.com/)
+ 
+ 
 
 Study load: 1.5 ECTS <br>
-Location of Start: [Koningsberger building - Pangea hall](https://www.uu.nl/en/victor-j-koningsberger-building)
+Location of Start: [Koningsberger building - ATLAS](https://www.uu.nl/en/victor-j-koningsberger-building)
 
 ---
 # Quick Overview
@@ -57,9 +56,9 @@ Participants will receive a certificate at the end of the course.
 
 | When?  |      | What?      |
 |:--------|:-------|:-------------|
-| 09.00 | 09.30  | Lecture |
-| 09:30 | 10.15  | Practical |
-| 10.15 | 10.45  | Discussion |
+| 09.15 | 09.45  | Lecture |
+| 09:45 | 10.30  | Practical |
+| 10.30 | 10.45  | Discussion |
 |       | **break** |            |
 | 11.00 | 11.45  | Lecture |
 | 11:45 | 12.30  | Practical |
@@ -74,10 +73,11 @@ Participants will receive a certificate at the end of the course.
 ### Lecture Hall locations
 | When?  | Where    |
 |:--------|:-------|
-| Tuesday | [Ruppert Blauw](https://goo.gl/maps/jG6Vzv5ugfCXvR8x8)  | 
-| Wednesday| [Koningsberger Cosmos](https://goo.gl/maps/ufn6aXVL9K48Gn7S6)  | 
-| Thursday | [Ruppert 040](https://goo.gl/maps/jG6Vzv5ugfCXvR8x8)  | 
-| Friday | [Koningsberger Cosmos](https://goo.gl/maps/ufn6aXVL9K48Gn7S6) |            
+| Monday | [Koningsberger ATLAS](https://goo.gl/maps/ufn6aXVL9K48Gn7S6) |
+| Tuesday | [Koningsberger ATLA](https://goo.gl/maps/ufn6aXVL9K48Gn7S6)  | 
+| Wednesday| [Koningsberger ATLA](https://goo.gl/maps/ufn6aXVL9K48Gn7S6)  | 
+| Thursday | [Ruppert Wit (morning), Blue (afternoon)](https://goo.gl/maps/jG6Vzv5ugfCXvR8x8)  | 
+| Friday | [Koningsberger ATLAS](https://goo.gl/maps/ufn6aXVL9K48Gn7S6) |            
 
 
 # How to prepare
