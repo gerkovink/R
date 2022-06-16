@@ -43,7 +43,7 @@ pre { /* Code block - determines code spacing between lines */
 ## Very useful
 You can access the course materials quickly from
 
-[www.gerkovink.com/R](https://www.gerkovink.com/R)
+[https://laurencefrank.github.io/R](https://laurencefrank.github.io/R)
 
 # Overview of this course
 ## Program
