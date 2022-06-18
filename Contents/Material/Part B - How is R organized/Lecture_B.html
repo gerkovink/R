@@ -3582,55 +3582,6 @@ f</pre>
 
 <pre >## [1] 1 2 3 4 5</pre>
 
-</article></slide><slide class=""><hgroup><h2>Functional programming</h2></hgroup><article  id="functional-programming" class="smaller ">
-
-<pre class = 'prettyprint lang-r'>library(purrr)
-map(g, &quot;vector&quot;)</pre>
-
-<pre >## [[1]]
-## [1] 1 2 3 4 5
-## 
-## [[2]]
-## [1] 1 2 3 4 5</pre>
-
-<pre class = 'prettyprint lang-r'>map(map(g, &quot;data frame&quot;), &quot;V2&quot;)</pre>
-
-<pre >## [[1]]
-## [1] 8.430130 5.921832 2.469878 3.626294 4.108676
-## 
-## [[2]]
-## [1] 8.430130 5.921832 2.469878 3.626294 4.108676</pre>
-
-</article></slide><slide class=""><hgroup><h2>Grabbing elements with <code>map()</code></h2></hgroup><article  id="grabbing-elements-with-map" class="smaller ">
-
-<p>and making them into new objects</p>
-
-<pre class = 'prettyprint lang-r'>do.call(&quot;cbind&quot;, map(map(g, &quot;data frame&quot;), &quot;V2&quot;))</pre>
-
-<pre >##          [,1]     [,2]
-## [1,] 8.430130 8.430130
-## [2,] 5.921832 5.921832
-## [3,] 2.469878 2.469878
-## [4,] 3.626294 3.626294
-## [5,] 4.108676 4.108676</pre>
-
-</article></slide><slide class=""><hgroup><h2>Now with a pipe</h2></hgroup><article  id="now-with-a-pipe" class="smaller ">
-
-<pre class = 'prettyprint lang-r'>library(dplyr)
-g %&gt;% 
-  map(&quot;data frame&quot;) %&gt;% 
-  map(&quot;V2&quot;) %&gt;% 
-  do.call(&quot;cbind&quot;, .)</pre>
-
-<pre >##          [,1]     [,2]
-## [1,] 8.430130 8.430130
-## [2,] 5.921832 5.921832
-## [3,] 2.469878 2.469878
-## [4,] 3.626294 3.626294
-## [5,] 4.108676 4.108676</pre>
-
-<p>Tomorrow we focus much more on pipes</p>
-
 </article></slide><slide class=""><hgroup><h2>Logical operators</h2></hgroup><article  id="logical-operators" class="smaller ">
 
 <ul>
