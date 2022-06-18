@@ -3694,7 +3694,17 @@ f</pre>
 
 <pre >## [1] 8.326673e-17</pre>
 
+</article></slide><slide class=""><hgroup><h2>Floating point example, continued</h2></hgroup><article  id="floating-point-example-continued" class="smaller ">
+
+<pre class = 'prettyprint lang-r'>(3 - 2.9) - 0.1</pre>
+
+<pre >## [1] 8.326673e-17</pre>
+
 <pre class = 'prettyprint lang-r'>((3 - 2.9) - 0.1) &lt; 0.00000000000001</pre>
+
+<pre >## [1] TRUE</pre>
+
+<pre class = 'prettyprint lang-r'>all.equal((3 - 2.9), 0.1)</pre>
 
 <pre >## [1] TRUE</pre>
 
