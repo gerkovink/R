@@ -174,6 +174,7 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 
 ### Useful references
 
+- [R reference card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
 - [The tidyverse style guide](https://style.tidyverse.org)
 - [The Google R style guide](https://google.github.io/styleguide/Rguide.xml)
 
