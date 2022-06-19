@@ -253,7 +253,7 @@ apply(rand.mat, MARGIN = 2, FUN = var)
 ```
 
 ## `sapply()` 
-`sapply()` is used on `list`-objects.
+`sapply()` is used on `list`-objects and it returns a vector or a matrix, depending on the output of the function.
 
 ```{r}
 my.list <- list(A = c(4, 2, 1:3), B = "Hello.", C = TRUE)
@@ -265,8 +265,6 @@ sapply(my.list, class)
 my.list <- list(A = c(4, 2, 1:3), B = "Hello.", C = TRUE)
 sapply(my.list, range)
 ```
-
-It returns a vector or a matrix, depending on the output of the function.
 
 Why is each element a character string?
 
@@ -293,7 +291,7 @@ sapply(cats, class)
 
 ## `lapply()`
 
-`lapply()` is *exactly* the same as `sapply()`, but it returns a list instead of a vector.
+`lapply()` is *exactly* the same as `sapply()`, but it returns a list of the same length as input list object, each element of which is the result of applying FUN to the corresponding element of list.
 ```{r}
 lapply(cats, class)
 ```
