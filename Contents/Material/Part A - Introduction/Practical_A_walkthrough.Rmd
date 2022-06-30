@@ -47,7 +47,7 @@ In this exercise we will get acquainted with `R`. A convenient way to work with 
  
 If you have no experience with `R`, you will learn the most from following this document. If you have some experience with `R` already,  I suggest you try solving the questions without looking at the answers/walkthrough. You can then refer to the solutions at any time, if needed. 
 
-If you have any questions or if you feel that some code should be elaborated, feel free to ask me via e-mail or ask the workgroup instructor.
+If you have any questions or if you feel that some code should be elaborated, feel free to ask the workgroup instructor.
 
 ---
 
