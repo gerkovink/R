@@ -12,15 +12,14 @@ output:
 ## Very useful
 You can access the course materials quickly from
 
-[www.gerkovink.com/R](https://www.gerkovink.com/R)
+[https://laurencefrank.github.io/R](https://laurencefrank.github.io/R)
+
 
 
 Some guidelines
 
-1. Please keep your microphone off
-2. If you have a question, raise your hand or type your question in the chat
-3. You may always interrupt me 
-4. We will introduce frequent question breaks
+1. If you have a question, you may always interrupt me 
+2. We will introduce frequent question breaks
 
 
 # Overview of this course

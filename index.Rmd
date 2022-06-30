@@ -1,5 +1,5 @@
 ---
-title: "Statistical Programming with R 2021"
+title: "Statistical Programming with R 2022"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -14,16 +14,16 @@ We usually adapt the course as we go, so we suggest to access the materials onli
 
 ---
 
-Course leader: [Gerko Vink](https://www.gerkovink.com) <br>
+
 Instructors: 
 
- - [Erik-Jan van Kesteren](https://erikjanvankesteren.nl)
- - [Maarten Cruyff](https://www.uu.nl/medewerkers/mcruyff)
- - [Ayoub Bagheri](https://bagheria.github.io)
- - [Thom Volker](https://thomvolker.github.io)
-
+ - [Laurence Frank](https://www.uu.nl/staff/lefrank) (course leader) <br>
+ - [Maarten Cruyff](https://www.uu.nl/staff/mcruyff)
+ - [Duco Veen](https://www.ducoveen.com/)
+ 
+ 
 Study load: 1.5 ECTS <br>
-Location of Start: [Koningsberger building - Pangea hall](https://www.uu.nl/en/victor-j-koningsberger-building)
+Location of Start: [Koningsberger building - Atlas](https://www.uu.nl/en/victor-j-koningsberger-building)
 
 ---
 # Quick Overview
@@ -74,9 +74,11 @@ Participants will receive a certificate at the end of the course.
 ### Lecture Hall locations
 | When?  | Where    |
 |:--------|:-------|
-| Tuesday | [Ruppert Blauw](https://goo.gl/maps/jG6Vzv5ugfCXvR8x8)  | 
-| Wednesday| [Koningsberger Cosmos](https://goo.gl/maps/ufn6aXVL9K48Gn7S6)  | 
-| Thursday | [Ruppert 040](https://goo.gl/maps/jG6Vzv5ugfCXvR8x8)  | 
+| Monday | [Koningsberger Atlas](https://goo.gl/maps/ufn6aXVL9K48Gn7S6) |
+| Tuesday | [Koningsberger Atlas](https://goo.gl/maps/ufn6aXVL9K48Gn7S6)  | 
+| Wednesday morning| [Koningsberger Cosmos](https://goo.gl/maps/ufn6aXVL9K48Gn7S6)  | 
+| Wednesday afternoon| [Ruppert Paars](https://goo.gl/maps/jG6Vzv5ugfCXvR8x8) | 
+| Thursday | [Ruppert Blauw (morning), Wit (afternoon)](https://goo.gl/maps/jG6Vzv5ugfCXvR8x8)  | 
 | Friday | [Koningsberger Cosmos](https://goo.gl/maps/ufn6aXVL9K48Gn7S6) |            
 
 
@@ -89,9 +91,7 @@ Dear all,
 
 This summer you will participate in the [**USS24: Statistical programming with R**](https://www.utrechtsummerschool.nl/courses/social-sciences/data-science-statistical-programming-with-r) course in Utrecht, the Netherlands. To realize a steeper learning curve, we will use some functionality that is not part of the base installation for `R`. The below steps guide you through installing both `R` as well as the necessary additions. 
 
-**If you follow this course online; please have a look at [this instructional page on MS Teams](https://www.uu.nl/en/education/quality-and-innovation/remote-teaching/microsoft-teams)**
-
-We look forward to see you all in Utrecht and online,  
+We look forward to see you all in Utrecht,  
 
 *The Statistical Programming with R Team*
 
@@ -175,6 +175,7 @@ All lectures are in `html` format. Practicals are walkthrough files that guide y
 
 ### Useful references
 
+- [R reference card](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
 - [The tidyverse style guide](https://style.tidyverse.org)
 - [The Google R style guide](https://google.github.io/styleguide/Rguide.xml)
 

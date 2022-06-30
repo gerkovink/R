@@ -12,7 +12,7 @@ output: html_document
 
 ---
 
-It is always wise to fix the random seed. I (Gerko) often use a seed value of `123`:
+It is always wise to fix the random seed. I often use a seed value of `123`:
 ```{r}
 set.seed(123)
 ```
