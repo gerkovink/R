@@ -52,14 +52,14 @@ Materials covered:
 
 | Start  |  End    | What?      |
 |:-------|:------|:-----------|
-| 09.00 | 09.15  | Welcome |
-| 09.15 | 09.45  | Lecture |
-| 09:45 | 10.30  | Practical |
-| 10.30 | 10.50  | Discussion |
+| 09.15 | 09.30  | Welcome |
+| 09.30 | 10.00  | Lecture |
+| 10:00 | 10.45  | Practical |
+| 10.45 | 11.00  | Discussion |
 |       | break |        |
-| 11.05 | 11.45  | Lecture |
-| 11:45 | 12.30  | Practical |
-| 12:30 | 13.00  | Discussion |
+| 11.00 | 11.45  | Lecture |
+| 11:45 | 12.40  | Practical |
+| 12:40 | 13.00  | Discussion |
 
 
 
@@ -97,7 +97,7 @@ Steps: see [this manual](https://www.linkedin.com/pulse/3-methods-update-r-rstud
 
 
 
-# Day 1 (Nov. 12th)
+# Day 1 (Nov. 2nd)
 
 ## Column 1
 
@@ -140,7 +140,7 @@ The above links are useful references that connect to today's materials.
 See also [this `rmarkdown` cheat sheet](Contents/Material/Part A - Introduction/rmarkdown-reference_sheet.pdf). 
 
 
-# Day 2 (Nov. 26th)
+# Day 2 (Nov. 11th, draft)
 
 ## Column 1
 
@@ -153,7 +153,7 @@ To ensure that you work with the latest iteration of the course materials, we ad
     - [Practical C](Contents/Material/Part C - Programming/Practical_C_walkthrough.html)
     
 
-- Part D: Tidy R
+- Part D: Tidy R and replicability
     - [Lecture D (slides)](Contents/Material/Part D - Tidy/Lecture_D.html)
     - [Lecture D (pdf)](Contents/Material/Part D - Tidy/Lecture_D.pdf)
     - [Practical D](Contents/Material/Part D - Tidy/Practical_D_walkthrough.html)
@@ -173,7 +173,7 @@ All lectures are in `html` format. Practicals are files that guide you through t
 - [The base R cheatsheet](https://github.com/rstudio/cheatsheets/raw/main/base-r.pdf)
 - [The tidyverse style guide](https://style.tidyverse.org)
 - [The Google R style guide](https://google.github.io/styleguide/Rguide.xml)
-
+- [Dependency management: `renv`](https://rstudio.github.io/renv/articles/renv.html)
 
 
 The above links are useful references that connect to today's materials. 

@@ -165,14 +165,14 @@ a[1:3]
 
 Empty means all elements
 ```{r}
-#The first element in R is 1 (in other languages (e.g. Python) it is 0)
+#(In Python is :)
 a[]
 ```
 
 
 
 ## 2. Matrix: Multiple vectors in one object
-This we would refer to as a matrix
+
 ```{r,collapse=TRUE}
 matrix(3, nrow = 5, ncol = 2)
 ```
@@ -495,7 +495,7 @@ mean(na.omit(c(1, 2, NA, 4, 5)))
 ```{r,collapse=TRUE}
 (3 - 2.9)
 (3 - 2.9) == 0.1
-(3 - 2.9) - .1
+(3 - 2.9) - 0.1
 
 ```
 
@@ -507,7 +507,7 @@ dplyr::near((3 - 2.9), 0.1)
 ```
 
 # Applications
-## Reading a CSV file and calculating descriptive statistics
+## Reading a CSV file and descriptive statistics
 That was dry, but let's see some potential, reading a CSV file and calculating some descriptive statistics.
 
 You'll need to install the packages/load the library beforehand

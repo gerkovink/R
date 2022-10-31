@@ -14,7 +14,7 @@ output:
 
 ---
 
-
+<!-- Add renv + pivot to the practical -->
 
 ## This week
 How to organize and automate your code:
@@ -587,7 +587,7 @@ d[, "x"] #d["x"] returns a data.frame
 
 tidyverse: tibble
 
-- Deos not try to read your mind
+- Does not try to read your mind
 ```{r, error=TRUE}
 d <- tibble(variable=1:4)
 d$var

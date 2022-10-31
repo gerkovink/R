@@ -20,7 +20,7 @@ output:
 - Gentle introduction to:
   - Programming languages
   - R for data science
-- Provide a foundation for [Gerko Vink's course](https://www.gerkovink.com/rijkR/)
+- Provide a foundation for the courses [Gerko Vink's course](https://www.gerkovink.com/rijkR/) and Erik-Jan van Kesteren
 
 
 ## Why do we care about R?
@@ -159,7 +159,7 @@ Run commands on your terminal (this is not R, you won't need to use this)
 ##### Changing the working directory with RStudio:
   - "Session (top menu) -> Set Working directories"
   - "Files (RStudio unit) -> More --> Set as working directory"
-
+  - On a notebook --> Working directory = directory of the notebook
 
 
 
@@ -265,7 +265,7 @@ paste("The number of students is: ", student_number, sep = " ")
 ---
 
 ### 2. Using packages
-```{r, eval = TRUE, echo = FALSE}
+```{r, eval = TRUE, echo = TRUE, collapse = TRUE}
 # install.packages("tidyverse") #installing packages
 library(readr) #loading the library to read csv, usually on top of the file
 
