@@ -658,10 +658,11 @@ as.data.frame(d_new)
 
 ::: {.column width="50%"}
 
+
 base `R`
 - Drops the entire row if there is one missing value
 ```{r}
-aggregate(formula = cbind(age, wgt, bmi) ~ reg, 
+aggregate(cbind(age, wgt, bmi) ~ reg, 
           data = data, 
           FUN = mean)
 ```
