@@ -31,7 +31,7 @@ R is rapidly becoming the standard platform for data manipulation, visualization
 Materials covered:
 
 ##### Day 1:
-- Installing R/Rstudio (done at home)
+- Installing R/Rstudio or signing up for RStudio Cloud (done at home) 
 - Getting comfortable with notebooks/projects/scripts
 - Getting help
 - Variables in R: basic data types (character, numeric, integer, logical, date) and data structures (vectors, matrices, lists, data.frames)
@@ -69,54 +69,32 @@ Materials covered:
 
 ## Column 1
 
-### Preparing your machine for the course
-To realize a steeper learning curve, we will use some functionality that is not part of the base installation for `R`. The below steps guide you through installing both `R` as well as the necessary additions. 
+### **Option 1: Without administrator rights or the ability to install `R/RStudio`**
 
+Steps: please sign up for [RStudio Cloud](https://rstudio.cloud). Choose the free plan.
 
-### **System requirements**
-
-Bring a laptop computer to the course and make sure that you have full write access and administrator rights to the machine. We will explore programming and compiling in this course. This means that you need full access to your machine. Some corporate laptops come with limited access for their users, we therefore advice you to bring a personal laptop computer, if you have one. 
-
-### **1. Install the latest version of `R`**
-`R` can be obtained [here](https://cran.r-project.org). We won't use `R` directly in the course, but rather call `R` through `RStudio`. Therefore it needs to be installed. 
-
-### **2. Install the latest `RStudio` Desktop**
-
-Rstudio is an Integrated Development Environment (IDE). It can be obtained as stand-alone software [here](https://www.rstudio.com/products/rstudio/download/#download). The free and open source `RStudio Desktop` version is sufficient.
-
-### **3. Start RStudio and install the following packages. **
-
-Execute the following lines of code in the console window:
-
-```{r eval=FALSE, echo = TRUE}
-install.packages(c("ggplot2", "tidyverse", "magrittr", "knitr", "rmarkdown", 
-                   "plotly", "ggplot2", "shiny", "devtools", "boot", "class", 
-                   "car", "MASS", "ggplot2movies", "ISLR", "DAAG", "mice", 
-                   "purrr", "furrr", "future"), dependencies = TRUE)
-```
-
-
-If you are not sure where to execute code, use the following figure to identify the console - ignore the outdated version in the example:
-
-<center>
-  <img src="console.png" alt="HTML5 Icon" width = 70%>
-</center>
-
-Just copy and paste the installation command and press the return key. When asked 
-
-```{r eval = FALSE, echo = TRUE}
-Do you want to install from sources the package which needs 
-compilation? (Yes/no/cancel)
-```
-
-type `Yes` in the console and press the return key. 
 
 ## Column 2
 
-### **What if the steps to the left do not work for me?**
-If all fails and you have insufficient rights to your machine, open a free account on [rstudio.cloud](https://rstudio.cloud). You can run your own cloud-based `RStudio` environment there. 
+### **Option 2: Installing `R` and `RStudio` from scratch**
 
-Naturally, you will need internet access for these services to be accessed. 
+Steps: 
+
+- 1. Install `R`: `R` can be obtained [here](https://cran.r-project.org). We won't use `R` directly in the course, but rather call `R` through `RStudio`. Therefore it needs to be installed. 
+
+- 2. Install `RStudio` Desktop: Rstudio is an Integrated Development Environment (IDE). It can be obtained as stand-alone software [here](https://www.rstudio.com/products/rstudio/download/#download). The free and open source `RStudio Desktop` version is sufficient.
+
+
+## Column 3
+
+### **Option 3: You have an old version of R**
+
+Steps: see [this manual](https://www.linkedin.com/pulse/3-methods-update-r-rstudio-windows-mac-woratana-ngarmtrakulchol/). 
+
+- To update `R`: The function `updateR()` in the package `installR` (Windows) or `updateR` (Mac) is the easiest route.
+- To update `RStudio` Desktop: Download the new version [here](https://www.rstudio.com/products/rstudio/download/#download).
+
+
 
 
 # Day 1 (Nov. 12th)
