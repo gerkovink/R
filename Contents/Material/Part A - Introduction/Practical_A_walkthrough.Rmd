@@ -156,7 +156,7 @@ In the rest of this course we will need to make exercises and assignments and ha
 13. **Create a new code chunk (Ctrl+Alt+I or Cmd+Option+I), and install the package tidyverse. Make sure to comment that line afterwards! If you send this file to another person you don't want them to install anything (if they run it without inspecting it) unless they choose to.**
 
 ```{r}
-#install.packages("tidiverse")
+#install.packages("tidyverse")
 ```
 
 

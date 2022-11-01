@@ -110,7 +110,7 @@ Inspecting the structure of your data is vital, as you probably have imported yo
 
 ---
 
-7. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly, but actually represents grouping information about cities. Convert the variable to a factor and add the labels Utrecht (corresponding to value 1), New York (value 2), London (3), Singapore (4), Rome (5) and Cape Town (6).** 
+7. **Imagine that the first variable `V1` in our dataframe `dat3` is not coded correctly. Instead of digits, it should represent information about cities. Convert the variable to a factor and add the labels Utrecht (corresponding to value 1), New York (value 2), London (3), Singapore (4), Rome (5) and Cape Town (6).** 
 ```{r}
 dat3$V1 <- factor(dat3$V1, labels = c("Utrecht", "New York", "London", "Singapore", "Rome", "Capetown"))
 dat3

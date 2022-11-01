@@ -279,7 +279,7 @@ d[3:4, 1:2]
 
 ## 4. Factor
 - A data type used to encode categorical variables
-- It'll be useful for data modeling and data isualization
+- It'll be useful for data modeling and data visualization
 ```{r,collapse=TRUE}
 d$V3_factor <- factor(d$V3, labels = c("Amsterdam","Utrecht"))
 d

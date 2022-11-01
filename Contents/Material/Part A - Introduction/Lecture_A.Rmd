@@ -170,8 +170,8 @@ Run commands on your terminal (this is not R, you won't need to use this)
 ### R-scripts (.R)
 - Text file with R code (you can open it in any text editor)
 - Working directory:
-  - If associated to a project: your home directory (e.g. "/Users/javiergb") 
-  - If not associated to a project: the project directory 
+  - If not associated to a project: your home directory (e.g. "/Users/javiergb") 
+  - If associated to a project: the project directory 
 - Output in the console/plots menus
 
 ### Rstudio-projects (.Rproj)
