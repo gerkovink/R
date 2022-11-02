@@ -140,7 +140,7 @@ The above links are useful references that connect to today's materials.
 See also [this `rmarkdown` cheat sheet](Contents/Material/Part A - Introduction/rmarkdown-reference_sheet.pdf). 
 
 
-# Day 2 (Nov. 11th, draft)
+# Day 2 (Nov. 16th, draft)
 
 ## Column 1
 
