@@ -1,8 +1,5 @@
 ---
-title: "Example exercise"
-author: "Gerko Vink (with small adaptations by Javier Garcia-Bernardo)"
-date: "Statistical programming with `R`"
-output: html_document
+
 ---
 
 ---

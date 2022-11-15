@@ -14,12 +14,14 @@ output:
 
 ---
 
-<!-- Add renv + pivot to the practical -->
+
 
 ## This week
 How to organize and automate your code:
 
 #### First half
+- Best practices in R
+- Reproducible science and dependency management in R
 - Control-flow: 
   - Choice: if-else statements
   - Loops: For loops
@@ -27,50 +29,12 @@ How to organize and automate your code:
 - Environments
 
 #### Second half
+- Inferential statistics: A 5-min primer of linear regression
 - Reading and writing files in serveral formats
-- Inferential statistics: A primer of linear regression
 - Principles of tidy data and short comparison of base R and the tidyverse
-- Best practices in R
+- Data wrangling with the tidyverse
 
 
-
-# Reading and writing files in serveral formats
-
-## Reading and Writing
-
-
-Reading files
-```{r, eval = FALSE, echo = TRUE}
-#install.packages(c("readr","readxl","haven","foreign","Hmisc","feather"),
-#repos = "http://cran.us.r-project.org")
-
-readr::read_delim("here_path.csv", delim = ",") #CSV
-readr::read_rds("here_path.Rds") #RDS (R format)
-readxl::read_excel("here_path.xlsx") #Excel
-haven::read_dta("here_path.dta") #Stata
-haven::read_sav("here_path.sav") #SPSS
-feather::read_feather("tmp/here_path.feather") #feather
-```
-
-Writing to files
-```{r, eval = FALSE, echo = TRUE}
-#install.packages(c("writexl"),
-#    repos = "http://cran.us.r-project.org")
-
-## Writing
-readr::write_delim(virginia,"tmp/here_path.csv", delim = ",") #CSV
-readr::write_rds(virginia,"tmp/here_path.Rds") #RDS (R format)
-writexl::write_xlsx(virginia,"tmp/here_path.xlsx") #Excel
-haven::write_dta(virginia,"tmp/here_path.dta") #Stata
-haven::write_sav(virginia,"tmp/here_path.sav") #SPSS
-feather::write_feather(virginia, "tmp/here_path.feather") #feather
-```
-
-## Reading and writing
-- CSV: Easy to use, share, open in excel or a text editor.
-- RDS: binary format, only for `R`. Your factors (categorical variables) will stay as factors. Small size and decent read time.
-- feather: binary format, efficient for large data files and to share.
-![https://bookdown.org/csgillespie/efficientR/input-output.html](img/5-2-1.png){width=50%}
 
 # Modeling
 
@@ -121,8 +85,9 @@ lm(bmi ~ I(wgt / (hgt / 100)^2), data = boys)
 ```
 
 ## Why we really need `I()`
-```{r}
+```{r,collapse=TRUE}
 lm(bmi ~ wgt + wgt^2, data = boys)
+
 lm(bmi ~ wgt + I(wgt^2), data = boys)
 ```
 
@@ -194,6 +159,46 @@ plot(lm(bmi ~ wgt, data = boys), which = 6)
 
 
 
+# Reading and writing files in several formats
+
+## Reading and Writing
+
+
+Reading files
+```{r, eval = FALSE, echo = TRUE}
+#install.packages(c("readr","readxl","haven","foreign","Hmisc","feather"),
+#repos = "http://cran.us.r-project.org")
+
+readr::read_delim("here_path.csv", delim = ",") #CSV
+readr::read_rds("here_path.Rds") #RDS (R format)
+readxl::read_excel("here_path.xlsx") #Excel
+haven::read_dta("here_path.dta") #Stata
+haven::read_sav("here_path.sav") #SPSS
+feather::read_feather("tmp/here_path.feather") #feather
+```
+
+Writing to files
+```{r, eval = FALSE, echo = TRUE}
+#install.packages(c("writexl"),
+#    repos = "http://cran.us.r-project.org")
+
+## Writing
+readr::write_delim(virginia,"tmp/here_path.csv", delim = ",") #CSV
+readr::write_rds(virginia,"tmp/here_path.Rds") #RDS (R format)
+writexl::write_xlsx(virginia,"tmp/here_path.xlsx") #Excel
+haven::write_dta(virginia,"tmp/here_path.dta") #Stata
+haven::write_sav(virginia,"tmp/here_path.sav") #SPSS
+feather::write_feather(virginia, "tmp/here_path.feather") #feather
+```
+
+## Reading and writing
+- CSV: Easy to use, share, open in excel or a text editor.
+- RDS: binary format, only for `R`. Your factors (categorical variables) will stay as factors. Small size and decent read time.
+- feather: binary format, efficient for large data files and to share.
+![https://bookdown.org/csgillespie/efficientR/input-output.html](img/5-2-1.png){width=50%}
+
+
+
 # Principles of tidy data
 
 ## Library
@@ -260,12 +265,10 @@ virginia
 ## Advantages of tidy data
 
 1. Consistent way of storing data = reuse of tools/code
-
 2. Facilitate manipulation, visualization and modelling
-- Combining tables (e.g., merging two tables by year)
-- Plotting: you'll typically want to show how one variable depends on another (y ~ x)
-- Statistical models (y ~ x + year)
-
+  * Combining tables (e.g., merging two tables by year)
+  * Plotting: you'll typically want to show how one variable depends on another (y ~ x)
+  * Statistical models (y ~ x + year)
 3. Performance: R is fast applying functions to columns (vectorized)
 
 
@@ -674,9 +677,9 @@ aggregate(cbind(age, wgt, bmi) ~ reg,
 tidyverse
 - Does not drop the entire row if there is one missing value
 ```{r}
-grouped_data <- dplyr::group_by(data, reg) 
-dplyr::summarise_all(grouped_data, mean, na.rm = TRUE)
-#
+data %>% 
+  dplyr::group_by(reg) %>% 
+  dplyr::summarise_all(mean, na.rm = TRUE)
 ```
 
 :::
@@ -699,8 +702,30 @@ summarized_data <- data %>%
   dplyr::group_by(reg) %>%  
   dplyr::summarise_all(mean, na.rm = TRUE)
 ```
-- Base R has since version 4.1 its own pipe (`|>`), but it still lacks functionality
+- Base R has since version 4.1 its own pipe (`|>`), but it still lacks some functionality
 
+## Data wrangling summary
+- [Cheatsheet data tidying with tidyr](https://posit.co/wp-content/uploads/2022/10/data-transformation-1.pdf)
+- [Cheatsheet data transformation with dplyr](https://posit.co/wp-content/uploads/2022/10/tidyr.pdf)
+
+
+- Main functions `dplyr`:
+  - `mutate`: add column
+  - `select`: select columns
+  - `filter`: filter rows
+  - `distinct`: remove duplicates
+  - `arrange`: sort rows
+  - `group_by` + `summarize` / `summarize_all`: groups
+  
+- Main functions `tidyr`:
+  - `drop_na`: remove rows with missing values
+  - `fill`: fill missing values with a value
+  - `pivot_wider`(data, names_from = "name",
+values_from = "value")
+  - `pivot_longer`(data, cols, names_to = "name",
+values_to = "value", values_drop_na = FALSE)
+  
+  
 
 ## Why tidyverse
 
@@ -714,174 +739,7 @@ summarized_data <- data %>%
 
 
 
-
-
-# Best practises in R
-
-
-## Naming conventions: File names
-
-File names should end in `.R` and be meaningful. 
-
-GOOD:
-```{r eval=FALSE}
-predict_ad_revenue.R
-```
-
-BAD:
-```{r eval=FALSE}
-foo.R
-```
-
-## Naming conventions: Identifiers
-
-Use underscores ( _ ) to separate words within a name (see more here: http://adv-r.had.co.nz/Style.html)
-
-1. Variable names should be nouns and function names should be verbs. 
-2. Strive for names that are concise and meaningful 
-3. Avoid using names of existing functions and variables
-
-
-## Syntax: Line Length
-
-The maximum line length is 80 characters.
-
-```{r}
-# This is to demonstrate that at about eighty characters you would move off of the page
-
-# Also, if you have a very wide function
-fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg + bmi * hgt + wgt * hgt + wgt * hgt * bmi, data = boys)
-
-# it would be nice to pose it as
-fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg + bmi * hgt 
-          + bmi * wgt + wgt * hgt + wgt * hgt * bmi, data = boys)
-#or
-fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg 
-          + bmi * hgt 
-          + bmi * wgt
-          + wgt * hgt 
-          + wgt * hgt * bmi, 
-          data = boys)
-```
-
-
-## Syntax: Indentation
-
-When indenting your code, use two spaces. `RStudio` does this for you!
-
-Never use tabs or mix tabs and spaces. 
-
-Exception: When a line break occurs inside parentheses, align the wrapped line with the first character inside the parenthesis.
-
-```{r}
-apply(boys,
-      MARGIN = 2,
-      FUN = length)
-```
-
-## Syntax: Spacing
-Place spaces around all binary operators (=, +, -, <-, etc.). 
-
-Exception: Spaces around ='s are optional when passing parameters in a function call.
-```{r eval=FALSE}
-lm(age ~ bmi, data=boys)
-```
-or
-```{r eval=FALSE}
-lm(age ~ bmi, data = boys)
-```
-
-## Syntax: Spacing (continued)
-Do not place a space before a comma, but always place one after a comma. 
-
-GOOD:
-```{r eval=FALSE}
-tab.prior <- as_tibble(d[d$x < 2, "x"])
-total <- sum(d[, 1])
-total <- sum(d[1, ])
-```
-
-
-## Syntax: Spacing (continued)
-BAD:
-```{r eval=FALSE}
-# Needs spaces around '<'
-tab.prior <- table(df[df$days.from.opt<0, "campaign.id"])  
-# Needs a space after the comma
-tab.prior <- table(df[df$days.from.opt < 0,"campaign.id"])  
-# Needs a space before <-
-tab.prior<- table(df[df$days.from.opt < 0, "campaign.id"]) 
-# Needs spaces around <-
-tab.prior<-table(df[df$days.from.opt < 0, "campaign.id"])  
-# Needs a space after the comma
-total <- sum(x[,1])  
-# Needs a space after the comma, not before 
-total <- sum(x[ ,1])  
-```
-
-
-## Syntax: Spacing (continued)
-Place a space before left parenthesis, except in a function call.
-
-GOOD: 
-```{r eval=FALSE}
-if (debug)
-```
-
-BAD:
-```{r eval=FALSE}
-if(debug)
-```
-
-## Syntax: Extra spacing
-Extra spacing (i.e., more than one space in a row) is okay if it improves alignment of equals signs or arrows (<-).
-```{r eval = FALSE}
-plot(x    = x.coord,
-     y    = data.mat[, MakeColName(metric, ptiles[1], "roiOpt")],
-     ylim = ylim,
-     xlab = "dates",
-     ylab = metric,
-     main = (paste(metric, " for 3 samples ", sep = "")))
-
-```
-
-Do not place spaces around code in parentheses or square brackets.
-
-Exception: Always place a space after a comma.
-
-
-## Syntax: In general...
-- Use common sense and BE CONSISTENT.
-
-- The point of having style guidelines is to have a common vocabulary of coding 
-    - so people can concentrate on what you are saying, rather than on how you are saying it. 
-
-- If code you add to a file looks drastically different from the existing code around it, the discontinuity will throw readers out of their rhythm when they go to read it. Try to avoid this.
-
-
-## Working in projects in `RStudio`
-- Every research project has its own project
-- Every project can have its own folder, which also serves as a research archive
-- Every project can have its own version control system (e.g. github)
-- Every project can have its own dependency management (e.g. renv)
-
-
-## Replicability = __Keep your code clean__ {.build}
-
-1. Break the code in components, keep it tidy
-2. Use (at least) one folder for the data, and one for figures; don't save all code in one folder.
-3. If you have several R files, use descriptive names (e.g. 1_data_collection.Rmd)
-4. Write all code in the source editor, don't use the console until you know what you are doing. Otherwise you'll forget to copy a step to the code and you'll not be able to remember what you did.
-5. You shouldn't need to write a command more than two times. 
-   - If you are doing something similar several times --> Use __functions__ (e.g. you made an amazing plot and you want to use it in two subsets of the data)
-      - Reusable in other projects
-   - If you find yourself writing the same thing several times --> use __for loops__ (potentially with `purrr::map` for convenience)
-   - Both functions and loops allow you:
-      - Have a clear code
-      - Easier to maintain / less errors
-6. Use __comments__ (text preceded by `#`) to clarify what you are doing
-  - If you look at your code again, one year from now: you will not know what you did --> unless you use comments 
-  
+# Practical
 
 
 

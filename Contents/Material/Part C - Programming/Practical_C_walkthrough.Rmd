@@ -14,19 +14,22 @@ output:
 ---
 
 # Exercises
-In this practical we will go over control flow (if-else statatements and for loops), and functions.
+In this practical we will go over reproducibility, control flow (if-else statements and for loops), and functions.
 
-First, create a new notebook for this homework (File -> New File -> R Markdown -> Document)
+First, create a new project (File -> New Project), install `renv` and initialize the dependency management (`renv::init()`).
+
+Then, create a new notebook for this homework (File -> New File -> R Markdown -> Document)
 
 In the following exercises we will use the same dataset as last time, boys.
 
-You need to download `dataset_boys.csv` from [here](https://javier.science/R/#day-2-nov-26th) and add it to a folder "data" in the same folder as your markdown file.
+You need to download `dataset_boys.csv` from [here](https://javier.science/R/#day-2-nov-16th) and add it to a folder "data" in the same folder as your markdown file.
 
 Then, read the file dataset_boys.csv using the code in the next cell.
 
 ```{r class.source = 'fold-show'}
-#install.packages(c("readr"),repos = "http://cran.us.r-project.org")
+#install.packages(c("readr", "stringr), repos = "http://cran.us.r-project.org")
 library(readr)
+library(stringr)
 
 # Reading the file in the background
 boys <- readr::read_delim("data/dataset_boys.csv",delim=",")
@@ -41,28 +44,8 @@ boys <- na.omit(boys)
 ## Exercise 1-3: Control-flow 
 
 
-1. **Create a `for`-loop that loops over all numbers between 0 and 10, but only prints numbers below 5. **
+1. **Create a `for`-loop that loops over all numbers between 0 and 10, but only prints numbers 3, 4, and 5. **
 
-```{r}
-for (i in 0:10) {
-  if (i < 5) {
-    print(i)
-  }
-}
-```
-
-
-
-2. **Modify the for loop to only print the numbers 3, 4, and 5.**
-
-```{r}
-for (i in 0:10) {
-  if (i >= 3 & i <= 5) {
-    print(i)
-  }
-}
-```
-Or, even more efficiently:
 ```{r}
 for (i in 0:10) {
   if (i %in% 3:5) {
@@ -72,22 +55,31 @@ for (i in 0:10) {
 ```
 
 
-3. **Try to do the same thing without a for-loop, by subsetting a vector from 0 to 10 directly.**
+2. **Try to do the same thing without a for-loop, by subsetting a vector from 0 to 10 directly.**
 
 ```{r}
 num <- 0:10
 num[num >= 3 & num <=5]
 ``` 
 
+
+
 ---
 
-## Exercise 4--6: Functions
+## Exercise 3--5: Functions
 
-4. **Create a function that calculates the sample standard deviation. Validate it by comparing the output to the function `sd()`** 
+3. **Create a function that calculates the sample standard deviation. Validate it by comparing the output to the function `sd()`. Write documentation for such function.** 
 
 $$\sigma = \sqrt{\frac{1}{N-1}\sum_{i=0}^N{(x_i - \bar{x})^2}}$$
 
 ```{r}
+#' Calculate the standard deviation of a 
+#' \sigma = \sqrt{\frac{1}{N-1}\sum_{i=0}^N{(x_i - \bar{x})^2}}$$
+#' 
+#' @param values A numeric vector
+#' @returns STD of the vector
+#' @examples
+#' std_own(c(3,5,4))
 std_own <- function(values) {
   s <- sqrt(1/(length(values)-1)*sum((values - mean(values))^2))
   return(s)
@@ -98,7 +90,7 @@ sd(c(1,2,3,3))
 ```
 
 
-5. **Use a for loop to apply the function to the columns** `c("age","hgt")` **of the dataset** `boys`. Boys is a tibble (more on this later today), you'll need to use the notation `boys[["age"]]` to extract the vector of values of the column.
+4. **Use a for loop to apply the function to the columns** `c("age","hgt")` **of the dataset** `boys`. Boys is a tibble (more on this later today), you'll need to use the notation `boys[["age"]]` to extract the vector of values of the column.
 
 ```{r}
 for (col in c("age","wgt")) {
@@ -107,7 +99,7 @@ for (col in c("age","wgt")) {
 }
 ```
 
-6. **Redo exercise 5 using apply, sapply or lapply**.
+5. **Redo exercise 5 using apply, sapply or lapply**.
 
 ```{r}
 #Returns vector
@@ -117,6 +109,41 @@ sapply(boys[, c("age","wgt")], FUN=std_own)
 #Returns list
 lapply(boys[, c("age","wgt")], FUN=std_own)
 ```
+
+---
+
+## Exercise 6--7: Dependency files and a more complicated example
+
+6. **Export your dependency files (`renv::snapshot()`). Which files were created?**
+```{r}
+renv::snapshot()
+
+#Look inside renv.lock and .Rprofile
+```
+
+
+
+7. **Find all libraries used in the .Rmd files of https://github.com/jgarciab/R**. Steps: a. Download the materials; b. Use `list.files(path=???, pattern=???, full.names=TRUE, recurseive=TRUE)` to find all Rmd files; c. Use `sapply` and `readLines` to read all files; d. Use `rapply` (recursive apply) and `stringr::str_match_all` to find the pattern `library\\(.*\\)` .
+
+```{r warning=FALSE}
+# Find the name of the files (you'll have to adjust the path)
+files <- list.files(path="../..", pattern="*Rmd", full.names=TRUE, recursive=TRUE)
+
+# Read files
+files_list <- sapply(files, readLines)
+
+# Find the pattern in all files
+files_list <- rapply(files_list, 
+                     function(x) str_match_all(x, "library\\(.*\\)"))
+
+# Print pattern
+files_list
+```
+
+
+
+
+If you are done, try to upload your files to github. Steps: Create an account. Create a new repository. Upload files. If interested, try to set up git in your computer (https://support.posit.co/hc/en-us/articles/200532077)
 
 
 ---

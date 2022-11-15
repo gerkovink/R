@@ -28,23 +28,251 @@ library(tidyverse)
   - vector, matrix, list, **data.frame**
 - Subsetting data structures
 - Reading files in different formats
+- Data visualization: design and storytelling
 
 ## This week
 How to organize and automate your code:
 
 #### First half
+- Best practices in R
+- Reproducible science and dependency management in R
 - Control-flow: 
   - Choice: if-else statements
   - Loops: For loops
 - Functions
 - Environments
 
-#### Second half
+#### Second half: Tidyverse
+- Inferential statistics: A 5-min primer of linear regression
 - Reading and writing files in serveral formats
 - Principles of tidy data and short comparison of base R and the tidyverse
-- Inferential statistics: A primer of linear regression
-- Best practices in R
+- Data wrangling with the tidyverse
 
+
+
+
+# Best practises in R
+
+
+## Naming conventions: File names
+
+File names should end in `.R` and be meaningful. 
+
+GOOD:
+```{r eval=FALSE}
+predict_ad_revenue.R
+```
+
+BAD:
+```{r eval=FALSE}
+foo.R
+```
+
+## Naming conventions: Identifiers
+
+Use underscores ( _ ) to separate words within a name (see more here: http://adv-r.had.co.nz/Style.html)
+
+1. Variable names should be nouns and function names should be verbs. 
+2. Strive for names that are concise and meaningful 
+3. Avoid using names of existing functions and variables
+
+
+## Syntax: Line Length
+
+The maximum line length is 80 characters.
+
+```{r, eval=FALSE}
+# This is to demonstrate that at about eighty characters you would move off of the page
+
+# Also, if you have a very wide function
+fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg + bmi * hgt + wgt * hgt + wgt * hgt * bmi, data = boys)
+
+# it would be nice to pose it as
+fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg + bmi * hgt 
+          + bmi * wgt + wgt * hgt + wgt * hgt * bmi, data = boys)
+#or
+fit <- lm(age ~ bmi + hgt + wgt + hc + gen + phb + tv + reg 
+          + bmi * hgt 
+          + bmi * wgt
+          + wgt * hgt 
+          + wgt * hgt * bmi, 
+          data = boys)
+```
+
+
+## Syntax: Indentation
+
+When indenting your code, use two spaces. `RStudio` does this for you!
+
+Never use tabs or mix tabs and spaces. 
+
+Exception: When a line break occurs inside parentheses, align the wrapped line with the first character inside the parenthesis.
+
+```{r, eval=FALSE}
+apply(boys,
+      MARGIN = 2,
+      FUN = length)
+```
+
+## Syntax: Spacing
+Place spaces around all binary operators (=, +, -, <-, etc.). 
+
+Exception: Spaces around ='s are optional when passing parameters in a function call.
+```{r eval=FALSE}
+lm(age ~ bmi, data=boys)
+```
+or
+```{r eval=FALSE}
+lm(age ~ bmi, data = boys)
+```
+
+## Syntax: Spacing (continued)
+Do not place a space before a comma, but always place one after a comma. 
+
+GOOD:
+```{r eval=FALSE}
+tab.prior <- as_tibble(d[d$x < 2, "x"])
+total <- sum(d[, 1])
+total <- sum(d[1, ])
+```
+
+
+## Syntax: Spacing (continued)
+BAD:
+```{r eval=FALSE}
+# Needs spaces around '<'
+tab.prior <- table(df[df$days.from.opt<0, "campaign.id"])  
+# Needs a space after the comma
+tab.prior <- table(df[df$days.from.opt < 0,"campaign.id"])  
+# Needs a space before <-
+tab.prior<- table(df[df$days.from.opt < 0, "campaign.id"]) 
+# Needs spaces around <-
+tab.prior<-table(df[df$days.from.opt < 0, "campaign.id"])  
+# Needs a space after the comma
+total <- sum(x[,1])  
+# Needs a space after the comma, not before 
+total <- sum(x[ ,1])  
+```
+
+
+## Syntax: Spacing (continued)
+Place a space before left parenthesis, except in a function call.
+
+GOOD: 
+```{r eval=FALSE}
+if (debug)
+```
+
+BAD:
+```{r eval=FALSE}
+if(debug)
+```
+
+## Syntax: Extra spacing
+Extra spacing (i.e., more than one space in a row) is okay if it improves alignment of equals signs or arrows (<-).
+```{r eval = FALSE}
+plot(x    = x.coord,
+     y    = data.mat[, MakeColName(metric, ptiles[1], "roiOpt")],
+     ylim = ylim,
+     xlab = "dates",
+     ylab = metric,
+     main = (paste(metric, " for 3 samples ", sep = "")))
+
+```
+
+Do not place spaces around code in parentheses or square brackets.
+
+Exception: Always place a space after a comma.
+
+
+## Syntax: In general...
+- Use common sense and BE CONSISTENT.
+
+- The point of having style guidelines is to have a common vocabulary of coding 
+    - so people can concentrate on what you are saying, rather than on how you are saying it. 
+
+- If the code that you add to a script looks drastically different from the existing code around it, the discontinuity will throw readers out of their rhythm when they go to read it. Try to avoid this.
+
+
+## Working in projects in `RStudio`
+- Every research project has its own project
+- Every project can have its own folder, which also serves as a research archive
+- Every project can have its own version control system (e.g. github)
+- Every project can have its own dependency management (e.g. renv)
+
+# Reproducibility
+
+## __Keep your code clean__ {.build}
+
+1. Break the code in components, keep it tidy
+2. Use (at least) one folder for the data, and one for figures; don't save all code in one folder.
+3. If you have several R files, use descriptive names (e.g. 1_data_collection.Rmd)
+4. Write all code in the source editor, don't use the console until you know what you are doing.
+5. You shouldn't need to write a command more than two times. 
+   - If you are doing something similar several times --> Use __functions__ (e.g. you made an amazing plot and you want to use it for two subsets of the data)
+      - Reusable in other projects
+   - If you find yourself writing the same thing several times --> use __for loops__ (potentially with `purrr::map` for convenience)
+   - Both functions and loops allow you:
+      - Have a clear code
+      - Easier to maintain / less errors
+6. Use __comments__ (text preceded by `#`) to clarify what you are doing
+  - If you look at your code again, one year from now: you will not know what you did --> unless you use comments 
+  
+## Dependency management {.build}
+
+Each project uses specific versions of the packages.
+
+What happens if the function that you are using is deprecated in a new version?
+
+We should separate the packages we use in each project.
+
+- Tools: 
+   - conda / `mamba` / poetry (Python): Use virtual environments to compartmentalize projects 
+   - `renv` (R): Load the right version of packages when you open the project
+
+- Dependencies are specified in plain text files:
+   - Python: requirements.txt, environment.yml (conda/mamba), pyproject.toml (poetry)
+   - R: renv.lock
+
+- Caveats:
+   - Results may depend on the Operating System --> You could use Docker
+   - Packages may be deleted
+
+
+## Dependency management workflow {.build}
+- Python
+  - Create environment: `mamba env create -n my_cool_project python=3`
+  - Activate environment: `mamba activate my_cool_project`
+  - Install packages: `mamba install jupyter pandas scipy`
+  - Export when ready: `mamba export -n my_cool_project > my_cool_project.yml`
+  - Delete when you're done: `mamba env remove -n my_cool_project`
+  - Restore if you need it: `mamba env create --file my_cool_project.yml`
+  
+- R
+  - Create project (RStudio)
+  - Create renv file: `renv::init()`
+  - Install packages: `install.packages("tidyverse")`
+  - Export when ready: `renv::snapshot()`
+  - Restore if you need it: `renv::restore()`
+
+## Version control {.build}
+- I just messed up something and closed the file. How do I go back?
+
+- Solutions:
+  - Okay: Use a cloud system (most offer 30-days backups)
+  - Better: Use `git` (e.g. provided by github)
+
+
+- Workflow (for one person, not for teams):
+  - Create repository, selecting README.md and .gitignore files
+  - Add files that you want to upload: git add filex
+  - Commit files: git commit -m "updated version control"
+  - Push changes online: git push origin main
+  - If things change online: git pull origin main
+
+
+
+  
 # Control-flow
 
 
@@ -61,8 +289,8 @@ How to organize and automate your code:
 Loops in R often happen under the hood, using apply functions:
 
 - `apply()`: apply a function to margins of a matrix
-- `sapply()`: apply a function to elements of a list, `vector` or `matrix` return
-- `lapply()`: apply a function to elements of a list, `list` return
+- `sapply()`: apply a function to elements of a list, returns `vector` or `matrix`
+- `lapply()`: apply a function to elements of a list, returns `list`
 
 
 
@@ -373,10 +601,6 @@ Any `data.frame` is also a `list`, where each column is one `list`-element.
 
 This means we can use `sapply` on data frames as well, which is often useful.
 
-```{r}
-boys[boys[["reg"]] == reg, "age"]
-```
-
 
 ```{r}
 sapply(df, mean)
@@ -428,23 +652,25 @@ If there is no `return()`, the last line is automatically returned, so we can al
 
 
 ```{r}
-squared <- function(x){
+square <- function(x){
   x * x
 }
 
-squared(-2)
+square(-2)
 ```
 
 I do not recommend this, please always specify what you return unless you have a one-line function.
 
 
-## Our own function {.smaller}
+## Anonymous/Lambda expressions
 
-We can also combine this with `apply()`
+```{python, eval=FALSE, python.reticulate=FALSE}
+df["number_children"].apply(lambda x: "low" if x in {1,2} else "high")
+```
+
 
 ```{r}
-df
-sapply(df, squared)
+sapply(df, {function(x) quantile(x, .42)})
 ```
 
 
@@ -471,6 +697,43 @@ is_contained("R", "rstudio")
 is_contained("R", "rstudio", print_input = TRUE)
 is_contained("R", "rstudio", print_input = FALSE)
 ```
+
+## Create documentation of functions
+
+```{python, eval=FALSE, python.reticulate=FALSE, collapse=TRUE}
+##Python
+def square(x):
+  """
+  Squares a number
+
+  Parameters:
+  x (float): Number (or vector)
+
+  Returns:
+  float: Squared numbers
+  """
+  return(x**2)
+```
+
+
+```{r, collapse=TRUE}
+##R more info at https://r-pkgs.org/man.html
+
+#' Squares a number
+#' 
+#' @param x A number.
+#' @returns A numeric vector.
+#' @examples
+#' square(3)
+square <- function(x){
+  x * x
+}
+```
+
+
+
+
+
 
 
 ## Troubleshooting
