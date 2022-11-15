@@ -224,7 +224,7 @@ ggplot(datasaurus_dozen, aes(x=x, y=y, colour=dataset))+
 
 
 
-End of Practical
+
 
 ---
 
