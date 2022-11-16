@@ -665,11 +665,13 @@ I do not recommend this, please always specify what you return unless you have a
 ## Anonymous/Lambda expressions
 
 ```{python, eval=FALSE, python.reticulate=FALSE}
-df["number_children"].apply(lambda x: "low" if x in {1,2} else "high")
+#Python
+df.apply(lambda x: np.percentile(x, .42))
 ```
 
 
 ```{r}
+#R
 sapply(df, {function(x) quantile(x, .42)})
 ```
 

@@ -16,8 +16,7 @@ output:
 
 
 
-## This week
-How to organize and automate your code:
+## Today: How to organize and automate your code
 
 #### First half
 - Best practices in R
@@ -101,7 +100,13 @@ The object `fit` contains a lot more than just the regression weights. To inspec
 attributes(fit)
 ```
 
-The benefit of using `attributes()` is that it directly tells you the class of the object. 
+## Finding the coefficients
+
+```{r}
+summary(fit)
+```
+
+
 
 ## Classes in R {.smaller}
 ```{r}

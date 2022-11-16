@@ -3732,12 +3732,12 @@ example_vector&gt;3</pre>
 
 head(df)</pre>
 
-<pre >##            V1       V2       V3
-## 1  1.03453561 6.931657 5.511877
-## 2 -0.09282029 3.272200 7.105758
-## 3  0.43705426 6.787447 5.217825
-## 4 -0.81968142 4.388272 6.152408
-## 5  0.08766878 7.658146 6.162172</pre>
+<pre >##            V1        V2       V3
+## 1 -0.68728841  3.697129 7.151063
+## 2 -0.88274298  8.021957 5.848428
+## 3  1.46397480  6.041192 7.279358
+## 4 -0.07762294 10.270455 5.626540
+## 5  0.16875374  9.061591 5.310817</pre>
 
 </article></slide><slide class=""><hgroup><h2>For-loops</h2></hgroup><article  id="for-loops-5" class="smaller ">
 
@@ -3757,11 +3757,11 @@ head(df)</pre>
 }</pre>
 
 <pre >## [1] &quot;V1&quot;
-## [1] 0.1293514
+## [1] -0.002985159
 ## [1] &quot;V2&quot;
-## [1] 5.807544
+## [1] 7.418465
 ## [1] &quot;V3&quot;
-## [1] 6.030008</pre>
+## [1] 6.243242</pre>
 
 </article></slide><slide class=""><hgroup><h2>For-loops</h2></hgroup><article  id="for-loops-6" class="smaller ">
 
@@ -3773,20 +3773,20 @@ head(df)</pre>
   print(sum(row_values&gt;5))
 }</pre>
 
-<pre >##         V1       V2       V3
-## 1 1.034536 6.931657 5.511877
-## [1] 2
-##            V1     V2       V3
-## 2 -0.09282029 3.2722 7.105758
+<pre >##           V1       V2       V3
+## 1 -0.6872884 3.697129 7.151063
 ## [1] 1
 ##          V1       V2       V3
-## 3 0.4370543 6.787447 5.217825
+## 2 -0.882743 8.021957 5.848428
 ## [1] 2
-##           V1       V2       V3
-## 4 -0.8196814 4.388272 6.152408
-## [1] 1
-##           V1       V2       V3
-## 5 0.08766878 7.658146 6.162172
+##         V1       V2       V3
+## 3 1.463975 6.041192 7.279358
+## [1] 2
+##            V1       V2      V3
+## 4 -0.07762294 10.27045 5.62654
+## [1] 2
+##          V1       V2       V3
+## 5 0.1687537 9.061591 5.310817
 ## [1] 2</pre>
 
 </article></slide><slide class=""><hgroup><h2>While loops</h2></hgroup><article  id="while-loops" class="smaller ">
@@ -3833,19 +3833,19 @@ while (i &lt; 10) {
 <p><code>apply</code> is used for matrices/dataframes. It applies a function to each <em>row</em> or <em>column</em>. It returns a vector or a matrix.</p>
 
 <pre class = 'prettyprint lang-r'>head(df, 1)
-##         V1       V2       V3
-## 1 1.034536 6.931657 5.511877</pre>
+##           V1       V2       V3
+## 1 -0.6872884 3.697129 7.151063</pre>
 
 <p>Apply it by row (MARGIN = 1):</p>
 
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 1, mean)
-## [1] 4.492690 3.428379 4.147442 3.240333 4.635996</pre>
+## [1] 3.386968 4.329214 4.928175 5.273124 4.847054</pre>
 
 <p>Apply it by column (MARGIN = 2):</p>
 
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 2, mean) #Identical to colMeans(df), which is much faster
-##        V1        V2        V3 
-## 0.1293514 5.8075444 6.0300078</pre>
+##           V1           V2           V3 
+## -0.002985159  7.418464706  6.243241537</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>apply()</code></h2></hgroup><article  id="apply-2" class="smaller ">
 
@@ -3854,11 +3854,11 @@ while (i &lt; 10) {
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 2, sqrt)
 ## Warning in FUN(newX[, i], ...): NaNs produced
 ##             V1       V2       V3
-## [1,] 1.0171212 2.632804 2.347739
-## [2,]       NaN 1.808922 2.665663
-## [3,] 0.6611008 2.605273 2.284256
-## [4,]       NaN 2.094820 2.480405
-## [5,] 0.2960891 2.767336 2.482372</pre>
+## [1,]       NaN 1.922792 2.674147
+## [2,]       NaN 2.832306 2.418352
+## [3,] 1.2099483 2.457884 2.698029
+## [4,]       NaN 3.204755 2.372033
+## [5,] 0.4107965 3.010248 2.304521</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>sapply()</code></h2></hgroup><article  id="sapply" class="smaller build">
 
@@ -3887,8 +3887,8 @@ sapply(my.list, range)</pre>
 
 <pre class = 'prettyprint lang-r'>sapply(df, mean)</pre>
 
-<pre >##        V1        V2        V3 
-## 0.1293514 5.8075444 6.0300078</pre>
+<pre >##           V1           V2           V3 
+## -0.002985159  7.418464706  6.243241537</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>lapply()</code></h2></hgroup><article  id="lapply" class="smaller ">
 
@@ -3954,12 +3954,14 @@ square(-2)</pre>
 
 </article></slide><slide class=""><hgroup><h2>Anonymous/Lambda expressions</h2></hgroup><article  id="anonymouslambda-expressions" class="smaller ">
 
-<pre class = 'prettyprint lang-python'>df[&quot;number_children&quot;].apply(lambda x: &quot;low&quot; if x in {1,2} else &quot;high&quot;)</pre>
+<pre class = 'prettyprint lang-python'>#Python
+df.apply(lambda x: np.percentile(x, .42))</pre>
 
-<pre class = 'prettyprint lang-r'>sapply(df, {function(x) quantile(x, .42)})</pre>
+<pre class = 'prettyprint lang-r'>#R
+sapply(df, {function(x) quantile(x, .42)})</pre>
 
 <pre >##     V1.42%     V2.42%     V3.42% 
-## 0.02991228 6.01971071 5.94743818</pre>
+## -0.2727159  7.3881119  5.7774242</pre>
 
 </article></slide><slide class=""><hgroup><h2>Default options in functions</h2></hgroup><article  id="default-options-in-functions" class="smaller build">
 
