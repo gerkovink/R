@@ -30,8 +30,7 @@ library(tidyverse)
 - Reading files in different formats
 - Data visualization: design and storytelling
 
-## This week
-How to organize and automate your code:
+## Today: How to organize and automate your code
 
 #### First half
 - Best practices in R
@@ -265,8 +264,8 @@ We should separate the packages we use in each project.
 
 - Workflow (for one person, not for teams):
   - Create repository, selecting README.md and .gitignore files
-  - Add files that you want to upload: git add filex
-  - Commit files: git commit -m "updated version control"
+  - Add files that you want to upload: git add file 1_data_cleaning.R
+  - Commit files: git commit -m "add data cleaning pipeline"
   - Push changes online: git push origin main
   - If things change online: git pull origin main
 
@@ -572,6 +571,7 @@ Apply it by column (MARGIN = 2):
 apply(df, MARGIN = 2, mean) #Identical to colMeans(df), which is much faster
 ```
 
+## `apply()`
 
 It doesn't need to aggregate:
 ```{r, collapse=TRUE}
@@ -819,7 +819,7 @@ dplyr::n_distinct(c(1,2,3,4,2))
 - Pass to the function (using arguments) ***everything*** that the function needs to use (i.e. don't define something outside the function that is being used for the function)
 
 BAD
-```{r}
+```{r, eval=FALSE}
 
 shifted_mean <- function(numbers) {
    return(mean(numbers) + shift_by)
@@ -830,9 +830,7 @@ shifted_mean(c(1,2,3))
 ```
 
 GOOD
-```{r}
-numbers <- 
-
+```{r, eval=FALSE}
 shifted_mean <- function(numbers, shift_by) {
    return(mean(numbers) + shift_by)
 }
