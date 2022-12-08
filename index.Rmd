@@ -1,5 +1,5 @@
 ---
-title: "Statistical Programming with R 2022"
+title: "Statistical Programming with R 2023"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -18,12 +18,12 @@ We usually adapt the course as we go, so we suggest to access the materials onli
 Instructors: 
 
  - [Laurence Frank](https://www.uu.nl/staff/lefrank) (course leader) <br>
- - [Maarten Cruyff](https://www.uu.nl/staff/mcruyff)
- - [Duco Veen](https://www.ducoveen.com/)
+ - [Mahdi Shafiee Kamalabad](https://www.uu.nl/staff/MShafieeKamalabad/)
+ - [?](https://www.uu.nl/staff/mcruyff)
  
  
 Study load: 1.5 ECTS <br>
-Location of Start: [Koningsberger building - Atlas](https://www.uu.nl/en/victor-j-koningsberger-building)
+Location of Start: [to be anounced](https://www.uu.nl/en/victor-j-koningsberger-building)
 
 ---
 # Quick Overview
