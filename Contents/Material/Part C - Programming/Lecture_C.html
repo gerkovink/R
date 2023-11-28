@@ -3222,6 +3222,8 @@ line-height: 1.9;
 
 <slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Recap</h2></hgroup><article  id="recap" class="smaller ">
 
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
+
 <h4>So far</h4>
 
 <ul>
@@ -3244,7 +3246,6 @@ line-height: 1.9;
 
 <ul>
 <li>Best practices in R</li>
-<li>Reproducible science and dependency management in R</li>
 <li>Control-flow:
 
 <ul>
@@ -3253,6 +3254,15 @@ line-height: 1.9;
 </ul></li>
 <li>Functions</li>
 <li>Environments</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
+
+<h4>Is the material too basic?</h4>
+
+<ul>
+<li>Reproducible science and dependency management in R</li>
+<li>Ask questions</li>
 </ul>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Best practises in R</h2></hgroup><article  id="best-practises-in-r" class="smaller ">
@@ -3387,121 +3397,6 @@ total &lt;- sum(x[ ,1])  </pre>
 <li>so people can concentrate on what you are saying, rather than on how you are saying it.</li>
 </ul></li>
 <li><p>If the code that you add to a script looks drastically different from the existing code around it, the discontinuity will throw readers out of their rhythm when they go to read it. Try to avoid this.</p></li>
-</ul>
-
-</article></slide><slide class=""><hgroup><h2>Working in projects in <code>RStudio</code></h2></hgroup><article  id="working-in-projects-in-rstudio" class="smaller ">
-
-<ul>
-<li>Every research project has its own project</li>
-<li>Every project can have its own folder, which also serves as a research archive</li>
-<li>Every project can have its own version control system (e.g. github)</li>
-<li>Every project can have its own dependency management (e.g. renv)</li>
-</ul>
-
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Reproducibility</h2></hgroup><article  id="reproducibility" class="smaller ">
-
-</article></slide><slide class=""><hgroup><h2><strong>Keep your code clean</strong></h2></hgroup><article  id="keep-your-code-clean" class="smaller build">
-
-<ol>
-<li>Break the code in components, keep it tidy</li>
-<li>Use (at least) one folder for the data, and one for figures; don’t save all code in one folder.</li>
-<li>If you have several R files, use descriptive names (e.g. 1_data_collection.Rmd)</li>
-<li>Write all code in the source editor, don’t use the console until you know what you are doing.</li>
-<li>You shouldn’t need to write a command more than two times.
-
-<ul>
-<li>If you are doing something similar several times –&gt; Use <strong>functions</strong> (e.g. you made an amazing plot and you want to use it for two subsets of the data)
-
-<ul>
-<li>Reusable in other projects</li>
-</ul></li>
-<li>If you find yourself writing the same thing several times –&gt; use <strong>for loops</strong> (potentially with <code>purrr::map</code> for convenience)</li>
-<li>Both functions and loops allow you:
-
-<ul>
-<li>Have a clear code</li>
-<li>Easier to maintain / less errors</li>
-</ul></li>
-</ul></li>
-<li>Use <strong>comments</strong> (text preceded by <code>#</code>) to clarify what you are doing</li>
-</ol>
-
-<ul>
-<li>If you look at your code again, one year from now: you will not know what you did –&gt; unless you use comments</li>
-</ul>
-
-</article></slide><slide class=""><hgroup><h2>Dependency management</h2></hgroup><article  id="dependency-management" class="smaller build">
-
-<p>Each project uses specific versions of the packages.</p>
-
-<p>What happens if the function that you are using is deprecated in a new version?</p>
-
-<p>We should separate the packages we use in each project.</p>
-
-<ul>
-<li>Tools:
-
-<ul>
-<li>conda / <code>mamba</code> / poetry (Python): Use virtual environments to compartmentalize projects</li>
-<li><code>renv</code> (R): Load the right version of packages when you open the project</li>
-</ul></li>
-<li>Dependencies are specified in plain text files:
-
-<ul>
-<li>Python: requirements.txt, environment.yml (conda/mamba), pyproject.toml (poetry)</li>
-<li>R: renv.lock</li>
-</ul></li>
-<li>Caveats:
-
-<ul>
-<li>Results may depend on the Operating System –&gt; You could use Docker</li>
-<li>Packages may be deleted</li>
-</ul></li>
-</ul>
-
-</article></slide><slide class=""><hgroup><h2>Dependency management workflow</h2></hgroup><article  id="dependency-management-workflow" class="smaller build">
-
-<ul>
-<li>Python
-
-<ul>
-<li>Create environment: <code>mamba env create -n my_cool_project python=3</code></li>
-<li>Activate environment: <code>mamba activate my_cool_project</code></li>
-<li>Install packages: <code>mamba install jupyter pandas scipy</code></li>
-<li>Export when ready: <code>mamba export -n my_cool_project &gt; my_cool_project.yml</code></li>
-<li>Delete when you’re done: <code>mamba env remove -n my_cool_project</code></li>
-<li>Restore if you need it: <code>mamba env create --file my_cool_project.yml</code></li>
-</ul></li>
-<li>R
-
-<ul>
-<li>Create project (RStudio)</li>
-<li>Create renv file: <code>renv::init()</code></li>
-<li>Install packages: <code>install.packages(&quot;tidyverse&quot;)</code></li>
-<li>Export when ready: <code>renv::snapshot()</code></li>
-<li>Restore if you need it: <code>renv::restore()</code></li>
-</ul></li>
-</ul>
-
-</article></slide><slide class=""><hgroup><h2>Version control</h2></hgroup><article  id="version-control" class="smaller build">
-
-<ul>
-<li><p>I just messed up something and closed the file. How do I go back?</p></li>
-<li><p>Solutions:</p>
-
-<ul>
-<li>Okay: Use a cloud system (most offer 30-days backups)</li>
-<li>Better: Use <code>git</code> (e.g. provided by github)</li>
-</ul></li>
-<li><p>Workflow (for one person, not for teams):</p>
-
-<ul>
-<li>Create repository, selecting README.md and .gitignore files</li>
-<li>Add files that you want to upload: git add file 1_data_cleaning.R</li>
-<li>Commit files: git commit -m &ldquo;add data cleaning pipeline&rdquo;</li>
-<li>Push changes online: git push origin main</li>
-<li>If things change online: git pull origin main</li>
-</ul></li>
 </ul>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Control-flow</h2></hgroup><article  id="control-flow" class="smaller ">
@@ -3732,11 +3627,11 @@ example_vector&gt;3</pre>
 head(df)</pre>
 
 <pre >##           V1       V2       V3
-## 1  0.1632070 6.930640 6.500829
-## 2  1.7903937 4.818528 5.579841
-## 3  0.8542316 1.142260 5.629821
-## 4 -1.0640460 3.370071 5.455964
-## 5 -0.1434343 8.711282 6.516961</pre>
+## 1 -1.2043444 3.548414 5.870359
+## 2 -0.8951685 4.297893 5.999608
+## 3  1.4877875 3.360583 5.195642
+## 4  0.7627172 3.000698 6.150678
+## 5 -1.2091441 3.047484 6.099501</pre>
 
 </article></slide><slide class=""><hgroup><h2>For-loops</h2></hgroup><article  id="for-loops-5" class="smaller ">
 
@@ -3756,11 +3651,11 @@ head(df)</pre>
 }</pre>
 
 <pre >## [1] &quot;V1&quot;
-## [1] 0.3200704
+## [1] -0.2116305
 ## [1] &quot;V2&quot;
-## [1] 4.994556
+## [1] 3.451014
 ## [1] &quot;V3&quot;
-## [1] 5.936683</pre>
+## [1] 5.863157</pre>
 
 </article></slide><slide class=""><hgroup><h2>For-loops</h2></hgroup><article  id="for-loops-6" class="smaller ">
 
@@ -3772,21 +3667,21 @@ head(df)</pre>
   print(sum(row_values&gt;5))
 }</pre>
 
-<pre >##         V1      V2       V3
-## 1 0.163207 6.93064 6.500829
-## [1] 2
-##         V1       V2       V3
-## 2 1.790394 4.818528 5.579841
-## [1] 1
-##          V1      V2       V3
-## 3 0.8542316 1.14226 5.629821
-## [1] 1
-##          V1       V2       V3
-## 4 -1.064046 3.370071 5.455964
+<pre >##          V1       V2       V3
+## 1 -1.204344 3.548414 5.870359
 ## [1] 1
 ##           V1       V2       V3
-## 5 -0.1434343 8.711282 6.516961
-## [1] 2</pre>
+## 2 -0.8951685 4.297893 5.999608
+## [1] 1
+##         V1       V2       V3
+## 3 1.487788 3.360583 5.195642
+## [1] 1
+##          V1       V2       V3
+## 4 0.7627172 3.000698 6.150678
+## [1] 1
+##          V1       V2       V3
+## 5 -1.209144 3.047484 6.099501
+## [1] 1</pre>
 
 </article></slide><slide class=""><hgroup><h2>While loops</h2></hgroup><article  id="while-loops" class="smaller ">
 
@@ -3843,19 +3738,19 @@ ifelse(example_vector &gt; 5.5, &quot;Pass&quot;,&quot;Fail&quot;)</pre>
 <p><code>apply</code> is used for homogeneous matrices/dataframes. It applies a function to each <em>row</em> or <em>column</em>. It returns a vector or a matrix.</p>
 
 <pre class = 'prettyprint lang-r'>head(df, 1)
-##         V1      V2       V3
-## 1 0.163207 6.93064 6.500829</pre>
+##          V1       V2       V3
+## 1 -1.204344 3.548414 5.870359</pre>
 
 <p>Apply it by row (MARGIN = 1):</p>
 
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 1, mean)
-## [1] 4.531558 4.062921 2.542104 2.587330 5.028270</pre>
+## [1] 2.738143 3.134111 3.348004 3.304698 2.645947</pre>
 
 <p>Apply it by column (MARGIN = 2):</p>
 
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 2, mean) #Identical to colMeans(df), which is much faster
-##        V1        V2        V3 
-## 0.3200704 4.9945563 5.9366832</pre>
+##         V1         V2         V3 
+## -0.2116305  3.4510143  5.8631575</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>apply()</code></h2></hgroup><article  id="apply-2" class="smaller ">
 
@@ -3864,11 +3759,11 @@ ifelse(example_vector &gt; 5.5, &quot;Pass&quot;,&quot;Fail&quot;)</pre>
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 2, sqrt)
 ## Warning in FUN(newX[, i], ...): NaNs produced
 ##             V1       V2       V3
-## [1,] 0.4039889 2.632611 2.549672
-## [2,] 1.3380559 2.195115 2.362169
-## [3,] 0.9242465 1.068766 2.372724
-## [4,]       NaN 1.835775 2.335800
-## [5,]       NaN 2.951488 2.552834</pre>
+## [1,]       NaN 1.883723 2.422882
+## [2,]       NaN 2.073136 2.449410
+## [3,] 1.2197490 1.833189 2.279395
+## [4,] 0.8733368 1.732252 2.480056
+## [5,]       NaN 1.745704 2.469717</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>sapply()</code></h2></hgroup><article  id="sapply" class="smaller build">
 
@@ -3897,8 +3792,8 @@ sapply(my_list, range)</pre>
 
 <pre class = 'prettyprint lang-r'>sapply(df, mean)</pre>
 
-<pre >##        V1        V2        V3 
-## 0.3200704 4.9945563 5.9366832</pre>
+<pre >##         V1         V2         V3 
+## -0.2116305  3.4510143  5.8631575</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>lapply()</code></h2></hgroup><article  id="lapply" class="smaller ">
 
@@ -3970,8 +3865,8 @@ df.apply(lambda x: np.percentile(x, .42))</pre>
 <pre class = 'prettyprint lang-r'>#R
 sapply(df, {function(x) quantile(x, .42)})</pre>
 
-<pre >##    V1.42%    V2.42%    V3.42% 
-## 0.0650818 4.3550221 5.6138275</pre>
+<pre >##     V1.42%     V2.42%     V3.42% 
+## -0.9941048  3.2603913  5.9582480</pre>
 
 </article></slide><slide class=""><hgroup><h2>Default options in functions</h2></hgroup><article  id="default-options-in-functions" class="smaller build">
 
@@ -4139,7 +4034,151 @@ shifted_mean(c(1,2,3))</pre>
 shift_by &lt;- 3
 shifted_mean(c(1,2,3), shift_by)</pre>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Practical</h2></hgroup><article  id="practical" class="smaller "></article></slide>
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Reproducibility</h2></hgroup><article  id="reproducibility" class="smaller ">
+
+</article></slide><slide class=""><hgroup><h2>Working in projects in <code>RStudio</code></h2></hgroup><article  id="working-in-projects-in-rstudio" class="smaller ">
+
+<ul>
+<li>Every research project has its own project</li>
+<li>Every project can have its own folder, which also serves as a research archive</li>
+<li>Every project can have its own version control system (e.g. github)</li>
+<li>Every project can have its own dependency management (e.g. renv)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2><strong>Keep your code clean</strong></h2></hgroup><article  id="keep-your-code-clean" class="smaller build">
+
+<ol>
+<li>Break the code in components, keep it tidy</li>
+<li>Use (at least) one folder for the data, and one for figures; don’t save all code in one folder.</li>
+<li>If you have several R files, use descriptive names (e.g. 1_data_collection.Rmd)</li>
+<li>Write all code in the source editor, don’t use the console until you know what you are doing.</li>
+<li>You shouldn’t need to write a command more than two times.
+
+<ul>
+<li>If you are doing something similar several times –&gt; Use <strong>functions</strong> (e.g. you made an amazing plot and you want to use it for two subsets of the data)
+
+<ul>
+<li>Reusable in other projects</li>
+</ul></li>
+<li>If you find yourself writing the same thing several times –&gt; use <strong>for loops</strong> (potentially with <code>purrr::map</code> for convenience)</li>
+<li>Both functions and loops allow you:
+
+<ul>
+<li>Have a clear code</li>
+<li>Easier to maintain / less errors</li>
+</ul></li>
+</ul></li>
+<li>Use <strong>comments</strong> (text preceded by <code>#</code>) to clarify what you are doing</li>
+</ol>
+
+<ul>
+<li>If you look at your code again, one year from now: you will not know what you did –&gt; unless you use comments</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Dependency management</h2></hgroup><article  id="dependency-management" class="smaller build">
+
+<p>Each project uses specific versions of the packages.</p>
+
+<p>What happens if the function that you are using is deprecated in a new version?</p>
+
+<p>We should separate the packages we use in each project.</p>
+
+<ul>
+<li>Tools:
+
+<ul>
+<li>conda / <code>mamba</code> / poetry (Python): Use virtual environments to compartmentalize projects</li>
+<li><code>renv</code> (R): Load the right version of packages when you open the project</li>
+</ul></li>
+<li>Dependencies are specified in plain text files:
+
+<ul>
+<li>Python: requirements.txt, environment.yml (conda/mamba), pyproject.toml (poetry)</li>
+<li>R: renv.lock</li>
+</ul></li>
+<li>Caveats:
+
+<ul>
+<li>Results may depend on the Operating System –&gt; You could use Docker</li>
+<li>Packages may be deleted</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Dependency management workflow</h2></hgroup><article  id="dependency-management-workflow" class="smaller build">
+
+<ul>
+<li>Python
+
+<ul>
+<li>Create environment: <code>mamba env create -n my_cool_project python=3</code></li>
+<li>Activate environment: <code>mamba activate my_cool_project</code></li>
+<li>Install packages: <code>mamba install jupyter pandas scipy</code></li>
+<li>Export when ready: <code>mamba export -n my_cool_project &gt; my_cool_project.yml</code></li>
+<li>Delete when you’re done: <code>mamba env remove -n my_cool_project</code></li>
+<li>Restore if you need it: <code>mamba env create --file my_cool_project.yml</code></li>
+</ul></li>
+<li>R
+
+<ul>
+<li>Create project (RStudio)</li>
+<li>Create renv file: <code>renv::init()</code></li>
+<li>Install packages: <code>install.packages(&quot;tidyverse&quot;)</code></li>
+<li>Export when ready: <code>renv::snapshot()</code></li>
+<li>Restore if you need it: <code>renv::restore()</code></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Version control</h2></hgroup><article  id="version-control" class="smaller build">
+
+<ul>
+<li><p>I just messed up something and closed the file. How do I go back?</p></li>
+<li><p>Solutions:</p>
+
+<ul>
+<li>Okay: Use a cloud system (most offer 30-days backups)</li>
+<li>Better: Use <code>git</code> (e.g. provided by github)</li>
+</ul></li>
+<li><p>Workflow (for one person, not for teams):</p>
+
+<ul>
+<li>Create repository, selecting README.md and .gitignore files</li>
+<li>Add files that you want to upload: git add file 1_data_cleaning.R</li>
+<li>Commit files: git commit -m &ldquo;add data cleaning pipeline&rdquo;</li>
+<li>Push changes online: git push origin main</li>
+<li>If things change online: git pull origin main</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Practical</h2></hgroup><article  id="practical" class="smaller ">
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Final recap</h2></hgroup><article  id="final-recap" class="smaller ">
+
+</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
+
+<ul>
+<li>How to use <code>R</code>, <code>RStudio</code>, <code>R</code>-scripts and <code>R</code>-notebooks</li>
+<li>Data types (elements)
+
+<ul>
+<li>character, numeric, integer, logical, factor</li>
+</ul></li>
+<li>Data structures: composed of data types
+
+<ul>
+<li>vector, matrix, list, <strong>data.frame</strong></li>
+</ul></li>
+<li>Subsetting data structures</li>
+<li>Reading files in different formats</li>
+<li>Best practices in R</li>
+<li>Control-flow:
+
+<ul>
+<li>Choice: if-else statements</li>
+<li>Loops: For loops</li>
+</ul></li>
+<li>Functions</li>
+<li>Environments</li>
+</ul></article></slide>
 
 
   <slide class="backdrop"></slide>

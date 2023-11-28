@@ -20,6 +20,8 @@ library(tidyverse)
 
 # Recap
 
+---
+
 #### So far
 - How to use `R`, `RStudio`, `R`-scripts and `R`-notebooks
 - Data types (elements)
@@ -32,13 +34,19 @@ library(tidyverse)
 
 #### Now
 - Best practices in R
-- Reproducible science and dependency management in R
 - Control-flow: 
   - Choice: if-else statements
   - Loops: For loops
 - Functions
 - Environments
 
+
+---
+
+#### Is the material too basic?
+
+- Reproducible science and dependency management in R
+- Ask questions
 
 
 
@@ -183,84 +191,6 @@ Exception: Always place a space after a comma.
     - so people can concentrate on what you are saying, rather than on how you are saying it. 
 
 - If the code that you add to a script looks drastically different from the existing code around it, the discontinuity will throw readers out of their rhythm when they go to read it. Try to avoid this.
-
-
-## Working in projects in `RStudio`
-- Every research project has its own project
-- Every project can have its own folder, which also serves as a research archive
-- Every project can have its own version control system (e.g. github)
-- Every project can have its own dependency management (e.g. renv)
-
-# Reproducibility
-
-## __Keep your code clean__ {.build}
-
-1. Break the code in components, keep it tidy
-2. Use (at least) one folder for the data, and one for figures; don't save all code in one folder.
-3. If you have several R files, use descriptive names (e.g. 1_data_collection.Rmd)
-4. Write all code in the source editor, don't use the console until you know what you are doing.
-5. You shouldn't need to write a command more than two times. 
-   - If you are doing something similar several times --> Use __functions__ (e.g. you made an amazing plot and you want to use it for two subsets of the data)
-      - Reusable in other projects
-   - If you find yourself writing the same thing several times --> use __for loops__ (potentially with `purrr::map` for convenience)
-   - Both functions and loops allow you:
-      - Have a clear code
-      - Easier to maintain / less errors
-6. Use __comments__ (text preceded by `#`) to clarify what you are doing
-  - If you look at your code again, one year from now: you will not know what you did --> unless you use comments 
-  
-## Dependency management {.build}
-
-Each project uses specific versions of the packages.
-
-What happens if the function that you are using is deprecated in a new version?
-
-We should separate the packages we use in each project.
-
-- Tools: 
-   - conda / `mamba` / poetry (Python): Use virtual environments to compartmentalize projects 
-   - `renv` (R): Load the right version of packages when you open the project
-
-- Dependencies are specified in plain text files:
-   - Python: requirements.txt, environment.yml (conda/mamba), pyproject.toml (poetry)
-   - R: renv.lock
-
-- Caveats:
-   - Results may depend on the Operating System --> You could use Docker
-   - Packages may be deleted
-
-
-## Dependency management workflow {.build}
-- Python
-  - Create environment: `mamba env create -n my_cool_project python=3`
-  - Activate environment: `mamba activate my_cool_project`
-  - Install packages: `mamba install jupyter pandas scipy`
-  - Export when ready: `mamba export -n my_cool_project > my_cool_project.yml`
-  - Delete when you're done: `mamba env remove -n my_cool_project`
-  - Restore if you need it: `mamba env create --file my_cool_project.yml`
-  
-- R
-  - Create project (RStudio)
-  - Create renv file: `renv::init()`
-  - Install packages: `install.packages("tidyverse")`
-  - Export when ready: `renv::snapshot()`
-  - Restore if you need it: `renv::restore()`
-
-## Version control {.build}
-- I just messed up something and closed the file. How do I go back?
-
-- Solutions:
-  - Okay: Use a cloud system (most offer 30-days backups)
-  - Better: Use `git` (e.g. provided by github)
-
-
-- Workflow (for one person, not for teams):
-  - Create repository, selecting README.md and .gitignore files
-  - Add files that you want to upload: git add file 1_data_cleaning.R
-  - Commit files: git commit -m "add data cleaning pipeline"
-  - Push changes online: git push origin main
-  - If things change online: git pull origin main
-
 
 
   
@@ -863,6 +793,105 @@ shift_by <- 3
 shifted_mean(c(1,2,3), shift_by)
 ```
 
+
+# Reproducibility
+
+## Working in projects in `RStudio`
+- Every research project has its own project
+- Every project can have its own folder, which also serves as a research archive
+- Every project can have its own version control system (e.g. github)
+- Every project can have its own dependency management (e.g. renv)
+
+
+
+## __Keep your code clean__ {.build}
+
+1. Break the code in components, keep it tidy
+2. Use (at least) one folder for the data, and one for figures; don't save all code in one folder.
+3. If you have several R files, use descriptive names (e.g. 1_data_collection.Rmd)
+4. Write all code in the source editor, don't use the console until you know what you are doing.
+5. You shouldn't need to write a command more than two times. 
+   - If you are doing something similar several times --> Use __functions__ (e.g. you made an amazing plot and you want to use it for two subsets of the data)
+      - Reusable in other projects
+   - If you find yourself writing the same thing several times --> use __for loops__ (potentially with `purrr::map` for convenience)
+   - Both functions and loops allow you:
+      - Have a clear code
+      - Easier to maintain / less errors
+6. Use __comments__ (text preceded by `#`) to clarify what you are doing
+  - If you look at your code again, one year from now: you will not know what you did --> unless you use comments 
+  
+## Dependency management {.build}
+
+Each project uses specific versions of the packages.
+
+What happens if the function that you are using is deprecated in a new version?
+
+We should separate the packages we use in each project.
+
+- Tools: 
+   - conda / `mamba` / poetry (Python): Use virtual environments to compartmentalize projects 
+   - `renv` (R): Load the right version of packages when you open the project
+
+- Dependencies are specified in plain text files:
+   - Python: requirements.txt, environment.yml (conda/mamba), pyproject.toml (poetry)
+   - R: renv.lock
+
+- Caveats:
+   - Results may depend on the Operating System --> You could use Docker
+   - Packages may be deleted
+
+
+## Dependency management workflow {.build}
+- Python
+  - Create environment: `mamba env create -n my_cool_project python=3`
+  - Activate environment: `mamba activate my_cool_project`
+  - Install packages: `mamba install jupyter pandas scipy`
+  - Export when ready: `mamba export -n my_cool_project > my_cool_project.yml`
+  - Delete when you're done: `mamba env remove -n my_cool_project`
+  - Restore if you need it: `mamba env create --file my_cool_project.yml`
+  
+- R
+  - Create project (RStudio)
+  - Create renv file: `renv::init()`
+  - Install packages: `install.packages("tidyverse")`
+  - Export when ready: `renv::snapshot()`
+  - Restore if you need it: `renv::restore()`
+
+## Version control {.build}
+- I just messed up something and closed the file. How do I go back?
+
+- Solutions:
+  - Okay: Use a cloud system (most offer 30-days backups)
+  - Better: Use `git` (e.g. provided by github)
+
+
+- Workflow (for one person, not for teams):
+  - Create repository, selecting README.md and .gitignore files
+  - Add files that you want to upload: git add file 1_data_cleaning.R
+  - Commit files: git commit -m "add data cleaning pipeline"
+  - Push changes online: git push origin main
+  - If things change online: git pull origin main
+
+
+
+
 # Practical
 
 
+# Final recap
+
+---
+
+- How to use `R`, `RStudio`, `R`-scripts and `R`-notebooks
+- Data types (elements)
+  - character, numeric, integer, logical, factor
+- Data structures: composed of data types
+  - vector, matrix, list, **data.frame**
+- Subsetting data structures
+- Reading files in different formats
+- Best practices in R
+- Control-flow: 
+  - Choice: if-else statements
+  - Loops: For loops
+- Functions
+- Environments

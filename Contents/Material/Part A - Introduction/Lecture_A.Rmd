@@ -286,24 +286,24 @@ data <- readr::read_csv("../common_datasets/dataset_boys.csv", col_select = c("a
 summary(data)
 ```
 
----
-### 3. Some other important considerations
-The computer cannot read your mind
-```{r, error= TRUE}
-a <- 100
-print()
-```
+<!-- --- -->
+<!-- ### 3. Some other important considerations -->
+<!-- The computer cannot read your mind -->
+<!-- ```{r, error= TRUE} -->
+<!-- a <- 100 -->
+<!-- print() -->
+<!-- ``` -->
 
-The computer reads from the top to the bottom
-```{r, eval= FALSE}
-a <- 100
-print(b)
-b <- 10
-```
+<!-- The computer reads from the top to the bottom -->
+<!-- ```{r, eval= FALSE} -->
+<!-- a <- 100 -->
+<!-- print(b) -->
+<!-- b <- 10 -->
+<!-- ``` -->
 
-```{r, error= TRUE, echo=FALSE}
-print(b)
-```
+<!-- ```{r, error= TRUE, echo=FALSE} -->
+<!-- print(b) -->
+<!-- ``` -->
 
 
 
@@ -313,7 +313,7 @@ Goal: Get used to RStudio using R as a calculator, and install one library
 
 1. Create an R script
 2. Create an R project
-3. Create an R notebook
+3. Create a Quarto document
 
 
 

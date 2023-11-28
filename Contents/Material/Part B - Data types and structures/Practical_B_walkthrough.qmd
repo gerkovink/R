@@ -121,7 +121,7 @@ dat3
 
 8. **Read the file `dataset_boys.csv`.** 
 
-First create a folder "data" in your project. Then download it from [here](https://javier.science/R/#day-1) and add it to that folder (use Ctrl+S in the browser to download it).
+First create a folder "data" in your project. Then download it from [here](https://javier.science/R/Contents/Material/common_datasets/dataset_boys.csv) and add it to that folder (use Ctrl+S in the browser to download it).
 
 First you need to load the required library to read the CSV (`readr`). You may need to install it first.
 
@@ -253,7 +253,7 @@ The mean age is `r mean(boys$age[boys$age < 15 & boys$reg != "north" ], na.rm = 
 
 
 ## Exercises 15-17:  Visualization
-Download the file `example_csv.csv` from [here](http://javier.science/R/#day-1-nov-12th) and add it to your data folder.
+Download the file `example_csv.csv` from [here](https://javier.science/R/Contents/Material/common_datasets/dataset_boys.csv) and add it to your data folder.
 
 Open the file in your text editor to see how it looks. What is the first line?
 

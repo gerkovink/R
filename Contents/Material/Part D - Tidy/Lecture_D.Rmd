@@ -20,7 +20,6 @@ output:
 
 #### First half
 - Best practices in R
-- Reproducible science and dependency management in R
 - Control-flow: 
   - Choice: if-else statements
   - Loops: For loops

@@ -17,11 +17,11 @@ In this practical we will go over reproducibility, control flow (if-else stateme
 
 First, create a new project (File -> New Project), install `renv` and initialize the dependency management (`renv::init()`).
 
-Then, create a new notebook for this homework (File -> New File -> R Markdown -> Document)
+Then, create a new notebook for this homework (File -> New File -> Quarto document -> Document)
 
 In the following exercises we will use the same dataset as last time, boys.
 
-You need to download `dataset_boys.csv` from [here](https://javier.science/R/#day-2-nov-16th) and add it to a folder "data" in the same folder as your markdown file. In t
+You need to download `dataset_boys.csv` from [here](https://javier.science/R/Contents/Material/common_datasets/dataset_boys.csv) and add it to a folder "data" in the same folder as your markdown file. In t
 
 Then, read the file dataset_boys.csv using the code in the next cell.
 
