@@ -111,7 +111,7 @@ To ensure that you work with the latest iteration of the course materials, we ad
     - [Lecture A (pdf)](Contents/Material/Part A - Introduction/Lecture_A.pdf)
     - [Practical A](Contents/Material/Part A - Introduction/Practical_A_walkthrough.html)
     - [`notebook.R`](Contents/Material/Part A - Introduction/exercise_examples/notebook.R)
-    - [`markdown.Rmd`](Contents/Material/Part A - Introduction/exercise_examples/markdown.Rmd)
+    - [`quarto.qmd`](Contents/Material/Part A - Introduction/exercise_examples/quarto.qmd)
 
 - Part B: Working with `R`: Data types and structures
     - [Lecture B (slides)](Contents/Material/Part B - Data types and structures/Lecture_B.html)

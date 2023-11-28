@@ -151,9 +151,9 @@ The existence of two very similar tools for the same thing might sound as unnece
 
 11. **Open the file `Quarto.qmd`. **
 
-You can find the notebook [`quarto.Qmd` here](exercise_examples/quarto.Rmd).
+You can find the notebook [`quarto.qmd` here](exercise_examples/quarto.qmd).
 
-Have a look at the code in the `quarto.Rmd` file and make sure that you understand what is going on. If you do not understand what you are looking at, please ask.
+Have a look at the code in the `quarto.qmd` file and make sure that you understand what is going on. If you do not understand what you are looking at, please ask.
 
 ---
 

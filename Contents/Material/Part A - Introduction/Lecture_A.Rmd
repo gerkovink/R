@@ -135,7 +135,7 @@ Run commands on your terminal (this is not R, you won't need to use this)
 
 ---
 
-#### Create a new file: RScript and RNotebook
+#### Create a new file: R Scripts and Quarto Documents
 
 <img src="figures/rstudio5.png" width="90%"/>
 <!-- ![Create new files](figures/rstudio5.png){width=90%} -->

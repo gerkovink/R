@@ -38,14 +38,14 @@ output:
 
 ## Linear regression (model)
 
-![Linear regression. Source: R. Kukuh (medium)](img/1*mQN0yjE3oWr6GBzY0953pw.png){width=70%}
+![Linear regression. Source: R. Kukuh (medium)](img/1mQN0yjE3oWr6GBzY0953pw.png){width=70%}
 
 ## Linear regression (visual interpretation)
 
-![Linear regression. Source: R. Kukuh (medium)](img/1*7tcfpzsXbrxROhVCB8BkBA.png){width=100%}
+![Linear regression. Source: R. Kukuh (medium)](img/17tcfpzsXbrxROhVCB8BkBA.png){width=100%}
 
 ## Linear regression (fitting)
-![Linear regression. Source: R. Kukuh (medium)](img/1*jJU6IrM4CsnGcOG1JIErxg.png){width=100%}
+![Linear regression. Source: R. Kukuh (medium)](img/1jJU6IrM4CsnGcOG1JIErxg.png){width=100%}
 
 
 
