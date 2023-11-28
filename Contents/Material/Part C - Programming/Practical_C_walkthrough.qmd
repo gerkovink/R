@@ -144,10 +144,6 @@ renv::snapshot()
 - Use `sapply` and `readLines` to read all files; 
 - Use `lapply` and `stringr::str_match_all` to find the pattern `library\\(.*\\)`.
 
-```{r}
-?rapply
-```
-
 
 ```{r warning=FALSE}
 # Find the name of the files (you'll have to adjust the path)
@@ -173,7 +169,7 @@ files_list
 - Create a new repository. 
 - Upload files. 
 
-If interested, try to set up git in your computer (https://support.posit.co/hc/en-us/articles/200532077)
+If interested, try to set up git in your RStudio (https://support.posit.co/hc/en-us/articles/200532077)
 
 
 ---

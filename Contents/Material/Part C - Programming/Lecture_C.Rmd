@@ -23,7 +23,7 @@ library(tidyverse)
 ---
 
 #### So far
-- How to use `R`, `RStudio`, `R`-scripts and `R`-notebooks
+- How to use `R`, `RStudio`, `R`-scripts and `Quarto`-documents
 - Data types (elements)
   - character, numeric, integer, logical, factor
 - Data structures: composed of data types
@@ -41,12 +41,6 @@ library(tidyverse)
 - Environments
 
 
----
-
-#### Is the material too basic?
-
-- Reproducible science and dependency management in R
-- Ask questions
 
 
 
@@ -700,7 +694,7 @@ square <- function(x){
 # Scoping rules in `R` 
 
 ## Global environemnt (workspace)
-
+  
 When you write the name of a variable, R needs to find the value.
 
 In the interactive computation (outside of functions, e.g., your console), this happens in the following order:

@@ -3227,7 +3227,7 @@ line-height: 1.9;
 <h4>So far</h4>
 
 <ul>
-<li>How to use <code>R</code>, <code>RStudio</code>, <code>R</code>-scripts and <code>R</code>-notebooks</li>
+<li>How to use <code>R</code>, <code>RStudio</code>, <code>R</code>-scripts and <code>Quarto</code>-documents</li>
 <li>Data types (elements)
 
 <ul>
@@ -3254,15 +3254,6 @@ line-height: 1.9;
 </ul></li>
 <li>Functions</li>
 <li>Environments</li>
-</ul>
-
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article  class="smaller">
-
-<h4>Is the material too basic?</h4>
-
-<ul>
-<li>Reproducible science and dependency management in R</li>
-<li>Ask questions</li>
 </ul>
 
 </article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Best practises in R</h2></hgroup><article  id="best-practises-in-r" class="smaller ">
@@ -3627,11 +3618,11 @@ example_vector&gt;3</pre>
 head(df)</pre>
 
 <pre >##           V1       V2       V3
-## 1 -1.2043444 3.548414 5.870359
-## 2 -0.8951685 4.297893 5.999608
-## 3  1.4877875 3.360583 5.195642
-## 4  0.7627172 3.000698 6.150678
-## 5 -1.2091441 3.047484 6.099501</pre>
+## 1 -1.1555706 3.987039 6.974957
+## 2 -1.6462298 5.041256 5.808818
+## 3  0.4646996 6.665295 4.938216
+## 4 -0.8045881 4.739685 4.422943
+## 5  1.0180784 7.675262 4.360817</pre>
 
 </article></slide><slide class=""><hgroup><h2>For-loops</h2></hgroup><article  id="for-loops-5" class="smaller ">
 
@@ -3651,11 +3642,11 @@ head(df)</pre>
 }</pre>
 
 <pre >## [1] &quot;V1&quot;
-## [1] -0.2116305
+## [1] -0.4247221
 ## [1] &quot;V2&quot;
-## [1] 3.451014
+## [1] 5.621708
 ## [1] &quot;V3&quot;
-## [1] 5.863157</pre>
+## [1] 5.30115</pre>
 
 </article></slide><slide class=""><hgroup><h2>For-loops</h2></hgroup><article  id="for-loops-6" class="smaller ">
 
@@ -3668,19 +3659,19 @@ head(df)</pre>
 }</pre>
 
 <pre >##          V1       V2       V3
-## 1 -1.204344 3.548414 5.870359
-## [1] 1
-##           V1       V2       V3
-## 2 -0.8951685 4.297893 5.999608
+## 1 -1.155571 3.987039 6.974957
 ## [1] 1
 ##         V1       V2       V3
-## 3 1.487788 3.360583 5.195642
-## [1] 1
+## 2 -1.64623 5.041256 5.808818
+## [1] 2
 ##          V1       V2       V3
-## 4 0.7627172 3.000698 6.150678
+## 3 0.4646996 6.665295 4.938216
 ## [1] 1
-##          V1       V2       V3
-## 5 -1.209144 3.047484 6.099501
+##           V1       V2       V3
+## 4 -0.8045881 4.739685 4.422943
+## [1] 0
+##         V1       V2       V3
+## 5 1.018078 7.675262 4.360817
 ## [1] 1</pre>
 
 </article></slide><slide class=""><hgroup><h2>While loops</h2></hgroup><article  id="while-loops" class="smaller ">
@@ -3739,18 +3730,18 @@ ifelse(example_vector &gt; 5.5, &quot;Pass&quot;,&quot;Fail&quot;)</pre>
 
 <pre class = 'prettyprint lang-r'>head(df, 1)
 ##          V1       V2       V3
-## 1 -1.204344 3.548414 5.870359</pre>
+## 1 -1.155571 3.987039 6.974957</pre>
 
 <p>Apply it by row (MARGIN = 1):</p>
 
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 1, mean)
-## [1] 2.738143 3.134111 3.348004 3.304698 2.645947</pre>
+## [1] 3.268809 3.067948 4.022737 2.786013 4.351386</pre>
 
 <p>Apply it by column (MARGIN = 2):</p>
 
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 2, mean) #Identical to colMeans(df), which is much faster
 ##         V1         V2         V3 
-## -0.2116305  3.4510143  5.8631575</pre>
+## -0.4247221  5.6217075  5.3011502</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>apply()</code></h2></hgroup><article  id="apply-2" class="smaller ">
 
@@ -3759,11 +3750,11 @@ ifelse(example_vector &gt; 5.5, &quot;Pass&quot;,&quot;Fail&quot;)</pre>
 <pre class = 'prettyprint lang-r'>apply(df, MARGIN = 2, sqrt)
 ## Warning in FUN(newX[, i], ...): NaNs produced
 ##             V1       V2       V3
-## [1,]       NaN 1.883723 2.422882
-## [2,]       NaN 2.073136 2.449410
-## [3,] 1.2197490 1.833189 2.279395
-## [4,] 0.8733368 1.732252 2.480056
-## [5,]       NaN 1.745704 2.469717</pre>
+## [1,]       NaN 1.996757 2.641014
+## [2,]       NaN 2.245274 2.410149
+## [3,] 0.6816888 2.581723 2.222210
+## [4,]       NaN 2.177082 2.103079
+## [5,] 1.0089987 2.770426 2.088257</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>sapply()</code></h2></hgroup><article  id="sapply" class="smaller build">
 
@@ -3793,7 +3784,7 @@ sapply(my_list, range)</pre>
 <pre class = 'prettyprint lang-r'>sapply(df, mean)</pre>
 
 <pre >##         V1         V2         V3 
-## -0.2116305  3.4510143  5.8631575</pre>
+## -0.4247221  5.6217075  5.3011502</pre>
 
 </article></slide><slide class=""><hgroup><h2><code>lapply()</code></h2></hgroup><article  id="lapply" class="smaller ">
 
@@ -3866,7 +3857,7 @@ df.apply(lambda x: np.percentile(x, .42))</pre>
 sapply(df, {function(x) quantile(x, .42)})</pre>
 
 <pre >##     V1.42%     V2.42%     V3.42% 
-## -0.9941048  3.2603913  5.9582480</pre>
+## -0.9169025  4.9447532  4.7733288</pre>
 
 </article></slide><slide class=""><hgroup><h2>Default options in functions</h2></hgroup><article  id="default-options-in-functions" class="smaller build">
 
