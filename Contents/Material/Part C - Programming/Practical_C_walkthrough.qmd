@@ -1,16 +1,15 @@
 ---
 title: "Practical C"
 author: "Javier Garcia-Bernardo"
-date: "Statistical Programming with R"
-output: 
-   html_document:
+date: "11/27/2023"
+format:
+  html:
     toc: true
-    toc_depth: 5
-    toc_float: 
-      collapsed: false
-      smooth_scroll: false
-    number_sections: false
-    code_folding: hide
+    toc-location: left
+    toc-depth: 5
+    code-fold: true
+    code-tools: true
+    number-sections: false
 ---
 
 # Exercises
@@ -22,11 +21,27 @@ Then, create a new notebook for this homework (File -> New File -> R Markdown ->
 
 In the following exercises we will use the same dataset as last time, boys.
 
-You need to download `dataset_boys.csv` from [here](https://javier.science/R/#day-2-nov-16th) and add it to a folder "data" in the same folder as your markdown file.
+You need to download `dataset_boys.csv` from [here](https://javier.science/R/#day-2-nov-16th) and add it to a folder "data" in the same folder as your markdown file. In t
 
 Then, read the file dataset_boys.csv using the code in the next cell.
 
-```{r class.source = 'fold-show'}
+```{r}
+#| echo = FALSE
+#install.packages(c("readr", "stringr), repos = "http://cran.us.r-project.org")
+library(readr)
+library(stringr)
+
+
+# Reading the file in the background
+boys <- readr::read_delim("../common_datasets/dataset_boys.csv",delim=",")
+# Keep only a few columns
+boys <- boys[, c("age","wgt","bmi")]
+# Drop missing values
+boys <- na.omit(boys)
+```
+
+```{r}
+#| output = FALSE
 #install.packages(c("readr", "stringr), repos = "http://cran.us.r-project.org")
 library(readr)
 library(stringr)
@@ -123,27 +138,42 @@ renv::snapshot()
 
 
 
-7. **Find all libraries used in the .Rmd files of https://github.com/jgarciab/R**. Steps: a. Download the materials; b. Use `list.files(path=???, pattern=???, full.names=TRUE, recurseive=TRUE)` to find all Rmd files; c. Use `sapply` and `readLines` to read all files; d. Use `rapply` (recursive apply) and `stringr::str_match_all` to find the pattern `library\\(.*\\)` .
+7. **Find all libraries used in the .Rmd files of https://github.com/jgarciab/R**. Steps: 
+- Download the materials; 
+- Use `list.files(path=???, pattern=???, full.names=TRUE, recurseive=TRUE)` to find all Rmd files;
+- Use `sapply` and `readLines` to read all files; 
+- Use `lapply` and `stringr::str_match_all` to find the pattern `library\\(.*\\)`.
+
+```{r}
+?rapply
+```
+
 
 ```{r warning=FALSE}
 # Find the name of the files (you'll have to adjust the path)
-files <- list.files(path="../..", pattern="*Rmd", full.names=TRUE, recursive=TRUE)
+files <- list.files(path="../..", pattern="*qmd", full.names=TRUE, recursive=TRUE)
 
 # Read files
 files_list <- sapply(files, readLines)
 
 # Find the pattern in all files
-files_list <- rapply(files_list, 
+files_list <- lapply(files_list, 
                      function(x) str_match_all(x, "library\\(.*\\)"))
+
+#Create a (named) vector 
+files_list <- unlist(files_list)
 
 # Print pattern
 files_list
 ```
 
 
+8. **If you are done, try to upload your files to github.**. Steps: 
+- Create an account. 
+- Create a new repository. 
+- Upload files. 
 
-
-If you are done, try to upload your files to github. Steps: Create an account. Create a new repository. Upload files. If interested, try to set up git in your computer (https://support.posit.co/hc/en-us/articles/200532077)
+If interested, try to set up git in your computer (https://support.posit.co/hc/en-us/articles/200532077)
 
 
 ---

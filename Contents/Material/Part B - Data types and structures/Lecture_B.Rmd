@@ -17,9 +17,9 @@ output:
 
 ## Recap
 
-This morning we have learned the basics of programming in `R`:
+We have learned the basics of programming in `R`:
 
-- How to use `RStudio`, `R`-scripts and `R`-notebooks
+- How to use `RStudio`, `R`-scripts and `Quarto`-documents
 - How to assign numbers to variables (`<-`)
 - Data types (elements)
   - character, numeric, integer, logical, factor
@@ -34,14 +34,15 @@ student cleaned <- 3
 ```
 
 - Some programming languages tell you how to handle this, but not R.
-- I use `students_cleaned`. This is the standard of Python. 
-- Use any, but be consistent
+- I use `students_cleaned`. This is the standard of Python. Use any, but be consistent
 
 ```{r, eval = FALSE}
 student_cleaned <- 3 #studentCleaned
 ```
 
-![http://journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf](figures/naming_convention.png){width=70%}
+<img src="figures/naming_convention.png" width="70%"/>
+
+<!-- ![http://journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf](){width=70%} -->
 
 
 # Data Types (Elements)
@@ -248,7 +249,7 @@ d["row 3", ]
 d[3, ]
 ```
 
-CAREFUL! You always need the comma (,) when filtering by rows
+CAREFUL! You always need the comma (,) when filtering by rows. Otherwise you filter by column!
 
 ## Retrieving columns elements in data frames
 All
@@ -455,11 +456,11 @@ dplyr::n_distinct(c(1,2,2,3,3))
 - Other arguments tell the function how it should handle the input. In the example below it tells the mean function to remove missing values.
 ```{r,collapse=TRUE}
 mean(c(1,2,3,4,5,NA))
-mean(c(1,2,3,4,5,NA),na.rm = TRUE)
+mean(c(1,2,3,4,5,NA), na.rm = TRUE)
 ```
 
 
-- You can create your own (more on this next day)
+- You can create your own (more on this later)
 ```{r,collapse=TRUE}
 my_mean <- function(vector_num){
   return(sum(vector_num)/length(vector_num))
@@ -473,7 +474,7 @@ my_mean(c(1,2,3,4,5))
 # Math errors
 
 ## Things that cannot be done
-- Things that have no representation in real number space (at least not without tremendous effort)
+- Things that have no representation in real number space
     - For example, the following code returns "Not a Number"
 ```{r,collapse=TRUE}
 0 / 0
@@ -544,6 +545,7 @@ summary(df)
 ---
 
 ```{r}
+library(Hmisc)
 Hmisc::describe(df)
 ```
 

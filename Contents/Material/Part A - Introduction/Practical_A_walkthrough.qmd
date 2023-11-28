@@ -1,15 +1,15 @@
 ---
 title: "Practical A"
-author: "Gerko Vink (with small adaptaions from Javier Garcia-Bernardo)"
-date: "Statistical Programming with R"
-output: 
-   html_document:
+author: "Gerko Vink (with some adaptations from Javier Garcia-Bernardo)"
+date: "11/27/2023"
+format:
+  html:
     toc: true
-    toc_depth: 5
-    toc_float: 
-      collapsed: false
-      smooth_scroll: false
-    number_sections: false
+    toc-location: left
+    toc-depth: 5
+    code-fold: true
+    code-tools: true
+    number-sections: false
 ---
 
 In this exercise we will get acquainted with `R`. A convenient way to work with `R` is with `RStudio`, as `RStudio` adds many features and convenient accessibility options to the plain `R` you have obtained from http://r-project.org. Most of these features go beyond the scope of this course, but as you will develop your `R` skillset, you might run into the need for `RStudio` at a later moment. Best to get to know `RStudio` now. 
@@ -124,11 +124,12 @@ to a readable file where code and output are visible. There is, however, an even
 
 ---
 
-## Exercise 11-13: R-markdown
+## Exercise 11-13: Quarto and R-markdown
 
 ---
 
-## About `rmarkdown`
+## About `rmarkdown` and `quarto`
+
 <center>
 <iframe src="https://player.vimeo.com/video/178485416?color=428bca&title=0&byline=0&portrait=0" width="500" height="315" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 <p><a href="https://vimeo.com/178485416">What is R Markdown?</a> from <a href="https://vimeo.com/rstudioinc">RStudio, Inc.</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
@@ -136,20 +137,29 @@ to a readable file where code and output are visible. There is, however, an even
 
 See also [this `rmarkdown` cheat sheet](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf). 
 
+In a nutshell, `rmarkdown` provides a way to create nice documents containing `r` code and its output.
+
+In 2022, RStudio launched [`Quarto`](https://quarto.org/). `Quarto` is the natural extension to `rmarkdown`. The main differences are that Quarto contains some nice extra features and supports languages other than R, as Python or Julia.
+
+For beginners, we recommend using the more modern `Quarto`. That is what we will cover in the workshop. However, you are likely to still encounter `rmarkdown` docs and references in the wild, so it is good to know it exists. Besides,`rmarkdown` will still be maintained, so it is likely that both formats will coexist, at least for a while. You can read more about the differences between `Quarto` and `rmarkdown` [here](https://quarto.org/docs/faq/rmarkdown.html). You can read more about `Quarto` on its website, with very detailed [documentation and tutorials](https://quarto.org/docs/get-started/hello/rstudio.html)
+
+The existence of two very similar tools for the same thing might sound as unnecessarily complicated, but do not worry: `rmarkdown` and `Quarto` are very similar. Indeed, most files written in `rmarkdown` (.rmd extension) can be run in `Quarto` by simply changing the extension from .rmd to .qmd. In the few cases files cannot be ran, a few modifications in the code will be sufficient to make it work again. 
+
+
 
 ---
 
-11. **Open the file `markdown.Rmd`. **
+11. **Open the file `Quarto.qmd`. **
 
-You can find the notebook [`markdown.Rmd` here](exercise_examples/markdown.Rmd).
+You can find the notebook [`quarto.Qmd` here](exercise_examples/quarto.Rmd).
 
-Have a look at the code in the `markdown.Rmd` file and make sure that you understand what is going on. If you do not understand what you are looking at, please ask during the lecture or via Teams.
+Have a look at the code in the `quarto.Rmd` file and make sure that you understand what is going on. If you do not understand what you are looking at, please ask.
 
 ---
 
-12. **Click `Knit HTML` to compile the file into a html-document. If necessary, install the required packages. Inspect the html file and compare it to the one you have created from the `notebook.R` file. **
+12. **Click `Render` to compile the file into a html-document. If necessary, install the required packages. Inspect the html file and compare it to the one you have created from the `notebook.R` file. **
 
-In the rest of this course we will need to make exercises and assignments and hand in our materials. The notebook functionality is a convenient way to quickly compile code and discuss it with a teacher and/or your peers. The markdown functionality in `R-Studio` is a very polished production device to mark-up high quality documents where text and code are woven together. Please use markdown to hand in your work and present both the `.Rmd` and `.html` files whenever you need to hand in exercises or assignments. 
+In the rest of this course we will need to make exercises and assignments and hand in our materials. The notebook functionality is a convenient way to quickly compile code and discuss it with a teacher and/or your peers. The Quarto functionality in `R-Studio` is a very polished production device to mark-up high quality documents where text and code are woven together. Please use Quarto to hand in your work and present both the `.qmd` and `.html` files whenever you need to hand in exercises or assignments. 
 
 ---
 
@@ -162,5 +172,5 @@ In the rest of this course we will need to make exercises and assignments and ha
 
 ---
 
-End of `Practical 1`. Play around with `R` and `R-studio` if you like. We will be using notebooks for the rest of the course.
+End of `Practical 1`. Play around with `R` and `R-studio` if you like. We will be using Quarto documents for the rest of the course.
 

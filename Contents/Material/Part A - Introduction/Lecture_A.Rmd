@@ -20,13 +20,13 @@ output:
 - Gentle introduction to:
   - Programming languages
   - R for data science
-- Provide a foundation for the courses [Gerko Vink's course](https://www.gerkovink.com/rijkR/) and Erik-Jan van Kesteren
+- Provide a foundation for the course of [Gerko Vink's course](https://www.gerkovink.com/rijkR/)
 
 
 ## Why do we care about R?
 ##### Why programming languages?
 - Faster
-- Easier
+- Easier (once you know it)
 - Communication: Beautiful plots/interactive
 - Flexibly (new methods)
 - Reproducibility! (open an old Excel file and try to understand what you did) 
@@ -39,7 +39,8 @@ output:
 
 ## R for data science 
 
-![Source: R for Data Science](figures/data-science-explore.png){width=80%}
+<img src="figures/data-science-explore.png" width="80%"/>
+<!-- ![Source: R for Data Science](figures/data-science-explore.png){width=80%}  -->
 
 
 
@@ -65,7 +66,17 @@ library(ggplot2) #Load the package
 
 
 
+---
+
+#### RStudio
+
+<img src="figures/rstudio1.png" width="90%"/>
+<!-- ![RStudio](figures/rstudio1.png){width=90%} -->
+
+
+
 ## RStudio
+
 
 #### Source editor
 Write your R code (load data, clean it, model it, etc)
@@ -100,34 +111,34 @@ Run commands on your terminal (this is not R, you won't need to use this)
 
 ---
 
-![RStudio](figures/rstudio1.png){width=90%}
-
----
-
 #### Basic units of RStudio
 
-![Basic units](figures/rstudio2.png){width=90%}
+<img src="figures/rstudio2.png" width="90%"/>
+<!-- ![Basic units](figures/rstudio2.png){width=90%} -->
 
 
 ---
 
 #### Run pieces of code
 
-![Run code](figures/rstudio3.png){width=90%}
+<img src="figures/rstudio3.png" width="90%"/>
+<!-- ![Run code](figures/rstudio3.png){width=90%} -->
 
 
 ---
 
 #### View your data/objects
 
-![View data](figures/rstudio4.png){width=90%}
+<img src="figures/rstudio4.png" width="90%"/>
+<!-- ![View data](figures/rstudio4.png){width=90%} -->
 
 
 ---
 
 #### Create a new file: RScript and RNotebook
 
-![Create new files](figures/rstudio5.png){width=90%}
+<img src="figures/rstudio5.png" width="90%"/>
+<!-- ![Create new files](figures/rstudio5.png){width=90%} -->
 
 
 # Paths & working directory 
@@ -138,15 +149,16 @@ Run commands on your terminal (this is not R, you won't need to use this)
   - "/Users/javiergb/Desktop/somefile.csv" (Mac/Linux)
   - "C:\\Users\\javiergb\\Desktop\\somefile.csv" (Windows)
 
-- In Windows:
+- Both in Unix and Windows:
   - Always use "/" (R will convert it)
   - "\\" is a "escape character", with a special meaning
   
 - Paths can be:
-  - Absolute (as the ones above). They are defined from the root directory, the top-most directory.
+  - Absolute (e.g., the ones above). They are defined from the root directory, the top-most directory.
   - Relative. They are defined from the working directory
     - e.g. "data/somefile.csv" --> in our working directory, find the folder "data", and inside, the file "somefile.csv"
     - It makes possible to use the code in different computers.
+
     
 ## Paths and working directory (cont)
 
@@ -175,13 +187,12 @@ Run commands on your terminal (this is not R, you won't need to use this)
 - Output in the console/plots menus
 
 ### Rstudio-projects (.Rproj)
-- Contains a .Rproj file within the directory, with project options.
+- Contains a .Rproj file within the directory, with project options. [More info on setting up projects](https://bookdown.org/yih_huynh/Guide-to-R-Book/rstudio-set-up.html)
 - Working directory: the project directory where the .Rproj file resides.
-- [More info on setting up projects](https://bookdown.org/yih_huynh/Guide-to-R-Book/rstudio-set-up.html)
-
-### R-notebooks (.Rmd)
-- R-markdown files (like this one!) -- combines chunks of texts and code
-- Working directory: the directory where the notebook is located
+ 
+### R-notebooks (.Rmd) and Quarto documents (.qmd)
+- Markdown files (like this one!) -- combines chunks of texts and code
+- Working directory: the directory where the document is located
 - Outputs directly in the editor. Can be knitted to HTML/PDF/Word
 - Most useful for data science
 
@@ -232,7 +243,7 @@ print(a)
 - If you know the name of the function that performs an operation, e.g. `anova()`, then you just type `?anova` or `help(anova)` in the console, or use the "Help" menu. 
 - If you do not know the name of the function: type `??` followed by your search criterion. For example `??anova` returns a list of all help pages that contain the word 'anova'
 
-- Alternatively, the internet will tell you almost everything you'd like to know and sites such as http://www.stackoverflow.com and http://www.stackexchange.com, as well as `Google` can be of tremendous help. 
+- Alternatively, the internet will tell you almost everything you'd like to know and sites such as http://www.stackoverflow.com and http://www.stackexchange.com, as well as `Google` and `LLM` can be of tremendous help. 
     - If you google `R` related issues; use 'R:' as a prefix in your search term
     
 

@@ -1,16 +1,15 @@
 ---
 title: "Practical B"
 author: "Javier Garcia-Bernardo (adapted from Gerko Vink)"
-date: "Statistical Programming with R"
-output: 
-   html_document:
+date: "11/27/2023"
+format:
+  html:
     toc: true
-    toc_depth: 5
-    toc_float: 
-      collapsed: false
-      smooth_scroll: false
-    number_sections: false
-    code_folding: hide
+    toc-location: left
+    toc-depth: 5
+    code-fold: true
+    code-tools: true
+    number-sections: false
 ---
 
 
@@ -22,10 +21,10 @@ In this practical exercise we are going to play around with the different types 
 Click on the `Code` buttons to see the solutions. Please really try before looking at the solution, and ask the instructor if something is not 100% clear.
 
 
-First, create a new notebook for this homework (File -> New File -> R Notebook)
+First, create a new Quarto document for this practical (File -> New File -> Quarto document)
 
 
-## Exercise 1-4: Vectors and matrixes
+## Exercise 1-4: Vectors and matrices
 
 ---
 
@@ -122,7 +121,7 @@ dat3
 
 8. **Read the file `dataset_boys.csv`.** 
 
-First create a folder "data" in your project. Then download it from [here](https://javier.science/R/#day-1-nov-12th) and add it to that folder (use Ctrl+S in the browser to download it).
+First create a folder "data" in your project. Then download it from [here](https://javier.science/R/#day-1) and add it to that folder (use Ctrl+S in the browser to download it).
 
 First you need to load the required library to read the CSV (`readr`). You may need to install it first.
 
@@ -133,14 +132,16 @@ library(readr)
 
 Then you can read the file using the function `read_delim()` from the `readr` library
 
-```{r, echo=FALSE}
+```{r}
+#| echo=FALSE
 #Reading the file in the background
-boys <- readr::read_delim("../common_datasets/dataset_boys.csv",delim=",")
+boys <- readr::read_delim("../common_datasets/dataset_boys.csv", delim=",")
 ```
 
 
-```{r, eval=FALSE}
-boys <- readr::read_delim("data/dataset_boys.csv",delim=",")
+```{r}
+#| eval=FALSE
+boys <- readr::read_delim("data/dataset_boys.csv", delim=",")
 ```
 
 ```{r}
@@ -148,16 +149,16 @@ head(boys)
 ```
 
 
-Alternatively, you can import workspaces directly from the internet by running and loading the connection
-```{r eval = TRUE}
+Alternatively, you can import datasets directly from the internet by running and loading the connection
+```{r}
 #To update
 con <- url("https://javier.science/R/Contents/Material/common_datasets/dataset_boys.csv")
 ```
-In the above code we store the connection in object `con` and then load the connection with `load(con)`.
+In the above code we store the connection in object `con` and then load the connectio.
 
 The `boys` object will be added to your Global Environment. You can now use the `boys` data by running
 
-```{r eval=TRUE}
+```{r}
 boys <- readr::read_delim(con, delim = ",")
 ```
 
@@ -215,8 +216,8 @@ nrow(boys2)
 or, alternatively (the tidy way), 
 ```{r}
 library(dplyr) #Library to filter
-boys2.1 <- dplyr::filter(boys, age >= 20)
-nrow(boys2.1)
+boys2 <- dplyr::filter(boys, age >= 20)
+nrow(boys2)
 ```
 
 ---
@@ -229,8 +230,8 @@ nrow(boys3)
 
 or, alternatively, 
 ```{r}
-boys3.2 <- dplyr::filter(boys, age > 19, age < 19.5)
-nrow(boys3.2)
+boys3 <- dplyr::filter(boys, age > 19, age < 19.5)
+nrow(boys3)
 ```
 
 ---
@@ -238,7 +239,7 @@ nrow(boys3.2)
 14. **What is the mean age of boys younger than 15 years of age that do not live in region `north`?**
 
 ```{r}
-age_subset <- boys[(boys$age < 15) & (boys$reg != "north"), "age"]
+age_subset <- boys[(boys$age < 15) & (boys$reg != "north"), ]$age
 mean(age_subset, na.rm = TRUE)
 ```
 
@@ -258,12 +259,14 @@ Open the file in your text editor to see how it looks. What is the first line?
 
 15. **Read the file and save it with the name "df_events".** You'll need to use the argument "skip" in the `read_delim()` function to skip the first line. Make sure it looks fine by printing the head.
 
-```{r, echo=FALSE}
+```{r}
+#| echo=FALSE
 #Reading data in background
 df_events <- readr::read_delim("../common_datasets/example_csv.csv", skip = 1)
 ```
 
-```{r, eval=FALSE}
+```{r}
+#| eval=FALSE
 df_events <- readr::read_delim("data/example_csv.csv", skip = 1)
 head(df_events)
 ```
