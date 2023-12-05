@@ -14,23 +14,258 @@ output:
 
 ---
 
+## Recap:
 
+#### Last week
+- Intro to R/Rstudio: Data types and structures
+- Subsetting structures
+- Choice statements and for-loops
+- Reproducibility (renv)
+- Best practices (e.g., naming conventions)
+- Reading and writing files in several formats
 
-## Today: How to organize and automate your code
-
-#### First half
-- Best practices in R
-- Control-flow: 
-  - Choice: if-else statements
-  - Loops: For loops
+#### Today
 - Functions
-- Environments
-
-#### Second half
 - Inferential statistics: A 5-min primer of linear regression
-- Reading and writing files in serveral formats
 - Principles of tidy data and short comparison of base R and the tidyverse
 - Data wrangling with the tidyverse
+- Speeding up queries in large datasets
+
+
+
+# Writing your own functions
+
+## What are functions?
+
+Functions are reusable pieces of code that 
+
+1. take some standard input (e.g. a vector of numbers)
+2. do some computation  (e.g. calculate the mean)
+3. return some standard output (e.g. one number with the mean)
+
+We have been using a lot of functions: code of the form `something()` is usually a function. 
+
+```{r}
+mean(1:6)
+```
+
+## Our own function
+
+We can make our own functions as follows:
+
+```{r}
+squared <- function (x){
+  x_square <- x * x
+  return(x_square) 
+}
+
+squared(4)
+```
+
+`x`, the input, is called the (formal) *argument* of the function. `x_square` is called the *return value*.
+
+## Our own function
+
+If there is no `return()`, the last line is automatically returned, so we can also just write:
+
+
+```{r}
+square <- function(x){
+  x * x
+}
+
+square(-2)
+```
+
+I do not recommend this, please always specify what you return unless you have a one-line function.
+
+
+## Anonymous/Lambda expressions
+
+```{r}
+df <- data.frame("V1" = rnorm(5),
+                "V2" = rnorm(5, mean = 5, sd = 2), 
+                "V3" = rnorm(5, mean = 6, sd = 1))
+
+head(df)
+```
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+#Python
+df.apply(lambda x: np.percentile(x, .42))
+```
+
+
+```{r}
+#R
+sapply(df, {function(x) quantile(x, .42)})
+```
+
+
+
+## Default options in functions {.build}
+* Default options for some arguments are provided in many functions. 
+* They allow us to provide additional (optional) arguments
+
+```{r}
+is_contained <- function(str_1, str_2, print_input = TRUE){
+  if (print_input){
+    cat("Testing if", str_1, "contained in", str_2, "\n")
+  }
+  return(str_1 %in% str_2)
+}
+```
+
+
+```{r, collapse=TRUE,eval=FALSE}
+is_contained("R", "rstudio")
+```
+```{r, collapse=TRUE}
+is_contained("R", "rstudio")
+is_contained("R", "rstudio", print_input = TRUE)
+is_contained("R", "rstudio", print_input = FALSE)
+```
+
+## Create documentation of functions
+
+```{python, eval=FALSE, python.reticulate=FALSE, collapse=TRUE}
+##Python
+def square(x):
+  """
+  Squares a number
+
+  Parameters:
+  x (float): Number (or vector)
+
+  Returns:
+  float: Squared numbers
+  """
+  return(x**2)
+```
+
+
+```{r, collapse=TRUE}
+##R more info at https://r-pkgs.org/man.html
+
+#' Squares a number
+#' 
+#' @param x A number.
+#' @returns A numeric vector.
+#' @examples
+#' square(3)
+square <- function(x){
+  return(x * x)
+}
+```
+
+
+
+
+
+## Troubleshooting
+* Your first self-written for-loop, or function, will probably not work.
+
+* Don't panic! Just go line-by-line, keeping track of what is currently inside each variable. 
+* Stackoverflow and LLMs are your friends.
+
+
+# Scoping rules in `R` 
+
+## Global environemnt (workspace)
+  
+When you write the name of a variable, R needs to find the value.
+
+In the interactive computation (outside of functions, e.g., your console), this happens in the following order:
+
+- First, search the global environment (i.e., your workspace) 
+- If it cannot be found, search each of the loaded packages
+
+
+```{r}
+search()
+```
+The order of packages is important.
+
+
+
+## Scoping rules in `R`: Functions
+
+Inside a function, this happens in the following order:
+
+- First, search within the function.
+- If it cannot be found, search in the global environment (i.e., your workspace) 
+- If it cannot be found, search each of the loaded packages
+
+
+```{r, collapse=TRUE}
+y <- 3
+test_t <- function() {
+  print(y)
+}
+test_t()
+```
+
+
+```{r, collapse=TRUE}
+y <- 3
+test_t <- function() {
+  y <- 2
+  print(y)
+}
+test_t()
+```
+
+## Scoping rules in `R`: Functions
+
+What happens inside a function, stays within a function (unless you specify it differently)
+
+
+```{r}
+y <- 3
+test_t <- function() {
+  y <- 2
+  print(y)
+}
+test_t()
+y
+```
+
+## Scoping rules in `R`: Packages
+
+Packages are neatly contained/isolated, so they are not affected by your code.They do so through namespaces: 
+
+- Namespaces allow the package developer to hide functions and data.
+- Objects in the global environment that match objects in the function's namespace are ignored when running functions from packages (prevent clashes)
+- Functions are executed within the namespace of the package and have access to the global environment
+- They provide a way to refer to an object, with the double colon `::`
+
+```{r}
+dplyr::n_distinct(c(1,2,3,4,2))
+```
+
+## Scoping rules in `R`: Packages (good practices)
+- Pass to the function (using arguments) ***everything*** that the function needs to use (i.e. don't define something outside the function that is being used for the function)
+
+BAD
+```{r, eval=FALSE}
+
+shifted_mean <- function(numbers) {
+   return(mean(numbers) + shift_by)
+}
+
+shift_by <- 3
+shifted_mean(c(1,2,3))
+```
+
+GOOD
+```{r, eval=FALSE}
+shifted_mean <- function(numbers, shift_by) {
+   return(mean(numbers) + shift_by)
+}
+
+shift_by <- 3
+shifted_mean(c(1,2,3), shift_by)
+```
 
 
 
@@ -38,14 +273,24 @@ output:
 
 ## Linear regression (model)
 
-![Linear regression. Source: R. Kukuh (medium)](img/1mQN0yjE3oWr6GBzY0953pw.png){width=70%}
+<img src="img/1mQN0yjE3oWr6GBzY0953pw.png" width="70%"/>   
+
+Linear regression. Source: R. Kukuh (medium)
+<!-- ![Linear regression. Source: R. Kukuh (medium)](img/1mQN0yjE3oWr6GBzY0953pw.png){width=70%} -->
 
 ## Linear regression (visual interpretation)
 
-![Linear regression. Source: R. Kukuh (medium)](img/17tcfpzsXbrxROhVCB8BkBA.png){width=100%}
+<img src="img/17tcfpzsXbrxROhVCB8BkBA.png" width="70%"/>   
+
+Linear regression. Source: R. Kukuh (medium)
+<!-- ![Linear regression. Source: R. Kukuh (medium)](img/17tcfpzsXbrxROhVCB8BkBA.png){width=100%} -->
 
 ## Linear regression (fitting)
-![Linear regression. Source: R. Kukuh (medium)](img/1jJU6IrM4CsnGcOG1JIErxg.png){width=100%}
+
+<img src="img/1jJU6IrM4CsnGcOG1JIErxg.png" width="70%"/>   
+
+Linear regression. Source: R. Kukuh (medium)
+<!-- ![Linear regression. Source: R. Kukuh (medium)](img/1jJU6IrM4CsnGcOG1JIErxg.png){width=100%} -->
 
 
 
@@ -220,9 +465,15 @@ Simple but extremely useful idea:
 2.  Each observation has its own row.
 3.  Each value has its own cell.
 
-![Source: R for data science](img/tidy-1.png){width=70%}
+<img src="img/tidy-1.png" width="70%"/>   
+
+Source: R for data science
 
 Original paper of [Tidy Data](http://www.jstatsoft.org/v59/i10/paper)
+
+<!-- ![Source: R for data science](img/tidy-1.png){width=70%} -->
+
+
 
 
 
@@ -278,7 +529,9 @@ virginia
 
 ## e.g. merging dataset
 
-![Merging](img/datasets.png){width=100%}
+<img src="img/datasets.png" width="100%"/>   
+
+<!-- ![Merging](img/datasets.png){width=100%} -->
 
 
 ## How to fix datasets: Melting (pivot_longer) {.build}
@@ -392,7 +645,7 @@ data[!nans,]
 tidyverse
 ```{r}
 tidyr::drop_na(data, 
-       bmi,  reg)
+               bmi,  reg)
 ```
 
 :::
@@ -427,7 +680,7 @@ dplyr::arrange(data, desc(age), bmi)
 ::::
 
 
-## Creating new column
+## Creating new column in a new data frame
 
 :::: {style="display: flex;"}
 
@@ -681,8 +934,8 @@ aggregate(cbind(age, wgt, bmi) ~ reg,
 tidyverse
 - Does not drop the entire row if there is one missing value
 ```{r}
-data %>% 
-  dplyr::group_by(reg) %>% 
+data |> 
+  dplyr::group_by(reg) |> 
   dplyr::summarise_all(mean, na.rm = TRUE)
 ```
 
@@ -690,7 +943,7 @@ data %>%
 
 ::::
 
-## Pipe! `%>%` A small intro
+## Pipe! `|>` A small intro
 
 Step by step
 ```{r, eval=FALSE}
@@ -698,15 +951,15 @@ grouped_data <- dplyr::group_by(data, reg)
 summarized_data <- dplyr::summarise_all(grouped_data, mean, na.rm = TRUE)
 ```
 
-The pipe operator (from the `magrittr` package) takes the output of the command *before* `%>%` and gives it as input for the command *after* `%>%`.
+The pipe takes the output of the command *before* `|>` and passes it as input for the command *after* `|>`.
 
 It reduces the overhead (no need to save intermediate output), organizes the code into coherent blocks, and increases readability.
 ```{r, eval=FALSE}
-summarized_data <- data %>% 
-  dplyr::group_by(reg) %>%  
+summarized_data <- data |> 
+  dplyr::group_by(reg) |>  
   dplyr::summarise_all(mean, na.rm = TRUE)
 ```
-- Base R has since version 4.1 its own pipe (`|>`), but it still lacks some functionality
+- Base R has since version 4.1 its own pipe (`|>`), before the pipe  was provided by the `magrittr` package and it looked like: `%>%`.
 
 ## Data wrangling summary
 - [Cheatsheet data tidying with tidyr](https://posit.co/wp-content/uploads/2022/10/data-transformation-1.pdf)
@@ -719,7 +972,7 @@ summarized_data <- data %>%
   - `filter`: filter rows
   - `distinct`: remove duplicates
   - `arrange`: sort rows
-  - `group_by` + `summarize` / `summarize_all`: groups
+  - `group_by` + `summarize` / `summarize_all`: apply function to groups
   
 - Main functions `tidyr`:
   - `drop_na`: remove rows with missing values
@@ -742,8 +995,141 @@ values_to = "value", values_drop_na = FALSE)
 - Huge community of fanatics
 
 
-
 # Practical
+
+
+# Bigger data
+
+## IMDB data
+
+Their data on movies and actors is freely available at https://developer.imdb.com/non-commercial-datasets/
+
+
+```{r eval=FALSE}
+#Download data
+download.file("https://datasets.imdbws.com/title.basics.tsv.gz", "db/title_basics.tsv.gz", mode = "wb")
+```
+
+```{r warning = FALSE}
+data_imdb <- readr::read_delim("db/title_basics.tsv.gz", delim = "\t", na = "\\N", show_col_types = FALSE)
+head(data_imdb, 5)
+```
+
+
+## Time to read data
+
+```{r}
+dim(data_imdb)
+```
+
+Time to read data:
+```{r warning=FALSE}
+system.time(
+  data_imdb <- readr::read_delim("db/title_basics.tsv.gz", delim = "\t", na = "\\N", show_col_types = FALSE)
+)
+```
+
+Time to query:
+```{r}
+system.time(
+  results <- data_imdb |> 
+    dplyr::group_by(startYear) |> 
+    dplyr::summarize(number_movies = n()) |> 
+    arrange(number_movies)
+)
+```
+
+## Speed up using a database (SQL)
+
+Use database instead of RDS
+
+```{r echo=FALSE}
+#install.packages("DBI")
+#install.packages("RSQLite")
+#install.packages("dbplyr")
+library(DBI) #Database access
+library(RSQLite) #SQLite
+library(dbplyr) #query without using SQL
+```
+
+Dump the data to a SQLite. SQLite is a lightweight, self-contained, and serverless relational database management system (RDBMS). It's designed for simplicity and efficiency.
+```{r}
+# Connect to SQLite database
+db <- DBI::dbConnect(RSQLite::SQLite(), "db/imdb.db") #try :memory: instead of a file
+
+# Write the data frame to the SQLite database using dbplyr
+DBI::dbWriteTable(db, "title_basics", data_imdb, overwrite = TRUE)
+DBI::dbWriteTable(db, "title_basics_no_index", data_imdb, overwrite = TRUE)
+# Create an index on startYear
+DBI::dbExecute(db, "CREATE INDEX idx_startYear ON title_basics(startYear);")
+
+# Close the database connection
+DBI::dbDisconnect(db)
+```
+
+## Some operations on the table
+
+Reading the tables
+```{r}
+db <- DBI::dbConnect(RSQLite::SQLite(), "db/imdb.db") #try :memory: instead of a file
+DBI::dbListTables(db)
+```
+
+Reading the fields of a table
+```{r}
+DBI::dbListFields(db, "title_basics")
+```
+
+
+## Running query
+```{r}
+# Connect to the table
+con <- dbConnect(SQLite(), "db/imdb.db")
+data_imdb_db <- tbl(con, "title_basics")
+
+# Create the query (note that it's exactly the same code)
+data_imdb_query <- data_imdb_db |> 
+  dplyr::group_by(startYear) |> 
+  dplyr::summarize(number_movies = n()) |> 
+  arrange(desc(number_movies))
+
+# Show query
+data_imdb_query %>% show_query()
+
+# Disconnect from server (done at the end)
+DBI::dbDisconnect(con)
+```
+## Performance
+
+```{r}
+# Run the query
+system.time({
+  # Connect to database
+  con <- dbConnect(SQLite(), "db/imdb.db")
+  data_imdb_db <- tbl(con, "title_basics")
+  
+  # Create query
+  data_imdb_query <- data_imdb_db |> 
+    dplyr::group_by(startYear) |> 
+    dplyr::summarize(number_movies = n()) |> 
+    arrange(desc(number_movies))
+
+  # Collect the data (query is run here)
+  results <- data_imdb_query |> collect()
+})
+
+# Disconnect
+DBI::dbDisconnect(con)
+```
+
+## Results
+
+```{r compact=TRUE}
+head(results)
+```
+
+
+
 
 
 

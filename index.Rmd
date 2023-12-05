@@ -38,18 +38,18 @@ Materials covered:
 - Understanding/installing packages
 - Reading a CSV and calculating descriptive statistics
 - Control flow (if-else statements and for loops)
-- Functions: creating your own functions
 - Best practices in R
 - Reproducible science and dependency management in R
 - If time allows: data visualization: design and storytelling 
 (slides)[https://github.com/jgarciab/workshop_data_viz]
 
 ##### Day 2:
+- Functions: creating your own functions
 - Principles of tidy data and short comparison of base R and the tidyverse
 - Reading and writing files in several formats
 - Data wrangling with the tidyverse
 - Inferential statistics: A 5-min primer of linear regression
-- Databases
+- Speeding up queries with SQLite
 
 
 ### Daily schedule 
