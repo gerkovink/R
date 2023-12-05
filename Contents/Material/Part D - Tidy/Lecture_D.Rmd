@@ -1010,17 +1010,17 @@ Their data on movies and actors is freely available at https://developer.imdb.co
 download.file("https://datasets.imdbws.com/title.basics.tsv.gz", "db/title_basics.tsv.gz", mode = "wb")
 ```
 
+
 ```{r warning = FALSE}
 data_imdb <- readr::read_delim("db/title_basics.tsv.gz", delim = "\t", na = "\\N", show_col_types = FALSE)
-head(data_imdb, 5)
+
+#10,375,265 rows, 9 columns
+data_imdb
 ```
 
 
 ## Time to read data
 
-```{r}
-dim(data_imdb)
-```
 
 Time to read data:
 ```{r warning=FALSE}
@@ -1043,7 +1043,7 @@ system.time(
 
 Use database instead of RDS
 
-```{r echo=FALSE}
+```{r eval=FALSE}
 #install.packages("DBI")
 #install.packages("RSQLite")
 #install.packages("dbplyr")
@@ -1056,13 +1056,11 @@ Dump the data to a SQLite. SQLite is a lightweight, self-contained, and serverle
 ```{r}
 # Connect to SQLite database
 db <- DBI::dbConnect(RSQLite::SQLite(), "db/imdb.db") #try :memory: instead of a file
-
 # Write the data frame to the SQLite database using dbplyr
 DBI::dbWriteTable(db, "title_basics", data_imdb, overwrite = TRUE)
 DBI::dbWriteTable(db, "title_basics_no_index", data_imdb, overwrite = TRUE)
 # Create an index on startYear
 DBI::dbExecute(db, "CREATE INDEX idx_startYear ON title_basics(startYear);")
-
 # Close the database connection
 DBI::dbDisconnect(db)
 ```
