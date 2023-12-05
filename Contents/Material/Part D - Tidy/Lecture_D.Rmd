@@ -1041,9 +1041,9 @@ system.time(
 
 ## Speed up using a database (SQL)
 
-Use database instead of RDS
+Use database instead of a file
 
-```{r eval=FALSE}
+```{r}
 #install.packages("DBI")
 #install.packages("RSQLite")
 #install.packages("dbplyr")
@@ -1051,6 +1051,8 @@ library(DBI) #Database access
 library(RSQLite) #SQLite
 library(dbplyr) #query without using SQL
 ```
+
+## Dump the data to a database
 
 Dump the data to a SQLite. SQLite is a lightweight, self-contained, and serverless relational database management system (RDBMS). It's designed for simplicity and efficiency.
 ```{r}
