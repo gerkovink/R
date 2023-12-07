@@ -1,0 +1,275 @@
+---
+title: "Practical D"
+author: "Javier Garcia-Bernardo"
+date: "12/08/2023"
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 5
+    code-fold: true
+    code-tools: true
+    number-sections: false
+---
+
+
+Functions in R are like magic tools that make your coding life easier. Instead of writing long, confusing chunks of code, you can create functions to do specific tasks. This makes your code neat, easy to understand, and less prone to mistakes. Imagine you have a set of instructions you use often; with a function, you can package those instructions and reuse them whenever you need. R already has lots of built-in functions, and you can create your own too. 
+
+Just remember to give your functions clear names and explain what they do--it's like leaving a note for your future self (or others) to understand your code better. 
+
+## Exercise 1: Functions
+
+1. **Create a function that calculates the sample standard deviation of a vector of numbers. Validate it by comparing the output to the function `sd()`. Write documentation for such function.** 
+
+$$\sigma = \sqrt{\frac{1}{N-1}\sum_{i=0}^N{(x_i - \bar{x})^2}}$$
+
+```{r}
+#' Calculate the standard deviation of a 
+#' \sigma = \sqrt{\frac{1}{N-1}\sum_{i=0}^N{(x_i - \bar{x})^2}}$$
+#' 
+#' @param values A numeric vector
+#' @returns STD of the vector
+#' @examples
+#' std_own(c(3,5,4))
+std_own <- function(values) {
+  s <- sqrt(1/(length(values)-1)*sum((values - mean(values))^2))
+  return(s)
+}
+
+std_own(c(1,2,3,3))
+sd(c(1,2,3,3))
+```
+
+
+In this practical I will be explicitly specifying the package of each function (e.g. readr::read_delim). Specifying the package is not required and can be cumbersome for the most commonly used functions. I do it to show the source of the functions you are using.
+
+First, open the R project you created last week (or create a new one).
+
+Then, load the required library (tidyverse). Look at the output, which packages does it load?
+```{r  class.source = 'fold-show'}
+library(tidyverse)
+```
+
+In the following exercises we will use the same dataset as last time, boys. You need to download `dataset_boys.csv` from [here](https://javier.science/R/#day-2-1) and add it to a folder "data" in the same folder as your markdown file.
+
+Then, read the file dataset_boys.csv using the code in the next cell.
+
+## Reading data
+
+```{r class.source = 'fold-show'}
+#Reading the file
+boys <- readr::read_delim("data/dataset_boys.csv",delim=",")
+is_tibble(boys)
+```
+
+---
+
+
+## Exercise 2-6: Tidyverse operations
+
+2. Filter: **Create a new tibble with the boys younger than 15 that do not live in the "north" region, and calculate their average age.**
+
+```{r}
+age_subset <- dplyr::filter(boys, 
+                            (age < 15), 
+                            (reg != "north")
+                            )
+mean(age_subset$age, na.rm=TRUE)
+```
+
+3. Select: **Select the variables bmi and wgt of the tibble you just created**
+
+```{r}
+dplyr::select(age_subset, bmi, wgt)
+```
+
+4. Mutate: **Create two new variables, one call hgt_square (hgt^2), and another called bmi_2 (10000 $\times$ wgt/hgt_square)**. 
+
+```{r}
+# The arguments are evaluated sequentially in tidyverse, by the time we get to bmi_2 the computer has already created hgt_square
+dplyr::mutate(boys, 
+              hgt_square = hgt^2,
+              bmi_2 = 10000 * wgt / hgt_square)
+```
+
+5. **group_by + summarize: Group by region, and calculate the average bmi, wgt and hgt. You could use a pipe to make it more compact.**
+
+```{r}
+# Without a pipe
+gr_boys <- dplyr::group_by(boys, reg)  
+dplyr::summarize(gr_boys, mean_bmi = mean(bmi, na.rm=TRUE),
+                   mean_wgt = mean(wgt, na.rm=TRUE),
+                   mean_hgt = mean(hgt, na.rm=TRUE))
+
+# With a pipe
+boys |> 
+  dplyr::group_by(reg) |> 
+  dplyr::summarize(mean_bmi = mean(bmi, na.rm=TRUE),
+                   mean_wgt = mean(wgt, na.rm=TRUE),
+                   mean_hgt = mean(hgt, na.rm=TRUE))
+
+
+```
+
+6. **arrange: Sort the dataset by bmi, what can you say about the boys with low bmi?**
+
+```{r}
+#They are small babies
+dplyr::arrange(boys, bmi)
+```
+
+## Exercises 7--10: Data transformations
+7. **Imagine you have the dataset tidyr::table2, could you easily create the cases of TB per capita?** (you only need to print `tidyr::table2`)
+
+```{r}
+tidyr::table2
+```
+
+8. **Transform the data to make it tidy** *Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?* **Then, calculate the cases of TB per 1 million people. Which country had the highest cases per capita?**
+
+```{r}
+# Without a pipe
+table2_tidy <- tidyr::pivot_wider(table2,
+                                  id_cols = c("country","year"),
+                                  names_from = "type",
+                                  values_from = "count")
+
+table2_tidy <-dplyr::mutate(table2_tidy, 
+                            cases_per_capita = 1E6*cases/population
+                            ) 
+dplyr::arrange(table2_tidy, desc(cases_per_capita))
+```
+
+```{r}
+#Or with a pipe
+table2 |>  
+  tidyr::pivot_wider(id_cols = c("country","year"),
+                     names_from = "type",
+                     values_from = "count") |> 
+  dplyr::mutate(cases_per_capita = 1E6*cases/population) |> 
+  dplyr::arrange(desc(cases_per_capita))
+```
+
+
+9. **Print the datasets tidyr::table4a (cases of TB) and tidyr::table4b (population). Tidy them and save the output tables with names table4a_tidy and table4ab_tidy** 
+*Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?*
+```{r}
+table4a_tidy <- tidyr::pivot_longer(table4a, 
+                                    cols = c("1999","2000"),
+                                    names_to = "year",
+                                    values_to = "TB") 
+head(table4a_tidy)
+
+table4b_tidy <-  tidyr::pivot_longer(table4b, 
+                                     cols = c("1999","2000"),
+                                     names_to = "year",
+                                     values_to = "Pop") 
+head(table4b_tidy)
+```
+
+10. **Join table4a_tidy and table4b_tidy, and calculate the cases of TB per 1 million people? Which country had the highest cases per capita?** Could you have done this with table4a and table4b?
+
+
+```{r}
+#With a pipe
+dplyr::inner_join(table4a_tidy, table4b_tidy, by = c("country", "year")) |> 
+    dplyr::mutate(cases_per_capita = 1E6*TB/Pop) |> 
+    dplyr::arrange(desc(cases_per_capita))
+  
+```
+
+## Exercises 11--13: Linear regression
+
+11. **Using the boys dataset, fit a model where the weight depends on the age and the region.** 
+
+```{r}
+fit <- stats::lm(wgt ~ age + reg, data=boys)
+fit
+```
+
+12. **Print the regression table using the function summary. Does the region have a significant effect?** 
+
+```{r}
+summary(fit)
+```
+
+13. **Check the assumptions of linear regression using plot(). Are the assumptions met? What are the biggest outliers? (find them in the data)** Homoscedasticity and independence of residuals (which = 1). Normality of residuals (which = 2) and presence of outliers (which = 6). 
+
+```{r}
+# There shouldn't be strange patterns
+plot(fit, which = 1)
+# The points should lie on the line
+plot(fit, which = 2)
+# Cook's distance measures the effect of deleting a given observation. 
+# Leverage is a measure of how far away the independent variable values of an observation are from those of the other observations.
+plot(fit, which = 6)
+
+# Checking outliers
+slice(boys, c(733,610,574))
+```
+
+
+## Exercise 14. Saving data
+
+14. **Save the data `boys` as an RDS file, and as an Excel file**. Remember to save your data to the data folder!
+
+```{r}
+readr::write_rds(boys, "data/boys.rds")
+writexl::write_xlsx(boys, "data/boys.xlsx")
+```
+
+
+
+## Exercise 15--16. Some visualizations
+
+
+Tidyverse is great because it connects very well with ggplot. You'll learn more in the next courses, but let's demonstrate using the datasaurus dataset. There are 12 datasets composed of a `x` variable and a `y` variable, created in a way that mean(x), mean(y), sd(x), sd(y) are equal across the 12 datasets.
+
+First, install the library datasauRus and load it
+
+
+```{r}
+#install.packages("datasauRus")
+library(datasauRus)
+```
+
+
+15. Group datasauRus::datasaurus_dozen by the variable `dataset` and calculate the mean and standard deviation of both x and y, and the correlation (function `cor()`) between x and y.
+
+```{r}
+datasauRus::datasaurus_dozen |> 
+      dplyr::group_by(dataset) |> 
+      dplyr::summarize(mean_x = mean(x),
+                mean_y = mean(y),
+                sd_x = sd(x),
+                sd_y = sd(y),
+                cor(x,y))
+```
+
+16. **Use the following code to visualize the data.** *The descriptive statistics were identical, but do the datasets look similar?*
+
+```{r, class.source = 'fold-show'}
+ggplot(datasaurus_dozen, aes(x=x, y=y, colour=dataset))+
+    geom_point()+
+    theme(legend.position = "none")+
+    facet_wrap(~dataset, ncol=3)
+```
+
+
+If you are interested in data visualization, design and storytelling, I teach regularly a course. The materials are [online](https://github.com/jgarciab/workshop_data_viz/tree/main).
+
+
+
+
+End of Practical.
+
+---
+
+#### References
+
+
+Matejka, J., & Fitzmaurice, G. (2017). Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing. CHI 2017 Conference proceedings: ACM SIGCHI Conference on Human Factors in Computing Systems.
+
+
+
+

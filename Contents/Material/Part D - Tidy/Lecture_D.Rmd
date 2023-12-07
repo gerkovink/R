@@ -1,6 +1,6 @@
 ---
-title: "Tidyverse"
-author: "Javier Garcia-Bernardo (based on material by Gerko Vink)"
+title: "Functions, tidyverse, SQLite"
+author: "Javier Garcia-Bernardo (partly based on material by Gerko Vink)"
 date: "Introduction to R and RStudio"
 knit: (function(inputFile, encoding){
   rmarkdown::render(inputFile, output_format = "all") })
@@ -54,7 +54,7 @@ mean(1:6)
 We can make our own functions as follows:
 
 ```{r}
-squared <- function (x){
+squared <- function(x){
   x_square <- x * x
   return(x_square) 
 }
@@ -84,8 +84,8 @@ I do not recommend this, please always specify what you return unless you have a
 
 ```{r}
 df <- data.frame("V1" = rnorm(5),
-                "V2" = rnorm(5, mean = 5, sd = 2), 
-                "V3" = rnorm(5, mean = 6, sd = 1))
+                 "V2" = rnorm(5, mean = 5, sd = 2), 
+                 "V3" = rnorm(5, mean = 6, sd = 1))
 
 head(df)
 ```
@@ -232,7 +232,7 @@ y
 
 ## Scoping rules in `R`: Packages
 
-Packages are neatly contained/isolated, so they are not affected by your code.They do so through namespaces: 
+Packages are neatly contained/isolated, so they are not affected by your code. They do so through namespaces: 
 
 - Namespaces allow the package developer to hide functions and data.
 - Objects in the global environment that match objects in the function's namespace are ignored when running functions from packages (prevent clashes)
@@ -546,7 +546,7 @@ df <- tibble::tribble(
 df
 ```
 ```{r, collapse=TRUE}
-tidyr::pivot_longer(df, cols = c("2010","2015"), names_to ="year", values_to ="count")
+tidyr::pivot_longer(df, cols = c("2010","2015"), names_to = "year", values_to = "count")
 ```
 
 
@@ -563,7 +563,7 @@ df
 ```
 
 ```{r, collapse=TRUE}
-tidyr::pivot_wider(df, id_cols = c("gender"), names_from ="variable", values_from ="value")
+tidyr::pivot_wider(df, id_cols = c("gender"), names_from = "variable", values_from = "value")
 ```
 
 
@@ -943,7 +943,7 @@ data |>
 
 ::::
 
-## Pipe! `|>` A small intro
+## Pipes: A short intro
 
 Step by step
 ```{r, eval=FALSE}
@@ -1052,9 +1052,10 @@ library(RSQLite) #SQLite
 library(dbplyr) #query without using SQL
 ```
 
-## Dump the data to a database
+## Dump the data to a SQLite.database
 
-Dump the data to a SQLite. SQLite is a lightweight, self-contained, and serverless relational database management system (RDBMS). It's designed for simplicity and efficiency.
+SQLite is a lightweight, self-contained, and serverless relational database management system (RDBMS). It's contained as a file in your computer. It's designed for simplicity and efficiency.
+
 ```{r}
 # Connect to SQLite database
 db <- DBI::dbConnect(RSQLite::SQLite(), "db/imdb.db") #try :memory: instead of a file
@@ -1084,38 +1085,61 @@ DBI::dbListFields(db, "title_basics")
 ## Running query
 ```{r}
 # Connect to the table
-con <- dbConnect(SQLite(), "db/imdb.db")
-data_imdb_db <- tbl(con, "title_basics")
+con <- DBI::dbConnect(RSQLite::SQLite(), "db/imdb.db")
+data_imdb_db <- dplyr::tbl(con, "title_basics")
 
 # Create the query (note that it's exactly the same code)
 data_imdb_query <- data_imdb_db |> 
-  dplyr::group_by(startYear) |> 
-  dplyr::summarize(number_movies = n()) |> 
-  arrange(desc(number_movies))
+                   dplyr::group_by(startYear) |> 
+                   dplyr::summarize(number_movies = n()) |> 
+                   dplyr::arrange(desc(number_movies))
 
 # Show query
-data_imdb_query %>% show_query()
+data_imdb_query |> dplyr::show_query()
 
 # Disconnect from server (done at the end)
 DBI::dbDisconnect(con)
 ```
-## Performance
+## Performance (without index)
 
 ```{r}
 # Run the query
 system.time({
   # Connect to database
-  con <- dbConnect(SQLite(), "db/imdb.db")
-  data_imdb_db <- tbl(con, "title_basics")
+  con <- DBI::dbConnect(RSQLite::SQLite(), "db/imdb.db")
+  data_imdb_db <- dplyr::tbl(con, "title_basics_no_index")
   
-  # Create query
+  # Create the query (note that it's exactly the same code)
   data_imdb_query <- data_imdb_db |> 
-    dplyr::group_by(startYear) |> 
-    dplyr::summarize(number_movies = n()) |> 
-    arrange(desc(number_movies))
-
+                     dplyr::group_by(startYear) |> 
+                     dplyr::summarize(number_movies = n()) |> 
+                     dplyr::arrange(desc(number_movies))
+  
   # Collect the data (query is run here)
-  results <- data_imdb_query |> collect()
+  results <- data_imdb_query |> dplyr::collect()
+})
+
+# Disconnect
+DBI::dbDisconnect(con)
+```
+
+## Performance (with index)
+
+```{r}
+# Run the query
+system.time({
+  # Connect to database
+  con <- DBI::dbConnect(RSQLite::SQLite(), "db/imdb.db")
+  data_imdb_db <- dplyr::tbl(con, "title_basics")
+  
+  # Create the query (note that it's exactly the same code)
+  data_imdb_query <- data_imdb_db |> 
+                     dplyr::group_by(startYear) |> 
+                     dplyr::summarize(number_movies = n()) |> 
+                     dplyr::arrange(desc(number_movies))
+  
+  # Collect the data (query is run here)
+  results <- data_imdb_query |> dplyr::collect()
 })
 
 # Disconnect
@@ -1124,11 +1148,29 @@ DBI::dbDisconnect(con)
 
 ## Results
 
-```{r compact=TRUE}
-head(results)
+
+```{r}
+head(results, 10)
 ```
 
 
+## Results (visually)
+
+```{r compact=TRUE}
+library(ggplot2)
+
+ggplot(data = results, aes(y=number_movies, x=startYear)) + 
+  geom_line(color = "cornflowerblue", linewidth = 1) +
+  theme_minimal() +
+  labs(x = "Year", y = "Number of movies") +
+  lims(y = c(0, 5E5))
+```
+
+## SQLite summary
+
+We sped the query from ~12 seconds (~11 to read the file + ~0.40 for the query) to ~0.38 seconds. And there are many other perks of using SQLite (e..g data integrity).
+
+However: `dbplyr` is not great at creating efficient queries from tidyverse. 
 
 
 
