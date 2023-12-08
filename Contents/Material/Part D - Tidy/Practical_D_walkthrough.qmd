@@ -52,7 +52,7 @@ library(tidyverse)
 
 In the following exercises we will use the same dataset as last time, boys. You need to download `dataset_boys.csv` from [here](https://javier.science/R/#day-2-1) and add it to a folder "data" in the same folder as your markdown file.
 
-Then, read the file dataset_boys.csv using the code in the next cell.
+Then, read the file dataset_boys.csv using the code in the next cell. The dataset contains the growth of Dutch boys in the 20th century (https://amices.org/mice/reference/boys.html)
 
 ## Reading data
 
@@ -80,16 +80,16 @@ mean(age_subset$age, na.rm=TRUE)
 3. Select: **Select the variables bmi and wgt of the tibble you just created**
 
 ```{r}
-dplyr::select(age_subset, bmi, wgt)
+age_subset_two_cols <- dplyr::select(age_subset, bmi, wgt)
 ```
 
 4. Mutate: **Create two new variables, one call hgt_square (hgt^2), and another called bmi_2 (10000 $\times$ wgt/hgt_square)**. 
 
 ```{r}
 # The arguments are evaluated sequentially in tidyverse, by the time we get to bmi_2 the computer has already created hgt_square
-dplyr::mutate(boys, 
-              hgt_square = hgt^2,
-              bmi_2 = 10000 * wgt / hgt_square)
+boys <- dplyr::mutate(boys, 
+                      hgt_square = hgt^2,
+                      bmi_2 = 10000 * wgt / hgt_square)
 ```
 
 5. **group_by + summarize: Group by region, and calculate the average bmi, wgt and hgt. You could use a pipe to make it more compact.**
@@ -97,17 +97,18 @@ dplyr::mutate(boys,
 ```{r}
 # Without a pipe
 gr_boys <- dplyr::group_by(boys, reg)  
-dplyr::summarize(gr_boys, mean_bmi = mean(bmi, na.rm=TRUE),
-                   mean_wgt = mean(wgt, na.rm=TRUE),
-                   mean_hgt = mean(hgt, na.rm=TRUE))
+boys_mean <- dplyr::summarize(gr_boys, 
+                              mean_bmi = mean(bmi, na.rm=TRUE),
+                              mean_wgt = mean(wgt, na.rm=TRUE),
+                              mean_hgt = mean(hgt, na.rm=TRUE))
 
 # With a pipe
-boys |> 
-  dplyr::group_by(reg) |> 
-  dplyr::summarize(mean_bmi = mean(bmi, na.rm=TRUE),
-                   mean_wgt = mean(wgt, na.rm=TRUE),
-                   mean_hgt = mean(hgt, na.rm=TRUE))
-
+boys_mean <-boys |> 
+            dplyr::group_by(reg) |> 
+            dplyr::summarize(mean_bmi = mean(bmi, na.rm=TRUE),
+                             mean_wgt = mean(wgt, na.rm=TRUE),
+                             mean_hgt = mean(hgt, na.rm=TRUE))
+          
 
 ```
 
@@ -134,15 +135,15 @@ table2_tidy <- tidyr::pivot_wider(table2,
                                   names_from = "type",
                                   values_from = "count")
 
-table2_tidy <-dplyr::mutate(table2_tidy, 
+table2_tidy <- dplyr::mutate(table2_tidy, 
                             cases_per_capita = 1E6*cases/population
                             ) 
-dplyr::arrange(table2_tidy, desc(cases_per_capita))
+table2_tidy <- dplyr::arrange(table2_tidy, desc(cases_per_capita))
 ```
 
 ```{r}
 #Or with a pipe
-table2 |>  
+table2_tidy <- table2 |>  
   tidyr::pivot_wider(id_cols = c("country","year"),
                      names_from = "type",
                      values_from = "count") |> 
@@ -172,9 +173,9 @@ head(table4b_tidy)
 
 ```{r}
 #With a pipe
-dplyr::inner_join(table4a_tidy, table4b_tidy, by = c("country", "year")) |> 
-    dplyr::mutate(cases_per_capita = 1E6*TB/Pop) |> 
-    dplyr::arrange(desc(cases_per_capita))
+table4 <- dplyr::inner_join(table4a_tidy, table4b_tidy, by = c("country", "year")) |> 
+          dplyr::mutate(cases_per_capita = 1E6*TB/Pop) |> 
+          dplyr::arrange(desc(cases_per_capita))
   
 ```
 

@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>In the following exercises we will use the same dataset as last time, boys. You need to download <code>dataset_boys.csv</code> from <a href="https://javier.science/R/#day-2-1">here</a> and add it to a folder “data” in the same folder as your markdown file.</p>
-<p>Then, read the file dataset_boys.csv using the code in the next cell.</p>
+<p>Then, read the file dataset_boys.csv using the code in the next cell. The dataset contains the growth of Dutch boys in the 20th century (https://amices.org/mice/reference/boys.html)</p>
 </section>
 <section id="reading-data" class="level2">
 <h2 class="anchored" data-anchor-id="reading-data">Reading data</h2>
@@ -241,24 +241,8 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(age_subset, bmi, wgt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>age_subset_two_cols <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(age_subset, bmi, wgt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 499 × 2
-     bmi   wgt
-   &lt;dbl&gt; &lt;dbl&gt;
- 1  14.5  3.65
- 2  11.8  3.37
- 3  12.6  3.14
- 4  14.4  4.27
- 5  15.2  5.03
- 6  15.1  4.66
- 7  13.8  3.81
- 8  13.8  3.89
- 9  12.8  3.88
-10  14.1  4.2 
-# ℹ 489 more rows</code></pre>
-</div>
 </div>
 <ol start="4" type="1">
 <li>Mutate: <strong>Create two new variables, one call hgt_square (hgt^2), and another called bmi_2 (10000 <span class="math inline">\(\times\)</span> wgt/hgt_square)</strong>.</li>
@@ -266,27 +250,11 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The arguments are evaluated sequentially in tidyverse, by the time we get to bmi_2 the computer has already created hgt_square</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">mutate</span>(boys, </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">hgt_square =</span> hgt<span class="sc">^</span><span class="dv">2</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">bmi_2 =</span> <span class="dv">10000</span> <span class="sc">*</span> wgt <span class="sc">/</span> hgt_square)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The arguments are evaluated sequentially in tidyverse, by the time we get to bmi_2 the computer has already created hgt_square</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>boys <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(boys, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">hgt_square =</span> hgt<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">bmi_2 =</span> <span class="dv">10000</span> <span class="sc">*</span> wgt <span class="sc">/</span> hgt_square)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 748 × 11
-     age   hgt   wgt   bmi    hc gen   phb      tv reg   hgt_square bmi_2
-   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
- 1 0.035  50.1  3.65  14.5  33.7 &lt;NA&gt;  &lt;NA&gt;     NA south      2510.  14.5
- 2 0.038  53.5  3.37  11.8  35   &lt;NA&gt;  &lt;NA&gt;     NA south      2862.  11.8
- 3 0.057  50    3.14  12.6  35.2 &lt;NA&gt;  &lt;NA&gt;     NA south      2500   12.6
- 4 0.06   54.5  4.27  14.4  36.7 &lt;NA&gt;  &lt;NA&gt;     NA south      2970.  14.4
- 5 0.062  57.5  5.03  15.2  37.3 &lt;NA&gt;  &lt;NA&gt;     NA south      3306.  15.2
- 6 0.068  55.5  4.66  15.1  37   &lt;NA&gt;  &lt;NA&gt;     NA south      3080.  15.1
- 7 0.068  52.5  3.81  13.8  34.9 &lt;NA&gt;  &lt;NA&gt;     NA south      2756.  13.8
- 8 0.071  53    3.89  13.8  35.8 &lt;NA&gt;  &lt;NA&gt;     NA west       2809   13.8
- 9 0.071  55.1  3.88  12.8  36.8 &lt;NA&gt;  &lt;NA&gt;     NA west       3036.  12.8
-10 0.073  54.5  4.2   14.1  38   &lt;NA&gt;  &lt;NA&gt;     NA east       2970.  14.1
-# ℹ 738 more rows</code></pre>
-</div>
 </div>
 <ol start="5" type="1">
 <li><strong>group_by + summarize: Group by region, and calculate the average bmi, wgt and hgt. You could use a pipe to make it more compact.</strong></li>
@@ -294,43 +262,20 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a pipe</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>gr_boys <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(boys, reg)  </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">summarize</span>(gr_boys, <span class="at">mean_bmi =</span> <span class="fu">mean</span>(bmi, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mean_wgt =</span> <span class="fu">mean</span>(wgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mean_hgt =</span> <span class="fu">mean</span>(hgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a pipe</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gr_boys <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(boys, reg)  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>boys_mean <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">summarize</span>(gr_boys, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mean_bmi =</span> <span class="fu">mean</span>(bmi, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mean_wgt =</span> <span class="fu">mean</span>(wgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mean_hgt =</span> <span class="fu">mean</span>(hgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># With a pipe</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>boys_mean <span class="ot">&lt;-</span>boys <span class="sc">|&gt;</span> </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">group_by</span>(reg) <span class="sc">|&gt;</span> </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_bmi =</span> <span class="fu">mean</span>(bmi, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                             <span class="at">mean_wgt =</span> <span class="fu">mean</span>(wgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                             <span class="at">mean_hgt =</span> <span class="fu">mean</span>(hgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
-  reg   mean_bmi mean_wgt mean_hgt
-  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 city      18.2    34.0     126. 
-2 east      17.9    37.0     134. 
-3 north     19.4    49.9     152. 
-4 south     17.8    34.5     128. 
-5 west      18.0    36.4     130. 
-6 &lt;NA&gt;      15.2     9.26     73.0</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With a pipe</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">|&gt;</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(reg) <span class="sc">|&gt;</span> </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_bmi =</span> <span class="fu">mean</span>(bmi, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mean_wgt =</span> <span class="fu">mean</span>(wgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mean_hgt =</span> <span class="fu">mean</span>(hgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 4
-  reg   mean_bmi mean_wgt mean_hgt
-  &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1 city      18.2    34.0     126. 
-2 east      17.9    37.0     134. 
-3 north     19.4    49.9     152. 
-4 south     17.8    34.5     128. 
-5 west      18.0    36.4     130. 
-6 &lt;NA&gt;      15.2     9.26     73.0</code></pre>
-</div>
 </div>
 <ol start="6" type="1">
 <li><strong>arrange: Sort the dataset by bmi, what can you say about the boys with low bmi?</strong></li>
@@ -338,23 +283,23 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#They are small babies</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">arrange</span>(boys, bmi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#They are small babies</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">arrange</span>(boys, bmi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 748 × 9
-      age   hgt   wgt   bmi    hc gen   phb      tv reg  
-    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;
- 1  0.038  53.5  3.37  11.8  35   &lt;NA&gt;  &lt;NA&gt;     NA south
- 2  0.164  55    3.73  12.3  37.8 &lt;NA&gt;  &lt;NA&gt;     NA west 
- 3  0.057  50    3.14  12.6  35.2 &lt;NA&gt;  &lt;NA&gt;     NA south
- 4  0.071  55.1  3.88  12.8  36.8 &lt;NA&gt;  &lt;NA&gt;     NA west 
- 5  0.191  56.9  4.14  12.8  35.7 &lt;NA&gt;  &lt;NA&gt;     NA south
- 6  0.09   55.7  4.07  13.1  36.6 &lt;NA&gt;  &lt;NA&gt;     NA east 
- 7  0.202  60    4.79  13.3  38.2 &lt;NA&gt;  &lt;NA&gt;     NA west 
- 8  3.96  105.  14.6   13.3  47.6 &lt;NA&gt;  &lt;NA&gt;     NA south
- 9  0.197  58    4.55  13.5  38.3 &lt;NA&gt;  &lt;NA&gt;     NA south
-10 11.1   135.  25     13.7  48.2 G1    P2        2 west 
+<pre><code># A tibble: 748 × 11
+      age   hgt   wgt   bmi    hc gen   phb      tv reg   hgt_square bmi_2
+    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
+ 1  0.038  53.5  3.37  11.8  35   &lt;NA&gt;  &lt;NA&gt;     NA south      2862.  11.8
+ 2  0.164  55    3.73  12.3  37.8 &lt;NA&gt;  &lt;NA&gt;     NA west       3025   12.3
+ 3  0.057  50    3.14  12.6  35.2 &lt;NA&gt;  &lt;NA&gt;     NA south      2500   12.6
+ 4  0.071  55.1  3.88  12.8  36.8 &lt;NA&gt;  &lt;NA&gt;     NA west       3036.  12.8
+ 5  0.191  56.9  4.14  12.8  35.7 &lt;NA&gt;  &lt;NA&gt;     NA south      3238.  12.8
+ 6  0.09   55.7  4.07  13.1  36.6 &lt;NA&gt;  &lt;NA&gt;     NA east       3102.  13.1
+ 7  0.202  60    4.79  13.3  38.2 &lt;NA&gt;  &lt;NA&gt;     NA west       3600   13.3
+ 8  3.96  105.  14.6   13.3  47.6 &lt;NA&gt;  &lt;NA&gt;     NA south     10962.  13.3
+ 9  0.197  58    4.55  13.5  38.3 &lt;NA&gt;  &lt;NA&gt;     NA south      3364   13.5
+10 11.1   135.  25     13.7  48.2 G1    P2        2 west      18252.  13.7
 # ℹ 738 more rows</code></pre>
 </div>
 </div>
@@ -367,7 +312,7 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span>table2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span>table2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 4
@@ -393,51 +338,29 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a pipe</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(table2,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>),</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">names_from =</span> <span class="st">"type"</span>,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">values_from =</span> <span class="st">"count"</span>)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span>dplyr<span class="sc">::</span><span class="fu">mutate</span>(table2_tidy, </span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>cases<span class="sc">/</span>population</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>                            ) </span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">arrange</span>(table2_tidy, <span class="fu">desc</span>(cases_per_capita))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a pipe</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(table2,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>),</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">names_from =</span> <span class="st">"type"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">values_from =</span> <span class="st">"count"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(table2_tidy, </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>cases<span class="sc">/</span>population</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>                            ) </span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">arrange</span>(table2_tidy, <span class="fu">desc</span>(cases_per_capita))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  country      year  cases population cases_per_capita
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
-1 Brazil       2000  80488  174504898            461. 
-2 Brazil       1999  37737  172006362            219. 
-3 China        2000 213766 1280428583            167. 
-4 China        1999 212258 1272915272            167. 
-5 Afghanistan  2000   2666   20595360            129. 
-6 Afghanistan  1999    745   19987071             37.3</code></pre>
-</div>
 </div>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Or with a pipe</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span>  </span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>),</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_from =</span> <span class="st">"type"</span>,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_from =</span> <span class="st">"count"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>cases<span class="sc">/</span>population) <span class="sc">|&gt;</span> </span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(cases_per_capita))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Or with a pipe</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> table2 <span class="sc">|&gt;</span>  </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>),</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_from =</span> <span class="st">"type"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_from =</span> <span class="st">"count"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>cases<span class="sc">/</span>population) <span class="sc">|&gt;</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(cases_per_capita))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  country      year  cases population cases_per_capita
-  &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
-1 Brazil       2000  80488  174504898            461. 
-2 Brazil       1999  37737  172006362            219. 
-3 China        2000 213766 1280428583            167. 
-4 China        1999 212258 1272915272            167. 
-5 Afghanistan  2000   2666   20595360            129. 
-6 Afghanistan  1999    745   19987071             37.3</code></pre>
-</div>
 </div>
 <ol start="9" type="1">
 <li><strong>Print the datasets tidyr::table4a (cases of TB) and tidyr::table4b (population). Tidy them and save the output tables with names table4a_tidy and table4ab_tidy</strong> <em>Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?</em></li>
@@ -445,11 +368,11 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>table4a_tidy <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(table4a, </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"1999"</span>,<span class="st">"2000"</span>),</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">values_to =</span> <span class="st">"TB"</span>) </span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table4a_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>table4a_tidy <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(table4a, </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"1999"</span>,<span class="st">"2000"</span>),</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">values_to =</span> <span class="st">"TB"</span>) </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table4a_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
@@ -464,11 +387,11 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>table4b_tidy <span class="ot">&lt;-</span>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(table4b, </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"1999"</span>,<span class="st">"2000"</span>),</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">values_to =</span> <span class="st">"Pop"</span>) </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table4b_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>table4b_tidy <span class="ot">&lt;-</span>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(table4b, </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"1999"</span>,<span class="st">"2000"</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">values_to =</span> <span class="st">"Pop"</span>) </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table4b_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
@@ -488,22 +411,11 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#With a pipe</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">inner_join</span>(table4a_tidy, table4b_tidy, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>TB<span class="sc">/</span>Pop) <span class="sc">|&gt;</span> </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(cases_per_capita))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#With a pipe</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>table4 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">inner_join</span>(table4a_tidy, table4b_tidy, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>TB<span class="sc">/</span>Pop) <span class="sc">|&gt;</span> </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(cases_per_capita))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 5
-  country     year      TB        Pop cases_per_capita
-  &lt;chr&gt;       &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
-1 Brazil      2000   80488  174504898            461. 
-2 Brazil      1999   37737  172006362            219. 
-3 China       2000  213766 1280428583            167. 
-4 China       1999  212258 1272915272            167. 
-5 Afghanistan 2000    2666   20595360            129. 
-6 Afghanistan 1999     745   19987071             37.3</code></pre>
-</div>
 </div>
 </section>
 <section id="exercises-1113-linear-regression" class="level2">
@@ -514,8 +426,8 @@ dbl (6): age, hgt, wgt, bmi, hc, tv
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> reg, <span class="at">data=</span>boys)</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> reg, <span class="at">data=</span>boys)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -533,7 +445,7 @@ Coefficients:
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -567,41 +479,41 @@ F-statistic:  1396 on 5 and 735 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There shouldn't be strange patterns</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There shouldn't be strange patterns</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="Practical_D_walkthrough_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The points should lie on the line</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The points should lie on the line</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="Practical_D_walkthrough_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cook's distance measures the effect of deleting a given observation. </span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Leverage is a measure of how far away the independent variable values of an observation are from those of the other observations.</span></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cook's distance measures the effect of deleting a given observation. </span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Leverage is a measure of how far away the independent variable values of an observation are from those of the other observations.</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="Practical_D_walkthrough_files/figure-html/unnamed-chunk-16-3.png" class="img-fluid" width="672"></p>
 </div>
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking outliers</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(boys, <span class="fu">c</span>(<span class="dv">733</span>,<span class="dv">610</span>,<span class="dv">574</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking outliers</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(boys, <span class="fu">c</span>(<span class="dv">733</span>,<span class="dv">610</span>,<span class="dv">574</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 9
-    age   hgt   wgt   bmi    hc gen   phb      tv reg  
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;
-1  19.9  192.  117.  31.7  57.6 G5    P6       18 north
-2  16.2  194.  113   29.9  58.4 G3    P5        6 north
-3  15.5  182.  102   30.6  57.7 &lt;NA&gt;  &lt;NA&gt;     NA west </code></pre>
+<pre><code># A tibble: 3 × 11
+    age   hgt   wgt   bmi    hc gen   phb      tv reg   hgt_square bmi_2
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
+1  19.9  192.  117.  31.7  57.6 G5    P6       18 north     36979.  31.7
+2  16.2  194.  113   29.9  58.4 G3    P5        6 north     37752.  29.9
+3  15.5  182.  102   30.6  57.7 &lt;NA&gt;  &lt;NA&gt;     NA west      33306.  30.6</code></pre>
 </div>
 </div>
 </section>
@@ -613,8 +525,8 @@ F-statistic:  1396 on 5 and 735 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_rds</span>(boys, <span class="st">"data/boys.rds"</span>)</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(boys, <span class="st">"data/boys.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_rds</span>(boys, <span class="st">"data/boys.rds"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(boys, <span class="st">"data/boys.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -625,8 +537,8 @@ F-statistic:  1396 on 5 and 735 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("datasauRus")</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasauRus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("datasauRus")</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasauRus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ol start="15" type="1">
@@ -635,13 +547,13 @@ F-statistic:  1396 on 5 and 735 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>datasauRus<span class="sc">::</span>datasaurus_dozen <span class="sc">|&gt;</span> </span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">group_by</span>(dataset) <span class="sc">|&gt;</span> </span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x),</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean_y =</span> <span class="fu">mean</span>(y),</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">sd_x =</span> <span class="fu">sd</span>(x),</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">sd_y =</span> <span class="fu">sd</span>(y),</span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">cor</span>(x,y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>datasauRus<span class="sc">::</span>datasaurus_dozen <span class="sc">|&gt;</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">group_by</span>(dataset) <span class="sc">|&gt;</span> </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean_y =</span> <span class="fu">mean</span>(y),</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">sd_x =</span> <span class="fu">sd</span>(x),</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">sd_y =</span> <span class="fu">sd</span>(y),</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>                <span class="fu">cor</span>(x,y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 13 × 6
@@ -668,10 +580,10 @@ F-statistic:  1396 on 5 and 735 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datasaurus_dozen, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">colour=</span>dataset))<span class="sc">+</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>dataset, <span class="at">ncol=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r fold-show code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datasaurus_dozen, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">colour=</span>dataset))<span class="sc">+</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>dataset, <span class="at">ncol=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="Practical_D_walkthrough_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
@@ -974,280 +886,281 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb49" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Practical D"</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Javier Garcia-Bernardo"</span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "12/08/2023"</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 5</span></span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: false</span></span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>Functions in R are like magic tools that make your coding life easier. Instead of writing long, confusing chunks of code, you can create functions to do specific tasks. This makes your code neat, easy to understand, and less prone to mistakes. Imagine you have a set of instructions you use often; with a function, you can package those instructions and reuse them whenever you need. R already has lots of built-in functions, and you can create your own too. </span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>Just remember to give your functions clear names and explain what they do--it's like leaving a note for your future self (or others) to understand your code better. </span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 1: Functions</span></span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Create a function that calculates the sample standard deviation of a vector of numbers. Validate it by comparing the output to the function `sd()`. Write documentation for such function.** </span>
-<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>$$\sigma = \sqrt{\frac{1}{N-1}\sum_{i=0}^N{(x_i - \bar{x})^2}}$$</span>
-<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a><span class="co">#' Calculate the standard deviation of a </span></span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a><span class="co">#' \sigma = \sqrt{\frac{1}{N-1}\sum_{i=0}^N{(x_i - \bar{x})^2}}$$</span></span>
-<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a><span class="co">#' </span></span>
-<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param values A numeric vector</span></span>
-<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a><span class="co">#' @returns STD of the vector</span></span>
-<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
-<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a><span class="co">#' std_own(c(3,5,4))</span></span>
-<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>std_own <span class="ot">&lt;-</span> <span class="cf">function</span>(values) {</span>
-<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="fu">length</span>(values)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">sum</span>((values <span class="sc">-</span> <span class="fu">mean</span>(values))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(s)</span>
-<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a><span class="fu">std_own</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
-<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
-<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>In this practical I will be explicitly specifying the package of each function (e.g. readr::read_delim). Specifying the package is not required and can be cumbersome for the most commonly used functions. I do it to show the source of the functions you are using.</span>
-<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>First, open the R project you created last week (or create a new one).</span>
-<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>Then, load the required library (tidyverse). Look at the output, which packages does it load?</span>
-<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r  class.source = 'fold-show'}</span></span>
-<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb49-53"><a href="#cb49-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-55"><a href="#cb49-55" aria-hidden="true" tabindex="-1"></a>In the following exercises we will use the same dataset as last time, boys. You need to download <span class="in">`dataset_boys.csv`</span> from <span class="co">[</span><span class="ot">here</span><span class="co">](https://javier.science/R/#day-2-1)</span> and add it to a folder "data" in the same folder as your markdown file.</span>
-<span id="cb49-56"><a href="#cb49-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a>Then, read the file dataset_boys.csv using the code in the next cell.</span>
-<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reading data</span></span>
-<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-61"><a href="#cb49-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r class.source = 'fold-show'}</span></span>
-<span id="cb49-62"><a href="#cb49-62" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading the file</span></span>
-<span id="cb49-63"><a href="#cb49-63" aria-hidden="true" tabindex="-1"></a>boys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/dataset_boys.csv"</span>,<span class="at">delim=</span><span class="st">","</span>)</span>
-<span id="cb49-64"><a href="#cb49-64" aria-hidden="true" tabindex="-1"></a><span class="fu">is_tibble</span>(boys)</span>
-<span id="cb49-65"><a href="#cb49-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-66"><a href="#cb49-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-67"><a href="#cb49-67" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb49-68"><a href="#cb49-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-69"><a href="#cb49-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-70"><a href="#cb49-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 2-6: Tidyverse operations</span></span>
-<span id="cb49-71"><a href="#cb49-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-72"><a href="#cb49-72" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Filter: **Create a new tibble with the boys younger than 15 that do not live in the "north" region, and calculate their average age.**</span>
-<span id="cb49-73"><a href="#cb49-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-76"><a href="#cb49-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-77"><a href="#cb49-77" aria-hidden="true" tabindex="-1"></a>age_subset <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(boys, </span>
-<span id="cb49-78"><a href="#cb49-78" aria-hidden="true" tabindex="-1"></a>                            (age <span class="sc">&lt;</span> <span class="dv">15</span>), </span>
-<span id="cb49-79"><a href="#cb49-79" aria-hidden="true" tabindex="-1"></a>                            (reg <span class="sc">!=</span> <span class="st">"north"</span>)</span>
-<span id="cb49-80"><a href="#cb49-80" aria-hidden="true" tabindex="-1"></a>                            )</span>
-<span id="cb49-81"><a href="#cb49-81" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age_subset<span class="sc">$</span>age, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb49-82"><a href="#cb49-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-83"><a href="#cb49-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-84"><a href="#cb49-84" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Select: **Select the variables bmi and wgt of the tibble you just created**</span>
-<span id="cb49-85"><a href="#cb49-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-88"><a href="#cb49-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-89"><a href="#cb49-89" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(age_subset, bmi, wgt)</span>
-<span id="cb49-90"><a href="#cb49-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-91"><a href="#cb49-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-92"><a href="#cb49-92" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Mutate: **Create two new variables, one call hgt_square (hgt^2), and another called bmi_2 (10000 $\times$ wgt/hgt_square)**. </span>
-<span id="cb49-93"><a href="#cb49-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-96"><a href="#cb49-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-97"><a href="#cb49-97" aria-hidden="true" tabindex="-1"></a><span class="co"># The arguments are evaluated sequentially in tidyverse, by the time we get to bmi_2 the computer has already created hgt_square</span></span>
-<span id="cb49-98"><a href="#cb49-98" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">mutate</span>(boys, </span>
-<span id="cb49-99"><a href="#cb49-99" aria-hidden="true" tabindex="-1"></a>              <span class="at">hgt_square =</span> hgt<span class="sc">^</span><span class="dv">2</span>,</span>
-<span id="cb49-100"><a href="#cb49-100" aria-hidden="true" tabindex="-1"></a>              <span class="at">bmi_2 =</span> <span class="dv">10000</span> <span class="sc">*</span> wgt <span class="sc">/</span> hgt_square)</span>
-<span id="cb49-101"><a href="#cb49-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-102"><a href="#cb49-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-103"><a href="#cb49-103" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**group_by + summarize: Group by region, and calculate the average bmi, wgt and hgt. You could use a pipe to make it more compact.**</span>
-<span id="cb49-104"><a href="#cb49-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-107"><a href="#cb49-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-108"><a href="#cb49-108" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a pipe</span></span>
-<span id="cb49-109"><a href="#cb49-109" aria-hidden="true" tabindex="-1"></a>gr_boys <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(boys, reg)  </span>
-<span id="cb49-110"><a href="#cb49-110" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">summarize</span>(gr_boys, <span class="at">mean_bmi =</span> <span class="fu">mean</span>(bmi, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb49-111"><a href="#cb49-111" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mean_wgt =</span> <span class="fu">mean</span>(wgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb49-112"><a href="#cb49-112" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mean_hgt =</span> <span class="fu">mean</span>(hgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb49-113"><a href="#cb49-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-114"><a href="#cb49-114" aria-hidden="true" tabindex="-1"></a><span class="co"># With a pipe</span></span>
-<span id="cb49-115"><a href="#cb49-115" aria-hidden="true" tabindex="-1"></a>boys <span class="sc">|&gt;</span> </span>
-<span id="cb49-116"><a href="#cb49-116" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(reg) <span class="sc">|&gt;</span> </span>
-<span id="cb49-117"><a href="#cb49-117" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_bmi =</span> <span class="fu">mean</span>(bmi, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb49-118"><a href="#cb49-118" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mean_wgt =</span> <span class="fu">mean</span>(wgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb49-119"><a href="#cb49-119" aria-hidden="true" tabindex="-1"></a>                   <span class="at">mean_hgt =</span> <span class="fu">mean</span>(hgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
-<span id="cb49-120"><a href="#cb49-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-121"><a href="#cb49-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-122"><a href="#cb49-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-123"><a href="#cb49-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-124"><a href="#cb49-124" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**arrange: Sort the dataset by bmi, what can you say about the boys with low bmi?**</span>
-<span id="cb49-125"><a href="#cb49-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-128"><a href="#cb49-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-129"><a href="#cb49-129" aria-hidden="true" tabindex="-1"></a><span class="co">#They are small babies</span></span>
-<span id="cb49-130"><a href="#cb49-130" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">arrange</span>(boys, bmi)</span>
-<span id="cb49-131"><a href="#cb49-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-132"><a href="#cb49-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-133"><a href="#cb49-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises 7--10: Data transformations</span></span>
-<span id="cb49-134"><a href="#cb49-134" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**Imagine you have the dataset tidyr::table2, could you easily create the cases of TB per capita?** (you only need to print <span class="in">`tidyr::table2`</span>)</span>
-<span id="cb49-135"><a href="#cb49-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-138"><a href="#cb49-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-139"><a href="#cb49-139" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span>table2</span>
-<span id="cb49-140"><a href="#cb49-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-141"><a href="#cb49-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-142"><a href="#cb49-142" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>**Transform the data to make it tidy** *Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?* **Then, calculate the cases of TB per 1 million people. Which country had the highest cases per capita?**</span>
-<span id="cb49-143"><a href="#cb49-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-146"><a href="#cb49-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-147"><a href="#cb49-147" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a pipe</span></span>
-<span id="cb49-148"><a href="#cb49-148" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(table2,</span>
-<span id="cb49-149"><a href="#cb49-149" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>),</span>
-<span id="cb49-150"><a href="#cb49-150" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">names_from =</span> <span class="st">"type"</span>,</span>
-<span id="cb49-151"><a href="#cb49-151" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">values_from =</span> <span class="st">"count"</span>)</span>
-<span id="cb49-152"><a href="#cb49-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-153"><a href="#cb49-153" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span>dplyr<span class="sc">::</span><span class="fu">mutate</span>(table2_tidy, </span>
-<span id="cb49-154"><a href="#cb49-154" aria-hidden="true" tabindex="-1"></a>                            <span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>cases<span class="sc">/</span>population</span>
-<span id="cb49-155"><a href="#cb49-155" aria-hidden="true" tabindex="-1"></a>                            ) </span>
-<span id="cb49-156"><a href="#cb49-156" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">arrange</span>(table2_tidy, <span class="fu">desc</span>(cases_per_capita))</span>
-<span id="cb49-157"><a href="#cb49-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-158"><a href="#cb49-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-161"><a href="#cb49-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-162"><a href="#cb49-162" aria-hidden="true" tabindex="-1"></a><span class="co">#Or with a pipe</span></span>
-<span id="cb49-163"><a href="#cb49-163" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span>  </span>
-<span id="cb49-164"><a href="#cb49-164" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>),</span>
-<span id="cb49-165"><a href="#cb49-165" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_from =</span> <span class="st">"type"</span>,</span>
-<span id="cb49-166"><a href="#cb49-166" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_from =</span> <span class="st">"count"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb49-167"><a href="#cb49-167" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>cases<span class="sc">/</span>population) <span class="sc">|&gt;</span> </span>
-<span id="cb49-168"><a href="#cb49-168" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(cases_per_capita))</span>
-<span id="cb49-169"><a href="#cb49-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-170"><a href="#cb49-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-171"><a href="#cb49-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-172"><a href="#cb49-172" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>**Print the datasets tidyr::table4a (cases of TB) and tidyr::table4b (population). Tidy them and save the output tables with names table4a_tidy and table4ab_tidy** </span>
-<span id="cb49-173"><a href="#cb49-173" aria-hidden="true" tabindex="-1"></a>*Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?*</span>
-<span id="cb49-176"><a href="#cb49-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-177"><a href="#cb49-177" aria-hidden="true" tabindex="-1"></a>table4a_tidy <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(table4a, </span>
-<span id="cb49-178"><a href="#cb49-178" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"1999"</span>,<span class="st">"2000"</span>),</span>
-<span id="cb49-179"><a href="#cb49-179" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
-<span id="cb49-180"><a href="#cb49-180" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">values_to =</span> <span class="st">"TB"</span>) </span>
-<span id="cb49-181"><a href="#cb49-181" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table4a_tidy)</span>
-<span id="cb49-182"><a href="#cb49-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-183"><a href="#cb49-183" aria-hidden="true" tabindex="-1"></a>table4b_tidy <span class="ot">&lt;-</span>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(table4b, </span>
-<span id="cb49-184"><a href="#cb49-184" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"1999"</span>,<span class="st">"2000"</span>),</span>
-<span id="cb49-185"><a href="#cb49-185" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
-<span id="cb49-186"><a href="#cb49-186" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">values_to =</span> <span class="st">"Pop"</span>) </span>
-<span id="cb49-187"><a href="#cb49-187" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table4b_tidy)</span>
-<span id="cb49-188"><a href="#cb49-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-189"><a href="#cb49-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-190"><a href="#cb49-190" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>**Join table4a_tidy and table4b_tidy, and calculate the cases of TB per 1 million people? Which country had the highest cases per capita?** Could you have done this with table4a and table4b?</span>
-<span id="cb49-191"><a href="#cb49-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-192"><a href="#cb49-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-195"><a href="#cb49-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-196"><a href="#cb49-196" aria-hidden="true" tabindex="-1"></a><span class="co">#With a pipe</span></span>
-<span id="cb49-197"><a href="#cb49-197" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">inner_join</span>(table4a_tidy, table4b_tidy, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb49-198"><a href="#cb49-198" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>TB<span class="sc">/</span>Pop) <span class="sc">|&gt;</span> </span>
-<span id="cb49-199"><a href="#cb49-199" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(cases_per_capita))</span>
-<span id="cb49-200"><a href="#cb49-200" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb49-201"><a href="#cb49-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-202"><a href="#cb49-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-203"><a href="#cb49-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises 11--13: Linear regression</span></span>
-<span id="cb49-204"><a href="#cb49-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-205"><a href="#cb49-205" aria-hidden="true" tabindex="-1"></a><span class="ss">11. </span>**Using the boys dataset, fit a model where the weight depends on the age and the region.** </span>
-<span id="cb49-206"><a href="#cb49-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-209"><a href="#cb49-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-210"><a href="#cb49-210" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> reg, <span class="at">data=</span>boys)</span>
-<span id="cb49-211"><a href="#cb49-211" aria-hidden="true" tabindex="-1"></a>fit</span>
-<span id="cb49-212"><a href="#cb49-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-213"><a href="#cb49-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-214"><a href="#cb49-214" aria-hidden="true" tabindex="-1"></a><span class="ss">12. </span>**Print the regression table using the function summary. Does the region have a significant effect?** </span>
-<span id="cb49-215"><a href="#cb49-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-218"><a href="#cb49-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-219"><a href="#cb49-219" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
-<span id="cb49-220"><a href="#cb49-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-221"><a href="#cb49-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-222"><a href="#cb49-222" aria-hidden="true" tabindex="-1"></a><span class="ss">13. </span>**Check the assumptions of linear regression using plot(). Are the assumptions met? What are the biggest outliers? (find them in the data)** Homoscedasticity and independence of residuals (which = 1). Normality of residuals (which = 2) and presence of outliers (which = 6). </span>
-<span id="cb49-223"><a href="#cb49-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-226"><a href="#cb49-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-227"><a href="#cb49-227" aria-hidden="true" tabindex="-1"></a><span class="co"># There shouldn't be strange patterns</span></span>
-<span id="cb49-228"><a href="#cb49-228" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">1</span>)</span>
-<span id="cb49-229"><a href="#cb49-229" aria-hidden="true" tabindex="-1"></a><span class="co"># The points should lie on the line</span></span>
-<span id="cb49-230"><a href="#cb49-230" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">2</span>)</span>
-<span id="cb49-231"><a href="#cb49-231" aria-hidden="true" tabindex="-1"></a><span class="co"># Cook's distance measures the effect of deleting a given observation. </span></span>
-<span id="cb49-232"><a href="#cb49-232" aria-hidden="true" tabindex="-1"></a><span class="co"># Leverage is a measure of how far away the independent variable values of an observation are from those of the other observations.</span></span>
-<span id="cb49-233"><a href="#cb49-233" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">6</span>)</span>
-<span id="cb49-234"><a href="#cb49-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-235"><a href="#cb49-235" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking outliers</span></span>
-<span id="cb49-236"><a href="#cb49-236" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(boys, <span class="fu">c</span>(<span class="dv">733</span>,<span class="dv">610</span>,<span class="dv">574</span>))</span>
-<span id="cb49-237"><a href="#cb49-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-238"><a href="#cb49-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-239"><a href="#cb49-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-240"><a href="#cb49-240" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 14. Saving data</span></span>
-<span id="cb49-241"><a href="#cb49-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-242"><a href="#cb49-242" aria-hidden="true" tabindex="-1"></a><span class="ss">14. </span>**Save the data `boys` as an RDS file, and as an Excel file**. Remember to save your data to the data folder!</span>
-<span id="cb49-243"><a href="#cb49-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-246"><a href="#cb49-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-247"><a href="#cb49-247" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_rds</span>(boys, <span class="st">"data/boys.rds"</span>)</span>
-<span id="cb49-248"><a href="#cb49-248" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(boys, <span class="st">"data/boys.xlsx"</span>)</span>
-<span id="cb49-249"><a href="#cb49-249" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-250"><a href="#cb49-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-251"><a href="#cb49-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-252"><a href="#cb49-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-253"><a href="#cb49-253" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 15--16. Some visualizations</span></span>
-<span id="cb49-254"><a href="#cb49-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-255"><a href="#cb49-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-256"><a href="#cb49-256" aria-hidden="true" tabindex="-1"></a>Tidyverse is great because it connects very well with ggplot. You'll learn more in the next courses, but let's demonstrate using the datasaurus dataset. There are 12 datasets composed of a <span class="in">`x`</span> variable and a <span class="in">`y`</span> variable, created in a way that mean(x), mean(y), sd(x), sd(y) are equal across the 12 datasets.</span>
-<span id="cb49-257"><a href="#cb49-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-258"><a href="#cb49-258" aria-hidden="true" tabindex="-1"></a>First, install the library datasauRus and load it</span>
-<span id="cb49-259"><a href="#cb49-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-260"><a href="#cb49-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-263"><a href="#cb49-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-264"><a href="#cb49-264" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("datasauRus")</span></span>
-<span id="cb49-265"><a href="#cb49-265" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasauRus)</span>
-<span id="cb49-266"><a href="#cb49-266" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-267"><a href="#cb49-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-268"><a href="#cb49-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-269"><a href="#cb49-269" aria-hidden="true" tabindex="-1"></a><span class="ss">15. </span>Group datasauRus::datasaurus_dozen by the variable <span class="in">`dataset`</span> and calculate the mean and standard deviation of both x and y, and the correlation (function <span class="in">`cor()`</span>) between x and y.</span>
-<span id="cb49-270"><a href="#cb49-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-273"><a href="#cb49-273" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-274"><a href="#cb49-274" aria-hidden="true" tabindex="-1"></a>datasauRus<span class="sc">::</span>datasaurus_dozen <span class="sc">|&gt;</span> </span>
-<span id="cb49-275"><a href="#cb49-275" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">group_by</span>(dataset) <span class="sc">|&gt;</span> </span>
-<span id="cb49-276"><a href="#cb49-276" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x),</span>
-<span id="cb49-277"><a href="#cb49-277" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean_y =</span> <span class="fu">mean</span>(y),</span>
-<span id="cb49-278"><a href="#cb49-278" aria-hidden="true" tabindex="-1"></a>                <span class="at">sd_x =</span> <span class="fu">sd</span>(x),</span>
-<span id="cb49-279"><a href="#cb49-279" aria-hidden="true" tabindex="-1"></a>                <span class="at">sd_y =</span> <span class="fu">sd</span>(y),</span>
-<span id="cb49-280"><a href="#cb49-280" aria-hidden="true" tabindex="-1"></a>                <span class="fu">cor</span>(x,y))</span>
-<span id="cb49-281"><a href="#cb49-281" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-282"><a href="#cb49-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-283"><a href="#cb49-283" aria-hidden="true" tabindex="-1"></a><span class="ss">16. </span>**Use the following code to visualize the data.** *The descriptive statistics were identical, but do the datasets look similar?*</span>
-<span id="cb49-284"><a href="#cb49-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-285"><a href="#cb49-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-show'}</span></span>
-<span id="cb49-286"><a href="#cb49-286" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datasaurus_dozen, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">colour=</span>dataset))<span class="sc">+</span></span>
-<span id="cb49-287"><a href="#cb49-287" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb49-288"><a href="#cb49-288" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
-<span id="cb49-289"><a href="#cb49-289" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>dataset, <span class="at">ncol=</span><span class="dv">3</span>)</span>
-<span id="cb49-290"><a href="#cb49-290" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-291"><a href="#cb49-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-292"><a href="#cb49-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-293"><a href="#cb49-293" aria-hidden="true" tabindex="-1"></a>If you are interested in data visualization, design and storytelling, I teach regularly a course. The materials are <span class="co">[</span><span class="ot">online</span><span class="co">](https://github.com/jgarciab/workshop_data_viz/tree/main)</span>.</span>
-<span id="cb49-294"><a href="#cb49-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-295"><a href="#cb49-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-296"><a href="#cb49-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-297"><a href="#cb49-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-298"><a href="#cb49-298" aria-hidden="true" tabindex="-1"></a>End of Practical.</span>
-<span id="cb49-299"><a href="#cb49-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-300"><a href="#cb49-300" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb49-301"><a href="#cb49-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-302"><a href="#cb49-302" aria-hidden="true" tabindex="-1"></a><span class="fu">#### References</span></span>
-<span id="cb49-303"><a href="#cb49-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-304"><a href="#cb49-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-305"><a href="#cb49-305" aria-hidden="true" tabindex="-1"></a>Matejka, J., &amp; Fitzmaurice, G. (2017). Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing. CHI 2017 Conference proceedings: ACM SIGCHI Conference on Human Factors in Computing Systems.</span>
-<span id="cb49-306"><a href="#cb49-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-307"><a href="#cb49-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-308"><a href="#cb49-308" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb41" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Practical D"</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Javier Garcia-Bernardo"</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "12/08/2023"</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-location: left</span></span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-depth: 5</span></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: false</span></span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>Functions in R are like magic tools that make your coding life easier. Instead of writing long, confusing chunks of code, you can create functions to do specific tasks. This makes your code neat, easy to understand, and less prone to mistakes. Imagine you have a set of instructions you use often; with a function, you can package those instructions and reuse them whenever you need. R already has lots of built-in functions, and you can create your own too. </span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>Just remember to give your functions clear names and explain what they do--it's like leaving a note for your future self (or others) to understand your code better. </span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 1: Functions</span></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Create a function that calculates the sample standard deviation of a vector of numbers. Validate it by comparing the output to the function `sd()`. Write documentation for such function.** </span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>$$\sigma = \sqrt{\frac{1}{N-1}\sum_{i=0}^N{(x_i - \bar{x})^2}}$$</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-29"><a href="#cb41-29" aria-hidden="true" tabindex="-1"></a><span class="co">#' Calculate the standard deviation of a </span></span>
+<span id="cb41-30"><a href="#cb41-30" aria-hidden="true" tabindex="-1"></a><span class="co">#' \sigma = \sqrt{\frac{1}{N-1}\sum_{i=0}^N{(x_i - \bar{x})^2}}$$</span></span>
+<span id="cb41-31"><a href="#cb41-31" aria-hidden="true" tabindex="-1"></a><span class="co">#' </span></span>
+<span id="cb41-32"><a href="#cb41-32" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param values A numeric vector</span></span>
+<span id="cb41-33"><a href="#cb41-33" aria-hidden="true" tabindex="-1"></a><span class="co">#' @returns STD of the vector</span></span>
+<span id="cb41-34"><a href="#cb41-34" aria-hidden="true" tabindex="-1"></a><span class="co">#' @examples</span></span>
+<span id="cb41-35"><a href="#cb41-35" aria-hidden="true" tabindex="-1"></a><span class="co">#' std_own(c(3,5,4))</span></span>
+<span id="cb41-36"><a href="#cb41-36" aria-hidden="true" tabindex="-1"></a>std_own <span class="ot">&lt;-</span> <span class="cf">function</span>(values) {</span>
+<span id="cb41-37"><a href="#cb41-37" aria-hidden="true" tabindex="-1"></a>  s <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="fu">length</span>(values)<span class="sc">-</span><span class="dv">1</span>)<span class="sc">*</span><span class="fu">sum</span>((values <span class="sc">-</span> <span class="fu">mean</span>(values))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb41-38"><a href="#cb41-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(s)</span>
+<span id="cb41-39"><a href="#cb41-39" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb41-40"><a href="#cb41-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-41"><a href="#cb41-41" aria-hidden="true" tabindex="-1"></a><span class="fu">std_own</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb41-42"><a href="#cb41-42" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>))</span>
+<span id="cb41-43"><a href="#cb41-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-44"><a href="#cb41-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-45"><a href="#cb41-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-46"><a href="#cb41-46" aria-hidden="true" tabindex="-1"></a>In this practical I will be explicitly specifying the package of each function (e.g. readr::read_delim). Specifying the package is not required and can be cumbersome for the most commonly used functions. I do it to show the source of the functions you are using.</span>
+<span id="cb41-47"><a href="#cb41-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-48"><a href="#cb41-48" aria-hidden="true" tabindex="-1"></a>First, open the R project you created last week (or create a new one).</span>
+<span id="cb41-49"><a href="#cb41-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-50"><a href="#cb41-50" aria-hidden="true" tabindex="-1"></a>Then, load the required library (tidyverse). Look at the output, which packages does it load?</span>
+<span id="cb41-51"><a href="#cb41-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r  class.source = 'fold-show'}</span></span>
+<span id="cb41-52"><a href="#cb41-52" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb41-53"><a href="#cb41-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-54"><a href="#cb41-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-55"><a href="#cb41-55" aria-hidden="true" tabindex="-1"></a>In the following exercises we will use the same dataset as last time, boys. You need to download <span class="in">`dataset_boys.csv`</span> from <span class="co">[</span><span class="ot">here</span><span class="co">](https://javier.science/R/#day-2-1)</span> and add it to a folder "data" in the same folder as your markdown file.</span>
+<span id="cb41-56"><a href="#cb41-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-57"><a href="#cb41-57" aria-hidden="true" tabindex="-1"></a>Then, read the file dataset_boys.csv using the code in the next cell. The dataset contains the growth of Dutch boys in the 20th century (https://amices.org/mice/reference/boys.html)</span>
+<span id="cb41-58"><a href="#cb41-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-59"><a href="#cb41-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reading data</span></span>
+<span id="cb41-60"><a href="#cb41-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-61"><a href="#cb41-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r class.source = 'fold-show'}</span></span>
+<span id="cb41-62"><a href="#cb41-62" aria-hidden="true" tabindex="-1"></a><span class="co">#Reading the file</span></span>
+<span id="cb41-63"><a href="#cb41-63" aria-hidden="true" tabindex="-1"></a>boys <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_delim</span>(<span class="st">"data/dataset_boys.csv"</span>,<span class="at">delim=</span><span class="st">","</span>)</span>
+<span id="cb41-64"><a href="#cb41-64" aria-hidden="true" tabindex="-1"></a><span class="fu">is_tibble</span>(boys)</span>
+<span id="cb41-65"><a href="#cb41-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-66"><a href="#cb41-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-67"><a href="#cb41-67" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb41-68"><a href="#cb41-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-69"><a href="#cb41-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-70"><a href="#cb41-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 2-6: Tidyverse operations</span></span>
+<span id="cb41-71"><a href="#cb41-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-72"><a href="#cb41-72" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Filter: **Create a new tibble with the boys younger than 15 that do not live in the "north" region, and calculate their average age.**</span>
+<span id="cb41-73"><a href="#cb41-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-76"><a href="#cb41-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-77"><a href="#cb41-77" aria-hidden="true" tabindex="-1"></a>age_subset <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(boys, </span>
+<span id="cb41-78"><a href="#cb41-78" aria-hidden="true" tabindex="-1"></a>                            (age <span class="sc">&lt;</span> <span class="dv">15</span>), </span>
+<span id="cb41-79"><a href="#cb41-79" aria-hidden="true" tabindex="-1"></a>                            (reg <span class="sc">!=</span> <span class="st">"north"</span>)</span>
+<span id="cb41-80"><a href="#cb41-80" aria-hidden="true" tabindex="-1"></a>                            )</span>
+<span id="cb41-81"><a href="#cb41-81" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age_subset<span class="sc">$</span>age, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb41-82"><a href="#cb41-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-83"><a href="#cb41-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-84"><a href="#cb41-84" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Select: **Select the variables bmi and wgt of the tibble you just created**</span>
+<span id="cb41-85"><a href="#cb41-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-88"><a href="#cb41-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-89"><a href="#cb41-89" aria-hidden="true" tabindex="-1"></a>age_subset_two_cols <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(age_subset, bmi, wgt)</span>
+<span id="cb41-90"><a href="#cb41-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-91"><a href="#cb41-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-92"><a href="#cb41-92" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Mutate: **Create two new variables, one call hgt_square (hgt^2), and another called bmi_2 (10000 $\times$ wgt/hgt_square)**. </span>
+<span id="cb41-93"><a href="#cb41-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-96"><a href="#cb41-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-97"><a href="#cb41-97" aria-hidden="true" tabindex="-1"></a><span class="co"># The arguments are evaluated sequentially in tidyverse, by the time we get to bmi_2 the computer has already created hgt_square</span></span>
+<span id="cb41-98"><a href="#cb41-98" aria-hidden="true" tabindex="-1"></a>boys <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(boys, </span>
+<span id="cb41-99"><a href="#cb41-99" aria-hidden="true" tabindex="-1"></a>                      <span class="at">hgt_square =</span> hgt<span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb41-100"><a href="#cb41-100" aria-hidden="true" tabindex="-1"></a>                      <span class="at">bmi_2 =</span> <span class="dv">10000</span> <span class="sc">*</span> wgt <span class="sc">/</span> hgt_square)</span>
+<span id="cb41-101"><a href="#cb41-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-102"><a href="#cb41-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-103"><a href="#cb41-103" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**group_by + summarize: Group by region, and calculate the average bmi, wgt and hgt. You could use a pipe to make it more compact.**</span>
+<span id="cb41-104"><a href="#cb41-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-107"><a href="#cb41-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-108"><a href="#cb41-108" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a pipe</span></span>
+<span id="cb41-109"><a href="#cb41-109" aria-hidden="true" tabindex="-1"></a>gr_boys <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">group_by</span>(boys, reg)  </span>
+<span id="cb41-110"><a href="#cb41-110" aria-hidden="true" tabindex="-1"></a>boys_mean <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">summarize</span>(gr_boys, </span>
+<span id="cb41-111"><a href="#cb41-111" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mean_bmi =</span> <span class="fu">mean</span>(bmi, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb41-112"><a href="#cb41-112" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mean_wgt =</span> <span class="fu">mean</span>(wgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb41-113"><a href="#cb41-113" aria-hidden="true" tabindex="-1"></a>                              <span class="at">mean_hgt =</span> <span class="fu">mean</span>(hgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb41-114"><a href="#cb41-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-115"><a href="#cb41-115" aria-hidden="true" tabindex="-1"></a><span class="co"># With a pipe</span></span>
+<span id="cb41-116"><a href="#cb41-116" aria-hidden="true" tabindex="-1"></a>boys_mean <span class="ot">&lt;-</span>boys <span class="sc">|&gt;</span> </span>
+<span id="cb41-117"><a href="#cb41-117" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">group_by</span>(reg) <span class="sc">|&gt;</span> </span>
+<span id="cb41-118"><a href="#cb41-118" aria-hidden="true" tabindex="-1"></a>            dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_bmi =</span> <span class="fu">mean</span>(bmi, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb41-119"><a href="#cb41-119" aria-hidden="true" tabindex="-1"></a>                             <span class="at">mean_wgt =</span> <span class="fu">mean</span>(wgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb41-120"><a href="#cb41-120" aria-hidden="true" tabindex="-1"></a>                             <span class="at">mean_hgt =</span> <span class="fu">mean</span>(hgt, <span class="at">na.rm=</span><span class="cn">TRUE</span>))</span>
+<span id="cb41-121"><a href="#cb41-121" aria-hidden="true" tabindex="-1"></a>          </span>
+<span id="cb41-122"><a href="#cb41-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-123"><a href="#cb41-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-124"><a href="#cb41-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-125"><a href="#cb41-125" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**arrange: Sort the dataset by bmi, what can you say about the boys with low bmi?**</span>
+<span id="cb41-126"><a href="#cb41-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-129"><a href="#cb41-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-130"><a href="#cb41-130" aria-hidden="true" tabindex="-1"></a><span class="co">#They are small babies</span></span>
+<span id="cb41-131"><a href="#cb41-131" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">arrange</span>(boys, bmi)</span>
+<span id="cb41-132"><a href="#cb41-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-133"><a href="#cb41-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-134"><a href="#cb41-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises 7--10: Data transformations</span></span>
+<span id="cb41-135"><a href="#cb41-135" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**Imagine you have the dataset tidyr::table2, could you easily create the cases of TB per capita?** (you only need to print <span class="in">`tidyr::table2`</span>)</span>
+<span id="cb41-136"><a href="#cb41-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-139"><a href="#cb41-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-140"><a href="#cb41-140" aria-hidden="true" tabindex="-1"></a>tidyr<span class="sc">::</span>table2</span>
+<span id="cb41-141"><a href="#cb41-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-142"><a href="#cb41-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-143"><a href="#cb41-143" aria-hidden="true" tabindex="-1"></a><span class="ss">8. </span>**Transform the data to make it tidy** *Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?* **Then, calculate the cases of TB per 1 million people. Which country had the highest cases per capita?**</span>
+<span id="cb41-144"><a href="#cb41-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-147"><a href="#cb41-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-148"><a href="#cb41-148" aria-hidden="true" tabindex="-1"></a><span class="co"># Without a pipe</span></span>
+<span id="cb41-149"><a href="#cb41-149" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(table2,</span>
+<span id="cb41-150"><a href="#cb41-150" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>),</span>
+<span id="cb41-151"><a href="#cb41-151" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">names_from =</span> <span class="st">"type"</span>,</span>
+<span id="cb41-152"><a href="#cb41-152" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">values_from =</span> <span class="st">"count"</span>)</span>
+<span id="cb41-153"><a href="#cb41-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-154"><a href="#cb41-154" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">mutate</span>(table2_tidy, </span>
+<span id="cb41-155"><a href="#cb41-155" aria-hidden="true" tabindex="-1"></a>                            <span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>cases<span class="sc">/</span>population</span>
+<span id="cb41-156"><a href="#cb41-156" aria-hidden="true" tabindex="-1"></a>                            ) </span>
+<span id="cb41-157"><a href="#cb41-157" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">arrange</span>(table2_tidy, <span class="fu">desc</span>(cases_per_capita))</span>
+<span id="cb41-158"><a href="#cb41-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-159"><a href="#cb41-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-162"><a href="#cb41-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-163"><a href="#cb41-163" aria-hidden="true" tabindex="-1"></a><span class="co">#Or with a pipe</span></span>
+<span id="cb41-164"><a href="#cb41-164" aria-hidden="true" tabindex="-1"></a>table2_tidy <span class="ot">&lt;-</span> table2 <span class="sc">|&gt;</span>  </span>
+<span id="cb41-165"><a href="#cb41-165" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(<span class="st">"country"</span>,<span class="st">"year"</span>),</span>
+<span id="cb41-166"><a href="#cb41-166" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_from =</span> <span class="st">"type"</span>,</span>
+<span id="cb41-167"><a href="#cb41-167" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_from =</span> <span class="st">"count"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb41-168"><a href="#cb41-168" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>cases<span class="sc">/</span>population) <span class="sc">|&gt;</span> </span>
+<span id="cb41-169"><a href="#cb41-169" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(cases_per_capita))</span>
+<span id="cb41-170"><a href="#cb41-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-171"><a href="#cb41-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-172"><a href="#cb41-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-173"><a href="#cb41-173" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>**Print the datasets tidyr::table4a (cases of TB) and tidyr::table4b (population). Tidy them and save the output tables with names table4a_tidy and table4ab_tidy** </span>
+<span id="cb41-174"><a href="#cb41-174" aria-hidden="true" tabindex="-1"></a>*Do you have values in the column names and you need to make the data longer? Or do you have more than one variable in one column and you need to make the data wider?*</span>
+<span id="cb41-177"><a href="#cb41-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-178"><a href="#cb41-178" aria-hidden="true" tabindex="-1"></a>table4a_tidy <span class="ot">&lt;-</span> tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(table4a, </span>
+<span id="cb41-179"><a href="#cb41-179" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"1999"</span>,<span class="st">"2000"</span>),</span>
+<span id="cb41-180"><a href="#cb41-180" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
+<span id="cb41-181"><a href="#cb41-181" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">values_to =</span> <span class="st">"TB"</span>) </span>
+<span id="cb41-182"><a href="#cb41-182" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table4a_tidy)</span>
+<span id="cb41-183"><a href="#cb41-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-184"><a href="#cb41-184" aria-hidden="true" tabindex="-1"></a>table4b_tidy <span class="ot">&lt;-</span>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(table4b, </span>
+<span id="cb41-185"><a href="#cb41-185" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"1999"</span>,<span class="st">"2000"</span>),</span>
+<span id="cb41-186"><a href="#cb41-186" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">names_to =</span> <span class="st">"year"</span>,</span>
+<span id="cb41-187"><a href="#cb41-187" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">values_to =</span> <span class="st">"Pop"</span>) </span>
+<span id="cb41-188"><a href="#cb41-188" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table4b_tidy)</span>
+<span id="cb41-189"><a href="#cb41-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-190"><a href="#cb41-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-191"><a href="#cb41-191" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>**Join table4a_tidy and table4b_tidy, and calculate the cases of TB per 1 million people? Which country had the highest cases per capita?** Could you have done this with table4a and table4b?</span>
+<span id="cb41-192"><a href="#cb41-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-193"><a href="#cb41-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-196"><a href="#cb41-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-197"><a href="#cb41-197" aria-hidden="true" tabindex="-1"></a><span class="co">#With a pipe</span></span>
+<span id="cb41-198"><a href="#cb41-198" aria-hidden="true" tabindex="-1"></a>table4 <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">inner_join</span>(table4a_tidy, table4b_tidy, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>, <span class="st">"year"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb41-199"><a href="#cb41-199" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">cases_per_capita =</span> <span class="fl">1E6</span><span class="sc">*</span>TB<span class="sc">/</span>Pop) <span class="sc">|&gt;</span> </span>
+<span id="cb41-200"><a href="#cb41-200" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(cases_per_capita))</span>
+<span id="cb41-201"><a href="#cb41-201" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-202"><a href="#cb41-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-203"><a href="#cb41-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-204"><a href="#cb41-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises 11--13: Linear regression</span></span>
+<span id="cb41-205"><a href="#cb41-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-206"><a href="#cb41-206" aria-hidden="true" tabindex="-1"></a><span class="ss">11. </span>**Using the boys dataset, fit a model where the weight depends on the age and the region.** </span>
+<span id="cb41-207"><a href="#cb41-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-210"><a href="#cb41-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-211"><a href="#cb41-211" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lm</span>(wgt <span class="sc">~</span> age <span class="sc">+</span> reg, <span class="at">data=</span>boys)</span>
+<span id="cb41-212"><a href="#cb41-212" aria-hidden="true" tabindex="-1"></a>fit</span>
+<span id="cb41-213"><a href="#cb41-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-214"><a href="#cb41-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-215"><a href="#cb41-215" aria-hidden="true" tabindex="-1"></a><span class="ss">12. </span>**Print the regression table using the function summary. Does the region have a significant effect?** </span>
+<span id="cb41-216"><a href="#cb41-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-219"><a href="#cb41-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-220"><a href="#cb41-220" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb41-221"><a href="#cb41-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-222"><a href="#cb41-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-223"><a href="#cb41-223" aria-hidden="true" tabindex="-1"></a><span class="ss">13. </span>**Check the assumptions of linear regression using plot(). Are the assumptions met? What are the biggest outliers? (find them in the data)** Homoscedasticity and independence of residuals (which = 1). Normality of residuals (which = 2) and presence of outliers (which = 6). </span>
+<span id="cb41-224"><a href="#cb41-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-227"><a href="#cb41-227" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-228"><a href="#cb41-228" aria-hidden="true" tabindex="-1"></a><span class="co"># There shouldn't be strange patterns</span></span>
+<span id="cb41-229"><a href="#cb41-229" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">1</span>)</span>
+<span id="cb41-230"><a href="#cb41-230" aria-hidden="true" tabindex="-1"></a><span class="co"># The points should lie on the line</span></span>
+<span id="cb41-231"><a href="#cb41-231" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">2</span>)</span>
+<span id="cb41-232"><a href="#cb41-232" aria-hidden="true" tabindex="-1"></a><span class="co"># Cook's distance measures the effect of deleting a given observation. </span></span>
+<span id="cb41-233"><a href="#cb41-233" aria-hidden="true" tabindex="-1"></a><span class="co"># Leverage is a measure of how far away the independent variable values of an observation are from those of the other observations.</span></span>
+<span id="cb41-234"><a href="#cb41-234" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit, <span class="at">which =</span> <span class="dv">6</span>)</span>
+<span id="cb41-235"><a href="#cb41-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-236"><a href="#cb41-236" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking outliers</span></span>
+<span id="cb41-237"><a href="#cb41-237" aria-hidden="true" tabindex="-1"></a><span class="fu">slice</span>(boys, <span class="fu">c</span>(<span class="dv">733</span>,<span class="dv">610</span>,<span class="dv">574</span>))</span>
+<span id="cb41-238"><a href="#cb41-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-239"><a href="#cb41-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-240"><a href="#cb41-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-241"><a href="#cb41-241" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 14. Saving data</span></span>
+<span id="cb41-242"><a href="#cb41-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-243"><a href="#cb41-243" aria-hidden="true" tabindex="-1"></a><span class="ss">14. </span>**Save the data `boys` as an RDS file, and as an Excel file**. Remember to save your data to the data folder!</span>
+<span id="cb41-244"><a href="#cb41-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-247"><a href="#cb41-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-248"><a href="#cb41-248" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_rds</span>(boys, <span class="st">"data/boys.rds"</span>)</span>
+<span id="cb41-249"><a href="#cb41-249" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(boys, <span class="st">"data/boys.xlsx"</span>)</span>
+<span id="cb41-250"><a href="#cb41-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-251"><a href="#cb41-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-252"><a href="#cb41-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-253"><a href="#cb41-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-254"><a href="#cb41-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercise 15--16. Some visualizations</span></span>
+<span id="cb41-255"><a href="#cb41-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-256"><a href="#cb41-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-257"><a href="#cb41-257" aria-hidden="true" tabindex="-1"></a>Tidyverse is great because it connects very well with ggplot. You'll learn more in the next courses, but let's demonstrate using the datasaurus dataset. There are 12 datasets composed of a <span class="in">`x`</span> variable and a <span class="in">`y`</span> variable, created in a way that mean(x), mean(y), sd(x), sd(y) are equal across the 12 datasets.</span>
+<span id="cb41-258"><a href="#cb41-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-259"><a href="#cb41-259" aria-hidden="true" tabindex="-1"></a>First, install the library datasauRus and load it</span>
+<span id="cb41-260"><a href="#cb41-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-261"><a href="#cb41-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-264"><a href="#cb41-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-265"><a href="#cb41-265" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("datasauRus")</span></span>
+<span id="cb41-266"><a href="#cb41-266" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(datasauRus)</span>
+<span id="cb41-267"><a href="#cb41-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-268"><a href="#cb41-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-269"><a href="#cb41-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-270"><a href="#cb41-270" aria-hidden="true" tabindex="-1"></a><span class="ss">15. </span>Group datasauRus::datasaurus_dozen by the variable <span class="in">`dataset`</span> and calculate the mean and standard deviation of both x and y, and the correlation (function <span class="in">`cor()`</span>) between x and y.</span>
+<span id="cb41-271"><a href="#cb41-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-274"><a href="#cb41-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb41-275"><a href="#cb41-275" aria-hidden="true" tabindex="-1"></a>datasauRus<span class="sc">::</span>datasaurus_dozen <span class="sc">|&gt;</span> </span>
+<span id="cb41-276"><a href="#cb41-276" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">group_by</span>(dataset) <span class="sc">|&gt;</span> </span>
+<span id="cb41-277"><a href="#cb41-277" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">summarize</span>(<span class="at">mean_x =</span> <span class="fu">mean</span>(x),</span>
+<span id="cb41-278"><a href="#cb41-278" aria-hidden="true" tabindex="-1"></a>                <span class="at">mean_y =</span> <span class="fu">mean</span>(y),</span>
+<span id="cb41-279"><a href="#cb41-279" aria-hidden="true" tabindex="-1"></a>                <span class="at">sd_x =</span> <span class="fu">sd</span>(x),</span>
+<span id="cb41-280"><a href="#cb41-280" aria-hidden="true" tabindex="-1"></a>                <span class="at">sd_y =</span> <span class="fu">sd</span>(y),</span>
+<span id="cb41-281"><a href="#cb41-281" aria-hidden="true" tabindex="-1"></a>                <span class="fu">cor</span>(x,y))</span>
+<span id="cb41-282"><a href="#cb41-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-283"><a href="#cb41-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-284"><a href="#cb41-284" aria-hidden="true" tabindex="-1"></a><span class="ss">16. </span>**Use the following code to visualize the data.** *The descriptive statistics were identical, but do the datasets look similar?*</span>
+<span id="cb41-285"><a href="#cb41-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-286"><a href="#cb41-286" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.source = 'fold-show'}</span></span>
+<span id="cb41-287"><a href="#cb41-287" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(datasaurus_dozen, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y, <span class="at">colour=</span>dataset))<span class="sc">+</span></span>
+<span id="cb41-288"><a href="#cb41-288" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb41-289"><a href="#cb41-289" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)<span class="sc">+</span></span>
+<span id="cb41-290"><a href="#cb41-290" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>dataset, <span class="at">ncol=</span><span class="dv">3</span>)</span>
+<span id="cb41-291"><a href="#cb41-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb41-292"><a href="#cb41-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-293"><a href="#cb41-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-294"><a href="#cb41-294" aria-hidden="true" tabindex="-1"></a>If you are interested in data visualization, design and storytelling, I teach regularly a course. The materials are <span class="co">[</span><span class="ot">online</span><span class="co">](https://github.com/jgarciab/workshop_data_viz/tree/main)</span>.</span>
+<span id="cb41-295"><a href="#cb41-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-296"><a href="#cb41-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-297"><a href="#cb41-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-298"><a href="#cb41-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-299"><a href="#cb41-299" aria-hidden="true" tabindex="-1"></a>End of Practical.</span>
+<span id="cb41-300"><a href="#cb41-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-301"><a href="#cb41-301" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb41-302"><a href="#cb41-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-303"><a href="#cb41-303" aria-hidden="true" tabindex="-1"></a><span class="fu">#### References</span></span>
+<span id="cb41-304"><a href="#cb41-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-305"><a href="#cb41-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-306"><a href="#cb41-306" aria-hidden="true" tabindex="-1"></a>Matejka, J., &amp; Fitzmaurice, G. (2017). Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing. CHI 2017 Conference proceedings: ACM SIGCHI Conference on Human Factors in Computing Systems.</span>
+<span id="cb41-307"><a href="#cb41-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-308"><a href="#cb41-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-309"><a href="#cb41-309" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
