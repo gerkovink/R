@@ -1,1 +1,1 @@
-# [javier.science/R](https://javier.science.R)
+# [javier.science/R](https://javier.science/R)
